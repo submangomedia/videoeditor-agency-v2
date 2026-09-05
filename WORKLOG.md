@@ -74,6 +74,72 @@ probably didn't affect MX" is not the same as knowing.
 
 ## 2026-09-05 — T5 · **`/portfolio/` SHIPS — the last of the ten pages**
 
+### ⚠️⚠️ ADDENDUM, AFTER THE PUSH — THE THUMBNAILS ARE NOT VIDEO STILLS
+
+Pushed as `dd78c49`, then loaded
+`https://videoeditor-agency-v2.pages.dev/portfolio/` and looked at it. **The page
+is correct. The images are not.** Five thumbnails opened individually, 2026-09-05.
+
+**The 4:5 items — 27 of the 57, including 6 of the 8 featured — are Mango's
+promotional before/after marketing cards, not frames from the videos.** Each one
+carries a headline ("LAWYER VIDEO EDITING", "DOCTOR / MEDICAL VIDEO EDITING",
+"WEDDING PLANNER COURSE VIDEO EDITING"), a BEFORE/AFTER or RAW/FINAL split, a
+diagonal watermark, and a **"CONTACT US" bar with a phone number and a domain
+burned into the pixels.**
+
+**Four consequences, in order of severity:**
+
+1. **At least one card prints `mangomedia.digital`.** It is `fKs9q1E9y94` — the
+   Medical explainer showreel — which is **featured, first, above the fold.** The
+   others checked print `videoeditor.agency`. So the set is MIXED, and nobody has
+   audited which is which. This is precisely the Q-P4 hazard T2 named: *"the same
+   client's logo on two agencies' homepages reads as one company pretending to be
+   two."* Here it is Mango's own domain, on VEA's portfolio.
+2. **The phone number `+8801336433711` is burned into the image**, roughly 27
+   times over. `RULINGS.md` R14 records that number as **RULED BUT NOT YET
+   DIALLED**, and the footer carries a loud `[[bracket]]` saying exactly that.
+   **The bracket protects the footer and nothing else.** If that digit is wrong,
+   it is wrong 27 times in pixels that no `[[bracket]]` can flag.
+3. **The alt text is wrong on those 27 rows.** `alt="Video still — …"` describes a
+   frame from a video. These are designed graphics. T5 flagged alt text as needing
+   a sighted pass; this is that pass, and the answer is worse than assumed.
+4. **They fight T3's palette.** Bright magenta and purple cards on `#090909` with
+   a `#273FB7` accent. The 0.88 rest-state dim was designed for photographic
+   stills; it does not tame a designed advertisement. The page currently reads as
+   a wall of someone else's ads.
+
+**Under R07, one more thing worth seeing:** the BEFORE panels show clients'
+**unedited** footage, and the faces are identifiable. Withholding the name does
+not withhold the person.
+
+**What is NOT wrong:** the 9:16 and 16:9 items — the individual client edits — are
+genuine video stills and look right. The mechanism, the grid, the shapes, the
+lazy-loading and the anchors all work.
+
+#### Where this came from, and it is nobody's error
+
+`Portfolio-Catalogue.md` finding 4 chose `oardefault.jpg` because it returns the
+true aspect ratio, and it does. But `oardefault` returns **the uploaded cover
+art**, and for a compilation showreel the cover art is a promo card. Finding 4
+then retired the fallback — *"the fallback plan in the audit, extract frames from
+the Drive masters, is not needed"* — on the grounds that shape was the only
+problem. **Shape was not the only problem.** No thread could have known that
+without looking at the pictures, and T2 could not: it had no route to them.
+
+#### → MASUD. Three options, and T5 does not pick.
+
+1. **Extract a frame from the Drive masters** for the 27 showreels. This is
+   exactly the fallback finding 4 retired. It gives a true 9:16/4:5 still with no
+   branding, no phone number and no watermark. Costs the most time.
+2. **Re-cut the 27 cover cards** without the CONTACT US bar and the watermark, in
+   VEA's dark palette. Keeps the before/after idea, which does sell the work.
+3. **Ship the 9:16 and 16:9 items only** — 30 genuine stills — and hold the 27
+   showreels back. Fastest, honest, and a smaller portfolio.
+
+⚠️ **Whichever is chosen, `fKs9q1E9y94` must not ship as-is.** A card reading
+`mangomedia.digital` on videoeditor.agency is the one item here that is not a
+matter of taste.
+
 ### Done
 
 - **`site\portfolio\index.html`** — 57 items in 14 industries, 65 stills, one `<h1>`,
@@ -1021,6 +1087,52 @@ labelled INFERENCE in the catalogue, not ruled.
 | 2 | **R30 — NEW.** "We respond within 2 business hours" — confirm or drop | One bracket in Why Choose Us. R18 covers turnaround, not response time, so nothing rules it. Also on the Contact copy; one answer settles both |
 | 3 | **A showreel** — an `.mp4` for a native `<video>`, or the reel's URL on the agency's own channel | Hero secondary CTA and the showreel embed are deleted |
 | 4 | **R06 · R07 · R08 · R09 · R04 rates** | The five deleted sections return one at a time as each is answered |
+
+### ⚠️ Amended later the same day — T5 and T8 shipped after the page was built
+
+Re-scanned `site\` at Masud's request and found it had moved underneath T4.
+`site\portfolio\index.html` and `site\contact\index.html` now exist; they did not
+when the homepage was written an hour earlier. **Three corrections made to
+`site\index.html`:**
+
+1. **Both CTAs now point at `/contact/`**, not at a raw `mailto:`. That page is
+   real, carries the working email and the two R14 brackets, and is the
+   destination the copy always intended.
+2. **Hero secondary CTA is now `/portfolio/`** ("See our work"), not
+   `/services/`. For this buyer the work is the stronger second CTA, and
+   `/services/` keeps its own CTA further down the page. ⚠️ **This links to the
+   portfolio PAGE. It does not reinstate the homepage portfolio STRIP** — R07 is
+   still open and T2's finding 6 is unchanged.
+3. **T4's "R30" renumbered to R31.** T8 minted R30 for "full registered address"
+   in `site\contact\index.html` on the same day. T8's was first; T4 yields.
+
+**The homepage now has three real destinations** — `/contact/`, `/portfolio/`,
+`/services/` — and no bracketed CTA. That was blocker 1 and it is closed.
+
+### ⚠️ For T1 — build threads are minting ruling IDs that do not exist
+
+**R28, R29, R30 and R31 appear in page comments and in `site.css`. None of them
+is in `RULINGS.md`.** The R30 collision above is the first consequence and it
+took two threads one day to produce. `RULINGS.md` §1 exists to stop precisely
+this. **T1 registers them, or build threads stop inventing IDs.** T4 does not own
+that file.
+
+### ⚠️ For T9 — `robots.txt` is now stale on a point of fact
+
+Its comment block says *"`/portfolio/` is absent because `site/portfolio/` does
+not exist (T5 unrun, blocked on R07)"* and that `sitemap.xml` lists **eleven**
+URLs. **`site\portfolio\index.html` exists.** Sources: `site\robots.txt` versus
+the folder itself. `sitemap.xml` needs checking against the twelve pages that are
+actually there, and the footer link list with it.
+
+### ⚠️ For whoever owns the repo root — there is no root `.gitignore`
+
+The only one is `site\.gitignore`, and it only covers `site\`. Once the project
+folder is the repository, everything above `site\` — `01-Research-Import\`,
+`02-Decisions\`, `04-Assets\` — has **no** ignore rules, so Drive's
+`.tmp.drivedownload/` and `*.gdoc` artefacts will be committed from those folders.
+`site\.gitignore` already lists exactly the right patterns; they need to exist at
+the root too. **Not in any thread's Owns column, so T4 has not written it.**
 
 ### ⚠️ Rule 4 steps 1 and 2 were NOT run, and T4 cannot run them
 
