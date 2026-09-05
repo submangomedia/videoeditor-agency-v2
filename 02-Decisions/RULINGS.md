@@ -175,7 +175,13 @@ question was originally raised, so nothing is lost by renumbering.
 | **R21** | Who owns Content Creators as an audience — Mango or VEA? | §8 #12 | Audience pages in **both** projects | ⚠️ **PRE-EMPTED, not answered** · see §4 |
 | **R22** | `/for/…` or flat audience slugs? | **C1** — new | T7's four URLs, T9 redirects | **RULED** — see §4 |
 | **R23** | Service count — homepage says 6, Services page 11, footer 7 | `SITE-MAP-v1.md` §4.2 · `THREAD-PLAN.md` §5 T6 | `/services/`, Home §4, footer | **RULED: 11** via T6 · see §4 |
-| **R28** | **11 services, but only 4 have rates.** R23 and R04 cannot both be executed as written | **C8** — raised by T6 | `/pricing/` — how many rows the table has | **OPEN** |
+| **R28** | **11 services, but only 4 have rates.** R23 and R04 cannot both be executed as written | **C8** — raised by T6 | `/pricing/` — how many rows the table has | **DELEGATED** · see §4 |
+| **R29** | A **white/light variant of `logo.svg`** — the navy mark is invisible on `#090909` | R19 · template | ⛔ **Every page.** No page ships without it | **OPEN** |
+| **R30** | **VEA is a trading name of Mango Media Digital**, not a separate registered entity | T8 | `/privacy/` §1, `/terms/` §1 | **RULED** via T8 · see §4 |
+| **R31** | *"We respond within 2 business hours"* — confirm or drop | T4 | Home "Why Choose Us", `/contact/` | **OPEN** |
+| **R32** | **A second radius token** — `--radius` 3px + `--radius-card` 20px | T4 | `site.css`, every card on the site | **RULED** via T4 · see §4 |
+| **R33** | **Sherika webfont licence** — MZ Media's heading face is commercial | T3/T9 · *was called R28* | `site.css`, `<head>` of every page | **OPEN** |
+| **R34** | **Full registered address** — street, area, Dhaka, postcode | T8 · *was called R30* | `/privacy/` §1, `/terms/` §1 | **OPEN** |
 | **R24** | Is `SITE-MAP-v1.md` approved as ruled? | **C2** — new | Every page thread | **OPEN** |
 | **R25** | Is `THREAD-PLAN.md` approved as ruled? | **C2** — new | Thread ownership itself | **OPEN** |
 | **R26** | New build: replace the existing repo's contents, or new repo + repoint Pages? | **C6** — new | Every push. The live site has no staging gate today | **RULED** — see §4 |
@@ -821,6 +827,85 @@ three, and nothing on the page will reveal it.**
 
 ---
 
+*Batch 7, 2026-09-06 — **arbitration.** Four threads minted IDs R28–R32 on 2026-09-05
+without the register. Three different decisions were all called R28 and two were called
+R30. Every thread flagged it and asked T1 to settle it. **§7 is the settlement.***
+
+---
+
+### R32 — A second radius token · **RULED** · 2026-09-05 · *via T4*
+
+> **Masud, 2026-09-05, as recorded by T4:** selected **"Add a second radius token"**,
+> shown as *"`site.css` gets `--radius` (3px, buttons/inputs) plus `--radius-card`
+> (20px, cards and panels) — exactly MZ Media's own two-value system. **This overrides
+> `instructions.md` §5's 'one radius token' rule, which needs your word.**"
+
+**Effect:** two radius tokens. `--radius` for anything clickable, `--radius-card` for
+anything you read. A third would need another ruling.
+
+⚠️ **This overrides a binding rule, and it is recorded as an override rather than
+absorbed quietly.** Sources: `instructions.md` §5 page rules (*"One radius token, one
+primary accent"*) and `site.css` §0 deviation 2 (T3, 2026-09-05 — softer cards *"would
+need a second token and Masud's ruling to break §5"*) **versus Masud, 2026-09-05.** The
+later ruling governs; T3's deviation 2 is history. **`instructions.md` §5 now contains a
+rule the project has voted down — whoever owns that file should strike it**, or the next
+thread will read it and revert the tokens.
+
+⚠️ **T4 edited `site\assets\css\site.css`, which THREAD-PLAN §4 gives to T3
+exclusively.** T4 did so on Masud's explicit instruction and recorded the authorisation
+verbatim in the token block. **Named, not disciplined** — but T3 will find a token it
+did not write, and Rule 1 has now been crossed twice in two days (T8 for the copy
+import, T4 here). Both times with Masud's word, both times recorded. **A third
+uninstructed crossing is a process failure, not an exception.**
+
+---
+
+### R30 — Legal entity · **RULED** · 2026-09-05 · *via T8*
+
+> **Masud, 2026-09-05, as recorded by T8:** **Video Editor Agency is a trading name of
+> Mango Media Digital**, not a separate registered entity.
+
+**Effect:** `/privacy/` §1 and `/terms/` §1 both name **Mango Media Digital** as the
+data controller and the contracting party. A trading name cannot hold either role.
+
+**This is load-bearing and it is the reason `/privacy/` and `/terms/` can be written at
+all.** It does **not** supply the address those pages also need — that is **R34**, open.
+
+---
+
+### R19 — two corrections to my own entry · 2026-09-06
+
+**1. The palette's provenance, which I did not record.** WORKLOG shows Masud ruled
+**"MZ Media style"** on 2026-09-05, and T3 read every value in `site.css` §0 off
+**mzmedia.digital**. So `#090909 / #111111 / #273FB7 / #31313C` were **measured from a
+reference site**, not invented. My batch-6 entry recorded the hexes without saying where
+they came from. **Corrected here.** He later confirmed: *"Use Google font and use color
+from the MZ Media."*
+
+**2. My `--accent-text` suggestion is superseded, and by a better number.** I proposed
+`#677CE6` at 5.31:1. T4 has since specified **`--ink-accent: rgba(120, 145, 255, 0.9)`**:
+
+| | On `#090909` | On `#111111` |
+|---|---|---|
+| `#7891FF` solid | **6.91:1** | 6.56:1 |
+| at `0.9` alpha → composites to `#6D83E6` | **5.73:1** | 5.43:1 |
+| ~~`#677CE6` (T1's earlier pick)~~ | 5.31:1 | 5.04:1 |
+
+**T4's value is better on both surfaces. It wins. Use `--ink-accent`.** *(T4's own
+figures — 6.92 and 5.75 — reproduce to 6.91 and 5.73. Rounding, not a discrepancy.)*
+
+⚠️ **3. One cited figure is measured against the wrong background.** `site.css` §1 and
+`Design-Patterns-v1.md` both state that `--accent` fails as text at **2.48:1**. Against
+the page colour the site actually uses, `#090909`, it is **2.35:1**. **2.48:1 is the
+ratio against pure black `#000000`**, which appears nowhere in the palette.
+
+**The ban is correct either way** — 2.35 and 2.48 both fail AA text, AA large and the
+3:1 UI floor, so nothing built on that rule changes. **Recorded because a number in a
+stylesheet gets quoted for years**, and because the register should say where every
+figure came from. → the figure's owner corrects `site.css` §1.
+
+---
+
 ⚠️ **One data point for R12, not a conclusion:** the domain was registered **2024-05-22**.
 The research claims *"5+ years"* (≈2021) and *"6+ years"* (≈2020). A company can predate
 its domain, so this proves nothing on its own — but **neither claim is supported by
@@ -1067,7 +1152,11 @@ governs. The rule's requirement is not thereby satisfied — it is set aside.
 
 ## 5. Status after four batches — 2026-09-05
 
-**16 ruled · 1 answered by verification · 1 delegated · 3 conditional/partial · 1 closed · 6 open.**
+**34 decisions on the register. 18 ruled · 1 verified · 1 delegated · 2 partial · 1 closed · 11 open.**
+
+⚠️ **§7 is new and is the authority on decision IDs.** Four threads minted R28–R32
+independently on 2026-09-05; three decisions were all called `R28` and two were called
+`R30`. **Settled 2026-09-06.** Two one-line find-and-replace jobs remain, in §7.2.
 
 ✅ **T3 IS UNBLOCKED.** R19 ruled: `#090909` page · `#111111` cards · `#273FB7` accent ·
 `#31313C` lines. **The site is now dark**, which no earlier document anticipated.
@@ -1088,7 +1177,8 @@ directly, and `/pricing/` cannot ship without them.
 | **Conditional** | **R08** — six real named testimonials found on mangomedia.digital. **Two usable, one defective, three praise services VEA does not sell.** Blocked on fresh consent naming videoeditor.agency |
 | **Pre-empted** | **R21** — `/content-creators/` ships, but *ownership* between Mango and VEA is still unanswered in **both** projects |
 | **Closed** | R18 turnaround — asked twice, declined twice. The page ships with no speed claim |
-| **Open** | R06 R07 R09 R12 R20 R24 R25 — **six left**, plus the four unconfirmed prices under R04 |
+| **Open** | R06 R07 R09 R12 R20 R24 R25 · **R29 R31 R33 R34** — eleven, plus the four unconfirmed prices under R04 |
+| **⛔ Blocks every page** | **R29 — the white logo.** Ruled palette is near-black; the only logo file is dark navy at 1.32:1. Not a decision, a missing file |
 
 ### What T1 presses next
 
@@ -1183,5 +1273,88 @@ document — including T1's written arguments against Masud's own decisions. Tha
 from R01 exactly as ruled and is not a reopening of it. If he would rather the research
 stayed out, the fix is which files get committed, not the repo's visibility.
 
-**Still true:** nothing from this project folder has been pushed. `site\` is the T0
-scaffold and no page has been built. **`RULINGS.md` is T1's only output.**
+**Still true:** nothing from this project folder has been pushed. **`RULINGS.md` is T1's
+only output.** *(The `site\` scaffold line above is stale as of 2026-09-06 — T4, T6 and
+T8 have since built pages. Corrected in §7.)*
+
+---
+
+## 7. ID arbitration — settled 2026-09-06. This table is the authority.
+
+On 2026-09-05, four threads minted IDs into the same space with nothing coordinating
+them. **Three separate decisions were all called `R28`. Two were called `R30`.** Every
+thread spotted it, refused to edit this file, and asked T1 to arbitrate. **This is the
+arbitration. Nothing outside this table is a valid ID.**
+
+### 7.1 — The final assignment
+
+| ID | Decision | Status | Was also called |
+|---|---|---|---|
+| **R28** | **Eleven services, four rates** | DELEGATED | — *(already published in this register; it keeps the number)* |
+| **R29** | **White/light `logo.svg` variant** | OPEN | — |
+| **R30** | **VEA is a trading name of Mango Media Digital** | **RULED** | `R28` in T8's first draft |
+| **R31** | **"We respond within 2 business hours"** | OPEN | `R30` in T4's page comments |
+| **R32** | **Second radius token** (`--radius` + `--radius-card`) | **RULED** | — |
+| **R33** | **Sherika webfont licence** | OPEN | ⚠️ **`R28`** in `site.css` and the template |
+| **R34** | **Full registered address** | OPEN | ⚠️ **`R30`** in `/privacy/` and `/terms/` |
+
+**The principle used, so the next arbitration is predictable:** an ID already **published
+in this register** keeps its number (R28). After that, an ID already **written into a
+shipped file** keeps its number, because moving it means editing pages (R29, R30, R31,
+R32). Only the genuine duplicates move — and both movers, R33 and R34, were the *second*
+claimant to their number.
+
+### 7.2 — Two find-and-replace jobs. These are the only files that change.
+
+**Job 1 — Sherika licence: `R28` → `R33`.** *(Owner: T3. `site.css` is T3's file.)*
+
+- **Files:** `site\assets\css\site.css` · `site\_template\page-template.html`
+- **Find:** `R28 — Sherika`   → **Replace with:** `R33 — Sherika`
+- **Also find:** `[[R28 — SHERIKA LICENCE]]` → `[[R33 — SHERIKA LICENCE]]`
+- **Done when:** searching the whole `site\` folder for `R28` returns **zero** results.
+  R28 is a pricing decision and must never appear in a stylesheet.
+
+**Job 2 — registered address: `R30` → `R34`.** *(Owner: T8.)*
+
+- **Files:** `site\privacy\index.html` · `site\terms\index.html`
+- **Find:** `[[R30 — full registered address]]` → **Replace with:** `[[R34 — full registered address]]`
+- ⚠️ **Do not blanket-replace `R30` in these two files.** They also cite R30 correctly,
+  for the trading-name ruling that lets them name a data controller. **Only the bracket
+  with the words "full registered address" moves.**
+- **Done when:** each file contains `R30` only where it means *Mango Media Digital is
+  the entity*, and `R34` only where an address is missing.
+
+⚠️ **T1 performed neither job.** Rule 1: those are T3's and T8's files. **Both are
+one-line edits and neither is urgent** — no page ships on a bracket anyway.
+
+### 7.3 — Four brackets that are stale because their question is already answered
+
+Threads are printing `[[…]]` placeholders citing questions this register has ruled. Each
+is a bracket that will be read as "still unknown" by the next thread.
+
+| Bracket, where it appears | Reality |
+|---|---|
+| `[[R15 — which email address does VEA publish?]]` in `_template\page-template.html` — **so on all eleven pages** | **R15 RULED 2026-09-05: `videoeditoragency.hello@gmail.com`.** → T3 or T9 |
+| A comment reading `R15 — EMAIL. OPEN.` in the same template | Same. → T3 or T9 |
+| `instructions.md` §5 *"One radius token"* | **Overridden by R32.** → whoever owns `instructions.md` |
+| `_redirects` / `robots.txt` notes citing *"Q1"* | **Q1 is R02, ruled 2026-09-03.** T9 already removed its copy |
+
+**The phone bracket beside the email one is correct and stays** — R14 named a number,
+but nobody has dialled it, and until someone does, printing it on eleven pages is a
+guess wearing a fact's clothes.
+
+### 7.4 — What this episode says about the process
+
+`THREAD-PLAN.md` §1 **Rule 3 — one thread at a time — has not held for two days.** T1,
+T4, T6, T7, T8 and T9 all ran on 2026-09-05. The consequences are now measurable rather
+than theoretical:
+
+- **six ID collisions** (this section),
+- **the same `.section` dead-space bug** duplicated into three files,
+- **`site.css` edited by two threads that do not own it**,
+- **four pages carrying private copies of the same CSS** (`Design-Patterns-v1.md` §0).
+
+**None of this lost work and none of it is unrecoverable.** But `THREAD-PLAN.md` §1
+predicted exactly this and named the Mango project's duplicate `(1)` files as the
+precedent. **Recorded, not argued** — and `THREAD-PLAN.md` is still formally unapproved
+(**R25**), so the rule being broken is one nobody has actually adopted.

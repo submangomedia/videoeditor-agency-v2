@@ -6,25 +6,14 @@
 
   <!-- ==========================================================================
        SEO HEAD — OWNED BY T9. THREAD-PLAN.md §4.
-       Synced by hand from _template/page-template.html on 2026-09-05, AFTER T3
-       added the Inter font load and the dark-paint meta. T7 filled the canonical
-       for its own page and changed nothing else in this block.
-
-       ⚠️ THIS BLOCK IS NOT SYNCHRONISED. `--check` will NOT report drift here.
+       T11 filled title, description and canonical for THIS page only,
+       2026-09-06. No turnaround (R18), no rate (R04), no count (R05), no
+       result claim (ROAS, CPA, conversions — VEA does not run the ads).
+       ⚠️ NOT SYNCHRONISED — sync-shared.mjs copies HEADER and FOOTER only.
        ========================================================================== -->
-
-  <!-- T9, 2026-09-05. Title 33 chars, description 155.
-       The first sentence is this page's own lede. "Genuinely unlimited" is R17,
-       verbatim, ruled 2026-09-03.
-       ⚠️ NOT USED, DELIBERATELY: the cost comparison. T7 flagged that the whole
-       "cheaper than hiring" pitch has no number behind it and R04's rates are a
-       shape, not confirmed figures. A saving claimed in a search result is a
-       saving quoted back at you. -->
-  <title>Video Editing for Business Owners</title>
-
-  <meta name="description" content="Consistent, professional video for your business — without carrying an in-house editing team on the payroll. Genuinely unlimited revisions on every project.">
-
-  <link rel="canonical" href="https://videoeditor.agency/business-owners/">
+  <title>Meta Ad Creative Editing</title>
+  <meta name="description" content="Hook-first ad edits with burned-in captions, exported for Reels, Feed and Stories from one master — with variant sets for testing. Ad creative editing for Meta, from Dhaka.">
+  <link rel="canonical" href="https://videoeditor.agency/ads/">
 
   <!-- ⚠️ STAYS until cutover, then comes off PAGE BY PAGE, NEVER SITEWIDE. -->
   <meta name="robots" content="noindex, nofollow">
@@ -38,61 +27,33 @@
 
   <link rel="stylesheet" href="/assets/css/site.css">
 
-  <!-- ==========================================================================
-       ⚠️ PAGE-SCOPED CSS — T3 ABSORBS THIS INTO site.css AND DELETES IT.
-       Identical in all four For pages. Existing tokens only, no new values.
-       See /coaches/index.html for the full note and the request to T3.
-       ====================================================================== -->
+  <!-- PAGE-SCOPED CSS — identical to /healthcare/. T3 collapses into site.css. -->
   <style>
-    /* ⚠️ .section { margin-block } DELETED 2026-09-06 — the dead-space bug.
-       DESIGN-PATTERNS-v1.md §0 consequence 2 and §4 step 3. It also hit the
-       footer, which carries class="site-footer section". Do not reintroduce.
-       Class names and radius aligned to DESIGN-PATTERNS-v1.md §2 so this whole
-       block deletes cleanly once T3 lands the real components in site.css.
-       The full .tile — gradient, hover lift — is deliberately NOT copied here;
-       §0 forbids a fifth copy. See /coaches/index.html for the long note. */
-
     .lede { font-size: var(--step-1); color: var(--ink-muted); }
-
     .section > h2 { padding-bottom: var(--space-2); border-bottom: 1px solid var(--rule); }
-
-    .actions {
-      display: flex; flex-wrap: wrap; align-items: center;
-      gap: var(--space-3); margin-block: var(--space-5);
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
-      gap: var(--space-5);
-      margin-block: var(--space-6);
-      padding: 0;
-      list-style: none;
-    }
-
-    .tile {
-      border: 1px solid var(--rule);
-      border-radius: var(--radius-card);   /* R32 — already in site.css §1 */
-      padding: var(--space-4);
-    }
-
+    .actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3); margin-block: var(--space-5); }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr)); gap: var(--space-5); margin-block: var(--space-6); padding: 0; list-style: none; }
+    .tile { border: 1px solid var(--rule); border-radius: var(--radius-card); padding: var(--space-4); }
     .tile h3 { margin-bottom: var(--space-2); }
     .tile p  { margin-bottom: 0; }
-
-    .deliverables {
-      max-width: var(--measure);
-      margin-block: var(--space-5);
-      padding-left: var(--space-4);
-    }
-
+    .deliverables { max-width: var(--measure); margin-block: var(--space-5); padding-left: var(--space-4); }
     .deliverables li { margin-bottom: var(--space-3); }
-
-    .cta-block {
-      border: 1px solid var(--rule);
-      border-radius: var(--radius-card);   /* R32 */
-      padding: var(--space-5);
-      margin-block: var(--space-7);
-    }
+    .strip { display: grid; grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr)); gap: var(--space-3); margin-block: var(--space-5); padding: 0; list-style: none; }
+    .strip li { border: 1px solid var(--rule); border-radius: var(--radius-card); overflow: hidden; background: var(--bg-raised); }
+    .strip img { display: block; width: 100%; border-radius: 0; opacity: 0.88; }
+    .strip .work__meta { margin: var(--space-3); font-size: var(--step--1); color: var(--ink-muted); }
+    .faq { list-style: none; padding: 0; margin-block: var(--space-6); border-bottom: 1px solid var(--rule); }
+    .faq > li { border-top: 1px solid var(--rule); }
+    .faq summary { cursor: pointer; padding-block: var(--space-4); font-family: var(--font-heading); font-weight: var(--weight-heading); font-size: var(--step-1); color: var(--ink); list-style: none; }
+    .faq summary::-webkit-details-marker { display: none; }
+    .faq details > p { padding-bottom: var(--space-5); margin: 0; max-width: 68ch; }
+    .cta-block { border: 1px solid var(--rule); border-radius: var(--radius-card); padding: var(--space-5); margin-block: var(--space-7); }
+    .note { font-size: var(--step--1); color: var(--ink-muted); max-width: 68ch; }
+    .steps { list-style: none; counter-reset: step; margin-block: var(--space-6); padding: 0; }
+    .steps > li { counter-increment: step; border-top: 1px solid var(--rule); padding-block: var(--space-4); }
+    .steps > li::before { content: counter(step, decimal-leading-zero) "  "; font-family: var(--font-heading); font-weight: var(--weight-heading); color: rgba(120,145,255,0.9); }
+    .steps h3 { display: inline; }
+    .steps p { margin: var(--space-2) 0 0; max-width: 62ch; }
   </style>
 </head>
 
@@ -185,161 +146,165 @@
 <!-- SHARED:HEADER — END ===================================================== -->
 
 <!-- ============================================================================
-     /business-owners/ — written by T7, 2026-09-05.
+     /ads/ — written by T11, 2026-09-06, on Masud's instruction. Rule 1
+     crossed on his word; recorded in WORKLOG. Structure: EXPANSION-v1.md §7.
 
-     COPY SOURCE: 03-Build-Ready/For-BusinessOwners-Copy-Final.md, built from
-     `videoeditor_agency_website_copy` PAGE 4 ("FOR BUSINESSES"), fetched from
-     Drive and read on 2026-09-05. `VEA all page content plan` has only an empty
-     `# Business Owners` heading with nothing beneath it.
+     A SERVICE PAGE, NOT AN AUDIENCE PAGE. "Ads Video" is one of R23's eleven
+     services; this is that service's own URL. Not a twelfth service.
 
-     ⚠️ FIVE SECTIONS, NOT SEVEN. Proof (R08 conditional) and Recommended plan
-        (R04 killed "Monthly Retainer or Per Bundle") are DELETED, not unbuilt.
-
-     ⚠️⚠️ THE STRONGEST ARGUMENT ON THIS PAGE IS THE ONE IT CANNOT MAKE, AND A
-           LATER THREAD MUST NOT INVENT IT.
-
-        The pitch to a business owner is a COST pitch — an editing team costs
-        less than an editor on staff. The source copy asserts this three times
-        and never once puts a number to it. Under R04 the published per-unit
-        rates would be that argument, but:
-          1. R04 ruled the SHAPE. RULINGS.md §4 R04: "T6 must have him confirm
-             each rate before it renders on a page." He has not.
-          2. An in-house editor's salary varies by country. This page is read in
-             the US, the UK and Bangladesh. One number is wrong in two of three.
-          3. instructions.md §5 rule 3: never invent a figure.
-        NO COST COMPARISON IS BUILT HERE. Carried as an open item in WORKLOG.
-
-     ⚠️ R11 — VIDEO RECORDING IS NOT OFFERED ON THIS PAGE, AND THAT IS A CHOICE.
-        R11 was ruled IN on 2026-09-05, scoped to Dhaka, and /services/ lists it.
-        This is the For page most likely to attract a buyer who wants filming as
-        well as editing. It is absent because the deliverables list below comes
-        from the copy doc, which does not include it. If it is added, the Dhaka
-        scope goes in the same sentence — under R16 that is a fact, not a
-        confession, but most of this page's readers still cannot buy it.
-
-     ⚠️ NO TURNAROUND CLAIM. R18 closed to pressing.
-
-     WHAT IS REAL HERE:
-       · Prose                — `videoeditor_agency_website_copy` PAGE 4
-       · Unlimited revisions  — R17, Masud 2026-09-03
-       · CTA → /contact/      — T8 shipped that page 2026-09-05. See the note in
-                                /coaches/index.html for why /contact/ and not a
-                                raw mailto:, and for the ⚠️ that /contact/
-                                currently publishes an email R15 did NOT rule
+     ⚠️ ZERO CATALOGUED ITEMS ARE AD CREATIVE. The proof section is a bracket.
+        Masud, 2026-09-06: ad videos exist, he will supply. THIS PAGE DOES NOT
+        REACH THE CUSTOM DOMAIN UNTIL ≥4 ARE CATALOGUED — T10 gate.
+     ⚠️ NO RESULT CLAIM. No ROAS, CPA, CTR, "conversions". VEA cuts the
+        creative; it does not run the account and cannot see the numbers.
+     ⚠️ MEDIA BUYING IS MANGO'S PRODUCT, NOT THIS SITE'S. Said once, plainly,
+        with a link. EXPANSION-v1.md E3 records the ownership split.
+     ⚠️ NO TURNAROUND (R18). NO NUMBER (R05). NO COMPETITOR SENTENCE.
      ========================================================================= -->
 
 <main class="site-main" id="main">
   <div class="container">
 
-    <h1>Video Editing for Business Owners</h1>
+    <h1>Meta Ad Creative Editing</h1>
 
-    <p class="lede">Consistent, professional video — without carrying an in-house
-      editing team on the payroll.</p>
+    <p class="lede">Hook-first cuts, burned-in captions, and safe-zoned exports for
+      Reels, Feed and Stories — from one master edit, with variant sets ready for
+      testing. We cut the creative; you run the campaign.</p>
 
     <p class="actions">
       <a class="btn btn--primary" href="/contact/">Get started</a>
-      <span class="todo">[[SECONDARY CTA — becomes &lt;a href="/portfolio/"&gt;
-        "See our work" when T5 ships that page]]</span>
+      <a class="btn btn--secondary" href="/pricing/">See rates</a>
     </p>
 
     <section class="section" aria-labelledby="problem-heading">
-      <h2 id="problem-heading">Why video is the thing that keeps slipping</h2>
+      <h2 id="problem-heading">Why ad creative is its own discipline</h2>
 
       <ul class="grid">
-
         <li class="tile">
-          <h3>Editing is a full-time skill you need part-time</h3>
-          <p>Hiring for it means a salary, equipment, software, management and cover
-            when they are away — for output that varies month to month.</p>
+          <h3>The first three seconds decide everything</h3>
+          <p>An ad is judged before the sound is on. The open has to carry the
+            message on its own, with captions doing the talking.</p>
         </li>
-
         <li class="tile">
-          <h3>The content calendar bends around the edit</h3>
-          <p>Filming gets done. Publishing waits, then slides, then stops being a
-            calendar.</p>
+          <h3>One edit, four placements</h3>
+          <p>Reels, Feed, Stories and in-stream each crop differently and hide
+            different corners under UI. A master cut has to be exported for
+            each, not stretched.</p>
         </li>
-
         <li class="tile">
-          <h3>Quality swings depending on who picked up the job</h3>
-          <p>Freelancer to freelancer, the pacing, the captions and the colour are
-            all slightly different — and a brand that looks different every week
-            reads as a brand that is not paying attention.</p>
+          <h3>Testing needs variants, not one video</h3>
+          <p>Different hooks on the same body, different CTAs on the same hook.
+            The edit has to be built so variants are cheap.</p>
         </li>
-
         <li class="tile">
-          <h3>Nobody owns the feedback loop</h3>
-          <p>Revisions turn into an email chain between three people, and the video
-            that was two days from finished is now three weeks old.</p>
+          <h3>Creative fatigues</h3>
+          <p>An ad that worked last month stops working. Fresh cuts from
+            existing footage keep a campaign alive without a new shoot.</p>
         </li>
-
       </ul>
     </section>
 
     <section class="section" aria-labelledby="solution-heading">
-      <h2 id="solution-heading">Your business runs on content. We keep it running.</h2>
+      <h2 id="solution-heading">Footage in, a variant set out</h2>
 
-      <p>Video is one of the few things that does work across every part of a
-        business at once — marketing, sales, hiring, training, launches. Producing it
-        in-house is where it gets expensive and operationally awkward, because the
-        skill is specialised and the workload is uneven.</p>
+      <p>Send the footage, the offer, the platform and any brand rules. Your
+        dedicated editor builds a master cut, then exports it to every placement
+        you need with captions burned in and text kept out of the platform's UI
+        zones. Ask for hook or CTA variants and they come from the same master.</p>
 
-      <p>Video Editor Agency gives you the editing team without the hiring, the
-        management or the overhead. A dedicated editor who learns your brand, and a
-        project manager who owns the schedule and the feedback so it does not land
-        back on your desk. Weekly social content, a brand film, or a full launch
-        campaign — same team, same standard. Revisions are genuinely unlimited.</p>
+      <!-- R17, Masud 2026-09-03: "Genuinely unlimited". -->
+      <p>Revisions are genuinely unlimited. Change the hook, swap the CTA, shorten
+        the body — it is changed until you sign off.</p>
+
+      <p class="note">This page is about the creative. Media buying, targeting and
+        account management are not something videoeditor.agency sells — our parent
+        agency does, at <a href="https://mangomedia.digital">mangomedia.digital</a>.
+        Results depend on the campaign, and we do not quote them for work we do not
+        run.</p>
     </section>
 
     <section class="section" aria-labelledby="deliver-heading">
-      <h2 id="deliver-heading">What we edit for businesses</h2>
+      <h2 id="deliver-heading">What you get</h2>
 
       <ul class="deliverables">
-        <li><strong>Corporate explainer and brand films</strong> — the video that says
-          who you are, cut properly.</li>
-
-        <li><strong>Marketing and promotional campaigns</strong> — structured around
-          one message and one action.</li>
-
-        <li><strong>Social content</strong> — reels, shorts and LinkedIn video,
-          formatted per platform rather than reposted across them.</li>
-
-        <li><strong>Internal training and onboarding</strong> — the videos that stop
-          you explaining the same thing every quarter.</li>
-
-        <li><strong>Product launch videos</strong> — built to carry a date, not to be
-          re-cut the week before it.</li>
-
-        <li><strong>Event highlights and recaps</strong> — the day, made useful for
-          the eleven months afterwards.</li>
+        <li><strong>A master edit</strong> — the strongest cut of the footage, hook
+          first, message clear with the sound off.</li>
+        <li><strong>Placement exports</strong> — 9:16, 4:5 and 1:1 from the same
+          master, each with its own safe zones respected.</li>
+        <li><strong>Hook and CTA variants</strong> — tell us how many; the body is
+          shared, so each variant is quick to produce.</li>
+        <li><strong>Burned-in captions</strong> — styled to the brand, checked by a
+          person, timed for a silent scroll.</li>
+        <li><strong>UGC-style and talking-head ads</strong> — cut to feel native to
+          the feed rather than like a commercial.</li>
+        <li><strong>Refresh cuts</strong> — new creative from footage you already
+          have, when a campaign needs it.</li>
       </ul>
     </section>
 
-    <!-- T11, 2026-09-06, on Masud's instruction ("also for ads, for business
-         page"). EXPANSION-v1.md §7. One section, no proof strip — zero ad
-         creative is catalogued; the strip lives on /ads/ when items arrive.
-         No result claim: VEA cuts the creative and does not run the account. -->
-    <section class="section" aria-labelledby="ads-heading">
-      <h2 id="ads-heading">Ad creative for the campaigns you already run</h2>
+    <section class="section" aria-labelledby="how-heading">
+      <h2 id="how-heading">How it works</h2>
 
-      <p>Most businesses we edit for are running Meta ads. We cut the creative:
-        a hook-first master edit, burned-in captions, and exports sized for Reels,
-        Feed and Stories from the same cut — with hook and CTA variants so your
-        media buyer has something to test. Footage you already have is usually
-        enough to start.</p>
+      <ol class="steps">
+        <li><h3>Brief</h3><p>Footage, offer, platform, placements, any brand rules and
+          references. A short brief is fine; a specific one is better.</p></li>
+        <li><h3>Master cut</h3><p>Your editor returns the master for review with a
+          preview link.</p></li>
+        <li><h3>Variants and exports</h3><p>Once the master is signed off, the
+          placement exports and any hook or CTA variants are produced from it.</p></li>
+        <li><h3>Delivery</h3><p>Files named by placement and variant, ready to upload
+          to Ads Manager.</p></li>
+      </ol>
+    </section>
 
-      <p class="actions">
-        <a class="btn btn--secondary" href="/ads/">Meta ad creative</a>
-      </p>
+    <section class="section" aria-labelledby="proof-heading">
+      <h2 id="proof-heading">Recent ad creative</h2>
+
+      <p><span class="todo">[[T11 — STRIP NOT SHOWN. Zero catalogued items are ad
+        creative. Masud, 2026-09-06: Meta ad videos exist and he will supply links.
+        Needs ≥4 rows in Portfolio-Catalogue.md (Format: Ad Creative — new value,
+        T2) with real frames, then four stills here in the .strip markup used on
+        the homepage. THIS PAGE DOES NOT GO LIVE WITHOUT THEM.]]</span></p>
+    </section>
+
+    <section class="section" aria-labelledby="faq-heading">
+      <h2 id="faq-heading">Questions advertisers ask</h2>
+
+      <ul class="faq">
+        <li><details>
+          <summary>Can you cut ads from footage we already have?</summary>
+          <p>Yes. Most ad creative we produce comes from existing long-form,
+            product or talking-head footage. Send what you have.</p>
+        </details></li>
+        <li><details>
+          <summary>Which placements do you export for?</summary>
+          <p>Reels and Stories (9:16), Feed (4:5 and 1:1), and in-stream (16:9).
+            Tell us which you run and you get only those.</p>
+        </details></li>
+        <li><details>
+          <summary>Will you run the campaign?</summary>
+          <p>Not on this site. Our parent agency, Mango Media Digital, offers
+            Meta ads management; we can introduce you. Here, we cut the creative.</p>
+        </details></li>
+        <li><details>
+          <summary>How many variants should we test?</summary>
+          <p>That is your media buyer's call. Tell us the number and the
+            difference you want between them — hook, CTA, length, or opening
+            frame — and we build to it.</p>
+        </details></li>
+        <li><details>
+          <summary>How is ad creative priced?</summary>
+          <p>Per master edit and per variant set. See <a href="/pricing/">rates</a>,
+            or send the brief and we will quote it.</p>
+        </details></li>
+      </ul>
     </section>
 
     <section class="cta-block" aria-labelledby="cta-heading">
-      <h2 id="cta-heading">Stop treating video as the thing you get to later</h2>
-
-      <p>Tell us what you are trying to publish and how often. We will tell you what
-        it takes.</p>
-
+      <h2 id="cta-heading">Send the footage and the offer</h2>
+      <p>We will tell you what we would cut first, and how many variants it holds.</p>
       <p class="actions">
-        <a class="btn btn--primary" href="/contact/">Start editing for your business</a>
+        <a class="btn btn--primary" href="/contact/">Brief us on your ads</a>
       </p>
     </section>
 
@@ -434,7 +399,7 @@
         <li><a href="/pricing/">Pricing</a></li>
         <li><a href="/coaches/">For Coaches &amp; Trainers</a></li>
         <li><a href="/content-creators/">For Content Creators</a></li>
-        <li><a href="/business-owners/" aria-current="page">For Business Owners</a></li>
+        <li><a href="/business-owners/">For Business Owners</a></li>
         <li><a href="/marketers-and-agencies/">For Marketers &amp; Agencies</a></li>
         <li><a href="/about/">About</a></li>
         <li><a href="/contact/">Contact</a></li>

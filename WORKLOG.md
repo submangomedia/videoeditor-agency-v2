@@ -8,6 +8,438 @@ Format: **Done / Decisions / Open / Blocked**.
 
 ---
 
+## 2026-09-06 — T11 (second session) · **BUILT: hero, 3 featured strips, 5 new pages · Rule 1 crossed on Masud's word**
+
+### Authorisation, verbatim
+
+> **Masud, 2026-09-06:** *"Can you do it by yourself, or do you want to assign the
+> task to another thread? I need the work. I don't need the discussion."*
+
+T11 read that as authorisation to edit files owned by T4 (`index.html`), T7
+(`coaches\`, `business-owners\`) and to create five new page folders. **Recorded
+here so nobody reads it as T4's or T7's work.** Same precedent as T8, T4, T10.
+
+### Done — 8 files in `site\`
+
+| File | What |
+|---|---|
+| `index.html` (T4's) | Hero split: text left, 3 real stills right, **static** audience line linking all 9 audience pages. New "Who we edit for" section (9 tiles). Three featured strips: **Legal (real, 4 stills, one client unnamed)**, **Doctors (bracket)**, **Ads (bracket)**. Services tile "Ads &amp; Marketing" now links `/ads/`. H1 and all T4 copy untouched |
+| `healthcare\index.html` **NEW** | Doctors, dentists, dermatologists, aesthetic clinics — one page, four specialty tiles. Proof = bracket. Regulatory-advice disclaimer line |
+| `legal\index.html` **NEW** | 4 real stills from the 12 legal items, labelled honestly as one firm's podcast series. Bar-rules disclaimer line |
+| `podcasters\index.html` **NEW** | Strongest proof. 4 stills; 14 more podcast items held by T5 (promo-card thumbnails) — bracketed |
+| `ads\index.html` **NEW** | Service page for Meta ad creative. Proof = bracket. States plainly media buying is Mango's, links mangomedia.digital. No result claims |
+| `real-estate\index.html` **NEW** | Built because Masud chose Reading A; **T11 still recommends dropping it at cutover if no items arrive** (E4). Proof = bracket |
+| `coaches\index.html` (T7's) | +2 deliverables: LMS-ready delivery, course launch content. No "hundreds of courses" — E7 unconfirmed |
+| `business-owners\index.html` (T7's) | +1 section: ad creative, linking `/ads/` |
+
+**Every page:** one `<h1>`, `noindex`, no turnaround, no number beyond R05,
+no result claim, no competitor sentence (grep-checked), every internal link
+resolves to a folder that exists, every still exists in `assets\img\portfolio\`.
+Shared HEADER/FOOTER blocks copied byte-for-byte from `index.html` so
+`sync-shared.mjs --check` should print "No drift" — **not run; Drive is not
+reachable from the sandbox. Masud runs it.**
+
+### ⚠️ Brackets that now exist and must not reach the custom domain
+
+`/healthcare/` proof · `/ads/` proof · `/real-estate/` proof · homepage Doctors
+and Ads strips · `/legal/` "one client" note · `/podcasters/` "14 held" note.
+**T10 gate.** If the items do not arrive, delete the section (or the page, for
+`/ads/` and `/real-estate/`).
+
+### Requests to other threads — none executed by T11
+
+- **T3 / T9 (template):** footer nav needs `/podcasters/`, `/healthcare/`,
+  `/legal/`, `/real-estate/`, `/ads/`; "For" dropdown two-column per
+  EXPANSION-v1 §3.4. Until then the homepage "Who we edit for" section is the
+  only route to the five new pages.
+- **T9:** sitemap + canonical review for 5 new URLs; `_redirects` can now point
+  `/medical-healthcare-videos/`, `/real-estate-videos/`, `/ad-campaign-videos/`
+  at real pages.
+- **T2:** Format values "Ad Creative" and "Thumbnail".
+- **T6:** `/services/` "Ads Video" block should link `/ads/`; `/pricing/` needs
+  an ad-creative row (E8).
+
+### Open · Blocked
+
+- **Masud supplies the videos** — EXPANSION-v1 §10. Nothing else blocks the
+  three bracketed strips.
+- E1–E10 still unregistered → T1.
+- Unchanged: R26b takedown, `--assets` (⚠️ Glob shows 60+ jpgs in
+  `site\assets\img\portfolio\` today — T10's "only css" note may be stale),
+  T3 not run, four prices, phone dial, white logo.
+
+### Push summary
+
+Commit: `site\index.html`, `site\coaches\index.html`,
+`site\business-owners\index.html`, five new folders, `WORKLOG.md`,
+`02-Decisions\EXPANSION-v1.md`. Before pushing, from inside `site\`:
+`node tools\sync-shared.mjs --check` (expect "No drift").
+All pages stay `noindex`; staging only.
+
+---
+
+## 2026-09-06 — T11 · **Scope expansion research — `02-Decisions\EXPANSION-v1.md` written · PROPOSAL, not ruled**
+
+New thread. Masud opened it with a competitor (tastyedits.com) that matches his original
+plan "90%", plus new verticals — doctors, dermatologists, dentists, aesthetic clinics,
+lawyers, coaches launching LMS courses — and Meta ad creative as a stated line of work.
+
+### Done
+
+- Read the five documents in order. Fetched `videoeditor.agency` (**still the old
+  WordPress scrape — $6.99 pricing, Lorem ipsum, `0 +` counters all live; R26b not
+  executed**) and `videoeditor-agency-v2.pages.dev` (**empty — nothing pushed**).
+- Fetched eight tastyedits.com pages. **They already have Doctors and Lawyers pages**
+  (Lawyers is `noindex` — unreleased). Their Medical, Legal and Real Estate pages
+  recycle one identical stat block with nouns swapped; their Lawyers FAQ still asks
+  about podcasts. Recorded as the live example of THREAD-PLAN §5's paste-and-swap trap.
+- Wrote **`02-Decisions\EXPANSION-v1.md`** (T11's only file): site map v2 proposal,
+  Tasty Edits anatomy mapped block-by-block against rulings, hero structure with a
+  zero-JS build, three homepage featured blocks with proof state, one section per new
+  page, an `/ads/` service page, ten open decisions (E1–E10) for T1 to register, and a
+  supply checklist in T2's column format. **No competitor sentence is used as copy.**
+
+### Decisions — Masud, 2026-09-06 (T11 batch)
+
+- Verticals enter as **"two new pages and all the page links I have sent you, also for
+  ads, for business page"** (verbatim). T11 reads this as `/healthcare/`, `/legal/`,
+  `/podcasters/`, `/real-estate/`, `/ads/` — **15 pages** — and records a minimal
+  reading (12) beside it. **This amends ruling 2 and is NOT treated as ruled until he
+  confirms the §1 table.** → E1.
+- Meta ad videos exist and **he will supply links**. Doctor/dental/derm/aesthetic work
+  exists and **he will supply**. Until catalogued, every proof block is a bracket.
+- Research lives in a new T11 file, not in SITE-MAP-v1.
+
+### Open
+
+- **E1–E10** in `EXPANSION-v1.md` §9 → **T1** to assign R-IDs. E3 (who owns Meta ads —
+  Mango management vs VEA creative) is R21's twin and needs writing into **both**
+  projects.
+- **Proof supply** — §10 checklist. `/ads/` is fully blocked on it; `/healthcare/` has
+  one showreel; `/legal/` is one client; `/real-estate/` is 2.5 items (T11 recommends
+  deferring that page).
+- Requests to other threads, none executed by T11: **T2** new Format values "Ad
+  Creative" and "Thumbnail"; **T3** two-column "For" dropdown; **T4** hero visual +
+  three featured blocks; **T9** three old URLs can now 301 to real pages.
+- Not fetched: Tasty Edits' Doctors page and Examples page. Marked as such in §11.
+
+### Blocked
+
+- Everything in EXPANSION-v1 §1 until E1 is ruled.
+- Still: R26b takedown, gate item 1 (`--assets`), T3 not run, four prices, phone dial,
+  white logo. Unchanged from T10's entry below.
+
+---
+
+## 2026-09-06 — T10 · **$25 REMOVED · gate item 2 CLEARED · item 1 still open · the refactor is a T3 job**
+
+### Done — one authorised cross-Rule-1 edit, and nothing else
+
+- ⛔→✅ **The four flat `$25` cells on `/pricing/` are gone.** Now `$20` per
+  minute, `$30` per video, **`[[bracket]]`** for Motion Graphics, `$30` per
+  thumbnail. **Masud authorised T10 to cross Rule 1 on this one file explicitly
+  on 2026-09-06**, the same way T8 was authorised for the copy import. T10
+  changed the four amount cells, the comment above them, and the paragraph below
+  the table. **Nothing else on that page was touched, and no other file in
+  `site\` was opened.**
+- **The "billed at the same rate" paragraph had to go with them.** T6's own
+  comment said so: it existed *only* because every cell said $25. With $20, $30
+  and $30 in the table it named no number and was false. **Replaced with a
+  bracket, not with new copy** — what belongs there is R28, which is OPEN, and
+  T10 will not resolve an open commercial decision by writing a sentence into a
+  rate card.
+
+### ⚠️ CORRECTION — T4's "T6 knew. It shipped anyway" is UNFAIR, and T10 repeated it
+
+T10's own runbook entry of 2026-09-05 adopted that framing. **Both were wrong,
+and the evidence was inside the file the whole time.** `pricing\index.html`
+carried, above the table:
+
+> **Masud, 2026-09-05, verbatim:** *"just insert a flat rate for everything. I
+> just want to check the design and content. I will save the price later."*
+
+**T6 did exactly what it was asked**, labelled the block `NOT REAL`, and
+preserved his real figures beside it. T4's entry quotes T6's *earlier* comments
+and does not quote that one. **T6 is owed the correction.**
+
+**The real defect was never T6's judgement.** It is that **a review placeholder
+reached a public URL, and the only thing that knew it was a placeholder was an
+HTML comment.** A visitor sees the rendered page, and the rendered page said
+`$25` four times with no bracket. **A reviewer's shortcut and a published page
+are not the same artefact.** That distinction is the lesson, not blame.
+
+### ✅ GATE ITEM 2 IS CLEARED — the nav is live on all fourteen pages
+
+`sync-shared.mjs` ran on 2026-09-05 and `--check` printed **"No drift"** across
+thirteen pages. **Verified independently by T10 today**, counting
+`nav__pending` spans:
+
+| Before (T10, 2026-09-05) | Now (T10, 2026-09-06) |
+|---|---|
+| template 2 · portfolio 2 · **twelve pages at 6** | **all fourteen files at 2** |
+
+**The dead nav T10 called "the highest-value action left in the project" is
+fixed.** Only `For` and `Portfolio` remain as text.
+⚠️ **T7's entry below still says "all six items render as `nav__pending`" and
+"not one is reachable from the nav." That is now stale** — it was written either
+side of the sync. **`Portfolio` is still a dead span although the page exists**
+→ T3 or T9, unchanged.
+
+### ⛔ GATE ITEM 1 IS STILL OPEN — `--assets` was never run
+
+**Verified today: `site\assets\` still contains exactly one file, `css\site.css`.**
+There is no `site\assets\img\portfolio\`.
+
+The 2026-09-05 push entry records `sync-shared.mjs` and `--check` being run.
+**It does not record `build-portfolio.mjs --assets`, and the folder proves it was
+not.** So `/portfolio/` returns 200 on staging — as that entry says — **with 57
+image requests returning 404.** A 200 with every image broken is what a
+redirect-heavy site sends 60 of 61 old URLs to.
+
+**One command, from inside `site\`:**
+```
+node tools\build-portfolio.mjs --assets
+```
+
+### The refactor Masud asked for is blocked on ONE file, and it is not T10's
+
+Masud, 2026-09-06, chose **"do the whole refactor before cutover."** **T10 cannot
+execute it, and neither can any page thread**, for a reason two threads found
+independently today:
+
+**`DESIGN-PATTERNS-v1.md` §4 opens *"Once §1 and §2 are in `site.css`"*. They are
+not.** `.tile`, `.eyebrow`, `.grid`, `.steps`, `.faq`, `.cta-block`,
+`--ink-accent` and the three glow tokens are **all absent**. T6 and T7 each
+checked and each refused step 1 — **deleting a page's `<style>` block today
+strips that page to unstyled text.** T6: *"the rate table would render as an
+unstyled HTML table."*
+
+**Both threads have already done everything that does not depend on T3:** T7
+deleted the `.section` override on all four audience pages and applied R32; T6
+applied R32 to the eleven service cards. **The remaining work is one file —
+`site.css` — and T3 has not run since the document was written.**
+
+**So "do the refactor before cutover" resolves to "run T3."** → **Masud: open T3,
+or authorise T10 to cross Rule 1 on `site.css` the way he did for `/pricing/`.**
+
+### ⚠️ The document is wrong twice, and the second one matters more
+
+1. **§0's table says `/services/` and `/pricing/` carry `.section` spacing.**
+   **They do not** — both removed it on 2026-09-05 and both files document the
+   removal. **The four audience pages were the ones carrying it**, and §0's table
+   omits them. **T10 found this independently before reading T6's entry; T6
+   reached the same conclusion.** A thread following §0 fixes the wrong files.
+2. ⚠️ **§0 says the dead-space bug is "fixed on `/`". T6 measured the deployed
+   site and it is not.** All three pages show **240px** between adjacent
+   sections, and it comes from `site.css` §3 alone — `.section { padding-block:
+   var(--space-8) }` at 120px top *and* bottom, stacking. On `/pricing/` that is
+   ~70% of page height as empty space. **Desktop only** — below 48rem the media
+   query drops it to 96px, so a phone check misses it entirely.
+   **T6's one-line fix, for T3:** `.section + .section { padding-top: 0; }`
+
+### ⚠️ Five rulings still live outside the register
+
+**R28, R29, R30, R31, R32.** R32 is cited as ruled in `site.css`, in
+`index.html` twice and throughout `DESIGN-PATTERNS-v1.md`; **`RULINGS.md`
+contains no R32 at all.** The R30 collision — T8's *"trading name"* versus T4's
+*"respond within 2 business hours"* — already happened and had to be renumbered.
+**→ T1.** This is the fourth entry to ask.
+
+### Open · Blocked
+
+- ⛔ **`node tools\build-portfolio.mjs --assets`** — gate item 1. Masud only.
+- ⛔ **T3 has not run.** The whole visual-consistency question sits on it.
+- ⛔ **Motion Graphics still has no rate.** It is now a visible bracket on
+  `/pricing/`, which is correct and is also unshippable.
+- **24+ brackets across the four largest pages.** None may reach the custom domain.
+- **R07** — the portfolio still cannot play a single video.
+
+---
+
+## 2026-09-06 — T6 · Response to `Design-Patterns-v1` — **§4 is BLOCKED, and §0 is wrong about these two pages**
+
+### §4 cannot be executed. Its own precondition is not met.
+
+`Design-Patterns-v1` §4 opens *"Once §1 and §2 are in `site.css`"*. **They are not.**
+Checked `site\assets\css\site.css` on 2026-09-06:
+
+| In site.css? | |
+|---|---|
+| ❌ | `.tile` · `.eyebrow` · `.lede` · `.grid` · `.steps` · `.faq` · `.cta-block` |
+| ❌ | `--ink-accent` · `--glow-soft` · `--glow-strong` · `--glow-line` |
+| ✅ | `--radius-card: 20px` (R32) · `--space-8` · `.section` · `.card` |
+
+**T6 did NOT delete its `<style>` blocks.** Doing so today would strip `/services/`
+and `/pricing/` of `.eyebrow`, `.lede`, `.service-grid`, `.rate-table` and `.faq` —
+the rate table would render as an unstyled HTML table. **§4 step 1 is safe only
+after T3 lands §1 and §2, and not before.**
+
+### ⚠️ §0's table is WRONG about `/services/` and `/pricing/`
+
+| §0 claims | Actual |
+|---|---|
+| `/services/` has `.section` spacing | ❌ **No `.section` rule at all** |
+| `/pricing/` has `.section` spacing | ❌ **No `.section` rule at all** |
+| both have `.section > h2` | ❌ **Neither defines it** |
+| both have `.cta-block` | ❌ **Neither defines it** |
+| `/services/` card is `.service` | ❌ It is `.card`, T3's own class |
+| both have `.lede` | ✅ correct |
+
+Both were removed on 2026-09-05 when T3's dark palette landed, and the removal is
+documented **inside both files** — `services\index.html` lines 59–63 and
+`pricing\index.html` lines 68–72 — and in that day's T6 WORKLOG entry.
+**Sources: `Design-Patterns-v1` §0 versus those two files. Named, not silently
+fixed** — T6 does not own that document.
+
+**Therefore §0 consequence 2 is wrong as written.** These two pages do not have
+the `margin-block` stacking bug. Confirmed live: `marginTop: 0px` on every
+section of both.
+
+### ⚠️ BUT THE DEAD SPACE IS REAL, AND `/` IS NOT FIXED EITHER
+
+Measured on the deployed site at **1280×900**, all three pages:
+
+| Page | `.section` padding | Margin | Dead space between adjacent sections | Page height |
+|---|---|---|---|---|
+| `/` | 120px / 120px | 0px | **240px** | 6586px |
+| `/pricing/` | 120px / 120px | 0px | **240px** | 3480px |
+| `/services/` | 120px / 120px | 0px | **240px** | 3557px |
+
+**Identical on all three.** T4 removed the homepage's local `margin-block`, which
+did help — but the residual 240px comes from `site.css` §3 alone:
+
+```css
+.section { padding-block: var(--space-8); }   /* 120px, top AND bottom */
+```
+
+Adjacent sections stack their padding. **`Design-Patterns-v1` records the homepage
+as fixed; it is not. It has exactly the same 240px as the two pages it names as
+broken.** On `/pricing/` that is ~70% of the page height as empty space, and it is
+what a reviewer sees first.
+
+⚠️ **At viewports below 48rem this does not appear** — the media query drops to
+`--space-6` (48px), giving 96px. **It is a desktop-only defect**, which is why a
+phone check would miss it.
+
+**The one-line fix, for T3 — no token change, nothing else moves:**
+
+```css
+.section + .section { padding-top: 0; }
+```
+
+240px → 120px, preserving the first section's top padding and the last one's
+bottom. **T6 has not applied it. `site.css` is T3's, exclusively.**
+
+### Done — the one thing T6 could safely do
+
+- ✅ **R32 applied locally to the eleven service cards.** `site.css`'s `.card`
+  still uses `--radius` (3px), so R32 — Masud's ruling of 2026-09-05 — was live on
+  the homepage and nowhere else (§0 consequence 3). `/services/` now sets
+  `border-radius: var(--radius-card)` on its cards.
+  ⚠️ **This is deliberately the duplication `Design-Patterns-v1` exists to end.**
+  It is marked TEMPORARY in the file and **is deleted the moment T3 ships `.tile`.**
+  An unapplied ruling was judged worse than a temporary local rule.
+- ✅ **§4 step 6 verified on both pages: no `--accent` used as text or as a thin
+  border.** Both use it only through `.btn--primary` (blue fill, white label,
+  8.46:1), which is the sanctioned use.
+
+### Waiting on T3 — then T6 finishes in one short pass
+
+Once §1 and §2 land, `/services/` and `/pricing/` need: style blocks deleted, cards
+swapped to `.tile`, the local `--radius-card` rule removed, `.faq` and `.rate-table`
+reconciled against the shared versions, and `<p class="eyebrow">` added above the
+remaining section `<h2>`s. **None of it can start before then.**
+
+⚠️ **One thing T6 will not do without copy:** §4 step 4 asks for an eyebrow above
+every section `<h2>`. `/pricing/`'s original pre-label was *"Pricing Plans"*, which
+R04 killed — there are no plans. **New eyebrow labels are copy, and T6 does not
+invent copy.** They come from Masud or the source document.
+
+---
+
+## 2026-09-06 — T7 · DESIGN-PATTERNS-v1 applied · **only the ungated half. T3 is now the blocker.**
+
+### The finding that governs this entry
+
+**`DESIGN-PATTERNS-v1.md` §4 opens with *"Once §1 and §2 are in `site.css`"*. THEY ARE NOT.**
+
+Checked in `site.css` on 2026-09-06, not inferred:
+
+| From the patterns file | In `site.css`? |
+|---|---|
+| `--radius-card: 20px` (R32) | ✅ yes, §1 line 98 |
+| `--ink-accent` | ❌ absent |
+| `--glow-soft` / `--glow-strong` / `--glow-line` | ❌ absent |
+| `.tile` · `.grid` · `.eyebrow` · `.steps` · `.faq` · `.lede` · `.cta-block` | ❌ **none of them** |
+
+**So every page thread told to "delete your `<style>` block" would strip its own page
+back to unstyled text.** T7 did not do that, and no other thread should either until T3
+has run.
+
+### Done — the three steps that needed nothing from T3
+
+Applied to all four For pages:
+
+1. ✅ **§4 step 3 — `.section { margin-block: var(--space-7) }` DELETED.** This is the
+   dead-space defect §0 consequence 2 names. It stacked on `site.css`'s 120px
+   `padding-block` and it also hit the **footer**, which carries
+   `class="site-footer section"`. T7 flagged this on 2026-09-05 and has now removed its
+   own copy. `site.css` owns section rhythm.
+2. ✅ **§4 step 2 — `.tile` and `.cta-block` now use `--radius-card`.** R32 is ruled and
+   the token already exists, so this was a one-word swap with no dependency. **The four
+   For pages now match the homepage's soft cards instead of the sharp ones.**
+3. ✅ **§4 step 6 — audited.** Nothing on any of the four uses `--accent` as text or as a
+   thin border. The only accent use is `.btn--primary`: a fill with a white label at
+   8.46:1, which is the one correct use.
+
+**Also aligned, so the eventual deletion is a clean subtraction rather than a re-layout:**
+`.tile-grid` renamed to **`.grid`**, and `minmax(18rem)` → **`17rem`**, matching §2d
+exactly. When T3 lands the real `.grid`, removing the local copy changes nothing visually.
+
+### ⛔ Deliberately NOT done, and why
+
+| Step | Why not |
+|---|---|
+| §4 step 1 — delete the `<style>` block | The components do not exist in `site.css`. Deleting now unstyles four pages |
+| §4 step 4 — `<p class="eyebrow">` markup | `.eyebrow` does not exist. The markup would render as a stray sentence above every `<h2>` on four pages |
+| §2c — the full `.tile` (top-lit gradient, hover lift) | ⚠️ **`DESIGN-PATTERNS-v1.md` §0 forbids it in terms:** *"The fix is not 'each thread copies the homepage.' That makes five copies instead of four."* T7 took that at its word |
+| §2a/2e/2f — `.eyebrow`, `.steps`, `.faq` | Same reason. None is copied. `/coaches/` has no numbered process and none of the four has a Q&A, so only `.eyebrow` would have applied anyway |
+
+### ⚠️ T3 is now the single blocker on the visual consistency of the whole site
+
+T4's file is a handover to T3 and **T3 has not run since it was written.** Until §1 and §2
+land in `site.css`, every page keeps its private copy and the site keeps drifting. The
+four For pages are as close to the target as they can get without it.
+
+**What T3 still owns, unchanged from T7's 2026-09-05 entry and still outstanding:**
+
+- **Land §1 and §2 of `DESIGN-PATTERNS-v1.md` in `site.css`.** Everything else waits on it.
+- **The nav.** All six items still render as `nav__pending` text and the comment still
+  says *"NONE OF THE TEN PAGES EXISTS YET."* **All eleven pages now exist and not one is
+  reachable from the nav.**
+- **The "For" dropdown.** `page-template.html` line 134 and `site.css` §5 both still say
+  it *"lands with T7"*; Rule 2 says only T3 and T9 may touch that file. T7 has not opened
+  it, twice. T3's stated reason for deferring — *"an empty menu is worse than no menu"* —
+  **stopped being true on 2026-09-05 when the four child pages shipped.**
+- **The SHARED:FOOTER comment still says "R15 — EMAIL. OPEN."**
+
+### Unchanged and still open — for Masud
+
+- **`[[WHITE-LABEL]]`** — the one T7 bracket, a visible build gate on
+  `/marketers-and-agencies/`. *Has VEA ever delivered under a client agency's brand, with
+  no VEA marking?* Not a pricing question, so T6's 2026-09-05 closure does not cover it.
+- **Icons** — `DESIGN-PATTERNS-v1.md` §3 calls this the largest remaining gap. None of the
+  four For pages ships a Unicode glyph or an emoji as a substitute, per that rule.
+
+### Blocked
+
+- **`node tools\sync-shared.mjs` and `--check` not run** — no route from the sandbox into
+  the Drive folder. **Masud runs both before pushing.** Rule 4 is not satisfied until he does.
+- ⚠️ **`/pricing/` carries a placeholder `$25` and must not reach `videoeditor.agency`.**
+  Not T7's file; repeated here because it is a hard gate on the whole cutover.
+
+---
+
 ## 2026-09-05 — T6 · ⚠️ **PLACEHOLDER RATES INSERTED FOR REVIEW — NOT PRICES**
 
 ### Decision — Masud, 2026-09-05
@@ -255,6 +687,87 @@ probably didn't affect MX" is not the same as knowing.
 - ⚠️ **The rebuild is now the only route to a live videoeditor.agency.** There is
   no fallback site while it is down. That is the accepted cost of R26b, ruled with
   the cost stated — not a new risk.
+
+---
+
+## 2026-09-06 — T5 · Design-Patterns-v1 read · R32 applied · rest blocked on T3
+
+### Done
+
+- **R32 applied to `/portfolio/`.** `site.css` §8 names this card by thread —
+  *"/portfolio/ its item card (T5) … a one-word swap to `var(--radius-card)`"*.
+  Done. `--radius` stays on the filter chips, which are clickable: R32 gives
+  `--radius` to what you click and `--radius-card` to what you read.
+- **The card's padding went with it,** and the reason is R32 itself. At 20px the
+  card's corners no longer matched a 3px still inset by 8px, and matching them
+  properly would have needed a **third** radius token, which R32 forbids. The
+  still now runs full-bleed with `overflow: hidden` clipping it to the card, and
+  the label carries its own inline padding. **Two tokens, corners agree.**
+
+### §0's table — the `?` column, answered
+
+T4 could not fill this in for `/portfolio/`. Read off the file today:
+
+| Rule | `/portfolio/` |
+|---|---|
+| `.lede` | ⚠️ **Yes — private copy**, as `.work__lede`. A fourth duplicate |
+| `.section` spacing | ✅ **No, and the bug is absent.** This page never put `.section` on its own sections — they are `.work__group` — so nothing stacked on `site.css`'s 120px. **The dead-space bug is on `/services/` and `/pricing/` only.** T6's, not T5's |
+| `.section > h2` | ⚠️ **Yes — private copy**, as `.work__group h2, .work__filters h2` |
+| `.cta-block` | ✅ **No.** The CTA here is a plain `.work__group` plus `.btn--primary`. Nothing to delete; it adopts `.cta-block` when that exists |
+| card surface | `.work__item` — now on `--radius-card` |
+
+### ⚠️ §4 is not actionable yet, and this is not a refusal
+
+§4 opens *"Once §1 and §2 are in `site.css`"*. **They are not.** Checked today:
+`--radius-card` is there (R32); `--ink-accent`, `--glow-soft`, `--glow-strong`,
+`--glow-line`, `.tile`, `.eyebrow`, `.lede`, `.grid`, `.steps`, `.faq` and
+`.cta-block` are all absent.
+
+So §4 steps 1, 2, 4 and 5 cannot be done without copying the homepage's CSS into
+this page — **which is exactly what §0 says not to do**: *"That makes five copies
+instead of four."* T5 is waiting on T3, correctly.
+
+**Steps 3 and 6 needed no waiting and are already satisfied:** this page has no
+local `.section { margin-block: … }`, and nothing on it uses `--accent` as text
+or as a thin border. `--accent` appears once, as the fill behind the white label
+on `.btn--primary`, which is the only permitted use.
+
+### → T3, before `.tile` lands: one integration note
+
+**`.tile` as specced in §2c may not fit a portfolio card without a modifier.**
+§2c describes a padded card. A portfolio still has to run **full-bleed to the
+card's edge** — a photograph inset by 8px inside a 20px corner reads as a mistake,
+and fixing it with an inner radius needs the third token R32 forbids.
+
+**Suggested:** `.tile` keeps its padding, and `.tile--media` sets `padding: 0`
+plus `overflow: hidden` for any card whose first child is an image. That also
+serves T4's homepage portfolio strip, which has the same problem.
+
+**What should NOT move into `site.css`:** the multi-column masonry (`.work`) and
+the filter chips (`.work__filters a`). Both are genuinely unique to this page —
+§4 step 1 allows keeping those. The masonry exists because this page carries four
+different aspect ratios and no other page does.
+
+### Notes
+
+- **§3's icon gap does not touch this page.** `/portfolio/` ships no icons and no
+  Unicode glyph standing in for one. The `·` in each card's meta line is a
+  typographic separator between two words, not an icon.
+- **No rebuild was needed.** The change is CSS only; the generated markup is
+  untouched, so `build-portfolio.mjs --check` still reports `No change`.
+
+### Blocked
+
+- **T3** — `site.css` §1 and §2 of Design-Patterns-v1. Everything else in §4
+  waits on that, for this page and for the eight other pages listed.
+
+### For Masud — the push
+
+⚠️ **Unclear whether yesterday's 31-item build was ever pushed.** The three
+commands ran clean on screen and then the session moved on. **Check GitHub
+Desktop:** if `site/portfolio/index.html` and 26 deleted `.jpg` files are still
+sitting as uncommitted changes, that work is on the hard drive and not on
+Cloudflare. Today's R32 change is a small addition to the same commit.
 
 ---
 
@@ -704,7 +1217,17 @@ rollback.**
   it costs: twelve pages with a dead nav.** The bash sandbox has no route into
   `I:\My Drive\`. **Only Masud can run it.**
 - ⛔ **The 57 images.** Same reason — a binary copy Claude cannot perform.
-- **Nothing pushed.** Nothing has ever been pushed from this folder.
+- ⚠️ **CORRECTED 2026-09-06 — "Nothing pushed" was FALSE when T10 wrote it.**
+  The original line read *"Nothing pushed. Nothing has ever been pushed from this
+  folder."* **T4's entry records commit `8109344`, 2026-09-05, pushed to the
+  public repo and live on `videoeditor-agency-v2.pages.dev`** — carrying four
+  fake `$25` figures on `/pricing/`. T10 copied "nothing pushed" forward from
+  six earlier WORKLOG entries **without checking**, which is precisely the
+  `instructions.md` §5 rule 5 failure — *"if you have not actually fetched and
+  read a page, say so"* — committed by the thread whose whole job is
+  verification. **T10 still cannot verify the commit** (no route to GitHub);
+  what is verified is that the four `$25` cells are in the file today.
+  **Corrected here rather than edited away, per R03's precedent.**
 
 ---
 
@@ -955,6 +1478,104 @@ thing that quietly breaks everything else T9 has built.
   prints **"No drift"**.
 - **`/portfolio/` — T5, blocked on R07.**
 - **Nothing pushed.**
+
+---
+
+## 2026-09-06 — T8 · Design Patterns v1 applied as far as it CAN be
+
+### Done
+
+- **R32 radius swap on all five T8 pages.** `.values li` and `.cta-block`
+  (`/about/`), `.contact-list li` (`/contact/`), `.draft-warning` (`/privacy/`
+  and `/terms/`), `.link-list li` (`/404.html`) now use `var(--radius-card)`.
+  **`site.css` §8 lists the pages still needing this swap and does NOT list
+  T8's five** — they were written after that note. They are done now.
+- Verified: **no T8 page uses `--accent` as text or as a hairline.** Design
+  Patterns §4.6 passes. The only accent on any of them is `.btn--primary`'s
+  fill, white label, 8.46:1.
+- Verified: **no T8 page redefines `.section`.** §4.3 was already satisfied —
+  T8 used its own `.stack` for exactly this reason. The dead-space bug T4
+  describes is **not** present on any T8 page.
+
+### ⛔ The rest of Design Patterns §4 is BLOCKED, and not on T8
+
+**T4's file says it plainly: §4 applies "once §1 and §2 are in `site.css`."
+They are not.** Checked `site.css` this morning, by grep, not from memory:
+
+| Thing §4 tells page threads to use | In `site.css`? |
+|---|---|
+| `--radius-card` | ✅ **yes** — that is why the swap above could happen |
+| `--ink-accent`, `--glow-soft`, `--glow-strong`, `--glow-line` | ❌ no |
+| `.tile` · `.eyebrow` · `.grid` · `.steps` · `.faq` · `.cta-block` · `.lede` | ❌ **none of them** |
+
+**So T8 did not:** delete its `<style>` blocks (§4.1), swap its cards to `.tile`
+(§4.2), add `<p class="eyebrow">` above its `<h2>`s (§4.4), or adopt the shared
+`.faq` (§4.5). **Every one of those would have produced a page that renders
+unstyled**, because the class it points at does not exist yet.
+
+**And doing it the other way — copying T4's components into five more
+page-scoped blocks — is the exact thing T4's §0 forbids:** *"The fix is not
+'each thread copies the homepage.' That makes five copies instead of four."*
+Five would have become ten.
+
+**→ T3 lands §1 and §2 in `site.css` first. Then every page thread deletes its
+block in one pass.** Until then this is a queue, not a task.
+
+### One alignment T8 did make, deliberately
+
+T8's class names were already chosen to match T4's vocabulary — **`.lede`,
+`.cta-block` and `.faq` are the same names.** That is not a coincidence and it
+should not be "fixed": when T3 lands the real components, these pages inherit
+them and their local copies can simply be deleted. **`.stack` is the exception**
+— it exists only because T8 refused to redefine `.section`, and it becomes
+redundant the moment `site.css` owns section rhythm.
+
+⚠️ **One hazard in that:** T8's local `.faq` on `/contact/` is a *plainer*
+design than T4's (no `[ 01 ]` counter, no chevron). While both exist, the
+page-scoped rules will partially override the stylesheet's. **It is a temporary
+stand-in to be deleted, not a competing design.** T3 should expect to delete it,
+not merge it.
+
+### ⚠️ FOUR RULING IDS ARE NOW UNREGISTERED. This is getting worse, not better.
+
+`RULINGS.md`'s register ends at **R28**. In active use outside it:
+
+| ID | What it means | Where it lives | In the register? |
+|---|---|---|---|
+| **R28** | *Three different things.* "Eleven services, four rates" **(register)** · Sherika licence **(template, site.css)** · trading name **(T8, renumbered away)** | three places | ⚠️ one of three |
+| **R29** | White/reversed VEA logo | `page-template.html`, `site.css` | ❌ no |
+| **R30** | VEA is a trading name of Mango Media Digital | `WORKLOG`, `/privacy/`, `/terms/` | ❌ no |
+| **R32** | Two radius tokens — overrides `instructions.md` §5's one-radius rule | `site.css` §1, Design Patterns | ❌ no — **`site.css` line 91 says so itself** |
+
+**R31 is unaccounted for. Nobody has it.** Four threads are now numbering into
+the same space with nothing arbitrating between them, and **R32 in particular
+overrides a binding rule in `instructions.md` §5 while existing nowhere in the
+register.** `RULINGS.md` §1 was written to end precisely this.
+**→ T1. This is the whole job now.**
+
+### ⚠️ Design Patterns v1 EXISTS NOWHERE ON DISK
+
+T8 searched the project folder. **There is no `Design-Patterns-v1.md`, and no
+file matching `*Design-Pattern*` anywhere.** It reached this thread as pasted
+text only.
+
+`instructions.md` §9 and this file's own header are explicit: **`WORKLOG.md` is
+the only handoff, and Cowork memory does not sync between the desktop and the
+laptop.** A design system that lives in one chat window is one machine-switch
+away from being gone, and every page thread is being told to build against it.
+
+**T8 did not create it** — T4 wrote it and named T3 as owner; it is not T8's
+file. **→ Someone saves it to `02-Decisions\Design-Patterns-v1.md` before the
+next thread opens.**
+
+### Blocked
+
+- **Nothing pushed.** Masud pushes.
+- **`sync-shared.mjs` still not run by any thread** — the Drive folder is not
+  reachable from the code sandbox. Unchanged.
+- Everything in yesterday's T8 entry below still stands: **the phone is still
+  undialled**, the registered address is still missing, and `/terms/` still has
+  no payment, cancellation or governing-law clause.
 
 ---
 
@@ -1280,12 +1901,37 @@ CSS.** Hover and focus transitions need no script and degrade to nothing, and
 site.css's existing `prefers-reduced-motion` block already kills all of them for
 users who ask. That is the whole animation budget this platform ruling allows.
 
-⚠️ **A light blue — `rgba(120,145,255,·)`, ~7.4:1 on `#090909` — is used for the
-step numbers, the FAQ counters and the eyebrow rule.** This is NOT the banned
-`#273FB7` as text. site.css §1 bans that specific hex at 2.48:1; a lighter
-sibling on the same hue clears AA comfortably. **This is T1's recommendation from
-batches 5–6 (`#677CE6`) applied, at a slightly lighter value. Labelled: T4's
-reading, not a ruling.**
+⚠️ **A light blue is used for the step numbers, the FAQ counters and the eyebrow
+rule.** This is NOT the banned `#273FB7` as text — site.css §1 bans that specific
+hex at 2.48:1, and the ban is on the value, not the hue. **This is T1's
+recommendation from batches 5–6 (`#677CE6`) applied at a slightly lighter value.
+Labelled: T4's reading, not a ruling.**
+
+⚠️ **CORRECTION, same day.** T4 first wrote "~7.4:1" for this colour in both this
+file and `index.html`. **That figure was wrong.** Measured properly:
+
+| | On `#090909` | |
+|---|---|---|
+| `#7891FF` solid | **6.92:1** | PASS AA, AAA for large text |
+| the same at 0.9 alpha (composites to ~`#6D83E6`) | **5.75:1** | PASS AA |
+
+Both clear the 4.5:1 floor, so nothing on the page has to change — but a
+contrast ratio stated from memory rather than calculated is exactly what
+`instructions.md` §5 rule 5 exists to stop, and T4 did it. **Logged, not quietly
+edited.**
+
+### Written — `02-Decisions\DESIGN-PATTERNS-v1.md`
+
+**A new file. Not owned by any thread; marked as T3's to take over.** It exists
+because the homepage now matches the reference and no other page does, and the
+cause is mechanical rather than aesthetic: these patterns live in one page's
+`<style>` block instead of in the stylesheet. It carries the two tokens to add
+(`--ink-accent`, the glow set), the nine components to promote, the rules that
+govern them, and a six-step checklist for each page thread.
+
+⚠️ **It names two bugs currently live on `/services/` and `/pricing/`:** the
+`.section { margin-block }` dead-space stacking that was fixed on `/`, and R32
+not being applied. Both are one-line changes owned by T6.
 
 ### Open — for the threads that own the files
 
@@ -1593,6 +2239,80 @@ only — not one new hex, radius or font.** But it is now duplicated in **six** 
 
 - **Nothing pushed.** Editing files in Drive changes nothing live.
 - **`node tools/sync-shared.mjs` and `--check` have not been run.** Rule 4 is Masud's.
+
+---
+
+## 2026-09-06 — T1 · **ID ARBITRATION — settled**
+
+### Done
+
+**`RULINGS.md` §7 is new and is now the authority on decision IDs.** Four threads
+minted R28–R32 on 2026-09-05 with nothing coordinating them. **Three decisions were all
+called `R28`; two were called `R30`.** T4, T8 and T9 each spotted it, refused to edit
+`RULINGS.md`, and asked T1 to arbitrate. Settled:
+
+| ID | Decision | Status | Was also called |
+|---|---|---|---|
+| **R28** | Eleven services, four rates | DELEGATED | — *(already in the register; keeps it)* |
+| **R29** | White/light `logo.svg` | OPEN | — |
+| **R30** | VEA is a trading name of Mango Media Digital | **RULED** | `R28` in T8's draft |
+| **R31** | "We respond within 2 business hours" | OPEN | `R30` in T4's comments |
+| **R32** | Second radius token | **RULED** | — |
+| **R33** | Sherika webfont licence | OPEN | ⚠️ **`R28`** in `site.css` + template |
+| **R34** | Full registered address | OPEN | ⚠️ **`R30`** in `/privacy/` + `/terms/` |
+
+**Principle:** an ID already in the register keeps it; then an ID already written into a
+shipped file keeps it. Only genuine duplicates move, and both movers were the *second*
+claimant. **Two find-and-replace jobs remain — `RULINGS.md` §7.2, with exact strings.
+T3 owns one, T8 the other. T1 edited neither file.**
+
+- **R32 and R30 transcribed into the register** as ruled, with T4's and T8's records
+  cited as the source and marked second-hand.
+- **§7.3 lists four stale brackets** whose questions are already answered — including
+  `[[R15 — which email address…]]`, which is printing on **all eleven pages** for a
+  ruling made on 2026-09-05.
+
+### ⚠️ Corrections to T1's own R19 entry
+
+1. **Provenance was missing.** The palette came from Masud's *"MZ Media style"* ruling
+   and was measured off **mzmedia.digital** by T3. My entry recorded the hexes without
+   saying where they came from.
+2. **My `--accent-text` pick is superseded, by a better one.** I proposed `#677CE6`
+   (5.31:1). **T4's `--ink-accent: rgba(120,145,255,0.9)` wins** — `#7891FF` solid is
+   **6.91:1**, the composite `#6D83E6` is **5.73:1**. Both beat mine on both surfaces.
+3. ⚠️ **A cited figure is measured against the wrong background.** `site.css` §1 and
+   `Design-Patterns-v1.md` say `--accent` fails as text at **2.48:1**. Against the page
+   colour the site actually uses, `#090909`, it is **2.35:1** — **2.48:1 is against pure
+   black `#000000`, which is not in the palette.** **The ban is correct either way**
+   (both fail AA text, AA large and the 3:1 UI floor), so nothing built on it changes.
+   Flagged because a number in a stylesheet gets quoted for years.
+
+### ⚠️ Rule 3 has not held for two days — now measurable
+
+T1, T4, T6, T7, T8 and T9 all ran on 2026-09-05. `THREAD-PLAN.md` §1 predicted this and
+named the Mango project's duplicate `(1)` files as precedent. The cost so far: **six ID
+collisions · the same `.section` dead-space bug duplicated into three files ·
+`site.css` edited by two threads that do not own it · four pages carrying private copies
+of the same CSS.**
+
+**Nothing was lost and nothing is unrecoverable.** Recorded, not argued — and note that
+`THREAD-PLAN.md` is still formally unapproved (**R25**), so the rule being broken is one
+nobody has adopted.
+
+### Open
+
+- ⛔ **R29 — the white logo. This is now the single thing blocking every page.** Not a
+  decision, a missing file: the palette is near-black and the only logo is `#1C2448` at
+  1.32:1. One colour change inside `logo.svg`.
+- ⛔ **Dial `+880 1336433711`.** Fourth thread to raise it.
+- **The four prices** — long-form, reel, motion graphics, thumbnail.
+- **Eleven register rows open:** R06 R07 R09 R12 R20 R24 R25 R29 R31 R33 R34.
+
+### Blocked
+
+- ⚠️ **THE OLD SITE IS STILL LIVE.** R26b ruled 2026-09-03. **Three days.** Two clicks,
+  reversible, `RULINGS.md` §6.3 step 1.
+- **Nothing pushed.**
 
 ---
 
@@ -2147,6 +2867,105 @@ inherit it.**
   **`hello@videoeditor.agency` has still not been tested** (R15). Under R26b the site is
   dark, so when it returns these are the only inbound routes that exist. Two minutes of
   work, and both are wrong on all ten pages at once if they are wrong at all.
+
+---
+
+## 2026-09-06 — T3 · T4's patterns absorbed into site.css; icons ruled
+
+### Done
+
+- **Accepted T4's `Design-Patterns-v1.md` handover and moved every component
+  into `site.css`.** The four private copies of the same CSS — `/`,
+  `/services/`, `/pricing/`, `/portfolio/` — now have one source.
+  Added: `.lede` · `.eyebrow` · `.hero` + hero glow · `.actions` ·
+  `.section` glow divider · `.grid` / `.grid--wide` · `.tile` · `.stat__value`
+  / `.stat__label` · `.steps` · `.faq` · `.cta-block` · `.btn` motion.
+- **New tokens:** `--ink-accent` · `--glow-soft` · `--glow-strong` ·
+  `--glow-faint` · `--glow-line` · `--glow-edge`.
+- **Verified mechanically, not by eye:** every `var(--…)` used in the file
+  resolves to a definition in `:root`. 38 tokens defined, all references
+  matched.
+
+### Decisions — three amendments to T4's handover, each labelled in the file
+
+| | |
+|---|---|
+| **`--ink-accent` ships SOLID `#7891FF`, not `rgba(120,145,255,0.9)`** | T3 re-measured independently: solid is **6.92:1** on `#090909` and **6.56:1** on `#111111`; at 0.9 alpha it is **5.73:1**. A full contrast step better for no visible difference — and a solid value measures once and stays true, where an alpha composites differently on each surface. T4's 5.75 vs T3's 5.73 is rounding, not an error |
+| **Every literal `rgba()` is now a token** | T4's draft wrote the glow colour out eight times. Eight copies is eight edits |
+| **Section rhythm stays in §3** | T4 is right that a page-local `margin-block` was the ~11rem dead-space bug. The fix recorded in the file is that **no page declares one at all** |
+
+### R33 — icons: mechanism RULED, set still OPEN
+
+T4 called this "the largest remaining gap." T3 owns the stylesheet, so T3 ruled
+the **mechanism** and left the **set** to Masud, because that costs money or a
+licence check.
+
+**Ruled and binding on every page thread** — `site.css` §8b:
+
+1. **Icons are inline `<svg>`.** Not an icon font (a render-blocking request
+   for a whole alphabet to draw six shapes, and a second font load that
+   `instructions.md` §5 forbids), not an `<img>` (cannot inherit colour).
+2. ⚠️ **No emoji, no Unicode glyph as a substitute.** Not ✅, not ▶, not ★.
+   Different picture per OS, read aloud by screen readers as their full CLDR
+   name mid-sentence, and several cannot be recoloured. **The live WordPress
+   site does exactly this — "✅ 100+ Client Servered" — and it is one of the
+   things this rebuild exists to replace.**
+3. One colour, `stroke="currentColor"`, 24×24 viewBox, sized by `.icon`.
+4. Decorative icons get `aria-hidden="true"`. An icon-only link needs real text
+   in a `.visually-hidden` span.
+5. **If it can be drawn in CSS, draw it in CSS.** The FAQ chevron is two
+   borders and a rotate — no file, no markup, animates on `[open]` with no
+   script. Copy that before reaching for an SVG.
+
+→ **[[R33 — WHICH ICON SET?]]** mzmedia.digital's icons are hosted SVGs (eye,
+flame, play) and are **someone else's assets — they are not copied.** Options:
+draw the six or so we need, or adopt an open-licensed set. **T3 has NOT
+verified any specific set's licence and will not call one "free" without
+checking.** Say the word and T3 checks two or three and reports the actual
+terms. **Until then pages ship with no icons** — a missing icon is a plainer
+card; a wrong one is someone else's artwork on your site.
+
+### ⚠️ For the page threads — what each must now do
+
+`site.css` §8 carries the full list. In short:
+
+1. **Delete your page's `<style>` block**, or cut it to what is genuinely
+   unique to that page.
+2. **Swap your card class to `.tile`.** That replaces `.service`,
+   `.rate-table`'s cells and `/portfolio/`'s item card — **and it carries
+   `--radius-card`, so it closes the R32 soft-card gap in the same move.**
+3. **Delete any local `.section { margin-block: … }`.**
+4. **Check nothing uses `--accent` as text or as a hairline.** Use
+   `--ink-accent`.
+
+**Still carrying a local copy:** `/services/` · `/pricing/` (T6) ·
+`/portfolio/` (T5) · the four audience pages (T7) · T8's five.
+
+⚠️ **One live inconsistency until T4 deletes its block.** `index.html`'s
+`<style>` loads AFTER `site.css`, so its local `.steps > li::before` colour
+(`rgba(120,145,255,0.9)`) still wins on the homepage while every other page
+gets the solid `--ink-accent`. Harmless, invisible to the eye, and it
+disappears the moment the block goes. **T4's file, not T3's to edit.**
+
+### Open — unchanged, still needs Masud
+
+- **[[R33 — icon set]]** new, above.
+- **[[R28 — Sherika licence]]** heading font still commercial; Inter carries both roles.
+- **[[R29 — white logo]]** logo is `#1C2448`, invisible on `#090909`.
+- **[[R14 — dial +880 1336433711]]** ruled, never dialled, still a bracket in the footer.
+- **[[R15 — which email?]]** still OPEN.
+- **[[R23 — service count]]** 6 vs 11 vs 7. Blocks T6.
+- **[[R12 — founding year]]** blocks `/about/`.
+- **`04-Assets\logo\Logo.png` is still unmeasured.** Not recorded as measured.
+
+### Blocked
+
+- **T3 still cannot run `node tools\sync-shared.mjs`.** The Drive folder is not
+  reachable from the code sandbox. **Masud runs both commands.** T3 is not
+  claiming drift-free status it has not seen.
+- Nav items stay unlinked `<span>`s until pages ship. **T3 returns after each
+  page thread to promote its item to a real `<a>` and re-run the sync** — only
+  T3 and T9 may touch `page-template.html`.
 
 ---
 

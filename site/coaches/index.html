@@ -56,28 +56,48 @@
 
        THERE IS NOT ONE NEW HEX, RADIUS OR FONT HERE.
 
-       ⚠️ THIS IS NOW DUPLICATED IN SIX FILES — /services/, /pricing/, and the
-          four For pages. That is the compounding cost of page threads not
-          owning the stylesheet, and it is T3's to collapse.
+       ⚠️ UPDATED 2026-09-06 AGAINST 02-Decisions/DESIGN-PATTERNS-v1.md.
 
-       ⚠️ A CONCRETE REQUEST TO T3, per THREAD-PLAN.md §1 Rule 1 (a thread that
-          needs a change to a file it does not own writes the request down and
-          does not edit):
+       T4's handover instructs every page thread (§4) to delete this block —
+       BUT §4 opens with "Once §1 and §2 are in site.css", AND THEY ARE NOT.
+       Checked on 2026-09-06: site.css has --radius-card (R32) and nothing else
+       from that file. No --ink-accent, no --glow-* tokens, and none of .tile,
+       .grid, .eyebrow, .steps, .faq, .lede or .cta-block.
 
-          `.tile-grid` / `.tile` below are BYTE-IDENTICAL in their declarations
-          to T6's `.service-grid` / `.service`. They are renamed because a pain
-          point is not a service, and T6's names would be wrong on this page.
-          WHEN ABSORBING: keep ONE pair under the neutral name and update
-          /services/ to use it. Do not absorb both.
+       SO ONLY THE UNGATED STEPS WERE APPLIED HERE:
+         ✅ §4 step 3 — the .section { margin-block } override is DELETED.
+                        It needed nothing from T3 and it was a live defect.
+         ✅ §4 step 2 — .tile and .cta-block now use --radius-card, which
+                        already exists. One-word swap, no dependency.
+         ✅ §4 step 6 — checked: nothing on this page uses --accent as text or
+                        as a thin border. The only accent use is .btn--primary,
+                        which is a FILL with a white label at 8.46:1.
+         ⛔ §4 step 1 — NOT done. Deleting this block before T3 lands the
+                        components would leave the page unstyled.
+         ⛔ §4 step 4 — NOT done. <p class="eyebrow"> markup is pointless until
+                        .eyebrow exists; adding it now renders as a stray
+                        sentence above every h2.
+         ⛔ §2c full .tile — NOT copied. DESIGN-PATTERNS-v1.md §0 is explicit:
+                        "The fix is not 'each thread copies the homepage.' That
+                        makes five copies instead of four."
+
+       Class names and the 17rem minmax were aligned to §2 so that when T3
+       finally lands the components, deleting this block is a clean subtraction
+       rather than a re-layout.
+
+       ⚠️ STILL DUPLICATED ACROSS THE SITE, and T3 still owns collapsing it.
        ====================================================================== -->
   <style>
+    /* ⚠️ .section { margin-block } IS DELETED — 2026-09-06.
+       DESIGN-PATTERNS-v1.md §0 consequence 2 and §4 step 3: that override
+       stacked on site.css's 120px padding-block and produced ~11rem of dead
+       space between sections. It also hit the FOOTER, which carries
+       class="site-footer section". site.css owns section rhythm. Do not
+       reintroduce it. */
+
     .lede {
       font-size: var(--step-1);
       color: var(--ink-muted);
-    }
-
-    .section {
-      margin-block: var(--space-7);
     }
 
     .section > h2 {
@@ -93,18 +113,28 @@
       margin-block: var(--space-5);
     }
 
-    .tile-grid {
+    /* Renamed .tile-grid → .grid and minmax 18rem → 17rem to match
+       DESIGN-PATTERNS-v1.md §2d exactly, so that when T3 lands .grid in
+       site.css this local copy is a pure duplicate and deletes to a no-op. */
+    .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
       gap: var(--space-5);
       margin-block: var(--space-6);
       padding: 0;
       list-style: none;
     }
 
+    /* --radius-card is R32, ruled 2026-09-05, and it ALREADY EXISTS in
+       site.css §1. This is the one-word swap DESIGN-PATTERNS-v1.md §4 step 2
+       asks for, and it needs nothing from T3.
+       ⚠️ This is NOT T4's full .tile — that has a top-lit gradient and a hover
+       lift, and it is NOT copied here. DESIGN-PATTERNS-v1.md §0: "The fix is
+       not 'each thread copies the homepage.' That makes five copies instead of
+       four." T3 lands the real one; this block then deletes. */
     .tile {
       border: 1px solid var(--rule);
-      border-radius: var(--radius);
+      border-radius: var(--radius-card);
       padding: var(--space-4);
     }
 
@@ -127,7 +157,7 @@
 
     .cta-block {
       border: 1px solid var(--rule);
-      border-radius: var(--radius);
+      border-radius: var(--radius-card);   /* R32 — see .tile above */
       padding: var(--space-5);
       margin-block: var(--space-7);
     }
@@ -294,7 +324,7 @@
     <section class="section" aria-labelledby="problem-heading">
       <h2 id="problem-heading">Four things that quietly cap a coaching business</h2>
 
-      <ul class="tile-grid">
+      <ul class="grid">
 
         <li class="tile">
           <h3>The edit eats the week</h3>
@@ -344,8 +374,20 @@
       <h2 id="deliver-heading">What we edit for coaches and trainers</h2>
 
       <ul class="deliverables">
+        <!-- T11, 2026-09-06, on Masud's instruction: course / LMS editing is
+             folded into THIS page rather than a new one (EXPANSION-v1.md §6.4).
+             Two bullets added; nothing of T7's removed. No count is stated —
+             "hundreds of courses" is E7, unconfirmed, and does not ship. -->
         <li><strong>Online course editing</strong> — module by module, structured for
           completion, consistent from lesson one to the last.</li>
+
+        <li><strong>LMS-ready delivery</strong> — chaptered lessons, slide-and-camera
+          composites, screen-recording clean-up, and exports in the resolution,
+          bitrate and captions format your platform asks for.</li>
+
+        <li><strong>Course launch content</strong> — the trailer, the module previews
+          and the ad variants that sell the programme. See <a href="/ads/">Meta ad
+          creative</a>.</li>
 
         <li><strong>Coaching session highlight reels</strong> — the moments worth
           showing, cut out of hours of recording.</li>

@@ -92,6 +92,16 @@
 
     .service-grid > li > h3 { margin-bottom: var(--space-2); }
 
+    /* ⚠️ TEMPORARY — R32 APPLIED LOCALLY, 2026-09-06. DELETE WHEN .tile LANDS.
+       R32 (Masud, 2026-09-05) gives two radius tokens: --radius for anything
+       clickable, --radius-card for anything you read. site.css's .card still
+       uses --radius (3px), so R32 is currently applied on the homepage and
+       NOWHERE ELSE — Design-Patterns-v1 §0 consequence 3.
+       An unapplied ruling is worse than a temporary local rule, so these eleven
+       cards take --radius-card now. This is exactly the private-copy duplication
+       Design-Patterns-v1 exists to end: it goes the moment T3 ships .tile. */
+    .service-grid > li.card { border-radius: var(--radius-card); }
+
     .service__meta {
       font-size: var(--step--1);
       color: var(--ink-muted);

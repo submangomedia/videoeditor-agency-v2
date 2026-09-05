@@ -106,13 +106,28 @@
   @media (min-width: 40rem) { .work { columns: 3; } }
   @media (min-width: 60rem) { .work { columns: 4; } }
 
+  /* ⚠️ R32 APPLIED, 2026-09-05. site.css §8 names this card by thread:
+     "/portfolio/ its item card (T5) … a one-word swap to var(--radius-card)".
+     Done. --radius stays on the filter chips below, which are clickable —
+     R32 gives --radius to what you click and --radius-card to what you read.
+
+     The padding went with it. At 20px the card's corners no longer matched a
+     3px still inset by 8px, and matching them would have needed a third
+     radius token, which R32 does not allow. Instead the still runs full-bleed
+     and `overflow: hidden` clips it to the card — one radius, no third token,
+     and the corners agree. The label carries its own inline padding.
+
+     ⚠️ THIS CLASS IS TEMPORARY. Design-Patterns-v1 §2c replaces it with
+     `.tile` once T3 puts that in site.css. This block is then deleted, not
+     re-copied — §0 of that file is explicit that copying the homepage makes
+     five copies instead of four. */
   .work__item {
     break-inside: avoid;
     margin: 0 0 var(--space-3);
-    padding: var(--space-2);
     background: var(--bg-raised);
     border: 1px solid var(--rule);
-    border-radius: var(--radius);
+    border-radius: var(--radius-card);
+    overflow: hidden;
   }
 
   /* ⚠️ THE GLARE FIX T3 FLAGGED IN site.css §9.
@@ -121,9 +136,13 @@
      surface and hairline give each still an edge, and the still sits slightly
      back until it is hovered or focused. This is the whole of the fix — it
      needs no new token and no second colour. */
+  /* border-radius: 0 overrides site.css §2, which gives every <img> --radius.
+     The card clips the corners now, so a second radius on the image would
+     show as a 3px notch inside a 20px corner. */
   .work__item img {
     display: block;
     width: 100%;
+    border-radius: 0;
     opacity: 0.88;
     transition: opacity 120ms linear;
   }
@@ -134,14 +153,14 @@
   .work__title {
     font-size: var(--step-0);
     letter-spacing: 0;
-    margin: var(--space-3) 0 var(--space-1);
+    margin: var(--space-3) var(--space-3) var(--space-1);
   }
 
   /* max-width:none overrides the 68ch measure site.css sets on every <p>. In a
      260px column the measure would never bite, but it would if the columns
      ever widen. */
   .work__meta {
-    margin: 0;
+    margin: 0 var(--space-3) var(--space-3);
     max-width: none;
     font-size: var(--step--1);
     color: var(--ink-muted);

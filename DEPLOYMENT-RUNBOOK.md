@@ -444,16 +444,68 @@ disclosure is not optional.
 **Both are unreviewed drafts. A lawyer reads them before cutover.** They are
 already in `sitemap.xml`.
 
-### 6. ⛔ `/pricing/` — one rate missing, five brackets
+### 6. ⛔⛔ `/pricing/` RENDERS FOUR FAKE `$25` FIGURES — AND THEY ARE PUSHED
 
-Long-form **$20/min**, short-form **$30**, thumbnail **$30** are real and
-rendered. **Motion Graphics & Animation has no rate** — and the research figure
-($15/min) is deliberately not used, because of the two research figures Masud
-did address he **changed both**.
+**This item was wrong in the 2026-09-05 version of this runbook and is corrected
+here rather than quietly rewritten.** It previously read *"$20/min, $30, $30 are
+real and rendered; Motion Graphics has no rate."* **That is not what the file
+contains.** Re-read 2026-09-06:
 
-Also open on that page: the subtext line, the third inclusion, a second FAQ, and
-**the seven unpriced services of eleven** (R28, delegated to T1's inference, one
-word from Masud reverses it).
+```
+line 482  <td class="rate-table__amount">$25</td>
+line 487  <td class="rate-table__amount">$25</td>
+line 492  <td class="rate-table__amount">$25</td>
+line 497  <td class="rate-table__amount">$25</td>
+```
+
+**Plain text. No `.todo` bracket. One flat $25 against four different units** —
+per minute of long-form, per reel, per minute of motion graphics, and per
+thumbnail. A buyer cannot tell it is a placeholder, because nothing on the page
+says so.
+
+**Masud's real figures are in that file's own comments** (lines 275–281, 463–464)
+— *"Short video is $30. Long video is $20 per minute. Thumbnail is $30 per
+thumbnail."* — beside T6's own note to itself: *"REPLACE THE FOUR PLACEHOLDER $25
+FIGURES WITH REAL RATES."* **It shipped anyway.**
+
+**`instructions.md` §5 rule 1: *"No placeholder that a client could quote back at
+you. No demo pricing."*** The live site's fake `$6.99` block is the reason this
+rebuild exists. **This is the same failure, in the same place, on the new site.**
+
+⚠️ **T4 reports it is committed and pushed** — commit `8109344`, *"Placeholder
+flat rate…"*, 2026-09-05 — to a **public** repo under R01, and live on
+`videoeditor-agency-v2.pages.dev/pricing/`.
+**T10 cannot verify this.** The sandbox has no route to GitHub. **Masud
+verifies in ten seconds:**
+**https://videoeditor-agency-v2.pages.dev/pricing/** — if the table shows `$25`
+four times, it is public.
+
+**Contained, not safe:** `robots.txt` is closed, every page carries `noindex`,
+and no custom domain is attached. It is not findable by search. **It is readable
+by anyone with the link, and the repo is public.**
+
+**Not blocked on anything.** Masud gave the numbers on 2026-09-05. It is a
+four-cell edit — and the fourth cell, Motion Graphics, is the one rate he has
+never given, so it becomes a `[[bracket]]`, not a number.
+
+| Row | Renders now | Should render |
+|---|---|---|
+| Long-Form Video Editing | `$25` | **$20** per minute of final output |
+| Short-Form Reels & TikToks | `$25` | **$30** per video |
+| Motion Graphics & Animation | `$25` | ⛔ **`[[NOT GIVEN]]`** — never ruled |
+| Thumbnail Design | `$25` | **$30** per thumbnail |
+
+⚠️ **The file is `site\pricing\index.html`, which THREAD-PLAN.md §4 gives to T6
+exclusively.** T10 has not edited it. **Either reopen T6, or authorise a
+cross-Rule-1 edit explicitly** — the same authorisation T8 was given to import
+the copy doc.
+
+Also still open on that page: the subtext line, the third inclusion, a second
+FAQ, and **the seven unpriced services of eleven** (R28).
+
+⚠️ **And a business question T6 raised in its own comments:** at $30 per
+short-form edit and $30 per thumbnail, **a full reel and a single still cost the
+same.** They sit two rows apart in one small table. A buyer will notice.
 
 ### 7. `sitemap.xml` is missing `/portfolio/`
 

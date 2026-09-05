@@ -43,9 +43,16 @@
        See /coaches/index.html for the full note and the request to T3.
        ====================================================================== -->
   <style>
+    /* ⚠️ .section { margin-block } DELETED 2026-09-06 — the dead-space bug.
+       DESIGN-PATTERNS-v1.md §0 consequence 2 and §4 step 3. It also hit the
+       footer, which carries class="site-footer section". Do not reintroduce.
+       Class names and radius aligned to DESIGN-PATTERNS-v1.md §2 so this whole
+       block deletes cleanly once T3 lands the real components in site.css.
+       The full .tile — gradient, hover lift — is deliberately NOT copied here;
+       §0 forbids a fifth copy. See /coaches/index.html for the long note. */
+
     .lede { font-size: var(--step-1); color: var(--ink-muted); }
 
-    .section { margin-block: var(--space-7); }
     .section > h2 { padding-bottom: var(--space-2); border-bottom: 1px solid var(--rule); }
 
     .actions {
@@ -53,9 +60,9 @@
       gap: var(--space-3); margin-block: var(--space-5);
     }
 
-    .tile-grid {
+    .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
       gap: var(--space-5);
       margin-block: var(--space-6);
       padding: 0;
@@ -64,7 +71,7 @@
 
     .tile {
       border: 1px solid var(--rule);
-      border-radius: var(--radius);
+      border-radius: var(--radius-card);   /* R32 — already in site.css §1 */
       padding: var(--space-4);
     }
 
@@ -81,7 +88,7 @@
 
     .cta-block {
       border: 1px solid var(--rule);
-      border-radius: var(--radius);
+      border-radius: var(--radius-card);   /* R32 */
       padding: var(--space-5);
       margin-block: var(--space-7);
     }
@@ -260,7 +267,7 @@
     <section class="section" aria-labelledby="problem-heading">
       <h2 id="problem-heading">Post-production is where agency video projects go to die</h2>
 
-      <ul class="tile-grid">
+      <ul class="grid">
 
         <li class="tile">
           <h3>The edit is the bottleneck on every video you sell</h3>

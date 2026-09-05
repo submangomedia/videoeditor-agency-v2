@@ -142,6 +142,49 @@
        the floor that a border does not qualify. Measured, then ruled. */
 
 
+  /* --- The blue that IS legible as text ----------------------------------
+
+     The ban above is on the VALUE #273FB7, not on the hue. A lighter sibling
+     clears AA comfortably, so the site is not forced to choose between "blue
+     accents" and "readable".
+
+     RE-MEASURED BY T3, 2026-09-06, independently of T4's figures:
+       #7891FF on #090909 (page) ........... 6.92:1  PASS AA · AAA for large
+       #7891FF on #111111 (raised card) .... 6.56:1  PASS AA
+       same at 0.9 alpha over #090909 ...... 5.73:1  PASS AA
+
+     ⚠️ T3 CHANGED T4's PROPOSED VALUE, AND SAYS SO RATHER THAN QUIETLY
+        SWAPPING IT. Design-Patterns-v1.md §1 proposed
+        `rgba(120,145,255,0.9)`. T3 ships the SOLID hex instead. Two reasons:
+          1. It is a full contrast step better — 6.92:1 against 5.73:1 — for
+             no visual cost anyone can see.
+          2. An alpha colour composites differently on --bg than on
+             --bg-raised, so its real contrast changes depending on which
+             surface it lands on. A solid value measures once and stays true.
+        T4's 5.73 vs 5.75 difference is rounding, not an error.
+
+     USE FOR: step numbers, FAQ counters, eyebrow rules, hover borders.
+     NEVER for body copy — that is --ink-body. */
+  --ink-accent: #7891FF;
+
+
+  /* --- Glow --------------------------------------------------------------
+
+     Every "light flare" on mzmedia.digital is a hosted .webp — Glow Line
+     Divider.webp, test glow.webp, Pricing Top BG.webp. These are the same
+     shapes built as CSS gradients, so nothing is hosted, nothing is
+     requested, and nothing breaks if a CDN goes away.
+
+     ⚠️ These are DECORATION and never carry meaning. Every one of them sits
+        behind content on a pointer-events:none pseudo-element. No text is
+        ever placed on a glow and asked to be read against it. */
+  --glow-soft:   rgba(39, 63, 183, 0.30);
+  --glow-strong: rgba(39, 63, 183, 0.45);
+  --glow-faint:  rgba(39, 63, 183, 0.14);
+  --glow-line:   rgba(120, 145, 255, 0.55);
+  --glow-edge:   rgba(120, 145, 255, 0.45);   /* hover borders on cards */
+
+
   /* --- Type --------------------------------------------------------------
 
      ⚠️ MZ Media's pairing is Sherika (headings) + InterDisplay (body).
@@ -413,6 +456,15 @@ img {
    ⚠️ Never invert this into blue text on the dark background — 2.48:1.
    -------------------------------------------------------------------------- */
 
+/* ON MOTION, BECAUSE IT LOOKS LIKE A RULE BREAK AND IS NOT.
+   instructions.md §5 bans SCROLL-TRIGGERED reveals, JS carousels, count-up
+   counters and JS accordions. It does not ban CSS. A hover transition needs no
+   script, costs no request, and degrades to nothing. §2's
+   prefers-reduced-motion block already kills every transition in this file for
+   users who ask, which is why none of them declares its own.
+   ⚠️ The scroll-driven glow and drift that makes mzmedia.digital feel alive
+      still CANNOT be built here. §0 records Masud being shown that exact cost
+      when he chose "MZ Media style". Not reopened. */
 .btn {
   display: inline-block;
   padding: var(--space-3) var(--space-4);
@@ -424,24 +476,37 @@ img {
   line-height: 1;
   text-decoration: none;
   cursor: pointer;
+  transition: transform 160ms ease, box-shadow 160ms ease,
+              background-color 160ms ease, border-color 160ms ease;
 }
+
+.btn:hover { transform: translateY(-1px); }
 
 .btn--primary {
   background: var(--accent);
   color: #FFFFFF;
+  box-shadow: 0 6px 22px -8px rgba(39, 63, 183, 0.9);
 }
 
-.btn--primary:hover { background: #2F4CD8; }
+.btn--primary:hover {
+  background: #2F4CD8;
+  box-shadow: 0 10px 28px -8px rgba(39, 63, 183, 1);
+}
 
 /* Secondary sits on the page itself. Its border is WHITE at low alpha, not
-   the accent — see the contrast block in §1. */
+   the accent — see the contrast block in §1. On hover it may take the LIGHT
+   blue (--glow-edge, from #7891FF), never --accent: a #273FB7 hairline on
+   #090909 is 2.48:1 and would be invisible. */
 .btn--secondary {
   background: transparent;
   color: var(--ink);
   border-color: var(--rule-strong);
 }
 
-.btn--secondary:hover { background: var(--bg-raised); }
+.btn--secondary:hover {
+  background: var(--bg-raised);
+  border-color: var(--glow-edge);
+}
 
 
 /* --------------------------------------------------------------------------
@@ -467,9 +532,178 @@ img {
 
 
 /* --------------------------------------------------------------------------
-   8. SURFACES
+   8. PAGE COMPONENTS
+
+   ⚠️ ADDED 2026-09-06, FROM T4's `02-Decisions\Design-Patterns-v1.md`.
+
+   WHY THIS SECTION EXISTS. T4 proved these patterns inside `index.html`'s own
+   <style> block, and /services/ and /pricing/ then grew private copies of the
+   same rules. Four files, one set of styles, and the drift was already
+   visible: soft cards on the homepage, sharp cards everywhere else, plus a
+   section-spacing bug fixed on / and still live on two other pages.
+
+   T3 accepted T4's handover with three amendments, each labelled where it
+   applies:
+     1. `--ink-accent` ships SOLID, not at 0.9 alpha. See §1.
+     2. Every literal rgba() in T4's draft is now a token. A glow colour
+        written out eight times is eight edits.
+     3. Section rhythm stays in §3, where it already lived. T4 is right that a
+        local `margin-block` was the dead-space bug; the fix is that no page
+        declares one at all.
+
+   ⚠️ WHAT EVERY PAGE THREAD MUST NOW DO — Design-Patterns-v1.md §4:
+        · DELETE your page's <style> block, or cut it to what is genuinely
+          unique to that page.
+        · Swap your card class to `.tile`. That REPLACES `.service`,
+          `.rate-table`'s cells and /portfolio/'s own item card — and it
+          carries --radius-card, so it closes the R32 gap in the same move.
+        · DELETE any local `.section { margin-block: … }`. This file owns
+          section rhythm.
+        · Check nothing uses --accent as text or as a hairline. Use
+          --ink-accent.
+      Still carrying a local copy: /services/ · /pricing/ (T6), /portfolio/
+      (T5), the four audience pages (T7), and T8's five.
    -------------------------------------------------------------------------- */
 
+/* --- Text roles ---------------------------------------------------------- */
+
+/* The intro paragraph under a heading. */
+.lede {
+  font-size: var(--step-1);
+  color: var(--ink-muted);
+}
+
+/* The pre-label above a section heading. Muted, small, uppercase.
+   ⚠️ IT IS A <p>, NEVER AN <h*>. Keeping it out of the heading tree is what
+   stops it competing with the page's single real <h1> — instructions.md §5. */
+.eyebrow {
+  font-size: var(--step--1);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  margin-bottom: var(--space-2);
+}
+
+/* The short accent rule before it, the way MZ Media tags its sections. */
+.eyebrow::before {
+  content: "";
+  display: inline-block;
+  width: 1.75rem;
+  height: 1px;
+  margin-right: var(--space-2);
+  vertical-align: middle;
+  background: var(--ink-accent);
+}
+
+
+/* --- Hero ---------------------------------------------------------------- */
+
+.hero {
+  position: relative;
+  padding-block: var(--space-8) var(--space-7);
+  isolation: isolate;
+}
+
+/* MZ Media paints this with a .webp light flare; this is the same shape in
+   CSS. Behind the content, pointer-events:none so it can never eat a click. */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: -20% -30% auto -30%;
+  height: 130%;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(45% 55% at 22% 8%, var(--glow-soft), transparent 70%),
+    radial-gradient(35% 45% at 78% 0%, var(--glow-faint), transparent 72%);
+}
+
+.hero .lede { max-width: 46ch; }
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  align-items: center;
+  margin-top: var(--space-6);
+}
+
+
+/* --- Section rhythm and the glow divider --------------------------------- */
+
+/* ⚠️ NO margin-block ANYWHERE ON .section. §3 already carries 120px of
+   padding-block above 48rem. A page adding margin on top of that is the
+   ~11rem dead-space bug T4 found. That rule belongs here and only here. */
+.section { position: relative; }
+
+/* MZ Media's "Glow Line Divider.webp" — a hairline that brightens toward the
+   centre and fades at both ends. A gradient border cannot do this, so it is a
+   1px pseudo-element. `.glow-top` forces one where the cascade cannot. */
+.section + .section::before,
+.section.glow-top::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(100%, 60rem);
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent,
+    var(--glow-faint) 15%,
+    var(--glow-line) 50%,
+    var(--glow-faint) 85%,
+    transparent);
+  box-shadow: 0 0 18px 1px rgba(39, 63, 183, 0.35);
+}
+
+.section > h2 { margin-bottom: var(--space-5); }
+
+
+/* --- Grid ---------------------------------------------------------------- */
+
+/* auto-fit, so one rule serves the 6-up services grid, the 4-up "why us" grid
+   and the 2-up stats row without three sets of breakpoints. */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+  gap: var(--space-4);
+  margin-block: var(--space-6);
+  padding: 0;
+  list-style: none;
+}
+
+.grid--wide { grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr)); }
+
+
+/* --- Cards --------------------------------------------------------------- */
+
+/* THE card class. MZ Media's cards are not flat — they carry a top-lit
+   gradient so the upper edge catches light. Two stacked backgrounds do that:
+   a faint blue wash from the top, over the raised surface colour. */
+.tile {
+  position: relative;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-card);
+  padding: var(--space-5);
+  background:
+    linear-gradient(180deg, rgba(39, 63, 183, 0.10), transparent 55%),
+    var(--bg-raised);
+  transition: border-color 160ms ease, transform 160ms ease,
+              box-shadow 160ms ease;
+}
+
+.tile:hover {
+  border-color: var(--glow-edge);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px -12px var(--glow-strong);
+}
+
+.tile h3 { margin-bottom: var(--space-2); }
+.tile p  { margin-bottom: 0; color: var(--ink-body); }
+
+/* A plain surface, for anything that wants the card shape without the lit
+   gradient or the hover lift. */
 .card {
   background: var(--bg-raised);
   border: 1px solid var(--rule);
@@ -477,19 +711,259 @@ img {
   padding: var(--space-4);
 }
 
-/* ⚠️ FOR THE PAGE THREADS — R32 IS NOT APPLIED EVERYWHERE YET.
-   Several pages define their own card class in a page-scoped <style> block
-   rather than using .card, and each still says border-radius: var(--radius):
-     · /services/  .service      (T6)
-     · /pricing/   .rate-table   (T6)
-     · /portfolio/ its item card (T5)
-   Those are one-word swaps to var(--radius-card), and they belong to the
-   threads that wrote them. Until they are made, the site has soft cards on
-   some pages and sharp on others. Listed in WORKLOG.md. */
-
 /* The one navy-tinted surface, for a section that needs to separate itself
    from the page without becoming a second background colour. */
 .panel--tint { background: var(--bg-tint); }
+
+
+/* --- Stats --------------------------------------------------------------- */
+
+/* ⚠️ STATIC TEXT, AT THE REAL SIZE. instructions.md §5 bans an animated
+   counter with no static fallback — that is the failure live on the current
+   WordPress site, which renders "0 +" and "0 K" to anything without
+   JavaScript. There is no script here and no number to animate: the value on
+   screen is the value in the HTML source.
+   R05 permits "100+ clients" and "10,000+ videos edited". Nothing else. */
+.stat__value {
+  display: block;
+  font-family: var(--font-heading);
+  font-weight: var(--weight-heading);
+  font-size: var(--step-3);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+
+.stat__label {
+  display: block;
+  font-size: var(--step--1);
+  color: var(--ink-muted);
+  margin-top: var(--space-2);
+}
+
+
+/* --- Numbered process ---------------------------------------------------- */
+
+/* A real <ol> — the steps are ordered and a screen reader should say so. The
+   counter is drawn from the list, not typed into the markup, so renumbering
+   cannot drift out of sync with the text. */
+.steps {
+  list-style: none;
+  counter-reset: step;
+  margin-block: var(--space-6);
+  padding: 0;
+}
+
+.steps > li {
+  counter-increment: step;
+  border-top: 1px solid var(--rule);
+  padding-block: var(--space-5);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-2);
+  transition: border-color 160ms ease;
+}
+
+.steps > li:hover { border-color: var(--glow-edge); }
+
+/* ⚠️ TAKE THIS GRID EXACTLY AS WRITTEN — T4 hit the bug and fixed it.
+   The first version put ::before in column 1 and <h3> in column 2; <p>, being
+   the third grid item, then wrapped onto row 2 back into the 4.5rem column and
+   every paragraph rendered ONE WORD PER LINE. The number must SPAN BOTH ROWS
+   in column 1, and both text elements must be pinned to column 2. */
+@media (min-width: 40rem) {
+  .steps > li {
+    grid-template-columns: 4.5rem 1fr;
+    column-gap: var(--space-5);
+  }
+  .steps > li::before { grid-column: 1; grid-row: 1 / span 2; }
+  .steps > li > h3    { grid-column: 2; grid-row: 1; }
+  .steps > li > p     { grid-column: 2; grid-row: 2; }
+}
+
+.steps > li::before {
+  content: counter(step, decimal-leading-zero);
+  font-family: var(--font-heading);
+  font-weight: var(--weight-heading);
+  font-size: var(--step-2);
+  line-height: 1.15;
+  color: var(--ink-accent);
+}
+
+.steps h3 { margin-bottom: 0; }
+.steps p  { margin-bottom: 0; max-width: 62ch; }
+
+
+/* --- FAQ ----------------------------------------------------------------- */
+
+/* Native <details>/<summary>. instructions.md §5 bans a JS accordion and names
+   this as the replacement. It opens with JavaScript disabled, it is keyboard
+   operable for free, and Ctrl+F finds the closed answers in current browsers. */
+.faq {
+  list-style: none;
+  padding: 0;
+  margin-block: var(--space-6);
+  border-bottom: 1px solid var(--rule);
+  counter-reset: faq;
+}
+
+.faq > li {
+  border-top: 1px solid var(--rule);
+  counter-increment: faq;
+}
+
+.faq summary {
+  cursor: pointer;
+  padding-block: var(--space-4);
+  font-family: var(--font-heading);
+  font-weight: var(--weight-heading);
+  font-size: var(--step-1);
+  color: var(--ink);
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-3);
+  list-style: none;
+  transition: color 160ms ease;
+}
+
+/* Kills the native triangle in Safari, which ignores list-style: none. */
+.faq summary::-webkit-details-marker { display: none; }
+
+/* MZ Media numbers its FAQ [ 01 ] [ 02 ]. Drawn from the counter, so the
+   numbering cannot drift out of step with the questions. */
+.faq summary::before {
+  content: "[ " counter(faq, decimal-leading-zero) " ]";
+  font-size: var(--step--1);
+  color: var(--ink-accent);
+  white-space: nowrap;
+}
+
+/* The open/closed affordance: a CSS-drawn chevron. No icon file, no font. It
+   rotates on open because <details> flips the attribute, not because a script
+   runs. ⚠️ This is the pattern to copy for the icon question — see §11. */
+.faq summary::after {
+  content: "";
+  margin-left: auto;
+  align-self: center;
+  width: 0.55em;
+  height: 0.55em;
+  border-right: 2px solid var(--ink-muted);
+  border-bottom: 2px solid var(--ink-muted);
+  transform: rotate(45deg);
+  transition: transform 180ms ease, border-color 180ms ease;
+}
+
+.faq details[open] summary::after {
+  transform: rotate(-135deg);
+  border-color: var(--ink-accent);
+}
+
+.faq summary:hover { color: #C8D4FF; }
+
+.faq summary:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 3px;
+}
+
+.faq details > p {
+  padding-bottom: var(--space-5);
+  margin: 0;
+  max-width: 68ch;
+}
+
+
+/* --- Closing CTA banner -------------------------------------------------- */
+
+/* MZ Media puts its heaviest glow behind the final CTA. Same treatment as the
+   hero, lit from below instead of above. */
+.cta-block {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-card);
+  padding: var(--space-7) var(--space-5);
+  margin-block: var(--space-7);
+  text-align: center;
+  background: var(--bg-raised);
+}
+
+.cta-block::before {
+  content: "";
+  position: absolute;
+  inset: auto -20% -60% -20%;
+  height: 130%;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(50% 60% at 50% 100%,
+    var(--glow-strong), transparent 72%);
+}
+
+.cta-block p { margin-inline: auto; }
+
+
+/* --------------------------------------------------------------------------
+   8b. ICONS — the MECHANISM is ruled here. The SET is not.
+
+   T4 raised this as "the largest remaining gap" in Design-Patterns-v1.md §3.
+   T3 owns the stylesheet, so T3 rules the mechanism. The choice of icon set
+   costs money or a licence check, so that stays with Masud.
+
+   ⚠️ RULED, AND BINDING ON EVERY PAGE THREAD:
+
+   1. ICONS ARE INLINE <svg> IN THE MARKUP. Not an icon font, not an <img>,
+      not a background-image.
+      · An icon font is a render-blocking request for a whole alphabet to draw
+        six shapes, and it renders as a blank box or a random glyph while it
+        loads. On this site it would also be a SECOND font load, which
+        instructions.md §5 forbids.
+      · An <img> cannot inherit colour, so every icon would need a light
+        variant and a dark one.
+      · Inline SVG costs zero requests, scales, and takes its colour from the
+        text around it.
+
+   2. ⚠️ NO EMOJI. NO UNICODE GLYPH AS A SUBSTITUTE. Not ✅, not ▶, not ★.
+      They render as a different picture on every operating system, they are
+      announced aloud by screen readers as their full CLDR name mid-sentence,
+      and several are full-colour by default and cannot be recoloured. The
+      live WordPress site does this today — its homepage prints "✅ 100+
+      Client Servered" — and it is one of the things this rebuild replaces.
+
+   3. EVERY ICON IS ONE COLOUR AND INHERITS IT.
+      Author with `fill="none" stroke="currentColor"` on a 24×24 viewBox, and
+      let `.icon` below size it. That way an icon inside a --ink-muted
+      paragraph is muted and an icon inside a button is white, with no extra
+      CSS and no second copy of the file.
+
+   4. DECORATIVE ICONS ARE HIDDEN FROM SCREEN READERS: `aria-hidden="true"`.
+      An icon that carries meaning on its own needs a <title> inside the svg,
+      or visible text beside it. An icon-only link needs real text in a
+      .visually-hidden span. A picture is not a label.
+
+   5. IF A SHAPE CAN BE DRAWN IN CSS, DRAW IT IN CSS. The FAQ chevron in §8 is
+      two borders and a rotate — no file, no markup, and it animates on the
+      [open] attribute with no script. Copy that pattern before reaching for
+      an SVG.
+
+   → [[R33 — WHICH ICON SET? Masud: mzmedia.digital uses hosted SVGs (eye,
+        flame, play) that we cannot copy — they are someone else's assets.
+        Options: (a) draw the six or so we need by hand, (b) adopt an
+        open-licensed set and paste the paths in. T3 has NOT verified the
+        licence terms of any specific set and will not name one as "free"
+        without checking. Say the word and T3 checks two or three and reports
+        the actual licences before anything is used.]]
+
+   UNTIL R33 IS ANSWERED: pages ship with no icons. A missing icon is a
+   slightly plainer card. A wrong one is someone else's artwork on your site.
+   -------------------------------------------------------------------------- */
+
+.icon {
+  width: 1.25em;
+  height: 1.25em;
+  flex: none;
+  vertical-align: -0.2em;
+  stroke-width: 1.5;
+}
 
 
 /* --------------------------------------------------------------------------

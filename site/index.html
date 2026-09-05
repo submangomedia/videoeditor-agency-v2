@@ -174,6 +174,82 @@
 
     .hero .lede { max-width: 46ch; }
 
+    /* T11, 2026-09-06 — HERO SPLIT, structure only (EXPANSION-v1.md §4).
+       Text left, a collage of real portfolio stills right. No device frames,
+       no rotating word, no rating badge, no lightbox: every one of those is
+       either JS (banned) or a claim VEA cannot back (R09). Stills are the
+       same files /portfolio/ serves — nothing new to host. Mobile stacks. */
+    .hero__grid { display: grid; gap: var(--space-6); align-items: center; }
+    @media (min-width: 56rem) {
+      .hero__grid { grid-template-columns: 1.15fr 1fr; }
+    }
+
+    /* The static audience run. This replaces the competitor's rotating noun.
+       A crawler and a screen reader read one complete sentence. */
+    .hero__audiences {
+      margin-top: var(--space-4);
+      font-size: var(--step--1);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+    }
+    .hero__audiences a { color: inherit; }
+
+    .collage {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-3);
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    .collage li {
+      border: 1px solid var(--rule);
+      border-radius: var(--radius-card);   /* R32 */
+      overflow: hidden;
+      background: var(--bg-raised);
+    }
+    .collage li:nth-child(2) { transform: translateY(var(--space-5)); }
+    .collage img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      aspect-ratio: 9 / 16;
+      border-radius: 0;
+      opacity: 0.88;
+    }
+
+    /* FEATURED WORK STRIPS — three of them (EXPANSION-v1.md §5). Same card
+       as /portfolio/ so the two never drift; T3 collapses both into .tile. */
+    .strip {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+      gap: var(--space-3);
+      margin-block: var(--space-5);
+      padding: 0;
+      list-style: none;
+    }
+    .strip li {
+      border: 1px solid var(--rule);
+      border-radius: var(--radius-card);
+      overflow: hidden;
+      background: var(--bg-raised);
+    }
+    .strip img {
+      display: block;
+      width: 100%;
+      border-radius: 0;
+      opacity: 0.88;
+      transition: opacity 120ms linear;
+    }
+    .strip li:hover img { opacity: 1; }
+    .strip .work__meta {
+      margin: var(--space-3);
+      font-size: var(--step--1);
+      color: var(--ink-muted);
+    }
+
     .actions {
       display: flex;
       flex-wrap: wrap;
@@ -323,10 +399,15 @@
       font-weight: var(--weight-heading);
       font-size: var(--step-2);
       line-height: 1.15;
-      /* The one place the accent is allowed to carry colour is a fill. This is
-         text, so it takes a light blue that MEASURES — rgba(120,145,255) is
-         ~7.4:1 on #090909, well clear of AA. site.css §1's ban is on #273FB7
-         itself at 2.48:1, not on the hue. */
+      /* site.css §1 bans #273FB7 as text — 2.48:1. That ban is on the VALUE,
+         not the hue. This is a lighter sibling, and it was measured rather
+         than assumed:
+           #7891FF solid on #090909                 6.92:1  PASS AA + AAA-large
+           the same at 0.9 alpha (composites to
+           ~#6D83E6) on #090909                     5.75:1  PASS AA
+         ⚠️ CORRECTION: an earlier version of this comment claimed ~7.4:1.
+            That was wrong — recorded rather than quietly edited. Both real
+            figures clear the 4.5:1 AA floor for normal text. */
       color: rgba(120,145,255,0.9);
     }
 
@@ -616,7 +697,15 @@
     <!-- ======================================================================
          SECTION 1 — HERO
          ====================================================================== -->
+    <!-- ⚠️ T11 REBUILT THIS HERO ON 2026-09-06 UNDER MASUD'S INSTRUCTION.
+         Masud, 2026-09-06, verbatim: "Can you do it by yourself … I need the
+         work." Rule 1 crossed on his word, recorded in WORKLOG. Structure is
+         from 02-Decisions/EXPANSION-v1.md §4 — text left, real stills right,
+         a STATIC audience line instead of a JS rotating word. The H1 and
+         lede are T4's and unchanged. Not one line is competitor copy. -->
     <section class="hero" aria-labelledby="hero-heading">
+      <div class="hero__grid">
+        <div>
 
       <p class="eyebrow">Professional Video Editing Agency</p>
 
@@ -645,12 +734,35 @@
         <!-- ⚠️ UPDATED. Was /services/. T5 shipped site/portfolio/index.html,
              and for this buyer the work is the stronger second CTA than a
              service list. /services/ keeps its own CTA further down the page,
-             so nothing is lost.
-             ⚠️ This links to the portfolio PAGE. It does not reinstate the
-                homepage portfolio STRIP — R07 is still open and T2 finding 6 is
-                unchanged. See the deletion note in the section map above. -->
+             so nothing is lost. -->
         <a class="btn btn--secondary" href="/portfolio/">See our work</a>
 
+      </div>
+
+      <!-- The audience run. Every link resolves to a page in this folder
+           (instructions.md §5). Nine audiences: four T7 pages, five T11 pages. -->
+      <p class="hero__audiences">Editing for
+        <a href="/content-creators/">creators</a> ·
+        <a href="/coaches/">coaches</a> ·
+        <a href="/podcasters/">podcasters</a> ·
+        <a href="/healthcare/">doctors &amp; clinics</a> ·
+        <a href="/legal/">lawyers</a> ·
+        <a href="/real-estate/">realtors</a> ·
+        <a href="/business-owners/">business owners</a> ·
+        <a href="/marketers-and-agencies/">agencies</a>
+      </p>
+
+        </div>
+
+        <!-- Three real stills from the T2 catalogue, the files /portfolio/
+             already serves. Unnamed: NamePublic is NO on every row (R07).
+             The still is a frame, not the YouTube promo card, on all three.
+             Order: legal short (9:16), ad-agency reel (9:16), kids short. -->
+        <ul class="collage" aria-label="Recent edits">
+          <li><img src="/assets/img/portfolio/ggyM4XlELXo.jpg" width="1080" height="1920" alt="Video still — a short-form clip from a law podcast, captioned"></li>
+          <li><img src="/assets/img/portfolio/LhHqpgKHfvE.jpg" width="1080" height="1920" alt="Video still — a vertical reel for a restaurant marketing agency"></li>
+          <li><img src="/assets/img/portfolio/GIbOpOMjF5w.jpg" width="1012" height="1920" alt="Video still — an animated kids education short"></li>
+        </ul>
       </div>
 
       <!-- ⚠️ "Watch Showreel" (source: secondary hero CTA) and the "Our Editing
@@ -763,7 +875,7 @@
             social.</p>
         </li>
         <li class="tile">
-          <h3>Ads &amp; Marketing Videos</h3>
+          <h3><a href="/ads/">Ads &amp; Marketing Videos</a></h3>
           <p>High-converting ad edits for Meta, Google, and YouTube. Punchy
             hooks, clear CTAs, and A/B-ready cuts delivered fast.</p>
         </li>
@@ -780,6 +892,149 @@
       <p>+ Thumbnail Design | Event Video | Promotional Video | Video Recording</p>
 
       <p><a class="btn btn--primary" href="/services/">Explore All Services</a></p>
+
+    </section>
+
+
+    <!-- ======================================================================
+         SECTION 4b — WHO WE EDIT FOR
+         T11, 2026-09-06. Nine audience pages exist and the header "For"
+         dropdown is still unbuilt (T3). Until it is, THIS is how a visitor
+         reaches them from the homepage. Every link resolves to a live file.
+         ====================================================================== -->
+    <section class="section" aria-labelledby="audiences-heading">
+
+      <p class="eyebrow">Who we edit for</p>
+      <h2 id="audiences-heading">Built Around the Way You Publish</h2>
+
+      <ul class="grid">
+        <li class="tile">
+          <h3><a href="/content-creators/">Content Creators</a></h3>
+          <p>YouTube, Shorts, Reels and TikTok — a consistent look across every upload.</p>
+        </li>
+        <li class="tile">
+          <h3><a href="/coaches/">Coaches &amp; Course Creators</a></h3>
+          <p>Programmes, masterclasses and full online courses, lesson by lesson.</p>
+        </li>
+        <li class="tile">
+          <h3><a href="/podcasters/">Podcasters</a></h3>
+          <p>Full episodes, branded intros, and a clip pipeline from every recording.</p>
+        </li>
+        <li class="tile">
+          <h3><a href="/healthcare/">Doctors &amp; Clinics</a></h3>
+          <p>Patient education and procedure explainers for dentists, dermatologists and aesthetic clinics.</p>
+        </li>
+        <li class="tile">
+          <h3><a href="/legal/">Lawyers &amp; Law Firms</a></h3>
+          <p>Explainers, podcast clips and intake content that keeps a firm's tone.</p>
+        </li>
+        <li class="tile">
+          <h3><a href="/real-estate/">Real Estate</a></h3>
+          <p>Listing walk-throughs, agent talking heads and market-update shorts.</p>
+        </li>
+        <li class="tile">
+          <h3><a href="/business-owners/">Business Owners</a></h3>
+          <p>Promo, product and brand video that does a job on the page it sits on.</p>
+        </li>
+        <li class="tile">
+          <h3><a href="/marketers-and-agencies/">Marketers &amp; Agencies</a></h3>
+          <p>White-label editing capacity for the campaigns you already run.</p>
+        </li>
+        <li class="tile">
+          <h3><a href="/ads/">Meta Ad Creative</a></h3>
+          <p>Hook-first cuts and variant sets for Reels, Feed and Stories.</p>
+        </li>
+      </ul>
+
+    </section>
+
+
+    <!-- ======================================================================
+         SECTION 6 — FEATURED WORK · THREE STRIPS
+         T11, 2026-09-06, on Masud's instruction. EXPANSION-v1.md §5.
+
+         T4 deleted the homepage portfolio on 2026-09-05 because a card that
+         EMBEDS a player names the client through YouTube's title. These
+         strips do not embed anything: a still, a label, a link to the
+         /portfolio/ group. The same treatment T5 ships on /portfolio/ today.
+
+         STRIP 1 — LEGAL: real. Four of the twelve legal stills T5 renders.
+                   One client, unnamed, labelled for what it is.
+         STRIP 2 — DOCTORS: BRACKET. One medical showreel is catalogued and
+                   its thumbnail is a promo card, not a frame — T5 holds all
+                   26 such items. Masud, 2026-09-06: more exists, he will
+                   supply. Nothing is shown until it is in the catalogue.
+         STRIP 3 — ADS: BRACKET. Zero items tagged ad creative. Same.
+
+         ⚠️ A bracket is loud on purpose (site.css §9). These two strips DO
+            NOT reach the custom domain as brackets — T10 gate. If the items
+            have not arrived by cutover, delete the two <section>s below.
+         ====================================================================== -->
+    <section class="section" aria-labelledby="legal-work-heading">
+
+      <p class="eyebrow">Featured work</p>
+      <h2 id="legal-work-heading">Editing for the Legal Profession</h2>
+      <p class="lede">A long-running podcast series for one US law firm — full
+        episodes cut into captioned vertical clips, episode after episode.</p>
+
+      <ul class="strip">
+        <li>
+          <img src="/assets/img/portfolio/ggyM4XlELXo.jpg" width="1080" height="1920" loading="lazy" decoding="async" alt="Video still — law podcast clip, Best software">
+          <p class="work__meta">Legal · Podcast clip · 9:16</p>
+        </li>
+        <li>
+          <img src="/assets/img/portfolio/Bo5R1CDI7ok.jpg" width="1080" height="1920" loading="lazy" decoding="async" alt="Video still — law podcast clip, Fear of AI">
+          <p class="work__meta">Legal · Podcast clip · 9:16</p>
+        </li>
+        <li>
+          <img src="/assets/img/portfolio/BHgL_J-eMFU.jpg" width="1080" height="1920" loading="lazy" decoding="async" alt="Video still — law podcast clip, What I learned working with lawyers">
+          <p class="work__meta">Legal · Podcast clip · 9:16</p>
+        </li>
+        <li>
+          <img src="/assets/img/portfolio/9lTVyaiEWMo.jpg" width="1280" height="720" loading="lazy" decoding="async" alt="Video still — law podcast episode, Favorite tech">
+          <p class="work__meta">Legal · Full episode · 16:9</p>
+        </li>
+      </ul>
+
+      <p><a class="btn btn--secondary" href="/portfolio/#legal-and-law-firm">See all legal work</a>
+        <a href="/legal/">Editing for lawyers →</a></p>
+
+    </section>
+
+    <section class="section" aria-labelledby="medical-work-heading">
+
+      <p class="eyebrow">Featured work</p>
+      <h2 id="medical-work-heading">Short-Form Editing for Doctors &amp; Clinics</h2>
+      <p class="lede">Patient education, procedure explainers and clinic content —
+        captioned, on-brand, and cut for Reels and Shorts.</p>
+
+      <p><span class="todo">[[T11 — STRIP NOT SHOWN. One medical showreel is
+        catalogued (fKs9q1E9y94) and its thumbnail is a promo card, not a frame.
+        Masud, 2026-09-06: doctor / dentist / dermatology / aesthetic work exists
+        and he will supply it. Add ≥3 rows to Portfolio-Catalogue.md (Industry:
+        Healthcare &amp; Medical), run build-portfolio.mjs, then place four stills
+        here in the same markup as the legal strip above. If none arrive by
+        cutover, DELETE this section.]]</span></p>
+
+      <p><a href="/healthcare/">Editing for doctors and clinics →</a></p>
+
+    </section>
+
+    <section class="section" aria-labelledby="ads-work-heading">
+
+      <p class="eyebrow">Featured work</p>
+      <h2 id="ads-work-heading">Editing for Meta Ads</h2>
+      <p class="lede">Hook-first cuts, burned-in captions, and variant sets sized
+        for Reels, Feed and Stories — from one master edit.</p>
+
+      <p><span class="todo">[[T11 — STRIP NOT SHOWN. Zero catalogued items are
+        ad creative; the ten Served Agency reels are an agency's organic shorts,
+        not ads. Masud, 2026-09-06: Meta ad videos exist and he will supply links.
+        Add ≥4 rows (Format: Ad Creative — a new value T2 must add), run
+        build-portfolio.mjs, then place four stills here. If none arrive by
+        cutover, DELETE this section.]]</span></p>
+
+      <p><a href="/ads/">Meta ad creative →</a></p>
 
     </section>
 

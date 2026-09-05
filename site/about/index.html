@@ -102,9 +102,13 @@
       gap: var(--space-5);
     }
 
+    /* R32, 2026-09-05 — soft radius on anything you READ, sharp on anything
+       you CLICK. site.css §8 lists the pages still to be swapped and does not
+       list T8's five, because they were written after that note. Swapped here
+       2026-09-06 so this page is not the odd one out. */
     .values li {
       border: 1px solid var(--rule);
-      border-radius: var(--radius);
+      border-radius: var(--radius-card);
       padding: var(--space-4);
     }
 
@@ -113,7 +117,7 @@
 
     .cta-block {
       border: 1px solid var(--rule);
-      border-radius: var(--radius);
+      border-radius: var(--radius-card);
       padding: var(--space-5);
       margin-block: var(--space-7);
       background: var(--bg-tint);

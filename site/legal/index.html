@@ -6,25 +6,14 @@
 
   <!-- ==========================================================================
        SEO HEAD — OWNED BY T9. THREAD-PLAN.md §4.
-       Synced by hand from _template/page-template.html on 2026-09-05, AFTER T3
-       added the Inter font load and the dark-paint meta. T7 filled the canonical
-       for its own page and changed nothing else in this block.
-
-       ⚠️ THIS BLOCK IS NOT SYNCHRONISED. `--check` will NOT report drift here.
+       T11 filled title, description and canonical for THIS page only,
+       2026-09-06. No turnaround (R18), no rate (R04), no count (R05), no
+       outcome claim. T9 rewrites freely.
+       ⚠️ NOT SYNCHRONISED — sync-shared.mjs copies HEADER and FOOTER only.
        ========================================================================== -->
-
-  <!-- T9, 2026-09-05. Title 33 chars, description 155.
-       The first sentence is this page's own lede. "Genuinely unlimited" is R17,
-       verbatim, ruled 2026-09-03.
-       ⚠️ NOT USED, DELIBERATELY: the cost comparison. T7 flagged that the whole
-       "cheaper than hiring" pitch has no number behind it and R04's rates are a
-       shape, not confirmed figures. A saving claimed in a search result is a
-       saving quoted back at you. -->
-  <title>Video Editing for Business Owners</title>
-
-  <meta name="description" content="Consistent, professional video for your business — without carrying an in-house editing team on the payroll. Genuinely unlimited revisions on every project.">
-
-  <link rel="canonical" href="https://videoeditor.agency/business-owners/">
+  <title>Video Editing for Lawyers &amp; Law Firms</title>
+  <meta name="description" content="Podcast episodes, explainer shorts and intake video for lawyers and law firms — captioned from the transcript, cut to keep a firm's tone. Unlimited revisions. Edited in Dhaka.">
+  <link rel="canonical" href="https://videoeditor.agency/legal/">
 
   <!-- ⚠️ STAYS until cutover, then comes off PAGE BY PAGE, NEVER SITEWIDE. -->
   <meta name="robots" content="noindex, nofollow">
@@ -38,61 +27,28 @@
 
   <link rel="stylesheet" href="/assets/css/site.css">
 
-  <!-- ==========================================================================
-       ⚠️ PAGE-SCOPED CSS — T3 ABSORBS THIS INTO site.css AND DELETES IT.
-       Identical in all four For pages. Existing tokens only, no new values.
-       See /coaches/index.html for the full note and the request to T3.
-       ====================================================================== -->
+  <!-- PAGE-SCOPED CSS — identical to /healthcare/. T3 collapses into site.css. -->
   <style>
-    /* ⚠️ .section { margin-block } DELETED 2026-09-06 — the dead-space bug.
-       DESIGN-PATTERNS-v1.md §0 consequence 2 and §4 step 3. It also hit the
-       footer, which carries class="site-footer section". Do not reintroduce.
-       Class names and radius aligned to DESIGN-PATTERNS-v1.md §2 so this whole
-       block deletes cleanly once T3 lands the real components in site.css.
-       The full .tile — gradient, hover lift — is deliberately NOT copied here;
-       §0 forbids a fifth copy. See /coaches/index.html for the long note. */
-
     .lede { font-size: var(--step-1); color: var(--ink-muted); }
-
     .section > h2 { padding-bottom: var(--space-2); border-bottom: 1px solid var(--rule); }
-
-    .actions {
-      display: flex; flex-wrap: wrap; align-items: center;
-      gap: var(--space-3); margin-block: var(--space-5);
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
-      gap: var(--space-5);
-      margin-block: var(--space-6);
-      padding: 0;
-      list-style: none;
-    }
-
-    .tile {
-      border: 1px solid var(--rule);
-      border-radius: var(--radius-card);   /* R32 — already in site.css §1 */
-      padding: var(--space-4);
-    }
-
+    .actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3); margin-block: var(--space-5); }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr)); gap: var(--space-5); margin-block: var(--space-6); padding: 0; list-style: none; }
+    .tile { border: 1px solid var(--rule); border-radius: var(--radius-card); padding: var(--space-4); }
     .tile h3 { margin-bottom: var(--space-2); }
     .tile p  { margin-bottom: 0; }
-
-    .deliverables {
-      max-width: var(--measure);
-      margin-block: var(--space-5);
-      padding-left: var(--space-4);
-    }
-
+    .deliverables { max-width: var(--measure); margin-block: var(--space-5); padding-left: var(--space-4); }
     .deliverables li { margin-bottom: var(--space-3); }
-
-    .cta-block {
-      border: 1px solid var(--rule);
-      border-radius: var(--radius-card);   /* R32 */
-      padding: var(--space-5);
-      margin-block: var(--space-7);
-    }
+    .strip { display: grid; grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr)); gap: var(--space-3); margin-block: var(--space-5); padding: 0; list-style: none; }
+    .strip li { border: 1px solid var(--rule); border-radius: var(--radius-card); overflow: hidden; background: var(--bg-raised); }
+    .strip img { display: block; width: 100%; border-radius: 0; opacity: 0.88; }
+    .strip .work__meta { margin: var(--space-3); font-size: var(--step--1); color: var(--ink-muted); }
+    .faq { list-style: none; padding: 0; margin-block: var(--space-6); border-bottom: 1px solid var(--rule); }
+    .faq > li { border-top: 1px solid var(--rule); }
+    .faq summary { cursor: pointer; padding-block: var(--space-4); font-family: var(--font-heading); font-weight: var(--weight-heading); font-size: var(--step-1); color: var(--ink); list-style: none; }
+    .faq summary::-webkit-details-marker { display: none; }
+    .faq details > p { padding-bottom: var(--space-5); margin: 0; max-width: 68ch; }
+    .cta-block { border: 1px solid var(--rule); border-radius: var(--radius-card); padding: var(--space-5); margin-block: var(--space-7); }
+    .note { font-size: var(--step--1); color: var(--ink-muted); max-width: 68ch; }
   </style>
 </head>
 
@@ -185,161 +141,164 @@
 <!-- SHARED:HEADER — END ===================================================== -->
 
 <!-- ============================================================================
-     /business-owners/ — written by T7, 2026-09-05.
+     /legal/ — written by T11, 2026-09-06, on Masud's instruction. Rule 1
+     crossed on his word; recorded in WORKLOG. Structure: EXPANSION-v1.md §6.2.
 
-     COPY SOURCE: 03-Build-Ready/For-BusinessOwners-Copy-Final.md, built from
-     `videoeditor_agency_website_copy` PAGE 4 ("FOR BUSINESSES"), fetched from
-     Drive and read on 2026-09-05. `VEA all page content plan` has only an empty
-     `# Business Owners` heading with nothing beneath it.
+     PROOF IS REAL BUT NARROW: 12 rendered items, ONE client, unnamed
+     (NamePublic NO, R07). The page says so — "one firm's podcast series" —
+     rather than implying a roster. Nothing embeds; stills link to /portfolio/.
 
-     ⚠️ FIVE SECTIONS, NOT SEVEN. Proof (R08 conditional) and Recommended plan
-        (R04 killed "Monthly Retainer or Per Bundle") are DELETED, not unbuilt.
-
-     ⚠️⚠️ THE STRONGEST ARGUMENT ON THIS PAGE IS THE ONE IT CANNOT MAKE, AND A
-           LATER THREAD MUST NOT INVENT IT.
-
-        The pitch to a business owner is a COST pitch — an editing team costs
-        less than an editor on staff. The source copy asserts this three times
-        and never once puts a number to it. Under R04 the published per-unit
-        rates would be that argument, but:
-          1. R04 ruled the SHAPE. RULINGS.md §4 R04: "T6 must have him confirm
-             each rate before it renders on a page." He has not.
-          2. An in-house editor's salary varies by country. This page is read in
-             the US, the UK and Bangladesh. One number is wrong in two of three.
-          3. instructions.md §5 rule 3: never invent a figure.
-        NO COST COMPARISON IS BUILT HERE. Carried as an open item in WORKLOG.
-
-     ⚠️ R11 — VIDEO RECORDING IS NOT OFFERED ON THIS PAGE, AND THAT IS A CHOICE.
-        R11 was ruled IN on 2026-09-05, scoped to Dhaka, and /services/ lists it.
-        This is the For page most likely to attract a buyer who wants filming as
-        well as editing. It is absent because the deliverables list below comes
-        from the copy doc, which does not include it. If it is added, the Dhaka
-        scope goes in the same sentence — under R16 that is a fact, not a
-        confession, but most of this page's readers still cannot buy it.
-
-     ⚠️ NO TURNAROUND CLAIM. R18 closed to pressing.
-
-     WHAT IS REAL HERE:
-       · Prose                — `videoeditor_agency_website_copy` PAGE 4
-       · Unlimited revisions  — R17, Masud 2026-09-03
-       · CTA → /contact/      — T8 shipped that page 2026-09-05. See the note in
-                                /coaches/index.html for why /contact/ and not a
-                                raw mailto:, and for the ⚠️ that /contact/
-                                currently publishes an email R15 did NOT rule
+     ⚠️ NO OUTCOME CLAIM. No "more clients", no "more consultations".
+     ⚠️ NO TURNAROUND (R18). NO NUMBER (R05). NO COMPETITOR SENTENCE.
      ========================================================================= -->
 
 <main class="site-main" id="main">
   <div class="container">
 
-    <h1>Video Editing for Business Owners</h1>
+    <h1>Video Editing for Lawyers &amp; Law Firms</h1>
 
-    <p class="lede">Consistent, professional video — without carrying an in-house
-      editing team on the payroll.</p>
+    <p class="lede">Podcast episodes, explainer shorts and intake video that keep a
+      firm's tone — captioned from the transcript, not from an auto-generator, and
+      consistent from the first episode to the fiftieth.</p>
 
     <p class="actions">
       <a class="btn btn--primary" href="/contact/">Get started</a>
-      <span class="todo">[[SECONDARY CTA — becomes &lt;a href="/portfolio/"&gt;
-        "See our work" when T5 ships that page]]</span>
+      <a class="btn btn--secondary" href="/portfolio/#legal-and-law-firm">See legal work</a>
     </p>
 
     <section class="section" aria-labelledby="problem-heading">
-      <h2 id="problem-heading">Why video is the thing that keeps slipping</h2>
+      <h2 id="problem-heading">Why legal video is harder than it looks</h2>
 
       <ul class="grid">
-
         <li class="tile">
-          <h3>Editing is a full-time skill you need part-time</h3>
-          <p>Hiring for it means a salary, equipment, software, management and cover
-            when they are away — for output that varies month to month.</p>
+          <h3>Careful sentences, impatient platforms</h3>
+          <p>Lawyers qualify what they say. Short-form punishes that. The edit has
+            to keep the caveat and lose the dead air.</p>
         </li>
-
         <li class="tile">
-          <h3>The content calendar bends around the edit</h3>
-          <p>Filming gets done. Publishing waits, then slides, then stops being a
-            calendar.</p>
+          <h3>A caption is a published statement</h3>
+          <p>A mis-transcribed word in a caption is a claim you did not make.
+            Legal captions need a human reading against the transcript.</p>
         </li>
-
         <li class="tile">
-          <h3>Quality swings depending on who picked up the job</h3>
-          <p>Freelancer to freelancer, the pacing, the captions and the colour are
-            all slightly different — and a brand that looks different every week
-            reads as a brand that is not paying attention.</p>
+          <h3>Conservative, but not invisible</h3>
+          <p>The look has to stop a scroll without looking like an ad for a
+            personal-injury hotline.</p>
         </li>
-
         <li class="tile">
-          <h3>Nobody owns the feedback loop</h3>
-          <p>Revisions turn into an email chain between three people, and the video
-            that was two days from finished is now three weeks old.</p>
+          <h3>Consistency across dozens of episodes</h3>
+          <p>Intros, lower-thirds, disclaimers and end cards drift when every
+            episode is edited from scratch.</p>
         </li>
-
       </ul>
     </section>
 
     <section class="section" aria-labelledby="solution-heading">
-      <h2 id="solution-heading">Your business runs on content. We keep it running.</h2>
+      <h2 id="solution-heading">Record the conversation. We make it publishable.</h2>
 
-      <p>Video is one of the few things that does work across every part of a
-        business at once — marketing, sales, hiring, training, launches. Producing it
-        in-house is where it gets expensive and operationally awkward, because the
-        skill is specialised and the workload is uneven.</p>
+      <p>You send the episode, the talking-head or the recorded webinar. Your
+        dedicated editor cuts the full piece, pulls the clips that stand alone,
+        captions them against your transcript, and applies the firm's template every
+        time — so episode forty looks like episode one.</p>
 
-      <p>Video Editor Agency gives you the editing team without the hiring, the
-        management or the overhead. A dedicated editor who learns your brand, and a
-        project manager who owns the schedule and the feedback so it does not land
-        back on your desk. Weekly social content, a brand film, or a full launch
-        campaign — same team, same standard. Revisions are genuinely unlimited.</p>
+      <!-- R17, Masud 2026-09-03: "Genuinely unlimited". -->
+      <p>Revisions are genuinely unlimited. If a clip needs a disclaimer, a
+        caption needs correcting, or a segment should not go out, it is changed.</p>
+
+      <p class="note">We edit legal content; we do not advise on attorney advertising
+        rules, which vary by bar and jurisdiction. Where a clip or caption might
+        need review, we flag it and follow your instruction.</p>
     </section>
 
     <section class="section" aria-labelledby="deliver-heading">
-      <h2 id="deliver-heading">What we edit for businesses</h2>
+      <h2 id="deliver-heading">What we edit for law firms</h2>
 
       <ul class="deliverables">
-        <li><strong>Corporate explainer and brand films</strong> — the video that says
-          who you are, cut properly.</li>
-
-        <li><strong>Marketing and promotional campaigns</strong> — structured around
-          one message and one action.</li>
-
-        <li><strong>Social content</strong> — reels, shorts and LinkedIn video,
-          formatted per platform rather than reposted across them.</li>
-
-        <li><strong>Internal training and onboarding</strong> — the videos that stop
-          you explaining the same thing every quarter.</li>
-
-        <li><strong>Product launch videos</strong> — built to carry a date, not to be
-          re-cut the week before it.</li>
-
-        <li><strong>Event highlights and recaps</strong> — the day, made useful for
-          the eleven months afterwards.</li>
+        <li><strong>Podcast episodes</strong> — multi-cam, speaker switching, branded
+          intro and outro, chapters, and the episode's clips pulled out.</li>
+        <li><strong>Vertical clips</strong> — captioned shorts for LinkedIn, Reels,
+          TikTok and YouTube Shorts, in the firm's template.</li>
+        <li><strong>"What to do if…" explainers</strong> — talking-head content with
+          on-screen labels and simple motion graphics where a process needs one.</li>
+        <li><strong>Intake and awareness ads</strong> — hook-first variants sized for
+          Meta placements, from the same master. See <a href="/ads/">Meta ad
+          creative</a>.</li>
+        <li><strong>Webinar and CLE edits</strong> — tightened, chaptered, captioned,
+          ready to run as evergreen.</li>
+        <li><strong>Firm and attorney profiles</strong> — for the website and the
+          channel, cut from your existing footage.</li>
       </ul>
     </section>
 
-    <!-- T11, 2026-09-06, on Masud's instruction ("also for ads, for business
-         page"). EXPANSION-v1.md §7. One section, no proof strip — zero ad
-         creative is catalogued; the strip lives on /ads/ when items arrive.
-         No result claim: VEA cuts the creative and does not run the account. -->
-    <section class="section" aria-labelledby="ads-heading">
-      <h2 id="ads-heading">Ad creative for the campaigns you already run</h2>
+    <section class="section" aria-labelledby="proof-heading">
+      <h2 id="proof-heading">Recent work: one firm's podcast series</h2>
+      <p>Twelve episodes of a US law-firm podcast — full episodes and the vertical
+        clips cut from them. Client unnamed at their request.</p>
 
-      <p>Most businesses we edit for are running Meta ads. We cut the creative:
-        a hook-first master edit, burned-in captions, and exports sized for Reels,
-        Feed and Stories from the same cut — with hook and CTA variants so your
-        media buyer has something to test. Footage you already have is usually
-        enough to start.</p>
+      <ul class="strip">
+        <li>
+          <img src="/assets/img/portfolio/ggyM4XlELXo.jpg" width="1080" height="1920" loading="lazy" decoding="async" alt="Video still — law podcast clip, Best software">
+          <p class="work__meta">Podcast clip · 9:16</p>
+        </li>
+        <li>
+          <img src="/assets/img/portfolio/Bo5R1CDI7ok.jpg" width="1080" height="1920" loading="lazy" decoding="async" alt="Video still — law podcast clip, Fear of AI">
+          <p class="work__meta">Podcast clip · 9:16</p>
+        </li>
+        <li>
+          <img src="/assets/img/portfolio/mdKx0eGpFbU.jpg" width="1080" height="1920" loading="lazy" decoding="async" alt="Video still — law podcast clip, Working with lawyers">
+          <p class="work__meta">Podcast clip · 9:16</p>
+        </li>
+        <li>
+          <img src="/assets/img/portfolio/9lTVyaiEWMo.jpg" width="1280" height="720" loading="lazy" decoding="async" alt="Video still — law podcast episode, Favorite tech">
+          <p class="work__meta">Full episode · 16:9</p>
+        </li>
+      </ul>
 
-      <p class="actions">
-        <a class="btn btn--secondary" href="/ads/">Meta ad creative</a>
-      </p>
+      <p><a href="/portfolio/#legal-and-law-firm">All twelve legal edits →</a>
+        <span class="todo">[[T11 — this is ONE client. ≥2 more legal clients would
+        make this section a practice, not a relationship. Masud to supply.]]</span></p>
+    </section>
+
+    <section class="section" aria-labelledby="faq-heading">
+      <h2 id="faq-heading">Questions law firms ask</h2>
+
+      <ul class="faq">
+        <li><details>
+          <summary>How do you handle captions?</summary>
+          <p>From your transcript where you have one; otherwise we transcribe,
+            then a person reads every caption against the audio before delivery.
+            Legal terms are checked, not guessed.</p>
+        </details></li>
+        <li><details>
+          <summary>Can you add a standard disclaimer to every clip?</summary>
+          <p>Yes. Give us the wording once and it is part of the template — on
+            screen, in the end card, or both.</p>
+        </details></li>
+        <li><details>
+          <summary>Is client or case material kept confidential?</summary>
+          <p>Footage is shared through a private folder, seen only by your
+            assigned editor, and deleted from our systems on request after
+            delivery. Put any specific requirement in the brief.</p>
+        </details></li>
+        <li><details>
+          <summary>Can you match a template we already use?</summary>
+          <p>Yes. Send an existing episode or your brand files and we rebuild the
+            template so new episodes match the old ones.</p>
+        </details></li>
+        <li><details>
+          <summary>Do you work with firms outside Bangladesh?</summary>
+          <p>Yes — editing is fully remote. Only on-site recording is limited to
+            Dhaka.</p>
+        </details></li>
+      </ul>
     </section>
 
     <section class="cta-block" aria-labelledby="cta-heading">
-      <h2 id="cta-heading">Stop treating video as the thing you get to later</h2>
-
-      <p>Tell us what you are trying to publish and how often. We will tell you what
-        it takes.</p>
-
+      <h2 id="cta-heading">Send one episode. See how it comes back.</h2>
+      <p>Share a recording and where it will be published. We will tell you what we
+        would cut, and what we would leave in.</p>
       <p class="actions">
-        <a class="btn btn--primary" href="/contact/">Start editing for your business</a>
+        <a class="btn btn--primary" href="/contact/">Talk to us about your firm's video</a>
       </p>
     </section>
 
@@ -434,7 +393,7 @@
         <li><a href="/pricing/">Pricing</a></li>
         <li><a href="/coaches/">For Coaches &amp; Trainers</a></li>
         <li><a href="/content-creators/">For Content Creators</a></li>
-        <li><a href="/business-owners/" aria-current="page">For Business Owners</a></li>
+        <li><a href="/business-owners/">For Business Owners</a></li>
         <li><a href="/marketers-and-agencies/">For Marketers &amp; Agencies</a></li>
         <li><a href="/about/">About</a></li>
         <li><a href="/contact/">Contact</a></li>
