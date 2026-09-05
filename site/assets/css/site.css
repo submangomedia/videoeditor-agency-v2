@@ -67,9 +67,35 @@
 :root {
 
   /* --- Radius ------------------------------------------------------------
-     ONE token. Change this single line and every corner on the site follows.
-     3px, measured from mzmedia.digital's control radius. See §0 deviation 2. */
-  --radius: 3px;
+
+     ⚠️ TWO TOKENS AS OF 2026-09-05. THIS DELIBERATELY BREAKS A BINDING RULE.
+
+     RULED BY MASUD, 2026-09-05. He was shown three options with the cost of
+     each stated, and selected: "Add a second radius token — site.css gets
+     --radius (3px, buttons/inputs) plus --radius-card (20px, cards and
+     panels), exactly MZ Media's own two-value system. This overrides
+     instructions.md §5's 'one radius token' rule, which needs your word."
+
+     WHAT IT OVERRIDES, NAMED RATHER THAN QUIETLY BROKEN:
+       · instructions.md §5, page rules: "One radius token, one primary accent."
+       · site.css §0 deviation 2, T3, 2026-09-05: chose 3px throughout and
+         recorded that softer cards "would need a second token and Masud's
+         ruling to break §5."
+     Sources: instructions.md §5 versus Masud 2026-09-05. The later ruling
+     governs. T3's deviation 2 is now superseded and should be read as history.
+
+     ⚠️ WRITTEN BY T4, WHICH DOES NOT OWN THIS FILE. THREAD-PLAN.md §1 Rule 1
+        gives site.css to T3, exclusively. T4 crossed it on Masud's explicit
+        instruction — the same exception T8 was given to import the copy doc.
+        Recorded here so T3 finds it rather than discovering a token it did
+        not write. → [[R32 — not yet in RULINGS.md. T1 registers it.]]
+
+     WHY TWO AND NOT ONE SOFT TOKEN: mzmedia.digital runs 3px on the things a
+     visitor clicks and 20–25px on the surfaces they read. Making the single
+     token soft would have rounded the buttons too, which is not what that
+     site does. Measured from its stylesheet by T3 on 2026-09-05. */
+  --radius:      3px;    /* buttons, inputs, focus rings — anything clickable */
+  --radius-card: 20px;   /* cards, panels, banners — anything you read */
 
 
   /* --- Colour ------------------------------------------------------------
@@ -447,9 +473,19 @@ img {
 .card {
   background: var(--bg-raised);
   border: 1px solid var(--rule);
-  border-radius: var(--radius);
+  border-radius: var(--radius-card);   /* R32, 2026-09-05 */
   padding: var(--space-4);
 }
+
+/* ⚠️ FOR THE PAGE THREADS — R32 IS NOT APPLIED EVERYWHERE YET.
+   Several pages define their own card class in a page-scoped <style> block
+   rather than using .card, and each still says border-radius: var(--radius):
+     · /services/  .service      (T6)
+     · /pricing/   .rate-table   (T6)
+     · /portfolio/ its item card (T5)
+   Those are one-word swaps to var(--radius-card), and they belong to the
+   threads that wrote them. Until they are made, the site has soft cards on
+   some pages and sharp on others. Listed in WORKLOG.md. */
 
 /* The one navy-tinted surface, for a section that needs to separate itself
    from the page without becoming a second background colour. */

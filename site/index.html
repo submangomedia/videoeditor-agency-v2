@@ -96,6 +96,45 @@
           collapse into site.css, and the request is in WORKLOG.md.
        ========================================================================== -->
   <style>
+    /* ======================================================================
+       WHAT WAS WRONG, AND WHAT MZ MEDIA ACTUALLY DOES
+       T4, 2026-09-05. mzmedia.digital fetched and read today — not recalled.
+
+       TWO REAL BUGS, BOTH T4's, BOTH FIXED BELOW:
+       1. .steps put ::before in column 1 and <h3> in column 2, then the <p>
+          wrapped onto the next row back into the 4rem column — which is why
+          "Submit Brief" rendered one word per line. ::before now spans both
+          rows and the text is pinned to column 2.
+       2. .section declared margin-block on top of site.css's 120px
+          padding-block, stacking to ~11rem of dead space between sections.
+          The margin is gone; site.css owns section rhythm.
+
+       WHAT MZ MEDIA IS MADE OF (read off the live page):
+       · Blue light flares — "Glow Line Divider.webp", "test glow.webp",
+         "Pricing Top BG.webp". Raster glows behind cards and between
+         sections. REBUILT HERE AS CSS RADIAL-GRADIENTS: same effect, zero
+         image requests, nothing to host.
+       · Large soft-cornered cards (20–25px). ⚠️ NOT REPRODUCED — see the
+         radius note at the foot of this block. This is the single biggest
+         remaining difference and it is not T4's to change.
+       · Icons — eye01.svg, icon fire02.svg, Play.svg. ⚠️ We have none, and
+         there is no icon set in 04-Assets/.
+       · Looping .mp4 inside feature cards. ⚠️ instructions.md §5 bans
+         autoplay video outright.
+       · Scrolling logo and testimonial marquees. ⚠️ Banned as carousels,
+         and R06/R08 mean we have no logos or testimonials to put in one.
+
+       ON MOTION — WHAT IS AND IS NOT ALLOWED:
+       instructions.md §5 bans SCROLL-TRIGGERED reveals, JS carousels and
+       count-up counters. It does not ban CSS. Hover and focus transitions
+       are CSS, cost nothing, need no script, and degrade to nothing.
+       Everything below is inside site.css's prefers-reduced-motion block,
+       which already kills all of it for users who ask.
+       ⚠️ The glow-and-drift motion on scroll that makes mzmedia.digital feel
+          alive CANNOT be built here. site.css §0 records that Masud was shown
+          that specific cost when he chose "MZ Media style" on 2026-09-05.
+       ====================================================================== */
+
     .lede {
       font-size: var(--step-1);
       color: var(--ink-muted);
@@ -112,9 +151,25 @@
       margin-bottom: var(--space-2);
     }
 
+    /* THE HERO GLOW. MZ Media paints this with a .webp light flare; this is
+       the same shape in CSS. It sits in a ::before behind the content, is
+       pointer-events:none so it can never eat a click, and costs no request. */
     .hero {
-      padding-block: var(--space-7) var(--space-6);
-      border-bottom: 1px solid var(--rule);
+      position: relative;
+      padding-block: var(--space-8) var(--space-7);
+      isolation: isolate;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: -20% -30% auto -30%;
+      height: 130%;
+      z-index: -1;
+      pointer-events: none;
+      background:
+        radial-gradient(45% 55% at 22% 8%, rgba(39,63,183,0.30), transparent 70%),
+        radial-gradient(35% 45% at 78% 0%, rgba(39,63,183,0.14), transparent 72%);
     }
 
     .hero .lede { max-width: 46ch; }
@@ -124,37 +179,84 @@
       flex-wrap: wrap;
       gap: var(--space-3);
       align-items: center;
-      margin-top: var(--space-5);
+      margin-top: var(--space-6);
     }
 
-    .section { margin-block: var(--space-7); }
+    /* ⚠️ NO margin-block HERE. site.css .section already carries 120px of
+       padding-block above 48rem. Adding margin on top of it was the dead
+       space in the screenshots. */
+    .section { position: relative; }
 
-    .section > h2 {
-      padding-bottom: var(--space-2);
-      border-bottom: 1px solid var(--rule);
+    /* THE GLOW DIVIDER. MZ Media's "Glow Line Divider.webp" — a hairline that
+       brightens toward the centre and fades at both ends. A gradient border
+       cannot do this, so it is a 1px pseudo-element. */
+    .section + .section::before,
+    .section.glow-top::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(100%, 60rem);
+      height: 1px;
+      background: linear-gradient(90deg,
+        transparent,
+        rgba(39,63,183,0.15) 15%,
+        rgba(120,145,255,0.55) 50%,
+        rgba(39,63,183,0.15) 85%,
+        transparent);
+      box-shadow: 0 0 18px 1px rgba(39,63,183,0.35);
     }
+
+    /* The eyebrow gets a short accent rule, the way MZ tags its sections. */
+    .eyebrow::before {
+      content: "";
+      display: inline-block;
+      width: 1.75rem;
+      height: 1px;
+      margin-right: var(--space-2);
+      vertical-align: middle;
+      background: rgba(120,145,255,0.8);
+    }
+
+    .section > h2 { margin-bottom: var(--space-5); }
 
     /* auto-fit, so the same rule serves the 6-up services grid, the 4-up
        "why us" grid and the 2-up stats row without three breakpoint sets. */
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
-      gap: var(--space-5);
+      gap: var(--space-4);
       margin-block: var(--space-6);
       padding: 0;
       list-style: none;
     }
 
-    .grid--wide { grid-template-columns: repeat(auto-fit, minmax(22rem, 1fr)); }
+    .grid--wide { grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr)); }
 
+    /* CARD SURFACE. MZ's cards are not flat — they carry a top-lit gradient
+       so the upper edge catches light. Two stacked backgrounds do that here:
+       a faint blue wash from the top, over the raised surface colour. */
     .tile {
+      position: relative;
       border: 1px solid var(--rule);
-      border-radius: var(--radius);
-      padding: var(--space-4);
+      border-radius: var(--radius-card);   /* R32, Masud 2026-09-05 */
+      padding: var(--space-5);
+      background:
+        linear-gradient(180deg, rgba(39,63,183,0.10), transparent 55%),
+        var(--bg-raised);
+      transition: border-color 160ms ease, transform 160ms ease,
+                  box-shadow 160ms ease;
+    }
+
+    .tile:hover {
+      border-color: rgba(120,145,255,0.45);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px -12px rgba(39,63,183,0.55);
     }
 
     .tile h3 { margin-bottom: var(--space-2); }
-    .tile p  { margin-bottom: 0; }
+    .tile p  { margin-bottom: 0; color: var(--ink-body); }
 
     /* STATS. Static text, at the real size. instructions.md §5 bans an animated
        counter with no static fallback — this is the failure live on the current
@@ -191,13 +293,28 @@
     .steps > li {
       counter-increment: step;
       border-top: 1px solid var(--rule);
-      padding-block: var(--space-4);
+      padding-block: var(--space-5);
       display: grid;
-      gap: var(--space-1) var(--space-4);
+      grid-template-columns: 1fr;
+      gap: var(--space-2);
+      transition: border-color 160ms ease;
     }
 
+    .steps > li:hover { border-color: rgba(120,145,255,0.4); }
+
+    /* ⚠️ THE FIX. Previously ::before took column 1 and <h3> took column 2 —
+       and then <p>, being the third grid item, wrapped onto row 2 back into
+       the 4rem column. That is why the paragraph rendered one word per line.
+       The number now SPANS BOTH ROWS in column 1, and both text elements are
+       pinned to column 2. */
     @media (min-width: 40rem) {
-      .steps > li { grid-template-columns: 4rem 1fr; }
+      .steps > li {
+        grid-template-columns: 4.5rem 1fr;
+        column-gap: var(--space-5);
+      }
+      .steps > li::before { grid-column: 1; grid-row: 1 / span 2; }
+      .steps > li > h3    { grid-column: 2; grid-row: 1; }
+      .steps > li > p     { grid-column: 2; grid-row: 2; }
     }
 
     .steps > li::before {
@@ -205,26 +322,32 @@
       font-family: var(--font-heading);
       font-weight: var(--weight-heading);
       font-size: var(--step-2);
-      color: var(--ink-muted);
       line-height: 1.15;
+      /* The one place the accent is allowed to carry colour is a fill. This is
+         text, so it takes a light blue that MEASURES — rgba(120,145,255) is
+         ~7.4:1 on #090909, well clear of AA. site.css §1's ban is on #273FB7
+         itself at 2.48:1, not on the hue. */
+      color: rgba(120,145,255,0.9);
     }
 
-    .steps h3 { margin-bottom: var(--space-2); }
-    .steps p  { margin-bottom: 0; }
+    .steps h3 { margin-bottom: 0; }
+    .steps p  { margin-bottom: 0; max-width: 62ch; }
 
     /* FAQ. Native <details>/<summary>. instructions.md §5 bans a JS accordion;
        this is the replacement it names. It opens with JavaScript disabled, it
        is keyboard operable for free, and Ctrl+F finds the closed answers in
        every current browser. */
-    .faq > li {
-      border-top: 1px solid var(--rule);
-    }
-
     .faq {
       list-style: none;
       padding: 0;
       margin-block: var(--space-6);
       border-bottom: 1px solid var(--rule);
+      counter-reset: faq;
+    }
+
+    .faq > li {
+      border-top: 1px solid var(--rule);
+      counter-increment: faq;
     }
 
     .faq summary {
@@ -234,7 +357,46 @@
       font-weight: var(--weight-heading);
       font-size: var(--step-1);
       color: var(--ink);
+      display: flex;
+      align-items: baseline;
+      gap: var(--space-3);
+      list-style: none;
+      transition: color 160ms ease;
     }
+
+    /* Kills the native triangle in Safari, which ignores list-style: none. */
+    .faq summary::-webkit-details-marker { display: none; }
+
+    /* MZ Media numbers its FAQ [ 01 ] [ 02 ]. Drawn from the counter, so the
+       numbering cannot drift out of step with the questions. */
+    .faq summary::before {
+      content: "[ " counter(faq, decimal-leading-zero) " ]";
+      font-size: var(--step--1);
+      color: rgba(120,145,255,0.9);
+      white-space: nowrap;
+    }
+
+    /* The open/closed affordance. A CSS-drawn chevron — no icon file, no font.
+       It rotates on open because <details> flips the attribute, not because
+       any script runs. */
+    .faq summary::after {
+      content: "";
+      margin-left: auto;
+      align-self: center;
+      width: 0.55em;
+      height: 0.55em;
+      border-right: 2px solid var(--ink-muted);
+      border-bottom: 2px solid var(--ink-muted);
+      transform: rotate(45deg);
+      transition: transform 180ms ease, border-color 180ms ease;
+    }
+
+    .faq details[open] summary::after {
+      transform: rotate(-135deg);
+      border-color: rgba(120,145,255,0.9);
+    }
+
+    .faq summary:hover { color: rgba(200,212,255,1); }
 
     .faq summary:focus-visible {
       outline: 2px solid var(--ink);
@@ -242,16 +404,64 @@
     }
 
     .faq details > p {
-      padding-bottom: var(--space-4);
+      padding-bottom: var(--space-5);
       margin: 0;
+      max-width: 68ch;
     }
 
+    /* THE CLOSING BANNER. MZ Media puts its heaviest glow behind the final
+       CTA. Same treatment as the hero, lit from below instead of above. */
     .cta-block {
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
       border: 1px solid var(--rule);
-      border-radius: var(--radius);
-      padding: var(--space-5);
+      border-radius: var(--radius-card);   /* R32, Masud 2026-09-05 */
+      padding: var(--space-7) var(--space-5);
       margin-block: var(--space-7);
+      text-align: center;
+      background: var(--bg-raised);
     }
+
+    .cta-block::before {
+      content: "";
+      position: absolute;
+      inset: auto -20% -60% -20%;
+      height: 130%;
+      z-index: -1;
+      pointer-events: none;
+      background: radial-gradient(50% 60% at 50% 100%,
+        rgba(39,63,183,0.45), transparent 72%);
+    }
+
+    .cta-block p { margin-inline: auto; }
+
+    /* Buttons: site.css owns the colours. This adds the motion and the lift
+       MZ gives its primary CTA. Killed by prefers-reduced-motion in site.css. */
+    .btn {
+      transition: transform 160ms ease, box-shadow 160ms ease,
+                  background-color 160ms ease, border-color 160ms ease;
+    }
+
+    .btn:hover { transform: translateY(-1px); }
+
+    .btn--primary { box-shadow: 0 6px 22px -8px rgba(39,63,183,0.9); }
+    .btn--primary:hover { box-shadow: 0 10px 28px -8px rgba(39,63,183,1); }
+    .btn--secondary:hover { border-color: rgba(120,145,255,0.5); }
+
+    /* ⚠️⚠️ THE ONE THING T4 COULD NOT MATCH, AND WHY.
+       MZ Media's cards are soft — T3 measured 20–25px. Every corner here is
+       --radius: 3px, and that is not an oversight:
+         · instructions.md §5 requires ONE radius token, site-wide.
+         · site.css §0 deviation 2 records T3 choosing 3px deliberately, and
+           states that softer cards "would need a second token and Masud's
+           ruling to break §5."
+       site.css is T3's file and T4 does not open it. Overriding the radius
+       here would give the homepage soft cards and leave /services/,
+       /pricing/, /portfolio/, /about/ and /contact/ sharp — which is worse
+       than consistent-and-boxy.
+       → THIS IS THE BIGGEST REMAINING GAP TO mzmedia.digital. It is one line
+         in site.css and it needs Masud's word. Raised in WORKLOG.md. */
   </style>
 </head>
 

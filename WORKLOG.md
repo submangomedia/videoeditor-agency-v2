@@ -1217,6 +1217,127 @@ above the rate table in `/pricing/index.html`. **Masud picks one. T6 did not.**
 
 ---
 
+## 2026-09-05 — T4 · Homepage restyled to the MZ Media reference · **R32 RULED**
+
+Masud, on seeing the page live: *"the design is looking ugly and broken, and
+there is no shape or animations. Please follow the design elements of
+https://mzmedia.digital/ … icons, shapes, animations, colors."* He was right —
+two of the faults were real bugs, both T4's.
+
+### ⛔ R32 — a SECOND radius token · **RULED** · 2026-09-05
+
+> **Masud, 2026-09-05:** selected **"Add a second radius token"**, shown as
+> *"site.css gets `--radius` (3px, buttons/inputs) plus `--radius-card` (20px,
+> cards and panels) — exactly MZ Media's own two-value system. This overrides
+> instructions.md §5's 'one radius token' rule, which needs your word."*
+
+**This breaks a binding rule and it is named, not quietly applied.** Sources:
+`instructions.md` §5 page rules (*"One radius token"*) and `site.css` §0
+deviation 2 (T3, same day: softer cards *"would need a second token and Masud's
+ruling to break §5"*) **versus Masud, 2026-09-05.** The later ruling governs.
+T3's deviation 2 is now history.
+
+⚠️ **T4 edited `site\assets\css\site.css`, which it does not own.** Rule 1 gives
+that file to T3 exclusively. T4 crossed it on Masud's explicit instruction —
+the same exception T8 was granted for the copy import. The token block records
+the authorisation verbatim. **T3 should know it will find a token it did not
+write.**
+
+⚠️ **R32 is not in `RULINGS.md`.** Neither are R28–R31. → T1.
+
+### Done — `site\index.html`
+
+**Two real bugs, both T4's, both fixed:**
+
+1. **The process steps rendered one word per line.** `.steps > li` put `::before`
+   in column 1 and `<h3>` in column 2; the `<p>`, being the third grid item,
+   wrapped to row 2 back into the **4rem** column. The number now spans both
+   rows and both text elements are pinned to column 2.
+2. **~11rem of dead space between sections.** T4's `.section { margin-block }`
+   was stacking on top of site.css's 120px `padding-block`. The margin is gone;
+   site.css owns section rhythm. **⚠️ `/services/` and `/pricing/` carry the
+   same duplicated `.section` rule and therefore the same dead space — T6.**
+
+**Read `mzmedia.digital` today rather than working from notes.** What it is
+actually made of, and what was reproduced:
+
+| MZ Media element | Here |
+|---|---|
+| Blue light flares (`test glow.webp`, `Glow Line Divider.webp`) | ✅ **Rebuilt as CSS radial-gradients** — hero, section dividers, CTA banner. Zero image requests |
+| Soft 20–25px cards | ✅ **R32**, above |
+| Hover lift and border-brighten on cards | ✅ CSS transitions |
+| `[ 01 ]` bracketed FAQ numbering | ✅ From a CSS counter, so it cannot drift |
+| Open/closed chevron | ✅ CSS-drawn, rotates on `[open]`. No icon file |
+| Section eyebrow with accent rule | ✅ |
+| SVG icons (`eye01`, `icon fire02`, `Play`) | ❌ **We have none.** No icon set in `04-Assets\` |
+| Looping `.mp4` in feature cards | ❌ `instructions.md` §5 bans autoplay video |
+| Logo / testimonial marquees | ❌ Banned as carousels; R06 and R08 mean there is nothing to put in one |
+| Scroll-triggered glow and drift | ❌ Banned outright. `site.css` §0 records Masud being shown this exact cost when he chose "MZ Media style" |
+
+**On motion, because the brief said "no animations":** `instructions.md` §5 bans
+*scroll-triggered* reveals, JS carousels and count-up counters. **It does not ban
+CSS.** Hover and focus transitions need no script and degrade to nothing, and
+site.css's existing `prefers-reduced-motion` block already kills all of them for
+users who ask. That is the whole animation budget this platform ruling allows.
+
+⚠️ **A light blue — `rgba(120,145,255,·)`, ~7.4:1 on `#090909` — is used for the
+step numbers, the FAQ counters and the eyebrow rule.** This is NOT the banned
+`#273FB7` as text. site.css §1 bans that specific hex at 2.48:1; a lighter
+sibling on the same hue clears AA comfortably. **This is T1's recommendation from
+batches 5–6 (`#677CE6`) applied, at a slightly lighter value. Labelled: T4's
+reading, not a ruling.**
+
+### Open — for the threads that own the files
+
+- **R32 is not applied everywhere.** `.card` and `.panel--tint` in site.css are
+  done. These still say `var(--radius)` and belong to their authors:
+  `/services/` `.service` (T6) · `/pricing/` `.rate-table` (T6) ·
+  `/portfolio/` its item card (T5). **Until they change, the site has soft cards
+  on some pages and sharp on others.**
+- **Icons.** Every icon on mzmedia.digital is a hosted SVG. There is no icon set
+  in this project. An icon font is an external dependency; inline SVG is the
+  zero-JS answer, but someone has to choose them. → for T3.
+
+---
+
+## 2026-09-05 — ⚠️ RAISED BY T4, FOR T6 — FAKE PRICES ARE PUSHED AND PUBLIC
+
+**Not T4's file. Written here and stopped, per THREAD-PLAN.md §1 Rule 1.**
+
+`site\pricing\index.html` renders **four hard `$25` figures** — lines 482, 487,
+492, 497 — as `<td class="rate-table__amount">$25</td>`. **Plain text. No
+`.todo` bracket.** One flat $25 against four different units: per minute of
+long-form, per reel, per minute of motion graphics, and per thumbnail.
+
+**It is committed and pushed.** Commit `8109344`, *"Placeholder flat rate…"*,
+2026-09-05. Public repo under R01, and live on
+`videoeditor-agency-v2.pages.dev/pricing/`.
+
+**T6 knew.** Its own comments in that file carry Masud's real figures —
+*"Short video is $30. Long video is $20 per minute. Thumbnail is $30 per
+thumbnail."* (2026-09-05) — a note to itself reading *"REPLACE THE FOUR
+PLACEHOLDER $25 FIGURES WITH REAL RATES"*, and the observation that *"shipping a
+fake $25 one would be the same"* as the old site's fake $6.99 block. It shipped
+anyway.
+
+**This is the failure the project exists to prevent.** `instructions.md` §5 rule
+1: *"No placeholder that a client could quote back at you. No demo pricing."*
+The old site's live `$6.99` is the reason for the rebuild.
+
+**Contained, not safe:** `robots.txt` is closed, every page carries `noindex`,
+no custom domain is attached. Not findable — but public to anyone with the link.
+
+**Not blocked.** Masud supplied the numbers on 2026-09-05. It is a four-cell edit.
+
+⚠️ **Also for T6, and it is a business question rather than a build one:** at
+$30 per short-form edit and $30 per thumbnail, a full reel and a single still
+cost the same. T6 flagged it in its own comments. A buyer will notice.
+
+**T4 has not touched the file.** Reopen T6, or authorise T4 to cross Rule 1 —
+the same explicit authorisation T8 was given to import the copy doc.
+
+---
+
 ## 2026-09-05 — T4 · Homepage · **`site\index.html` BUILT**
 
 ### Done
