@@ -86,7 +86,7 @@
 
 import {
   readFileSync, writeFileSync, existsSync,
-  mkdirSync, readdirSync, copyFileSync,
+  mkdirSync, readdirSync, copyFileSync, rmSync,
 } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -120,18 +120,60 @@ const PLAYERS = false;
    four real titles, then add them to ITEMS. */
 const INCLUDE_UNCONFIRMED = false;
 
+/* ⚠️ THE 26 4:5 ITEMS ARE HELD BACK. THEIR ARTWORK IS UNUSABLE.
+ *
+ * ALL 26 WERE OPENED AND LOOKED AT, ONE BY ONE, ON 2026-09-05 — not sampled,
+ * not inferred. Every one is a DESIGNED PROMOTIONAL CARD, not a frame from the
+ * video: a headline ("LAWYER VIDEO EDITING", "PODCAST INTRO VIDEO EDITING"), a
+ * BEFORE/AFTER or RAW/FINAL split, a diagonal watermark, and a CONTACT US bar
+ * with a phone number burned into the pixels.
+ *
+ * FOUR REASONS THEY CANNOT SHIP, IN ORDER:
+ *   1. fKs9q1E9y94 prints mangomedia.digital. That is a different company's
+ *      domain on videoeditor.agency. Exactly the Q-P4 hazard T2 named.
+ *   2. They burn in +8801336433711. RULINGS.md R14 records that number RULED
+ *      BUT NOT YET DIALLED. The footer's [[bracket]] flags the footer; it
+ *      cannot flag pixels.
+ *   3. gB5JBkmJ3So is headlined "HEALTH CARE COURSE VIDEO EDITING" — the exact
+ *      medical claim Portfolio-Catalogue.md finding 5 corrected OUT of the
+ *      metadata as a claim risk. The tag was fixed; the image was not.
+ *   4. Bright magenta advertisements on T3's #090909 palette.
+ *
+ * WHY THE SHAPE IS THE TEST: finding 2 established that 4:5 ⟺ compilation
+ * showreel, exactly and with a cause. A showreel gets a designed cover; an
+ * individual client edit does not. The audit confirmed the same boundary holds
+ * for promo-card-versus-frame, with no exceptions in either direction. One
+ * rule is safer to maintain than 26 flags that can drift out of step.
+ *
+ * WHAT IT COSTS, STATED PLAINLY: 26 of 57 items, and 10 of the 14 industries.
+ * Podcast Channel loses all 13. Healthcare, SaaS, Real Estate, Finance, Food,
+ * Fitness, Mental Health, Non-Profit and Business & Personal Branding vanish
+ * from the page entirely. That is a real loss of breadth and breadth is what
+ * sells. It is still better than 26 advertisements for another company.
+ *
+ * THE ROWS ARE NOT DELETED. Only the artwork is unusable. Replace those 26
+ * .jpg files with real frames or clean re-exports, then set this true. */
+const INCLUDE_PROMO_CARDS = false;
+
 
 /* ---------------------------------------------------------------------------
  * THE DATA — transcribed from 02-Decisions/Portfolio-Catalogue.md §5a
  *
  * s     SHAPE, measured by T2 against YouTube on 2026-09-03. NOT derivable
  *       from the link form — finding 3 records two items an earlier audit
- *       called landscape that are in fact 9:16.
+ *       called landscape that are in fact 9:16. It is ALSO the promo-card
+ *       test — see INCLUDE_PROMO_CARDS above.
  * i     INDUSTRY, already corrected. Six rows in source A were mis-tagged;
  *       finding 5 lists them. Two of the six were claim risk, not tidying.
  * t     TITLE, with the client name removed, per Portfolio-Catalogue.md §5.
  *       Where the catalogue's own title still carried a person or a brand,
  *       it is neutralised here — the four are marked NEUTRALISED below.
+ * feat  Order in the "Selected work" strip. Six items, all of them shipping.
+ *       ⚠️ LABELLED AN INFERENCE, per RULINGS.md §0. T2's original eight are
+ *       superseded because six of the eight were promo cards. These six were
+ *       each opened and looked at: all are genuine footage, they cover all
+ *       four surviving industries and all three shapes. Masud replaces any of
+ *       them freely — nothing depends on the specific six.
  * slug  the Website doc's taxonomy slug. RESERVED FOR T9 and unused at render
  *       time: anchors are built from the label instead (see anchorFor), because
  *       four of the fourteen industries in use have no slug recorded anywhere
@@ -151,10 +193,10 @@ const SHAPES = {
 };
 
 const ITEMS = [
-  { id: 'fKs9q1E9y94', t: 'Medical explainer showreel', s: '4:5', i: 'Healthcare & Medical', f: 'Explainer Video', slug: 'healthcare-video', feat: 1, o: 1 },
-  { id: 'HtF06XQq5VQ', t: 'Law podcast intro', s: '4:5', i: 'Legal & Law Firm', f: 'Podcast & Interview', slug: 'law-firm-video', feat: 2, o: 2 },
-  { id: 'ggyM4XlELXo', t: 'Best software', s: '9:16', i: 'Legal & Law Firm', f: 'Podcast & Interview', slug: 'law-firm-video', feat: 0, o: 24 },
-  { id: '9lTVyaiEWMo', t: 'Favorite tech', s: '16:9', i: 'Legal & Law Firm', f: 'Podcast & Interview', slug: 'law-firm-video', feat: 0, o: 25 },
+  { id: 'fKs9q1E9y94', t: 'Medical explainer showreel', s: '4:5', i: 'Healthcare & Medical', f: 'Explainer Video', slug: 'healthcare-video', feat: 0, o: 1 },
+  { id: 'HtF06XQq5VQ', t: 'Law podcast intro', s: '4:5', i: 'Legal & Law Firm', f: 'Podcast & Interview', slug: 'law-firm-video', feat: 0, o: 2 },
+  { id: 'ggyM4XlELXo', t: 'Best software', s: '9:16', i: 'Legal & Law Firm', f: 'Podcast & Interview', slug: 'law-firm-video', feat: 1, o: 24 },
+  { id: '9lTVyaiEWMo', t: 'Favorite tech', s: '16:9', i: 'Legal & Law Firm', f: 'Podcast & Interview', slug: 'law-firm-video', feat: 5, o: 25 },
   { id: 'Bo5R1CDI7ok', t: 'Fear of AI', s: '9:16', i: 'Legal & Law Firm', f: 'Podcast & Interview', slug: 'law-firm-video', feat: 0, o: 26 },
   { id: 'ImTQjAo486Q', t: 'Goal budget', s: '9:16', i: 'Legal & Law Firm', f: 'Podcast & Interview', slug: 'law-firm-video', feat: 0, o: 27 },
   /* NEUTRALISED — catalogue title "LVRGAl" may be a brand name. */
@@ -171,11 +213,11 @@ const ITEMS = [
   { id: 'mdKx0eGpFbU', t: 'Working with lawyers', s: '9:16', i: 'Legal & Law Firm', f: 'Podcast & Interview', slug: 'law-firm-video', feat: 0, o: 35 },
 
   /* CORRECTED from "E-commerce" in source A. Finding 5. */
-  { id: 'IZIw8Q-z0ak', t: 'Cyber-security product explainer', s: '4:5', i: 'SaaS & Technology', f: 'Explainer Video', slug: 'saas-technology-video', feat: 3, o: 3 },
+  { id: 'IZIw8Q-z0ak', t: 'Cyber-security product explainer', s: '4:5', i: 'SaaS & Technology', f: 'Explainer Video', slug: 'saas-technology-video', feat: 0, o: 3 },
 
-  { id: 'ulOiBnEzNzw', t: 'Real estate floor plan', s: '4:5', i: 'Real Estate', f: 'Explainer Video', slug: 'real-estate-video', feat: 4, o: 4 },
+  { id: 'ulOiBnEzNzw', t: 'Real estate floor plan', s: '4:5', i: 'Real Estate', f: 'Explainer Video', slug: 'real-estate-video', feat: 0, o: 4 },
 
-  { id: 'LhHqpgKHfvE', t: 'Foodie influencer', s: '9:16', i: 'Advertising & Ad Agency', f: 'Short-Form (Reels & Shorts)', slug: 'ad-agency-video', feat: 5, o: 5 },
+  { id: 'LhHqpgKHfvE', t: 'Foodie influencer', s: '9:16', i: 'Advertising & Ad Agency', f: 'Short-Form (Reels & Shorts)', slug: 'ad-agency-video', feat: 2, o: 5 },
   { id: 'NxFnKPfNimQ', t: 'Function & event inquiries', s: '9:16', i: 'Advertising & Ad Agency', f: 'Short-Form (Reels & Shorts)', slug: 'ad-agency-video', feat: 0, o: 53 },
   { id: '_nt_Vt1rOaM', t: 'Turning influencer posts into customers', s: '9:16', i: 'Advertising & Ad Agency', f: 'Short-Form (Reels & Shorts)', slug: 'ad-agency-video', feat: 0, o: 54 },
   { id: 'vgKUxP8Wgtw', t: 'How to use Google Ads', s: '9:16', i: 'Advertising & Ad Agency', f: 'Short-Form (Reels & Shorts)', slug: 'ad-agency-video', feat: 0, o: 55 },
@@ -187,19 +229,19 @@ const ITEMS = [
   { id: 'unWprrKQjqs', t: 'VIP customer lists', s: '9:16', i: 'Advertising & Ad Agency', f: 'Short-Form (Reels & Shorts)', slug: 'ad-agency-video', feat: 0, o: 58 },
   { id: '1ctUzRbXVw4', t: 'The Google Reviews hack', s: '9:16', i: 'Advertising & Ad Agency', f: 'Short-Form (Reels & Shorts)', slug: 'ad-agency-video', feat: 0, o: 59 },
   { id: 'DDDVW6KUsQo', t: 'The Instagram ad strategy', s: '9:16', i: 'Advertising & Ad Agency', f: 'Short-Form (Reels & Shorts)', slug: 'ad-agency-video', feat: 0, o: 60 },
-  { id: 'r7v7nr6C2no', t: 'Why 90% of restaurant ads fail', s: '9:16', i: 'Advertising & Ad Agency', f: 'Short-Form (Reels & Shorts)', slug: 'ad-agency-video', feat: 0, o: 61 },
+  { id: 'r7v7nr6C2no', t: 'Why 90% of restaurant ads fail', s: '9:16', i: 'Advertising & Ad Agency', f: 'Short-Form (Reels & Shorts)', slug: 'ad-agency-video', feat: 6, o: 61 },
 
   /* CORRECTED from "Event Planners, Creative Agency". It is a coaching
      business FOR the wedding industry, not an event-planning company.
      Finding 5. */
-  { id: '0aap4alrgdk', t: 'Wedding industry CEO course', s: '4:5', i: 'Business & Personal Branding', f: 'Online Course & E-Learning', slug: 'personal-branding-video', feat: 6, o: 6 },
+  { id: '0aap4alrgdk', t: 'Wedding industry CEO course', s: '4:5', i: 'Business & Personal Branding', f: 'Online Course & E-Learning', slug: 'personal-branding-video', feat: 0, o: 6 },
 
   /* CORRECTED — "Restaurant & Food" dropped. It was a copy-paste artefact in
      source A, unsupported by source C and by both video titles. Finding 5. */
-  { id: 'q8Us_7ZMxqY', t: 'Story arc, part one', s: '16:9', i: 'YouTube Channel', f: 'Online Course & E-Learning', slug: 'youtube-video-editing', feat: 7, o: 7 },
+  { id: 'q8Us_7ZMxqY', t: 'Story arc, part one', s: '16:9', i: 'YouTube Channel', f: 'Online Course & E-Learning', slug: 'youtube-video-editing', feat: 3, o: 7 },
   { id: 'zb6qyP7zU78', t: 'Story arc, part two', s: '16:9', i: 'YouTube Channel', f: 'Online Course & E-Learning', slug: 'youtube-video-editing', feat: 0, o: 62 },
 
-  { id: 'GIbOpOMjF5w', t: 'Kids short 02', s: '1012', i: 'Education & Coaching', f: 'Short-Form (Reels & Shorts)', slug: 'education-coaching-video', feat: 8, o: 8 },
+  { id: 'GIbOpOMjF5w', t: 'Kids short 02', s: '1012', i: 'Education & Coaching', f: 'Short-Form (Reels & Shorts)', slug: 'education-coaching-video', feat: 4, o: 8 },
   { id: 'vQUZtcqNUVE', t: 'Online course showreel', s: '4:5', i: 'Education & Coaching', f: 'Online Course & E-Learning', slug: 'education-coaching-video', feat: 0, o: 20 },
   /* ⚠️ MISFILED, KNOWINGLY. This belongs in "Manufacturing & Industrial",
      which does not exist in the 28-list. Portfolio-Catalogue.md §4c asks for
@@ -249,7 +291,9 @@ const ITEMS = [
   { id: 'tXYLpEnnuCs', t: 'Business education showreel', s: '4:5', i: 'Finance & Investment', f: 'Talking Head Video', slug: 'finance-video', feat: 0, o: 52 },
 
   /* CORRECTED — "Doctors and Medical" dropped. Posture and physio content is
-     not doctor content. Same claim risk as the row above. Finding 5. */
+     not doctor content. Same claim risk as the row above. Finding 5.
+     ⚠️ ITS PROMO CARD STILL SAYS "HEALTH CARE COURSE VIDEO EDITING". The tag
+     was corrected; the artwork was not. See INCLUDE_PROMO_CARDS. */
   { id: 'gB5JBkmJ3So', t: 'Posture & position', s: '4:5', i: 'Fitness & Wellness', f: 'UGC Style Video', slug: 'fitness-wellness-video', feat: 0, o: 51 },
 ];
 
@@ -276,12 +320,12 @@ const anchorFor = (label) => label
 
 function card(it) {
   const dim = SHAPES[it.s];
-  const meta = esc(it.i) + ' \u00b7 ' + esc(it.f);
+  const meta = esc(it.i) + ' · ' + esc(it.f);
   /* width and height are the MEASURED pixel dimensions, so the browser
      reserves the right box before the image arrives. No layout shift, and no
      JavaScript to prevent it. */
   const still = '<img src="/assets/img/portfolio/' + it.id + '.jpg" width="' +
-    dim.w + '" height="' + dim.h + '" loading="lazy" decoding="async" alt="Video still \u2014 ' +
+    dim.w + '" height="' + dim.h + '" loading="lazy" decoding="async" alt="Video still — ' +
     esc(it.t) + '">';
   const label = '<h3 class="work__title">' + esc(it.t) + '</h3>\n' +
     '          <p class="work__meta">' + meta + '</p>';
@@ -319,7 +363,7 @@ function section(label, items) {
 }
 
 function build() {
-  const live = ITEMS.slice();
+  const live = ITEMS.filter((i) => INCLUDE_PROMO_CARDS || i.s !== '4:5');
   const byIndustry = new Map();
   for (const it of live) {
     if (!byIndustry.has(it.i)) byIndustry.set(it.i, []);
@@ -327,17 +371,11 @@ function build() {
   }
 
   /* Sections run largest first, then alphabetically. Stated so it reads as a
-     rule rather than a preference: the substantial bodies of work lead, and
-     eight industries genuinely have one item each. That is the real data, and
-     padding it would be the disease this project exists to avoid. */
+     rule rather than a preference: the substantial bodies of work lead. */
   const groups = [...byIndustry.entries()].sort(
     (a, b) => b[1].length - a[1].length || a[0].localeCompare(b[0])
   );
 
-  /* Featured is Portfolio-Catalogue.md §5c, which labels itself an INFERENCE,
-     not a ruling: eight items, no industry repeated, and all three shapes
-     present so the grid is tested by its own content. Masud replaces any of
-     them freely — nothing depends on the specific eight. */
   const featured = live.filter((i) => i.feat).sort((a, b) => a.feat - b.feat);
 
   const filters = groups.map(([label, items]) =>
@@ -347,7 +385,7 @@ function build() {
 
   const out = [];
   out.push('      <p class="work__lede">' + live.length +
-           ' edits, in ' + groups.length + ' industries. Every still below is a video we cut.</p>');
+           ' edits. Every image below is a frame from the video itself.</p>');
   out.push('');
   out.push('      <section class="work__group" id="selected" aria-labelledby="selected-h">\n' +
     '        <h2 id="selected-h">Selected work</h2>\n        <ul class="work">\n' +
@@ -357,11 +395,14 @@ function build() {
     '        <h2 id="filters-h">Browse by industry</h2>\n        <ul>\n' + filters +
     '\n        </ul>\n' +
     '        <p class="work__note">Filtering by video format is not built yet.\n' +
-    '          <span class="todo">[[Two taxonomy rows are missing before every\n' +
-    '          item has an honest home \u2014 Portfolio-Catalogue.md \u00a74c:\n' +
-    '          "Manufacturing &amp; Industrial" in the 28-list, and "Showreel /\n' +
-    '          Compilation" in the 14-list. 27 of these items are compilation\n' +
-    '          showreels and no format in the list describes one.]]</span></p>\n' +
+    '          <span class="todo">[[26 more edits are catalogued and NOT SHOWN.\n' +
+    '          Their YouTube thumbnail is a promo card, not a frame from the\n' +
+    '          video: headline, watermark, and a CONTACT US bar with a phone\n' +
+    '          number burned in. One prints mangomedia.digital. They return the\n' +
+    '          day they have real artwork — holding them also costs 10 of\n' +
+    '          the 14 industries. See WORKLOG 2026-09-05.]]</span>\n' +
+    '          <span class="todo">[[Format filtering also needs two taxonomy\n' +
+    '          rows that do not exist — Portfolio-Catalogue.md §4c.]]</span></p>\n' +
     '      </nav>');
   for (const [label, items] of groups) { out.push(''); out.push(section(label, items)); }
   return out.join('\n');
@@ -380,7 +421,21 @@ if (DO_ASSETS) {
     process.exit(1);
   }
   mkdirSync(ASSETS_DST, { recursive: true });
-  const want = new Set(ITEMS.map((i) => i.id + '.jpg'));
+
+  /* ⚠️ ONLY THE ITEMS THE PAGE ACTUALLY SHOWS ARE COPIED, AND ANYTHING ELSE
+     ALREADY IN assets/img/ IS DELETED.
+
+     Everything under site/ is SERVED. A held-back promo card sitting at
+     /assets/img/portfolio/<id>.jpg is published whether or not a page links
+     to it — and one of them prints mangomedia.digital. "Nothing links to it"
+     is not the same as "it is not public".
+
+     The masters stay in 04-Assets/, which is outside site/ and never served,
+     so restoring the 26 is still one flag plus a re-run. Nothing is lost. */
+  const want = new Set(
+    ITEMS.filter((i) => INCLUDE_PROMO_CARDS || i.s !== '4:5').map((i) => i.id + '.jpg')
+  );
+
   let copied = 0; const missing = [];
   for (const name of want) {
     const from = join(ASSETS_SRC, name);
@@ -388,13 +443,26 @@ if (DO_ASSETS) {
     copyFileSync(from, join(ASSETS_DST, name));
     copied++;
   }
-  const extra = readdirSync(ASSETS_SRC).filter((f) => f.endsWith('.jpg') && !want.has(f));
-  console.log('ASSETS ' + copied + ' still(s) copied into assets/img/portfolio/.');
-  if (missing.length) console.error('FAIL  ' + missing.length + ' missing: ' + missing.join(', '));
-  if (extra.length) {
-    console.log('       ' + extra.length + ' file(s) in 04-Assets are not used by the page —');
-    console.log('       the four source-B items held back, and nothing else. Expected.');
+
+  /* Remove stills the page no longer shows. This is what un-publishes the 26
+     promo cards from a clone where an earlier run already copied them in. */
+  let removed = 0;
+  if (existsSync(ASSETS_DST)) {
+    for (const f of readdirSync(ASSETS_DST)) {
+      if (f.endsWith('.jpg') && !want.has(f)) {
+        rmSync(join(ASSETS_DST, f));
+        removed++;
+      }
+    }
   }
+
+  console.log('ASSETS ' + copied + ' still(s) copied into assets/img/portfolio/.');
+  if (removed) {
+    console.log('       ' + removed + ' still(s) REMOVED from assets/img/ — held back,');
+    console.log('       and a file under site/ is served whether or not it is linked.');
+    console.log('       The masters are untouched in 04-Assets/.');
+  }
+  if (missing.length) console.error('FAIL  ' + missing.length + ' missing: ' + missing.join(', '));
   if (missing.length) process.exit(1);
 }
 
@@ -404,24 +472,32 @@ if (!MARKER.test(before)) {
   console.error('      Was the page overwritten from _template/page-template.html?');
   process.exit(1);
 }
+
+const shipped = ITEMS.filter((i) => INCLUDE_PROMO_CARDS || i.s !== '4:5');
+const held = ITEMS.length - shipped.length;
+
 const after = before.replace(MARKER, (_m, open, close) => open + '\n' + build() + '\n' + close);
 
 if (after === before) {
-  console.log('No change. ' + ITEMS.length + ' item(s) already rendered.');
+  console.log('No change. ' + shipped.length + ' item(s) already rendered.');
 } else if (CHECK_ONLY) {
-  console.error('DRIFT portfolio/index.html \u2014 its grid no longer matches this file.');
+  console.error('DRIFT portfolio/index.html — its grid no longer matches this file.');
   console.error('Run: node tools/build-portfolio.mjs');
   process.exit(1);
 } else {
   writeFileSync(PAGE, after, 'utf8');
-  console.log('WROTE portfolio/index.html \u2014 ' + ITEMS.length + ' items in ' +
-              new Set(ITEMS.map((i) => i.i)).size + ' industries.');
+  console.log('WROTE portfolio/index.html — ' + shipped.length + ' items in ' +
+              new Set(shipped.map((i) => i.i)).size + ' industries.');
 }
 
 if (!PLAYERS) {
-  console.log('NOTE  PLAYERS is off. Stills only \u2014 R07 is open and the YouTube');
+  console.log('NOTE  PLAYERS is off. Stills only — R07 is open and the YouTube');
   console.log('      titles name the clients. See the header block.');
 }
+if (held) {
+  console.log('NOTE  ' + held + ' item(s) held back — their thumbnail is a promo card,');
+  console.log('      not a frame from the video. See WORKLOG 2026-09-05.');
+}
 if (!INCLUDE_UNCONFIRMED) {
-  console.log('NOTE  ' + UNCONFIRMED.length + ' source-B items held back \u2014 no confirmed client.');
+  console.log('NOTE  ' + UNCONFIRMED.length + ' source-B items held back — no confirmed client.');
 }

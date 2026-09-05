@@ -8,6 +8,117 @@ Format: **Done / Decisions / Open / Blocked**.
 
 ---
 
+## 2026-09-05 — ✅ **PUSHED AND DEPLOYING · Rule 4 passed · one layout defect found**
+
+### ✅ "NOTHING PUSHED" IS NO LONGER TRUE — every earlier entry saying so is STALE
+
+Masud ran the git sequence on 2026-09-05. **The repo was already initialised, the
+remote was already configured, and the work was already committed:**
+
+```
+git init                 → "Reinitialized existing Git repository"
+git remote add origin …  → "error: remote origin already exists"
+git commit …             → "nothing to commit, working tree clean"
+git push -u origin main  → "Everything up-to-date"
+```
+
+**The push had already happened.** Every entry above that says *"Nothing has been
+pushed anywhere"* — T0's, T1's, T6's, and others — was written before that and is
+now wrong. **Do not repeat the claim.**
+
+### ✅ Rule 4 SATISFIED — for the first time in this project
+
+```
+node tools\sync-shared.mjs          → 13 page(s) checked. Nothing needed changing.
+node tools\sync-shared.mjs --check  → 13 page(s) checked. No drift.
+                                      Every page carries the canonical nav and footer.
+```
+
+**Thirteen pages, six threads, zero drift.** The script had never been run before
+today; it came back clean, which retires the risk several entries flagged.
+
+### ✅ THE STAGING SITE IS LIVE AND VERIFIED — fetched, not assumed
+
+`videoeditor-agency-v2.pages.dev`, checked 2026-09-05. **The Cloudflare build
+output directory `site` is confirmed correct** — the first deployment that has ever
+produced anything.
+
+| URL | Status | Title |
+|---|---|---|
+| `/` | 200 | Video Editor Agency — Editing for Creators & Brands |
+| `/services/` | 200 | Video Editing Services — Video Editor Agency |
+| `/pricing/` | 200 | Video Editing Rates — Video Editor Agency |
+| `/portfolio/` | 200 | Video editing portfolio — Video Editor Agency |
+
+**The rate table renders correctly.** Read out of the live DOM:
+
+```
+Long-Form Video Editing     | Per minute of final output | $20
+Short-Form Reels & TikToks  | Per video                  | $30
+Motion Graphics & Animation | Per minute of animation    | [[NOT GIVEN …]]
+Thumbnail Design            | Per thumbnail              | $30
+```
+
+Bracket counts live: `/` 3 · `/services/` 10 · `/pricing/` 8 · `/portfolio/` 3.
+**24 brackets across four pages. None may reach the custom domain.**
+
+### ⚠️ LAYOUT DEFECT — 240px between every section. T3's file, not fixed here.
+
+Measured on the live `/pricing/`, not eyeballed:
+
+| | |
+|---|---|
+| `.section` padding | **`padding-top: 120px` AND `padding-bottom: 120px`** |
+| Gap between two adjacent sections | **240px** — they stack |
+| `/pricing/` total height | **3888px** for roughly 1200px of actual content |
+| Result | **~70% of the page is empty.** Two full 720px viewports of nothing between the subtext and the rate table |
+
+**Cause:** `site.css` §3 sets `.section { padding-block: var(--space-8) }` with
+`--space-8: 7.5rem`, measured from MZ Media's `--section-padding: 120px`. But on
+mzmedia.digital that 120px is the rhythm *between* sections. Applied to both edges
+of adjacent sections it doubles to 240px.
+
+**This is not a T6 bug and not misuse of the class** — `class="section"` is the
+intended usage and every page thread used it. It is a design-system value that
+works on long sections and falls apart on short ones, and every page on the site
+inherits it.
+
+**Suggested fix, for T3 to accept or reject — one line, no token change:**
+
+```css
+.section + .section { padding-top: 0; }
+```
+
+That restores 120px between sections while keeping the first section's top padding
+and the last one's bottom. It leaves `--space-8` alone, so nothing else moves.
+
+⚠️ **T6 did NOT apply it.** `site.css` is T3's, exclusively.
+
+### Also noted
+
+- **One uncommitted file: `site\tools\build-portfolio.mjs`** — **T5's**, not T6's.
+  Its diff adds `rmSync` and a comment block explaining that 26 4:5 items are held
+  back because their artwork is promotional cards rather than video frames, one of
+  which prints `mangomedia.digital` on a videoeditor.agency page. That reads as a
+  deliberate T5 decision. **T5 or Masud commits it; T6 did not touch it.**
+- **GitHub Desktop line-ending warning** on that file: LF in the repo, git set to
+  convert to CRLF on checkout. Harmless for a script Cloudflare never runs, but it
+  will produce noisy whole-file diffs. A root `.gitattributes` with
+  `* text=auto eol=lf` would settle it. **Nobody owns `.gitattributes`; not created.**
+- ⚠️ **Both repos are now in the GitHub Desktop dropdown.** Masud was one click
+  from committing VEA work into `Mango-Website-Rebuild` today. **Check the Current
+  repository box reads `videoeditor-agency-v2` before every commit.**
+
+### Open
+
+- **The Motion Graphics rate** — the only missing number on `/pricing/`.
+- **The R04/R23 gap** — seven of eleven services still unpriced.
+- **R15** — VEA's email.
+- **`noindex` and `robots.txt` are both still closed.** Correct for staging. T10
+  lifts them page by page at cutover, never sitewide.
+
+---
+
 ## 2026-09-05 — ✅ **R26b EXECUTED — videoeditor.agency IS DARK**
 
 **Masud performed it himself in Cloudflare, 2026-09-05.** Verified on screen and
@@ -126,19 +237,57 @@ the Drive masters, is not needed"* — on the grounds that shape was the only
 problem. **Shape was not the only problem.** No thread could have known that
 without looking at the pictures, and T2 could not: it had no route to them.
 
-#### → MASUD. Three options, and T5 does not pick.
+#### RESOLVED — Masud, 2026-09-05: *"Do whatever is best for the website."*
 
-1. **Extract a frame from the Drive masters** for the 27 showreels. This is
-   exactly the fallback finding 4 retired. It gives a true 9:16/4:5 still with no
-   branding, no phone number and no watermark. Costs the most time.
-2. **Re-cut the 27 cover cards** without the CONTACT US bar and the watermark, in
-   VEA's dark palette. Keeps the before/after idea, which does sell the work.
-3. **Ship the 9:16 and 16:9 items only** — 30 genuine stills — and hold the 27
-   showreels back. Fastest, honest, and a smaller portfolio.
+**T5 audited all 26 and then chose. Both are recorded because the choice is T5's,
+not Masud's, and is reversible on sight.**
 
-⚠️ **Whichever is chosen, `fKs9q1E9y94` must not ship as-is.** A card reading
-`mangomedia.digital` on videoeditor.agency is the one item here that is not a
-matter of taste.
+**The audit — all 26 opened individually, none inferred.** Every 4:5 item is a
+promo card. Every 9:16, 1012×1920 and 16:9 item is a genuine frame — six of those
+were opened and checked too. **The boundary is exactly the shape**, which is not a
+coincidence: `Portfolio-Catalogue.md` finding 2 established 4:5 ⟺ compilation
+showreel, and a showreel gets a designed cover while an individual client edit does
+not. So the filter tests the shape rather than carrying 26 flags that could drift
+out of step with the data.
+
+**The choice: hold the 26 back. Ship the 31 genuine frames.** Of the three options
+above, only the third could be executed today — 1 needs the Drive masters and video
+tooling, 2 needs a designer. Both remain better end states.
+
+**What it costs, and it is not small:** 26 of 57 items, and **10 of the 14
+industries.** Podcast Channel loses all 13. Healthcare, SaaS, Real Estate, Finance,
+Food, Fitness, Mental Health, Non-Profit and Business & Personal Branding disappear
+from the page. The portfolio is now **31 items in 4 industries** — Legal 12,
+Advertising 10, Education 7, YouTube 2. **Breadth is what sells a portfolio**, and
+this loses most of it. It is still better than publishing 26 advertisements
+carrying another company's domain and an undialled phone number.
+
+**Also done, and it matters more than it looks:** `--assets` now copies **only the
+items the page shows, and deletes anything else already in `assets/img/`.** A file
+under `site/` is served whether or not a page links to it — the promo cards were
+live at their own URLs on `*.pages.dev` from the first push, `mangomedia.digital`
+card included. The masters stay in `04-Assets/`, which is never served, so
+restoring all 26 is one flag plus a re-run.
+
+**Featured re-picked** — six of the original eight were promo cards. The new six
+were each opened and looked at, cover all four surviving industries and all three
+shapes. Labelled an inference, per `RULINGS.md` §0.
+
+#### → MASUD. The 26 come back as soon as they have artwork.
+
+**Recommended: option 2 — re-cut the 26 covers** without the CONTACT US bar and the
+watermark, in the dark palette. Before/after genuinely sells video editing, and it
+restores 10 industries. Option 1 (extract frames from the masters) also works and
+needs no designer. Either way: replace those 26 `.jpg` files in
+`04-Assets\portfolio\`, set `INCLUDE_PROMO_CARDS = true`, re-run. **Nothing needs
+rebuilding.**
+
+⚠️ **Two of the 26 need more than new artwork.** `fKs9q1E9y94` prints
+`mangomedia.digital` — that is a different company's domain, not a style choice.
+`gB5JBkmJ3So` is headlined **"HEALTH CARE COURSE VIDEO EDITING"**, which is the
+precise medical claim finding 5 corrected *out of the metadata* as a claim risk.
+**The tag was fixed and the image was not.** Whoever re-cuts them must know that,
+or the claim ships in pixels a second time.
 
 ### Done
 
