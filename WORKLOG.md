@@ -8,6 +8,81 @@ Format: **Done / Decisions / Open / Blocked**.
 
 ---
 
+## 2026-09-05 — T6 · ⚠️ **PLACEHOLDER RATES INSERTED FOR REVIEW — NOT PRICES**
+
+### Decision — Masud, 2026-09-05
+
+> **Verbatim:** *"For the rate and price, just insert a flat rate for everything.
+> I just want to check the design and content. I will save the price later, so
+> don't ask me about the price and rate ever again."*
+
+**Pricing is CLOSED TO QUESTIONING.** No thread asks him about rates again. The
+page carries its own guard instead of a conversation.
+
+### What was done
+
+**A flat `$25` renders against all four units** on `/pricing/` — per finished
+minute, per video, per minute of animation, per thumbnail. One number across
+unlike units is self-evidently not a rate card; that is why a flat figure was
+chosen rather than four plausible ones.
+
+**`instructions.md` §5 permits this and only this way:** *"Any price shown is real,
+or is unmistakably labelled a placeholder."* A single `.todo` banner sits directly
+above the table. **It is the only thing keeping the page compliant. Deleting it
+turns four placeholders into four claims.**
+
+Kept to one element deliberately — the point was to let him judge the design, and
+a table full of yellow brackets would have defeated that.
+
+### ⚠️ HIS REAL FIGURES ARE PRESERVED. Do not go back to the research numbers.
+
+| Unit | His rate, 2026-09-05 |
+|---|---|
+| Long-Form Video Editing | **$20** per minute of final output |
+| Short-Form Reels & TikToks | **$30** per video |
+| Thumbnail Design | **$30** per thumbnail |
+| Motion Graphics & Animation | **never given** |
+
+> *"Short video is $30. Long video is $20 per minute. Thumbnail is $30 per
+> thumbnail."*
+
+⚠️ **The research says $15 / $25 / $15 / $XX and two of those are known wrong** —
+he changed both figures he addressed. Reinstating them would advertise rates
+**below his own**. That is the concrete cost R04's "confirm before it renders"
+rule prevented, and it is why the research numbers are recorded here as dead
+rather than as a fallback.
+
+### Also cleared, so the pages read as pages
+
+- **All eight rate brackets removed from `/services/`.** Every one of the eleven
+  services now reads "Published rate — see Pricing".
+- **Two brackets DELETED rather than filled on `/pricing/`:** the empty second FAQ
+  `<details>`, and the third "what's included" bullet. Both were blocked on the
+  pricing structure he has closed. **An empty accordion is a placeholder; one real
+  answer is not.** Restore them when real rates land.
+- **A flat-rate sentence added under the table** so all eleven services are
+  accounted for instead of seven dangling. ⚠️ **It is not a resolution of the
+  R04/R23 gap** — that gap is real and unchanged. It goes when the rates do.
+
+### ⚠️ THE HARD GATE
+
+**`/pricing/` must not be attached to `videoeditor.agency` in this state.** The old
+site was taken dark on 2026-09-05 *specifically* because it carried a fake $6.99
+pricing block. Shipping a fake $25 one is the same failure with a different number.
+
+Currently safe: `noindex` on, `robots.txt` is `Disallow: /`, no custom domain
+points at `videoeditor-agency-v2`. **T10 must clear the placeholder before cutover,
+and it is written into the build gate at the top of the file.**
+
+### Open — for Masud, not to be re-asked
+
+- The real rates, whenever he wants them. **T6 does not raise it.**
+- **R15 — VEA's email** (not a pricing question; still needed for the footer).
+- **The `.section` 240px spacing defect** — T3's file, one-line fix, still unfixed.
+  It matters more now: he is reviewing the design, and the page is ~70% empty.
+
+---
+
 ## 2026-09-05 — ✅ **PUSHED AND DEPLOYING · Rule 4 passed · one layout defect found**
 
 ### ✅ "NOTHING PUSHED" IS NO LONGER TRUE — every earlier entry saying so is STALE

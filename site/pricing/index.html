@@ -249,32 +249,46 @@
         CONFIRM EACH RATE BEFORE IT RENDERS ON A PAGE. Recording an option-label
         as a price quote would be exactly the Astro mistake."
 
-     ✅ UPDATED 2026-09-05 — THREE OF THE FOUR RATES ARE NOW MASUD'S OWN.
+     ⚠️⚠️ THE FIGURES ON THIS PAGE ARE PLACEHOLDERS. THEY ARE NOT PRICES. ⚠️⚠️
 
-     > Masud, 2026-09-05, verbatim: "Set the pricing: Short video is $30. Long
-     > video is $20 per minute. Thumbnail is $30 per thumbnail."
+     > Masud, 2026-09-05, verbatim: "For the rate and price, just insert a flat
+     > rate for everything. I just want to check the design and content. I will
+     > save the price later, so don't ask me about the price and rate ever again."
 
-     Those three are RENDERED AS REAL NUMBERS. R04's requirement — "T6 must have
-     him confirm each rate before it renders on a page" — is satisfied for them.
+     A flat **$25** is rendered against four DIFFERENT units — per finished
+     minute, per video, per minute of animation, per thumbnail. That is
+     deliberate: a single number spanning unlike units is self-evidently not a
+     rate card, so the table reads as provisional even to someone who misses the
+     label above it.
 
-     ⚠️ MOTION GRAPHICS & ANIMATION WAS NOT AMONG THEM AND REMAINS A BRACKET.
-        Three rates were given; the model has four units. The research says $15
-        per minute of animation. THAT FIGURE IS NOT CARRIED OVER, and the reason
-        matters: of the two research figures he did address, he CHANGED BOTH —
-        long-form $15 → $20, short-form $25 → $30. A stale figure he silently
-        left alone cannot be treated as one he endorsed. It needs his number.
+     instructions.md §5 permits a shown price only if it is real OR "unmistakably
+     labelled a placeholder." The .todo banner directly above the table is that
+     label and IS THE ONLY THING KEEPING THIS PAGE COMPLIANT. Deleting it turns
+     four placeholders into four claims.
 
-     ⚠️ AND THIS VINDICATES R04's CAUTION RATHER THAN BEING A FORMALITY. If T6
-        had rendered the option-label figures when R04 was first ruled, this page
-        would today be advertising $15/minute and $25/reel — under-charging
-        against Masud's actual rates on every long-form and short-form order.
-        That is the concrete cost the "Astro mistake" rule exists to prevent.
+     ⚠️ NO THREAD ASKS MASUD ABOUT PRICING AGAIN. He closed it. The page carries
+        its own guard instead, and this comment is the record.
 
-     THE SUPERSEDED SOURCES, recorded so nobody reinstates them:
-       · 01-Research-Import/videoeditor_agency_website_copy.md, PAGE 1
-         SECTION 8, "TAB 3 — Flat Rate" (lines 380–387) — $15 / $25 / $15 / $XX
-       · the client brief, per SITE-MAP-v1.md §4.8 — the same figures
-     Both predate every ruling. Two of their four numbers are now wrong.
+     ⚠️ HIS REAL FIGURES, GIVEN EARLIER THE SAME DAY, ARE NOT LOST. Restore these
+        when he says the word — do NOT go back to the research numbers:
+
+          Long-Form Video Editing        $20  per minute of final output
+          Short-Form Reels & TikToks     $30  per video
+          Thumbnail Design               $30  per thumbnail
+          Motion Graphics & Animation    —    never given
+
+        Source: Masud, 2026-09-05, "Short video is $30. Long video is $20 per
+        minute. Thumbnail is $30 per thumbnail." Also in WORKLOG.md.
+
+     ⚠️ WHY THE RESEARCH FIGURES MUST NEVER BE REINSTATED. The source document and
+        the client brief both say $15/min, $25/reel, $15/min, $XX. Masud CHANGED
+        both of the figures he addressed — $15→$20 and $25→$30. Had T6 rendered
+        the research numbers when R04 was first ruled, this page would have been
+        advertising rates BELOW his own on every long-form and short-form order.
+        That is the concrete cost R04's "confirm before it renders" rule prevented.
+          · 01-Research-Import/videoeditor_agency_website_copy.md PAGE 1 §8 "TAB 3"
+          · the client brief, per SITE-MAP-v1.md §4.8
+        Both predate every ruling. Two of their four numbers are known wrong.
 
      ⚠️ DEAD AND DELETED FROM THIS PAGE — killed by ruling, not by preference:
         · "TAB 1 — Monthly Retainer" (Starter/Growth/Pro, all $XXX)    → R04
@@ -291,11 +305,23 @@
 
      CLEAR ALL OF THESE BEFORE THIS PAGE IS PUSHED:
 
-       1. THE MOTION GRAPHICS RATE. The one unit of four with no number.
-       2. RESOLVE THE 11-SERVICES-VS-4-RATES GAP. See the note above the table.
-          The import shows the cause is structural, not an oversight.
-       3. R15 — VEA's email, for the CTA.
-       4. T3 — promote "Pricing" in the nav from <span> to <a href="/pricing/">.
+       1. ⚠️ REPLACE THE FOUR PLACEHOLDER $25 FIGURES WITH REAL RATES, and delete
+          the placeholder banner above the table in the same edit. Neither
+          without the other: real rates under a "PLACEHOLDER" banner is as wrong
+          as placeholders without one.
+       2. Delete the flat-rate sentence under the table. It exists only to make
+          the placeholder coherent across all eleven services.
+       3. RESOLVE THE 11-SERVICES-VS-4-RATES GAP — still genuinely open. R04
+          deleted the retainer and bundle tabs that were the only place seven of
+          the eleven were ever priced. Options (a), (b), (c) above the table.
+       4. R15 — VEA's email, for the CTA.
+       5. T3 — promote "Pricing" in the nav from <span> to <a href="/pricing/">.
+
+     ⚠️ THIS PAGE MUST NOT BE ATTACHED TO videoeditor.agency IN ITS CURRENT STATE.
+        The old site was taken dark on 2026-09-05 specifically because it carried
+        a fake $6.99 pricing block. Shipping a fake $25 one would be the same
+        failure with a different number. Staging only: noindex is on, robots.txt
+        is Disallow: /, and no custom domain points here.
 
      ✅ CLEARED SINCE THE FIRST DRAFT:
        · the copy import — T8 landed it 2026-09-05, provenance verified and
@@ -406,6 +432,16 @@
     <section class="section" aria-labelledby="rates-heading">
       <h2 id="rates-heading">Our rates</h2>
 
+      <!-- THE ONE GUARD ON THIS PAGE. Kept to a single element so it does not
+           interfere with reviewing the table's design, but loud enough (site.css
+           §10 .todo) that this page cannot be mistaken for shippable or attached
+           to the live domain by accident. DELETE THIS AND THE FIGURES BECOME
+           CLAIMS. instructions.md §5 permits a shown price only if it is real or
+           "unmistakably labelled a placeholder" — this is the label. -->
+      <p><span class="todo">[[PLACEHOLDER RATES — FOR LAYOUT REVIEW ONLY. The
+        figures in this table are not real prices and must not reach the live
+        domain. Masud sets the real ones later.]]</span></p>
+
       <div class="table-scroll">
         <table class="rate-table">
           <caption class="visually-hidden">Published per-unit editing rates</caption>
@@ -433,39 +469,48 @@
                  them. That is exactly why R04 required him to retype rather
                  than approve an option label, and it is the reason no research
                  figure was ever rendered on this page. -->
+            <!-- ⚠️⚠️ EVERY FIGURE BELOW IS A REVIEW PLACEHOLDER. NOT REAL. ⚠️⚠️
+                 Masud, 2026-09-05: "just insert a flat rate for everything. I
+                 just want to check the design and content. I will save the price
+                 later." A single flat $25 is used across four DIFFERENT units,
+                 which is self-evidently not a rate card — that is deliberate.
+                 His real figures of earlier today ($20/min, $30/reel, $30/thumb)
+                 are preserved in WORKLOG.md and are what these revert to. -->
             <tr>
               <th scope="row">Long-Form Video Editing</th>
               <td>Per minute of final output</td>
-              <td class="rate-table__amount">$20</td>
+              <td class="rate-table__amount">$25</td>
             </tr>
             <tr>
               <th scope="row">Short-Form Reels &amp; TikToks</th>
               <td>Per video</td>
-              <td class="rate-table__amount">$30</td>
+              <td class="rate-table__amount">$25</td>
             </tr>
             <tr>
               <th scope="row">Motion Graphics &amp; Animation</th>
               <td>Per minute of animation</td>
-              <td class="rate-table__amount"><span class="todo">[[NOT GIVEN.
-                Masud supplied three rates on 2026-09-05 and this was not one of
-                them. The research says $15 per minute of animation — NOT
-                CARRIED OVER, because he raised both of the other research
-                figures rather than confirming them, so $15 cannot be assumed
-                current. Needs his number.]]</span></td>
+              <td class="rate-table__amount">$25</td>
             </tr>
             <tr>
               <th scope="row">Thumbnail Design</th>
               <td>Per thumbnail</td>
-              <td class="rate-table__amount">$30</td>
+              <td class="rate-table__amount">$25</td>
             </tr>
           </tbody>
         </table>
       </div>
 
-      <p><span class="todo">[[THE OTHER SEVEN SERVICES — resolve (a), (b) or (c)
-        in the note above this table. Seven of the eleven services ruled under
-        R23 have no published rate, because R04 deleted the retainer and bundle
-        tabs that were the only place they were ever priced.]]</span></p>
+      <!-- ⚠️ THIS LINE EXISTS ONLY BECAUSE OF THE FLAT PLACEHOLDER RATE. It makes
+           the page coherent for review — all eleven services under R23 are
+           accounted for instead of seven dangling unpriced.
+
+           IT IS NOT A RESOLUTION OF THE R04/R23 GAP. That gap is real and
+           unchanged: R04 deleted the retainer and bundle tabs that were the only
+           place those seven were ever priced, and options (a), (b) and (c) above
+           are still open. When the real rates go in, this line goes with them. -->
+      <p>YouTube, podcast, marketing, ads, event and promotional editing, and
+        video recording, are billed at the same rate against whichever unit
+        fits the work — per finished minute, or per video.</p>
     </section>
 
     <!-- ======================================================================
@@ -507,10 +552,11 @@
         <li>A dedicated editor who stays with you throughout your project, and
           who learns your brand style so quality improves with every video</li>
         <li>Unlimited revision rounds, with zero extra charges</li>
-        <li><span class="todo">[[A THIRD INCLUSION, IF THERE IS ONE — every
-          remaining item in the source belonged to a deleted tier. Which of
-          "project manager", "priority support" or "white-label" applies to a
-          per-unit order?]]</span></li>
+        <!-- A third bullet was bracketed here and is DELETED rather than invented.
+             Every remaining inclusion in the source ("project manager", "priority
+             support", "white-label available") belonged to a retainer tier that
+             R04 deleted, so none of them is known to apply to a per-unit order.
+             Two true bullets beat three with one unknown. -->
       </ul>
     </section>
 
@@ -548,13 +594,10 @@
             with the final output — with zero extra charges.</p>
         </details>
 
-        <details>
-          <summary><span class="todo">[[A SECOND PRICING QUESTION IS NEEDED, and
-            the source has none that survives its own rulings. The obvious one is
-            "how are the seven unpriced services quoted?" — which cannot be
-            written until the R04/R23 gap above is resolved.]]</span></summary>
-          <p><span class="todo">[[ANSWER — blocked on that same decision.]]</span></p>
-        </details>
+        <!-- A second <details> was here and is DELETED, not filled. It would have
+             asked how the unpriced services are quoted, which cannot be answered
+             until the real rates exist. An empty accordion is a placeholder; one
+             real answer is not. Restore a second question when the rates land. -->
 
       </div>
     </section>
