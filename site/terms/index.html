@@ -1,0 +1,537 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- ==========================================================================
+       SEO HEAD — OWNED BY T9. THREAD-PLAN.md §4.
+       Synced by hand from _template/page-template.html on 2026-09-05, after both
+       T9's rewrite and T3's font/paint edit. T8 filled the canonical for this
+       page and changed nothing else in T9's tags.
+
+       ⚠️ THIS BLOCK IS NOT SYNCHRONISED. `--check` will NOT report drift here.
+       ========================================================================== -->
+
+  <!-- T9, 2026-09-05. Title 42 chars, description 84. Short on purpose.
+       ⚠️ R28 — "Video Editor Agency is a trading name of Mango Media Digital"
+       is recorded in T8's WORKLOG entry and NOT in RULINGS.md. This page cannot
+       name a contracting entity until that is in the register with a date. That
+       is T8's problem to solve and T1's file to fix; it is flagged here because
+       a terms page without a legal entity is the one document where the gap
+       actually matters. -->
+  <title>Terms and Conditions — Video Editor Agency</title>
+
+  <meta name="description" content="The terms covering use of this website and the video editing work we do for clients.">
+
+  <link rel="canonical" href="https://videoeditor.agency/terms/">
+
+  <!-- ⚠️ STAYS until cutover, then comes off PAGE BY PAGE, NEVER SITEWIDE.
+       instructions.md §5. Do not move this tag into a SHARED block. -->
+  <meta name="robots" content="noindex, nofollow">
+
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#090909">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;display=swap">
+
+  <link rel="stylesheet" href="/assets/css/site.css">
+
+  <!-- ==========================================================================
+       PAGE-SCOPED CSS — T3 ABSORBS INTO site.css AND DELETES THIS.
+       Identical to the block in /privacy/. Every value is an existing token.
+       ⚠️ `.section` is NOT redefined here. See the note in 404.html.
+       ====================================================================== -->
+  <style>
+    .lede {
+      font-size: var(--step-1);
+      color: var(--ink-muted);
+    }
+
+    .stack { margin-block: var(--space-7); }
+
+    .legal-doc h2 {
+      font-size: var(--step-2);
+      margin-top: var(--space-6);
+      padding-bottom: var(--space-2);
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .legal-doc h3 {
+      font-size: var(--step-1);
+      margin-top: var(--space-5);
+    }
+
+    .legal-doc ul { max-width: var(--measure); padding-left: var(--space-4); }
+    .legal-doc li { margin-bottom: var(--space-2); }
+
+    .meta {
+      font-size: var(--step--1);
+      color: var(--ink-muted);
+    }
+
+    .draft-warning {
+      border: 1px dashed #C8A400;
+      border-radius: var(--radius);
+      background: #3A2E00;
+      color: #FFD84D;
+      padding: var(--space-4);
+      margin-block: var(--space-5);
+    }
+
+    .draft-warning h2 {
+      color: #FFD84D;
+      font-size: var(--step-1);
+      margin: 0 0 var(--space-2);
+      border: 0;
+      padding: 0;
+    }
+
+    .draft-warning p { margin: 0 0 var(--space-2); color: #FFD84D; }
+    .draft-warning p:last-child { margin-bottom: 0; }
+  </style>
+</head>
+
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- SHARED:HEADER — START ======================================================
+     GENERATED BLOCK. Edit it HERE, in _template/page-template.html, then run
+     node tools/sync-shared.mjs. Hand-editing it inside a page file works until
+     the next sync, which overwrites it without warning.
+
+     ⚠️ ONLY T3 AND T9 MAY EDIT THIS BLOCK. See THREAD-PLAN.md §1 Rule 2.
+        A page thread that edits it silently rewrites the nav on nine pages
+        it does not own.
+
+     NAV SOURCE: 02-Decisions/SITE-MAP-v1.md §2. Six top-level items.
+
+     ⚠️ THE FOUR AUDIENCE URLS ARE FLAT — /coaches/, /content-creators/,
+        /business-owners/, /marketers-and-agencies/. R22, ruled 2026-09-03,
+        Masud verbatim: "Flat — /coaches/, /content-creators/…"
+        SITE-MAP-v1.md §1's TABLE STILL LISTS /for/… AND IS STALE. RULINGS.md
+        R22 says so in terms. Never take a URL from that table.
+
+     Only the pages that EXIST are links. The rest render as unlinked muted
+     text, because instructions.md §5 requires every nav link to resolve to a
+     live page — and a link to a 404 breaks that rule where plain text does not.
+     ⚠️ NONE OF THE TEN PAGES EXISTS YET, so all six are text today. That is
+        the correct treatment, not a temporary bodge. Promote each to a real
+        <a> as its thread ships it.
+
+     ⚠️ THE WORDMARK IS TYPE, NOT THE LOGO IMAGE, AND THAT IS DELIBERATE.
+        VEA's logo measures #1C2448 — one colour, no accent, read from the live
+        logo.svg at /wp-content/uploads/2024/10/logo.svg on 2026-09-05. On a
+        #090909 page that navy is very nearly invisible, and no white version
+        of the logo exists anywhere in this project.
+        → [[R29 — a white/reversed VEA logo is required before any logo image
+             can appear on a dark page.]]
+     ========================================================================= -->
+<header class="site-header">
+  <div class="container site-header__inner">
+
+    <a class="wordmark" href="/">Video Editor Agency</a>
+
+    <!-- ⚠️ NAV PROMOTED BY T9, 2026-09-05. Four spans became links.
+         The comment above this block still said "NONE OF THE TEN PAGES EXISTS
+         YET, so all six are text today." That stopped being true when T4, T6
+         and T8 shipped. Four of the six now resolve to a real file in this
+         folder, verified today, so under instructions.md §5 they must be links:
+         the rule requires a nav link to reach a live page, not that the nav
+         stay text. Two are still text, and both for a reason. -->
+    <nav class="nav" aria-label="Main">
+      <ul>
+        <li><a href="/services/">Services</a></li>
+
+        <!-- ⚠️ STILL TEXT, AND THIS IS THE ONE THAT NEEDS FIXING NEXT.
+             All four audience pages EXIST — /coaches/, /content-creators/,
+             /business-owners/, /marketers-and-agencies/ — and nothing in the
+             header reaches any of them. THEY ARE ORPHANS IN THE NAV.
+
+             T9 has NOT built the dropdown: it is a CSS :hover/:focus-within
+             component and site.css is T3's file, which T9 does not write.
+             The gap is covered for now by the footer link list below, so no
+             page is unreachable — but a footer link is not a nav item.
+             → T3, or Masud reassigning site.css. -->
+        <li><span class="nav__pending">For</span></li>
+
+        <!-- Still text because /portfolio/ genuinely does not exist. T5 has not
+             run and is blocked on R07. This is the correct treatment, not a
+             bodge — and it is also why _redirects cannot ship yet, since 60 of
+             its 61 rows point here. -->
+        <li><span class="nav__pending">Portfolio</span></li>
+
+        <!-- /pricing/ STAYS in the nav. R04 ruled it ships as a published
+             per-unit rate page, so THREAD-PLAN.md §5 T6's fallback — drop it
+             from the nav and 301 to /contact/ — no longer applies. -->
+        <li><a href="/pricing/">Pricing</a></li>
+
+        <li><a href="/about/">About</a></li>
+
+        <!-- Contact takes the button treatment SITE-MAP-v1.md §2 specifies.
+             T9 promotes it to a link, not to a button: the button class is a
+             design-system decision and site.css is T3's. → T3. -->
+        <li><a href="/contact/">Contact</a></li>
+      </ul>
+    </nav>
+
+  </div>
+</header>
+<!-- SHARED:HEADER — END ===================================================== -->
+
+<main class="site-main" id="main">
+  <div class="container legal-doc">
+
+    <h1>Terms and conditions</h1>
+
+    <p class="meta">Last updated: <span class="todo">[[DATE THIS IS APPROVED]]</span></p>
+
+    <!-- ============================================================
+         ⚠️⚠️ DRAFT. THE WARNING BELOW RENDERS ON PURPOSE.
+
+         These terms describe how the work is ruled to be sold — R04 per-unit
+         rates, R17 unlimited revisions, R18 no turnaround promise. Every clause
+         traces to a ruling or to a bracket. Nothing here was invented to fill a
+         gap, and nothing was copied from a template.
+
+         WHAT IS STILL MISSING IS COMMERCIAL, NOT EDITORIAL. Payment terms,
+         cancellation, and governing law have never been written down anywhere
+         in this project, and they are the three clauses that actually decide a
+         dispute. They are bracketed rather than guessed.
+
+         I am not a lawyer. A limitation-of-liability clause in particular
+         should be drafted by one — it is the clause that decides what happens
+         on the worst day this business ever has, and a wrong one is worse than
+         none because it can be unenforceable in a way that surprises you.
+         ============================================================ -->
+    <div class="draft-warning">
+      <h2>⚠️ Draft — not yet reviewed</h2>
+      <p>
+        These terms have not been reviewed by a lawyer and are not final. They
+        are published here so they can be checked before launch.
+      </p>
+      <p>
+        The terms that apply to any actual project are the ones in the written
+        quote or agreement we send you.
+      </p>
+    </div>
+
+    <p class="lede">
+      These terms cover the use of this website and the editing work we do for
+      clients.
+    </p>
+
+    <h2>1. Who you are dealing with</h2>
+
+    <!-- R30, WORKLOG 2026-09-05 (T8 batch): VEA is a TRADING NAME of Mango
+         Media Digital. This clause matters more here than on /privacy/ — a
+         trading name cannot enter a contract, so the contracting party has to
+         be named or there is genuine ambiguity about who the client is
+         actually dealing with, and who they would pursue.
+
+         ⚠️ RENUMBERED FROM R28 — THREE DECISIONS SHARE THAT ID.
+         RULINGS.md §3 registers R28 as "Eleven services, four rates"; the
+         template and site.css use R28 for the Sherika licence; T8's WORKLOG
+         used it for this. The register wins, so T8 moved ITS OWN to R30.
+         Full note in /privacy/index.html §1. T1 arbitrates the other two.
+
+         ⚠️ R30 IS NOT YET IN RULINGS.md — it is in WORKLOG.md only, because
+         RULINGS.md is T1's file. T1 must register it.
+
+         ⚠️ T9 FLAGGED THIS IN THIS PAGE'S OWN <head>: "a terms page without a
+         legal entity is the one document where the gap actually matters." That
+         is correct, and it is why §1 names Mango Media Digital from Masud's
+         answer rather than leaving the whole clause bracketed. What is still
+         bracketed is the ADDRESS, not the entity. -->
+    <p>
+      Video Editor Agency is a trading name of <strong>Mango Media Digital</strong>,
+      based in Dhaka, Bangladesh. When you engage us, your contract is with
+      Mango Media Digital. In these terms, &ldquo;we&rdquo; and &ldquo;us&rdquo;
+      mean Mango Media Digital trading as Video Editor Agency.
+    </p>
+
+    <p>
+      <span class="todo">[[R30 — FULL REGISTERED ADDRESS and, if there is one, the business registration or trade licence number. A client needs to know who they are contracting with.]]</span>
+    </p>
+
+    <h2>2. What we do</h2>
+
+    <p>
+      We provide video editing and related post-production services. The specific
+      services available are listed on our
+      <a href="/services/">services page</a>. Every project is agreed in writing
+      before work starts &mdash; what is being edited, what you will receive, and
+      what it costs.
+    </p>
+
+    <h2>3. Prices</h2>
+
+    <!-- R04, ruled 2026-09-03: published per-unit rates. Not retainer tiers,
+         not "request a quote".
+
+         ⚠️ NO AMOUNTS ON THIS PAGE, DELIBERATELY. R04's own entry instructs:
+         "T6 must have him confirm each rate before it renders on a page." He
+         has not. T6 shipped /pricing/ with every amount as a bracket for
+         exactly this reason. Repeating an unconfirmed figure inside a CONTRACT
+         page would be worse than repeating it on a marketing page — this is the
+         document a client quotes back.
+
+         ⚠️ AND R23 vs R04 IS UNRESOLVED. R23 ruled 11 services; the research
+         supplies a rate for 4 of them. T6 named this contradiction and left
+         three resolutions in /pricing/index.html for Masud to pick from. Until
+         he does, this clause cannot say whether all work is rate-carded or only
+         some of it. It is written to be true either way. -->
+    <p>
+      Our rates are published on our <a href="/pricing/">pricing page</a>. The
+      price for your project is the one stated in the written quote we send you
+      and which you accept. If the scope changes after that &mdash; more footage,
+      a longer final cut, a different format &mdash; we will tell you what it
+      changes before we do the work, not afterwards.
+    </p>
+
+    <p>
+      <span class="todo">[[PAYMENT TERMS — never written down anywhere in this project. Needed: deposit or full payment up front? Payment due on delivery, or on invoice? How many days? What currency? Which payment methods? What happens if an invoice is late?]]</span>
+    </p>
+
+    <h2>4. Revisions</h2>
+
+    <!-- ============================================================
+         R17, ruled 2026-09-03, Masud verbatim: "Genuinely unlimited".
+         Every revision cap in the research is dead — Starter's "3 revisions",
+         Starter Pack's "2", all of them.
+
+         T1's objection is recorded once under R17 and is NOT reopened here.
+         Stated as ruled.
+
+         ⚠️ ONE OBSERVATION ABOUT THIS DOCUMENT, NOT AN ARGUMENT ABOUT THE
+         RULING: this page is where a scope boundary would live if one were
+         ever wanted — a revision window, a definition of "revision" versus
+         "new brief", or a fair-use line. There is none, by ruling. Noting
+         where it would go is not the same as asking for it.
+
+         What IS written below is the distinction that already exists in
+         ordinary practice and does not contradict R17: an unlimited number of
+         rounds on the agreed brief is not the same promise as unlimited
+         changes to the brief itself. If Masud reads that as narrowing his
+         ruling, delete the second paragraph — it is his call, and R17 governs.
+         ============================================================ -->
+    <p>
+      Revisions are unlimited. There is no cap on the number of revision rounds
+      and no extra charge for them. We keep working until you are satisfied with
+      the edit.
+    </p>
+
+    <p>
+      Unlimited revisions apply to the project as it was briefed. If you decide
+      partway through that you want something materially different &mdash; new
+      footage, a different length, a different format &mdash; that is a new or
+      expanded project, and we will agree it with you before starting.
+    </p>
+
+    <h2>5. Timelines</h2>
+
+    <!-- R18: asked twice, declined twice. NO delivery-speed claim ships on any
+         page — RULINGS.md §4 R18 says so in terms: "/pricing/ and Home §7 ship
+         with no turnaround claim. Any thread that wants one comes back to
+         Masud; no thread invents one."
+
+         A contract page is the single worst place to invent one, so this clause
+         says how the date is set rather than what the date is. That is honest,
+         it is enforceable, and it does not commit the editing team to a number
+         nobody has agreed to. -->
+    <p>
+      We agree a delivery date with you in writing before work starts. If
+      anything is going to delay it, we will tell you as soon as we know rather
+      than on the day it is due. If you are late sending footage or feedback, the
+      delivery date moves by roughly the same amount.
+    </p>
+
+    <h2>6. Your footage, and who owns the result</h2>
+
+    <p>
+      You keep ownership of everything you send us. You confirm that you have the
+      right to use the footage, music, images and other material you supply, and
+      that our editing it will not infringe anyone else&rsquo;s rights.
+    </p>
+
+    <p>
+      Once you have paid in full, the finished edit is yours to use however you
+      like. We keep the right to be identified as the editor, but we will not
+      show your work publicly without asking you first.
+    </p>
+
+    <!-- ⚠️ THAT LAST SENTENCE IS A REAL COMMITMENT AND IT IS DELIBERATE.
+         THREAD-PLAN.md §5 (T2): "No client name is published without written
+         permission." R27 changed what goes in the REPO; it did not, and could
+         not, change what clients consented to — RULINGS.md R27 says so:
+         "the ruling settles the repo's visibility and the file's inclusion; it
+         does not, and cannot, supply permissions that belong to other people."
+         This clause is the client-facing half of that rule. T5 must honour it
+         when the portfolio ships. -->
+
+    <h2>7. Confidentiality</h2>
+
+    <p>
+      We treat your footage, scripts, plans and anything else you share with us
+      as confidential. We do not discuss your projects with other clients and we
+      do not use your material to train anything.
+    </p>
+
+    <h2>8. Cancelling</h2>
+
+    <p>
+      <span class="todo">[[CANCELLATION AND REFUNDS — not written down anywhere in this project. Needed: can a client cancel mid-project? Is a deposit refundable? What is charged for work already done? Can we decline or end a project, and on what notice?]]</span>
+    </p>
+
+    <h2>9. Liability</h2>
+
+    <p>
+      <span class="todo">[[LIMITATION OF LIABILITY — a lawyer drafts this one. It is the clause that decides what happens on the worst day this business has, and a badly drafted cap can be unenforceable in exactly the situation you were relying on it.]]</span>
+    </p>
+
+    <h2>10. This website</h2>
+
+    <p>
+      The text, design and images on this website belong to us. You are welcome
+      to read, print and share the pages; please do not republish the content as
+      your own.
+    </p>
+
+    <p>
+      We keep this site accurate and up to date, but we do not guarantee that it
+      is always available or error-free.
+    </p>
+
+    <h2>11. Which law applies</h2>
+
+    <p>
+      <span class="todo">[[GOVERNING LAW AND JURISDICTION — never decided. Bangladesh is the obvious answer since that is where the business is, but it is a real commercial decision, not a formality: an international client may resist it, and it decides where a dispute would actually be heard. Do not let this default by accident. A lawyer should confirm it.]]</span>
+    </p>
+
+    <h2>12. Changes</h2>
+
+    <p>
+      We may update these terms. The version that applies to your project is the
+      one in force when we agreed it, and the date at the top of this page shows
+      when it last changed.
+    </p>
+
+    <p class="meta">
+      See also our <a href="/privacy/">privacy policy</a>.
+    </p>
+
+  </div>
+</main>
+
+<!-- SHARED:FOOTER — START ======================================================
+     GENERATED BLOCK. Edit it HERE, then run node tools/sync-shared.mjs.
+
+     SETTLED, THEREFORE PRINTED:
+       R16 — LOCATION. Masud, 2026-09-05, selected "Say it plainly — Dhaka,
+             Bangladesh." This kills the New York and Delaware addresses in
+             the research outright. No US address appears anywhere on this site.
+             ⚠️ Stating Dhaka is a fact about location. It is NOT a licence to
+             borrow Mango's positioning — instructions.md §2 stands: Mango
+             sells full-service marketing to Bangladeshi businesses; VEA sells
+             editing to price- and speed-sensitive international buyers.
+
+     NOT SETTLED, THEREFORE BRACKETED RATHER THAN GUESSED:
+       R14 — PHONE. RULINGS.md §4 records this RULED as +880 1336433711 on
+             2026-09-05 — and THE SAME ENTRY records that it has NOT been
+             dialled. RULINGS §2 C5: "settled by dialling it, not by reasoning
+             about it." The research set that supplies that number also
+             supplies Lorem ipsum, a job board's FAQ and a landscaping
+             company's copy. Mango's number is ONE DIGIT away at
+             +880 1336433710. Wrong here means wrong on ten pages at once.
+             → It goes in the moment Masud confirms it rings.
+
+       R15 — EMAIL. OPEN. hello@videoeditor.agency recurs across the research
+             and has never been verified as a live mailbox. The zone's MX
+             records point at a cPanel host, so a mailbox COULD exist — which
+             is not the same as one existing.
+
+     ⚠️ THESE ARE BRACKETS, NOT PLACEHOLDERS, AND THE DIFFERENCE IS THE POINT.
+        A bracket is loud by design (site.css §9) and cannot reach production
+        unnoticed. Every page carries noindex and nothing ships until T10.
+        A plausible-looking wrong phone number would be the same risk class as
+        a fabricated testimonial — THREAD-PLAN.md §5 T4 says so in terms.
+
+     ⚠️ CORRECTED BY T9, 2026-09-05. THIS LINE PREVIOUSLY READ "T8 fills this
+        block once R14 is dialled and R15 is answered." IT NAMED THE ONE
+        THREAD THAT IS NOT ALLOWED TO OPEN THIS FILE.
+
+        THREAD-PLAN.md §1 Rule 2: only T3 and T9 may touch
+        _template/page-template.html. T8 raised the same contradiction in its
+        own WORKLOG entry (contradiction #2) and correctly did not edit it.
+        T3 has now finished. **T9 owns this block until Masud says otherwise.**
+
+        Sources: this file's own footer comment versus THREAD-PLAN.md §1
+        Rule 2 and §4. Corrected here rather than argued, because leaving it
+        would eventually be obeyed — a stale instruction in a file is a trap,
+        not a note.
+
+     WHO FILLS THE TWO BRACKETS, AND WHEN:
+       R14 — the moment Masud confirms +880 1336433711 actually rings.
+             T3's reasoning for bracketing rather than printing it stands and
+             T9 does not overturn it: RULINGS §2 C5 says this one is settled
+             by dialling, not by reasoning.
+       R15 — the moment an email address is confirmed to receive mail.
+
+     Bring either answer to T9 (or to whoever holds this file at the time).
+     Do NOT hand-edit the footer inside a page file: sync-shared.mjs
+     overwrites it on the next run without warning.
+     ========================================================================= -->
+<footer class="site-footer section">
+  <div class="container">
+    <h2 class="visually-hidden">Site footer</h2>
+
+    <p>Video editing from Dhaka, Bangladesh — for creators, coaches and brands worldwide.</p>
+
+    <!-- ⚠️ ADDED BY T9, 2026-09-05, AND IT FIXES A REAL PROBLEM.
+         Before this, the four audience pages existed and NOTHING ON THE SITE
+         LINKED TO THEM. The header's "For" dropdown is unbuilt (see the note in
+         SHARED:HEADER) and no page threads cross-link. Four orphan pages: a
+         crawler reaching the site would never find them, and neither would a
+         visitor.
+
+         This is a plain <ul> of <a>s using nothing but the base link styles —
+         NO NEW CSS CLASS, because site.css is T3's file and T9 does not write
+         it. If T3 wants to style this list properly, the markup is here to
+         hang a class on.
+
+         ⚠️ NO BLOG LINK. R10, ruled 2026-09-05: "Drop it — out of nav, 301 to
+         home." Every research document's footer has one. It does not come back.
+         ⚠️ NO /portfolio/ LINK. The page does not exist. It joins this list the
+         day T5 ships, and so does the sitemap entry.
+         ⚠️ The seven links below are every page that exists except /404.html,
+         which is deliberately unlinked and permanently noindexed. -->
+    <nav aria-label="Footer">
+      <ul>
+        <li><a href="/services/">Services</a></li>
+        <li><a href="/pricing/">Pricing</a></li>
+        <li><a href="/coaches/">For Coaches &amp; Trainers</a></li>
+        <li><a href="/content-creators/">For Content Creators</a></li>
+        <li><a href="/business-owners/">For Business Owners</a></li>
+        <li><a href="/marketers-and-agencies/">For Marketers &amp; Agencies</a></li>
+        <li><a href="/about/">About</a></li>
+        <li><a href="/contact/">Contact</a></li>
+        <li><a href="/privacy/">Privacy policy</a></li>
+        <li><a href="/terms/" aria-current="page">Terms and conditions</a></li>
+      </ul>
+    </nav>
+
+    <p>
+      <span class="todo">[[R14 — phone +880 1336433711: RULED, NOT YET DIALLED]]</span>
+      <span class="todo">[[R15 — which email address does VEA publish?]]</span>
+    </p>
+
+    <p class="legal">© 2026 Video Editor Agency</p>
+  </div>
+</footer>
+<!-- SHARED:FOOTER — END ===================================================== -->
+
+</body>
+</html>

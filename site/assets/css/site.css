@@ -1,0 +1,501 @@
+/* ==========================================================================
+   videoeditor.agency — site stylesheet
+   Hand-written. No framework, no preprocessor, no build step.
+   What is in this file is what is served.
+
+   Governed by:
+     instructions.md §5              (binding design rules, zero-JS rules)
+     02-Decisions/SITE-MAP-v1.md §2  (nav)
+     02-Decisions/RULINGS.md         (R16 Dhaka, R22 flat slugs, R04 pricing)
+     THREAD-PLAN.md §5 T3            (this file is T3's, exclusively)
+
+   ⚠️ THIS FILE WAS REBUILT ON A DARK PALETTE ON 2026-09-05. See §0.
+      It no longer inherits Mango's light navy/orange system. Read §0 before
+      changing a single token.
+   ========================================================================== */
+
+
+/* --------------------------------------------------------------------------
+   0. THE RULING THIS FILE IMPLEMENTS, AND WHAT IT OVERRIDES
+
+   Masud, 2026-09-05, verbatim: "MZ Media style"
+   — chosen after being shown three costed options and the specific costs of
+   this one: a white logo would be needed, the heading font is commercial, and
+   the glow/motion that makes mzmedia.digital work cannot be built under the
+   zero-JS ruling.
+
+   ⚠️ THIS OVERRIDES instructions.md §3 RULING 3.
+      Ruling 3 (2026-09-03) said: "Reuse Mango's design system — same tokens,
+      same Roboto Slab 600 / Roboto pairing, same single radius, same
+      navy-primary / orange-accent rule."
+      The 2026-09-05 ruling replaces the palette, the type pairing and the
+      radius value. Sources named, not silently reconciled:
+        instructions.md §3 ruling 3   VERSUS   Masud 2026-09-05.
+      The later ruling governs. What SURVIVES from ruling 3 is the file's
+      STRUCTURE: one radius token, one accent, one type pairing, the space
+      scale, the container, the accessibility rules, and this commenting
+      discipline.
+
+   WHERE THE VALUES CAME FROM. Every hex below was READ FROM THE LIVE
+   mzmedia.digital STYLESHEET on 2026-09-05, from its own CSS custom
+   properties — not eyedropped from a screenshot and not remembered.
+     --primary-black  #090909     --primary-blue   #273FB7
+     --secondary-black #111111    --all-border     #ffffff0f
+     --navy-s-border  #31313c     --navy-blue-gradient #181929
+     body 14px / 1.6, headings white, h1 72px, h2 52px
+     control radius 3px, card radius 20-25px
+
+   TWO DELIBERATE DEVIATIONS, LABELLED SO THEY CAN BE REVERSED:
+     1. BODY TEXT IS 16px, NOT 14px, and sits at 72% white rather than 60%.
+        MZ Media sells to YC founders. VEA sells to coaches, business owners
+        and marketers across a wider age range. 14px at 60% measures 7.34:1 —
+        it passes AA, so this is a readability judgement, not a compliance
+        fix. Revert both lines if the tighter look is wanted.
+     2. ONE RADIUS TOKEN, NOT TWO. MZ Media runs 3px on controls and 20-25px
+        on cards. instructions.md §5 requires "one radius token" and that rule
+        survived the palette change. 3px is used throughout, because it is the
+        value on their interactive elements and it is the one a visitor
+        actually touches. Softer cards would need a second token and Masud's
+        ruling to break §5.
+   -------------------------------------------------------------------------- */
+
+
+/* --------------------------------------------------------------------------
+   1. TOKENS
+   -------------------------------------------------------------------------- */
+
+:root {
+
+  /* --- Radius ------------------------------------------------------------
+     ONE token. Change this single line and every corner on the site follows.
+     3px, measured from mzmedia.digital's control radius. See §0 deviation 2. */
+  --radius: 3px;
+
+
+  /* --- Colour ------------------------------------------------------------
+
+     DARK BASE. The page is near-black; white carries the text; the blue is a
+     FILL, never a text colour. Read the contrast block below before using it. */
+
+  --bg:        #090909;   /* page. MZ --primary-black */
+  --bg-raised: #111111;   /* cards, panels. MZ --secondary-black */
+  --bg-tint:   #181929;   /* the one navy-tinted surface. MZ --navy-blue-gradient */
+
+  --ink:       #FFFFFF;              /* headings, and any text that must lead */
+  --ink-body:  rgba(255,255,255,0.72); /* body copy. See §0 deviation 1 */
+  --ink-muted: rgba(255,255,255,0.50); /* captions, legal, metadata */
+
+  --rule:        rgba(255,255,255,0.09); /* hairlines. MZ --all-border */
+  --rule-strong: #31313C;                /* emphasised divider. MZ --navy-s-border */
+
+  --accent: #273FB7;   /* MZ --primary-blue */
+
+
+  /* ⚠️ CONTRAST — MEASURED 2026-09-05, NOT A STYLE PREFERENCE.
+
+     Against this page's #090909 background:
+       white on bg                21.0:1   PASS AAA
+       body white 72% on bg       10.3:1   PASS AAA
+       muted white 50% on bg       5.3:1   PASS AA
+       ACCENT #273FB7 ON bg        2.48:1  FAIL — fails even the 3:1 floor
+                                            for non-text UI
+
+     Against the accent itself:
+       white on #273FB7            8.46:1  PASS AAA
+
+     THE RULE THAT FOLLOWS, AND IT IS BINDING:
+       ✅ The accent is a FILL. A blue button with a WHITE label is 8.46:1
+          and is correct.
+       ❌ The accent is NEVER text on the dark background. Not a link, not a
+          label, not a number, not a heading.
+       ❌ The accent is NEVER a hairline border or a thin rule on the dark
+          background. At 2.48:1 it is below the 3:1 floor for UI components,
+          so it would not be reliably visible.
+       This is stricter than the brief anticipated. The brief allowed a
+       failing accent on "borders". On THIS background it fails so far below
+       the floor that a border does not qualify. Measured, then ruled. */
+
+
+  /* --- Type --------------------------------------------------------------
+
+     ⚠️ MZ Media's pairing is Sherika (headings) + InterDisplay (body).
+
+     InterDisplay is Inter Display — Rasmus Andersson's Inter family, SIL Open
+     Font License. Free. It is loaded below as "Inter" from Google Fonts.
+
+     SHERIKA IS NOT SHIPPED AND CANNOT BE UNTIL IT IS LICENSED. It is served
+     from mzmedia.digital as a self-hosted Sherika-Regular.otf. It is not a
+     Google font. Using it requires buying a webfont licence, and this project
+     does not have one. Until then Inter carries BOTH roles — which is honest,
+     free, and still the closer half of their pairing.
+     → [[R28 — SHERIKA LICENCE. Masud: buy a Sherika webfont licence, or name
+          a free display face for headings? Until answered, headings are Inter.]]
+
+     instructions.md §5 rule: nothing is loaded that renders nowhere. Inter is
+     the only family in the <head> and it is the only family used here. */
+  --font-heading: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-body:    "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --weight-heading: 600;
+  --weight-body:    400;
+  --weight-bold:    600;
+
+  /* Scale anchored on MZ's measured h1 72px / h2 52px, stepped down for the
+     smaller sizes and clamped so it does not overflow a phone. */
+  --step--1: 0.875rem;
+  --step-0:  1rem;
+  --step-1:  1.125rem;
+  --step-2:  1.5rem;
+  --step-3:  clamp(2rem, 5vw, 3.25rem);
+  --step-4:  clamp(2.5rem, 7vw, 4.5rem);
+
+
+  /* --- Space -------------------------------------------------------------- */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 1rem;
+  --space-4: 1.5rem;
+  --space-5: 2rem;
+  --space-6: 3rem;
+  --space-7: 4rem;
+  --space-8: 7.5rem;   /* MZ --section-padding 120px */
+
+  --measure:   68ch;
+  --container: 72rem;
+}
+
+
+/* --------------------------------------------------------------------------
+   2. BASE
+   -------------------------------------------------------------------------- */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+  background: var(--bg);
+  color-scheme: dark;
+}
+
+/* Nothing on this site animates today. This is here so that stays true for
+   users who ask for reduced motion once something eventually does. */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink-body);
+  font-family: var(--font-body);
+  font-weight: var(--weight-body);
+  font-size: var(--step-0);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+
+  /* Footer sits at the bottom on short pages. Flexbox, not JS. */
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-heading);
+  font-weight: var(--weight-heading);
+  color: var(--ink);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin: 0 0 var(--space-3);
+  text-wrap: balance;
+}
+
+h1 { font-size: var(--step-4); }
+h2 { font-size: var(--step-3); }
+h3 { font-size: var(--step-2); letter-spacing: -0.01em; }
+h4 { font-size: var(--step-1); letter-spacing: 0; }
+
+p { margin: 0 0 var(--space-3); max-width: var(--measure); }
+
+/* Links are WHITE and underlined — never the accent. At 2.48:1 the accent is
+   unreadable as text on this background. The underline carries the affordance,
+   which is also what makes it work for colour-blind readers. */
+a {
+  color: var(--ink);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+}
+a:hover { text-decoration-thickness: 2px; }
+
+/* Visible keyboard focus. Non-negotiable on a site with no JS to fall back on.
+   ⚠️ The ring is WHITE, not the accent. On Mango's light palette the orange
+   ring was the most visible thing in the palette; on #090909 the blue measures
+   2.48:1 and would be a nearly invisible focus indicator. White is 21:1. */
+:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 3px;
+  border-radius: var(--radius);
+}
+
+/* The ONE radius token, applied to image containers as the rules require. */
+img {
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--radius);
+}
+
+/* Screen-reader-only. Used for the footer heading, which the document outline
+   needs but which must not compete with the page's single real <h1>. */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+
+/* --------------------------------------------------------------------------
+   3. LAYOUT
+   -------------------------------------------------------------------------- */
+
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: var(--space-4);
+}
+
+.site-main {
+  flex: 1 0 auto;
+  padding-block: var(--space-7);
+}
+
+/* MZ Media runs 120px section padding. Halved below 48rem so a phone does not
+   scroll through empty space. */
+.section { padding-block: var(--space-6); }
+
+@media (min-width: 48rem) {
+  .section { padding-block: var(--space-8); }
+}
+
+
+/* --------------------------------------------------------------------------
+   4. SKIP LINK
+   -------------------------------------------------------------------------- */
+
+.skip-link {
+  position: absolute;
+  left: var(--space-3);
+  top: var(--space-3);
+  z-index: 100;
+  padding: var(--space-2) var(--space-3);
+  background: var(--ink);
+  color: var(--bg);
+  border-radius: var(--radius);
+  text-decoration: none;
+  transform: translateY(-200%);
+}
+
+.skip-link:focus { transform: translateY(0); }
+
+
+/* --------------------------------------------------------------------------
+   5. HEADER AND NAV
+
+   Six top-level items, per 02-Decisions/SITE-MAP-v1.md §2:
+   Services · For ▾ · Portfolio · Pricing · About · Contact
+
+   NO PAGE EXISTS YET, so every item renders as unlinked muted text.
+   instructions.md §5 requires that "every nav link resolves to a live page,
+   no exceptions" — a link to a page that does not exist breaks that rule;
+   unlinked text does not. Promote each to a real <a> as its thread ships it.
+
+   The "For" dropdown is deliberately NOT built. An empty menu is worse than no
+   menu. It lands with T7 and its four child pages, on CSS :hover /
+   :focus-within for desktop and native <details> for mobile. Single level only.
+   A multi-level flyout is banned.
+
+   ⚠️ URLS ARE FLAT — /coaches/, /content-creators/, /business-owners/,
+      /marketers-and-agencies/. That is R22, ruled 2026-09-03.
+      SITE-MAP-v1.md §1's table still says /for/… and IS STALE.
+   -------------------------------------------------------------------------- */
+
+.site-header {
+  border-bottom: 1px solid var(--rule);
+  padding-block: var(--space-4);
+}
+
+.site-header__inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+
+/* ⚠️ The wordmark is TEXT, not the logo image, and that is deliberate.
+   VEA's logo measures #1C2448 — a dark navy, read from the live logo.svg on
+   2026-09-05. On a #090909 page it is very nearly invisible. A white logo file
+   does not exist yet.
+   → [[R29 — WHITE LOGO. Masud: a white/reversed version of the VEA logo is
+        required before any logo image can appear on a dark page. Until it
+        exists the header is set in type.]] */
+.wordmark {
+  font-family: var(--font-heading);
+  font-weight: var(--weight-heading);
+  font-size: var(--step-1);
+  letter-spacing: -0.02em;
+  text-decoration: none;
+  color: var(--ink);
+}
+
+.nav ul {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-4);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: var(--step--1);
+}
+
+.nav a { text-decoration: none; color: var(--ink-body); }
+.nav a:hover,
+.nav a[aria-current="page"] { color: var(--ink); text-decoration: underline; }
+
+/* Sections that do not have a page yet. Muted, so the state reads as
+   deliberate rather than as a broken link. */
+.nav__pending {
+  color: var(--ink-muted);
+  cursor: default;
+}
+
+
+/* --------------------------------------------------------------------------
+   6. BUTTONS
+
+   The ONLY correct use of the accent. Blue fill, white label, 8.46:1.
+   ⚠️ Never invert this into blue text on the dark background — 2.48:1.
+   -------------------------------------------------------------------------- */
+
+.btn {
+  display: inline-block;
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+  font-family: var(--font-body);
+  font-size: var(--step-0);
+  font-weight: var(--weight-bold);
+  line-height: 1;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.btn--primary {
+  background: var(--accent);
+  color: #FFFFFF;
+}
+
+.btn--primary:hover { background: #2F4CD8; }
+
+/* Secondary sits on the page itself. Its border is WHITE at low alpha, not
+   the accent — see the contrast block in §1. */
+.btn--secondary {
+  background: transparent;
+  color: var(--ink);
+  border-color: var(--rule-strong);
+}
+
+.btn--secondary:hover { background: var(--bg-raised); }
+
+
+/* --------------------------------------------------------------------------
+   7. FOOTER
+   -------------------------------------------------------------------------- */
+
+.site-footer {
+  flex-shrink: 0;
+  border-top: 1px solid var(--rule);
+  font-size: var(--step--1);
+}
+
+/* The footer already carries .section for its vertical rhythm. This trims the
+   120px back to something proportionate for a footer rather than a hero. */
+.site-footer.section { padding-block: var(--space-6); }
+
+.site-footer p { margin-bottom: var(--space-2); }
+
+.legal {
+  color: var(--ink-muted);
+  margin: var(--space-4) 0 0;
+}
+
+
+/* --------------------------------------------------------------------------
+   8. SURFACES
+   -------------------------------------------------------------------------- */
+
+.card {
+  background: var(--bg-raised);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  padding: var(--space-4);
+}
+
+/* The one navy-tinted surface, for a section that needs to separate itself
+   from the page without becoming a second background colour. */
+.panel--tint { background: var(--bg-tint); }
+
+
+/* --------------------------------------------------------------------------
+   9. PORTFOLIO VIDEO — the pattern, reserved
+
+   THREAD-PLAN.md §6 rules that a portfolio item is a downloaded thumbnail
+   inside a native <details>, with the YouTube iframe in the closed panel.
+
+   Why: a closed <details> NEVER LOADS ITS CONTENTS. Nothing is fetched from
+   YouTube, and no tracking cookie is set, until the visitor clicks. That is
+   zero-JS, zero-cookie, and it still plays on-site.
+
+   ⚠️ Thumbnails are DOWNLOADED into /assets/img/portfolio/, never hotlinked.
+
+   ⚠️ NEW PROBLEM CREATED BY THE DARK PALETTE — T5 MUST READ THIS.
+      04-Assets/portfolio/ holds 62 downloaded YouTube thumbnails. Most YouTube
+      stills are bright. On a #090909 page a grid of them glares, and any
+      thumbnail with a white background will look like a hole cut in the page.
+      This did not matter on the light palette. It matters now. The likely fix
+      is a 1px --rule border and a slight dim on rest state. T5 owns it; T3 is
+      flagging it, not solving it.
+
+   T5 writes the real rules. This note reserves the decision so nobody
+   reintroduces a bare iframe grid.
+   -------------------------------------------------------------------------- */
+
+
+/* --------------------------------------------------------------------------
+   10. UNFILLED BRACKETS
+
+   A [[bracket]] is a fact Masud has not supplied yet. Deliberately
+   conspicuous, so one cannot reach production unnoticed. Delete this rule once
+   no page contains a bracket.
+   -------------------------------------------------------------------------- */
+
+.todo {
+  display: inline-block;
+  background: #3A2E00;
+  border: 1px dashed #C8A400;
+  border-radius: var(--radius);
+  padding: 0.1em 0.45em;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.9em;
+  color: #FFD84D;
+}

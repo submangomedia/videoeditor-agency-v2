@@ -1,0 +1,2143 @@
+# WORKLOG — Video Editor Agency
+
+**Newest at top.** Cowork memory does not sync between the desktop and the laptop.
+This file is the only handoff. If it is not written here, the other machine does not
+know it happened.
+
+Format: **Done / Decisions / Open / Blocked**.
+
+---
+
+## 2026-09-05 — ✅ **R26b EXECUTED — videoeditor.agency IS DARK**
+
+**Masud performed it himself in Cloudflare, 2026-09-05.** Verified on screen and
+then verified again in DNS.
+
+R26b was ruled **2026-09-03** — *"Now — take it down today"*. It ran **three days
+late**, and both T6 and T9 flagged the delay in the interim. **It is now done and
+that thread of risk is closed.**
+
+### What was done
+
+`mangomedia-videoeditor` → **Custom domains** → removed **`videoeditor.agency`**
+and **`www.videoeditor.agency`**. The project's Custom domains table is now empty
+and shows the "Add a custom domain" empty state.
+
+**The Pages project and the old repo were NOT deleted** — only the domains were
+detached. That is `RULINGS.md` §6.3 step 1 exactly, and it is the reversible form
+of the ruling. Re-adding the two domains restores the old site.
+
+### What is now off the public internet
+
+The `$6.99 / $12.99 / $15.99` **web-hosting** pricing block · six **Lorem ipsum**
+FAQ answers · `Clients 0 +` and `Videos edited 0 K` · **"100+ Client Servered"**
+*(sic)* · the **Premium Addons PRO** plugin's own advertising copy · the
+**construction company's footer** with its Delaware address and `+2 237 467 134-98`
+phone · the **landscaping company's `/portfolio/`** with its three fabricated
+Wpmet testimonials.
+
+### ⚠️ EMAIL WAS CHECKED, NOT ASSUMED
+
+Chrome reported `DNS_PROBE_FINISHED_NXDOMAIN`, which reads as "the whole domain is
+gone" and would be alarming on a domain carrying live mail. **It is not what
+happened.** Queried against Google Public DNS, 2026-09-05:
+
+| Query | Result |
+|---|---|
+| **MX** | **Status 0 (NOERROR) — all three records intact:** `5 mx1-hosting.jellyfish.systems` · `10 mx2-hosting.jellyfish.systems` · `20 mx3-hosting.jellyfish.systems` |
+| **A** | Status 0 with **no answer** and an SOA in Authority — i.e. **NODATA**, not NXDOMAIN. The name exists; the A record is gone |
+| **Authority** | `coen.ns.cloudflare.com` — the zone is still in Masud's own Cloudflare account |
+
+**Removing a Pages custom domain removed only that hostname's proxied record. It
+did not touch the MX records, and email for the domain is unaffected.** Chrome's
+"NXDOMAIN" label is imprecise — the correct term is NODATA — but the visible result
+is the same: nothing serves.
+
+**This was worth checking rather than reasoning about.** `RULINGS.md` §6.3 carries
+an explicit warning not to touch the zone because of live mail, and "the removal
+probably didn't affect MX" is not the same as knowing.
+
+### Open / changed
+
+- **`RULINGS.md` R26b should be marked EXECUTED with today's date.** T1 owns that
+  file; this entry is the trace.
+- **Steps 2–5 of §6.3 remain**: clone the v2 repo *outside* Drive, push, then add
+  the custom domains to `videoeditor-agency-v2` at launch, and only then delete the
+  old repo and Pages project.
+- **The staging gate is now the only thing serving anything.** Everything lands on
+  `videoeditor-agency-v2.pages.dev` and no custom domain points anywhere.
+- ⚠️ **The rebuild is now the only route to a live videoeditor.agency.** There is
+  no fallback site while it is down. That is the accepted cost of R26b, ruled with
+  the cost stated — not a new risk.
+
+---
+
+## 2026-09-05 — T5 · **`/portfolio/` SHIPS — the last of the ten pages**
+
+### Done
+
+- **`site\portfolio\index.html`** — 57 items in 14 industries, 65 stills, one `<h1>`,
+  zero `<script>`, zero `<iframe>`, zero cookies.
+- **`site\tools\build-portfolio.mjs`** — generates the grid in place between
+  `PORTFOLIO:GRID` markers. Same contract as `sync-shared.mjs`: not a build step,
+  Cloudflare never runs it, build command stays empty, and the page is valid HTML
+  before and after. `--check` reports drift and exits 1. Verified by actually
+  running it: builds, is idempotent, and detects a hand-edit.
+- ✅ **This unblocks `_redirects`.** That file's own §1 warns: *"60 of the 61 rows
+  below point at `/portfolio/`. AS OF 2026-09-05 THAT PAGE DOES NOT EXIST… a 301 to
+  a URL that 404s is WORSE than no redirect… `/portfolio/` IS A HARD PRECONDITION
+  OF CUTOVER."* It exists now. **All ten launch pages exist.**
+
+### ⚠️ THE PAGE SHIPS WITHOUT PLAYERS, AND THAT IS THE R07 PROBLEM, NOT AN OMISSION
+
+`THREAD-PLAN.md` §6 rules an item is a still inside a native `<details>` with the
+iframe in the closed panel. That pattern is right and it is **built** — behind
+`PLAYERS` in `build-portfolio.mjs`. It is **off**, and it cannot go on yet:
+
+`Portfolio-Catalogue.md` finding 6 read the real YouTube titles —
+`Podcast-Editing-Jay Macallister-Best Software-…`, `KIDS SHORT-Editing-Baby
+Billion-…`. **The embedded player displays the video's own title.** An unnamed card
+that opens a player naming the client has protected nothing, and **R07 is OPEN**.
+Linking out instead does not help: YouTube shows the same title.
+
+**So today the portfolio is 65 stills you cannot play.** That is a weaker page than
+it should be, and it is the honest version. **Two ways out, both Masud's:**
+
+1. **Rename the videos on YouTube** to drop client names. Costs an afternoon; the
+   titles are keyword-stuffed rather than useful as they stand.
+2. **Rule R07** — the nineteen names in `Portfolio-Catalogue.md` §7.1, one yes or
+   no each.
+
+Either one, then set `PLAYERS = true` and re-run. One line.
+
+### Decisions T5 made, and the reasoning, so they can be reversed
+
+| # | Decision | Why |
+|---|---|---|
+| 1 | **57 items, not 61** | The four source-B items are held back. `Portfolio-Catalogue.md` §5b: no confirmed client, industry tags "provisional… must not become filters on a public page", and for two of them **the only available title IS a company name** — "Clothera Sourcing Limited", "Purrly cat food". Publishing those publishes a company name nobody has permission for. Held, not deleted: `INCLUDE_UNCONFIRMED` |
+| 2 | **Multi-column CSS, not a uniform grid** | `THREAD-PLAN.md` §6 and the source audit both specify a "vertical-first 9:16 card". **That is wrong for 27 of the 57.** Finding 2 measured 27 at 4:5, 26 at 9:16, 3 at 1012×1920, 5 at 16:9. A 9:16 cell crops a 4:5 still by 25%; a 4:5 cell letterboxes a 9:16 one. Columns give every still its true ratio, no crop, no letterbox, no JS. **Cost:** flow is column-major, so visual order down a column is not source order across it |
+| 3 | **Anchor sections by INDUSTRY only** | `SITE-MAP-v1.md` §3 recommends anchor sections and is right that it is the only honestly zero-JS, shareable option. But **it does not acknowledge that the taxonomy has two axes.** Sections can group by one. Format is shown as a tag on every card and is **not** filterable — stated on the page rather than faked |
+| 4 | **Sections ordered by size, then alphabetically** | Eight industries genuinely have one item each. Padding that would be the disease this project exists to avoid |
+| 5 | **Four card titles neutralised** | `LVRGAl` → "Podcast clip" (may be a brand); `MPAC announcement` → "Podcast clip — announcement" (unidentifiable acronym); `Podcast short — Jaymini` → "guest episode"; and the **seven guest-named podcast intros** → "Podcast intro (1 of 7)"… **The guest is a real named person and is not the client, so no consent covers them either way** |
+| 6 | **`--assets` copies the stills in** | The 61 files live in `04-Assets\portfolio\`, which is outside `site\` and is therefore **never served**. Nobody owned `site\assets\img\portfolio\`. T3's `site.css` §9 names that path, so T5 followed it |
+
+### ⚠️ Contradictions found — named, not silently resolved
+
+**1. The Sheet versus the catalogue.** `THREAD-PLAN.md` §6: *"build-portfolio.mjs
+reads a CSV export of the Sheet… The Sheet becomes the source of truth."*
+`Portfolio-Catalogue.md` §1 supersedes the sheet for portfolio data. **Both cannot
+hold.** A script reading today's Sheet would put **KUPKE (hypnotherapy) and TheRavio
+(posture content) back under "Doctors and Medical"** — which finding 5 calls a claim
+risk, not a tidy-up — **onto a public page.** The data is transcribed from the
+catalogue instead.
+*(Inference, T5, reversible:* the Sheet path is worth keeping — it is this project's
+only answer to *"how does a non-coder update a static site."* **The fix is to correct
+the Sheet from the catalogue, not to abandon the pattern.** → Masud rules.*)*
+
+**2. T5 is told to write CSS into a file T5 may not open.** `site.css` §9: *"T5
+writes the real rules."* `THREAD-PLAN.md` §4 gives `site\assets\css\*` to T3
+**exclusively**, and §1 Rule 1 says a thread that needs a change to a file it does
+not own writes the request and does not edit. T5 owns **no** CSS file.
+**Resolution: a page-scoped `<style>` in the one file T5 owns.** No new colour, no
+second radius — every value is a site.css token.
+→ **REQUEST TO T3: move that block into `site.css` §9.** It is not page-specific —
+**T4's homepage needs the same grid for its eight featured items**, and a second
+copy is how two grids drift apart.
+
+**3. T3's glare warning is answered.** `site.css` §9: *"On a #090909 page a grid of
+[bright YouTube stills] glares… T5 owns it."* Fixed with the raised card surface, a
+1px `--rule` hairline, and stills at 0.88 opacity until hover or focus. No new token.
+*(§9 also says 62 thumbnails; there are 61 — SL 13 is dead and has none.)*
+
+### Requests to threads that own files T5 does not
+
+- **T9 — `/portfolio/` is no longer pending.** The nav still renders it as
+  `<span class="nav__pending">Portfolio</span>`, with a comment reading *"Still text
+  because /portfolio/ genuinely does not exist."* **It exists.** Promote it, and add
+  it to the footer link list and to `sitemap.xml` — the footer comment already says
+  it joins *"the day T5 ships."*
+- **T9b — the anchor re-pointing you flagged, answered precisely.** `_redirects` §1
+  asks whether the 32 slugs can be re-pointed at real anchors. **Only the 9 industry
+  slugs can; the 23 format slugs cannot,** because format filtering does not exist
+  (decision 3). Of the 9: `real-estate-videos` → `#real-estate`,
+  `medical-healthcare-videos` → `#healthcare-and-medical`, `finance-business` →
+  `#finance-and-investment`, `tech-product-demos` → `#saas-and-technology`,
+  `education-e-learning` → `#education-and-coaching`, `fitness-wellness` →
+  `#fitness-and-wellness`, `food-cooking` → `#food-and-restaurant`. **Seven of nine.**
+  `beauty-fashion-lifestyle` and `travel-videos` have no items, so no section.
+  Of the 12 `/business-cat/` terms, **seven** map to a real anchor; the other five
+  have no items and degrade safely to the top of the page.
+- **T9 — `<head>`.** This page is the **first with artwork**, so `og:image` is now
+  possible. It still needs a deliberate choice of which still and a 1200×630 crop
+  that does not letterbox a 9:16 image. Not added.
+
+### Open
+
+- **R07 — the nineteen names.** Blocks the players, and blocks any card carrying a
+  client name. **This is the single thing that most improves the page.**
+- **`Portfolio-Catalogue.md` §4c — two missing taxonomy rows.** "Manufacturing &
+  Industrial" in the 28-list and "Showreel / Compilation" in the 14-list. **27 of
+  the 57 items are compilation showreels and no format describes one.** The
+  Caliber8 item is filed under Education & Coaching **knowingly and wrongly**, on
+  the catalogue's own interim instruction. A `[[bracket]]` is on the page.
+- **The four source-B items** — confirm or delete, per catalogue §8 item 7.
+- **Alt text is accurate but not content-descriptive.** Every still reads
+  `alt="Video still — {title}"`. **T5 cannot see the images** — the sandbox has no
+  route to them — so describing what is actually in each frame needs a sighted pass.
+  Stated rather than faked, per `instructions.md` §5 rule 5.
+
+### Blocked
+
+- Nothing blocks T5 further. The page is complete for what is currently rulable.
+
+### For Masud — the push
+
+1. **`node tools/build-portfolio.mjs --assets`** from inside `site\`. **Run this
+   first and run it once** — it copies the 57 stills into `site\assets\img\portfolio\`.
+   Until it runs, the page renders 65 broken images.
+2. `node tools/sync-shared.mjs` then `--check` — must print **"No drift"**.
+3. `node tools/build-portfolio.mjs --check` — must print **"No change"**.
+4. Commit and push. Cloudflare rebuilds `videoeditor-agency-v2.pages.dev` in about
+   a minute. Nothing reaches `videoeditor.agency` — no custom domain is attached.
+
+**What is next:** all ten pages now exist, so **T10 is the remaining thread** —
+full QA sweep, redirect verification, `noindex` off page by page, and the cutover.
+**Before T10: answer R07 or rename the YouTube titles**, or the site launches with a
+portfolio nobody can play.
+
+---
+
+## 2026-09-05 — T10 · **LAUNCH GATE BUILT · CUTOVER IS BLOCKED ON NINE ITEMS**
+
+### Done
+
+- **`DEPLOYMENT-RUNBOOK.md` rewritten end to end.** T10's only output and the
+  only file it touched. It now carries the real infrastructure names, the launch
+  gate, the page-by-page `noindex` checklist, the cutover sequence and the
+  rollback — **written before the switch, which is what T10's brief asks for.**
+- **Full QA sweep of all fourteen HTML files in `site\`.** Results in §4 of the
+  runbook. **The build is clean on every rule that can be checked without running
+  node** — and that is worth saying plainly, because the blockers below are not
+  sloppiness. They are facts nobody has supplied and one script nobody can run.
+
+| Check | Result |
+|---|---|
+| Exactly one real `<h1>` per page | ✅ 14/14 |
+| No `<script>`, `<iframe>`, `onclick`, `javascript:`, `href="#"` | ✅ **zero occurrences in `site\`** |
+| Every internal link resolves to a file that exists | ✅ **93 links, 0 broken** |
+| `noindex` present | ✅ 13 pages + template |
+| `canonical` | ✅ 12 pages · correctly absent on `404.html` |
+| One font family | ✅ **Inter only, 14/14 — the Roboto bug is dead** |
+| Images with alt text | ✅ 65/65 |
+| R05 numbers static, not JS | ✅ `100+` / `10,000+` as plain text |
+
+- ✅ **REDIRECTS VERIFIED. All 61 rows resolve.** The blocker T9b wrote into four
+  places — *"60 of the 61 rows point at `/portfolio/`, which does not exist"* — is
+  **cleared. T5 has shipped `site\portfolio\index.html` and `tools\build-portfolio.mjs`.**
+  Section order is correct, every explicit row sits above its wildcard, and the
+  four audience slugs correctly take no redirect (R22).
+
+### ⚠️ CORRECTION, WRITTEN RATHER THAN QUIETLY EDITED — T5 RAN DURING THIS SESSION
+
+**An earlier draft of this entry said "T5 shipped and wrote no WORKLOG entry."
+That was wrong and it is corrected here rather than deleted**, because
+`RULINGS.md` R03 records that a corrected claim leaving no trace is how the
+Astro error survived a month.
+
+What happened: T10 read `WORKLOG.md` at the start of the session, found
+`site\portfolio\index.html` and `tools\build-portfolio.mjs` on disk with no
+matching entry, and concluded the entry had been lost. **T5's entry then
+appeared above this one while T10 was writing.** The edit tool reported the file
+had changed on disk mid-write. **T5 was running at the same time as T10.**
+
+**Nothing was lost. Rule 3 was broken again.** `THREAD-PLAN.md` §1 Rule 3 — one
+thread at a time — has now visibly failed in two consecutive sessions; T9b
+documented the same thing one entry down and predicted this file would be the
+most exposed to it. The cost this time was T10 spending a pass reconstructing
+T5's state from the HTML, and **writing a false statement into the project's
+only handoff file.** → **Masud: close the other threads before opening the next.**
+
+⚠️ **T5's entry also corrects blocker 1 below** — the fix is a script T5 wrote,
+not the manual copy T10 first proposed. See the note inside it.
+
+### ⛔ NINE ITEMS BLOCK CUTOVER. Two of them would each, alone, ruin launch day.
+
+Full detail in `DEPLOYMENT-RUNBOOK.md` §6.
+
+**1. ⛔ THE 57 PORTFOLIO IMAGES ARE NOT IN `site\`.**
+`site\assets\` contains **one file: `css\site.css`.** There is no
+`site\assets\img\portfolio\`. `/portfolio/` references **57 distinct images**
+(65 `<img>` tags, 8 repeated) at `/assets/img/portfolio/<id>.jpg`.
+**All 57 exist — in `04-Assets\portfolio\`, which is outside `site\` and
+therefore is not served.** Every filename was checked against that folder; all
+57 present, 5 of the 62 downloaded unused.
+**Effect: the portfolio page renders 57 broken images, and 60 of the 61
+redirects land on it.**
+
+⚠️ **CORRECTED against T5's entry, which landed mid-session.** T10 first wrote
+that the fix was a manual copy of `04-Assets\portfolio\*.jpg` into
+`site\assets\img\portfolio\`. **T5 built the copy into its own script.** The
+correct fix is:
+
+```
+node tools\build-portfolio.mjs --assets     (from inside site\, run FIRST, once)
+```
+
+T5's decision 6 records the same finding independently — *"the 61 files live in
+`04-Assets\portfolio\`, which is outside `site\` and is therefore never
+served"* — and it names the same ownership gap: nobody owns
+`site\assets\img\portfolio\`, so T5 followed the path `site.css` §9 already
+names. **Two threads found this separately and agree.** It is real, and it is
+one command.
+
+**Masud runs it.** The sandbox has no route into Drive and the file tools cannot
+copy binaries.
+
+**2. ⛔ THE SITE IS UNNAVIGABLE. `sync-shared.mjs` has still never been run.**
+Counted `nav__pending` (an unlinked muted span) per file:
+
+| File | Count | Meaning |
+|---|---|---|
+| `_template\page-template.html` | **2** | T9's promoted nav — four real links |
+| `portfolio\index.html` | **2** | T5 built from the current template |
+| **every other page — 12 files** | **6** | **the whole nav is dead text** |
+
+**On the homepage, About, Contact, Services, Pricing, both legal pages, the 404
+and all four audience pages, a visitor cannot reach any other page from the
+header.** T9's footer link list is in the template and in **one** page, so on
+thirteen pages there is no footer route either.
+**One command repairs twelve pages.** It is the highest-value action left in the
+project, and only Masud can run it. Read the diff — fourteen files change at
+once and no thread has ever seen this script's output.
+
+**3. ⛔ 65 visible `[[brackets]]` across 15 files.** Worst: `/services/` 10,
+`/pricing/` 8, `/terms/` 8, `/contact/` 6, `/privacy/` 6.
+⛔ **Two are on EVERY page, in the shared footer — and one of them is stale.**
+`[[R15 — which email address does VEA publish?]]` **R15 WAS RULED 2026-09-05.**
+`/contact/` publishes `videoeditoragency.hello@gmail.com` correctly today; the
+footer still asks the question. **One line in `_template\page-template.html`
+plus a resync clears a bracket from fourteen pages.** → **T3 or T9.** T10 did
+not open that file.
+
+**4. ⛔ R14 — the number has still not been dialled.** Phone and WhatsApp are
+brackets on `/contact/` and in every footer. **With R13 ruling no form, exactly
+one of the site's three intended inbound routes works.** Ten seconds.
+
+**5. ⛔ `/terms/`** — payment terms, cancellation and refunds, limitation of
+liability, governing law. **None has ever been written down anywhere in this
+project.** Plus the registered address. `/privacy/` needs the address, a real
+retention answer, and it must name the `fonts.googleapis.com` request. **Both
+are unreviewed drafts and both are already in `sitemap.xml`.**
+
+**6. ⛔ `/pricing/`** — Motion Graphics has no rate; five brackets remain.
+
+**7. `sitemap.xml` lists eleven URLs. There are twelve live pages.**
+`/portfolio/` is missing, and the file's own comment explains its absence by
+saying the page does not exist. → **T9.**
+
+**8. The template's nav still calls `/portfolio/` a page that does not exist**
+(line 190). Fix it **before** the resync in item 2, so both land in one pass.
+→ **T3 or T9.**
+
+**9. `[[R30 — full registered address]]`** blocks `/privacy/` §1 and `/terms/`
+§1. **`[[WHITE-LABEL]]`** is still visible on `/marketers-and-agencies/`.
+
+### Decisions — T10's, labelled, none attributed to Masud
+
+- **T10 has taken the `noindex` lift.** `THREAD-PLAN.md` §4 gives it to T9 and
+  §5 gives it to T10; `robots.txt` calls the split an inference and asks for a
+  written ruling. **T10 took it because it is a cutover action, not an SEO one.**
+  Recorded as T10's reading, not as a ruling. Whoever owns `THREAD-PLAN.md`
+  settles it.
+- **Q-BASE is closed as unobtainable, not left open.** The old runbook asked for
+  a pre-cutover traffic baseline. **R02 declined the Search Console export and
+  R26b takes the site dark.** There is no baseline and there never will be.
+  Better recorded as an accepted cost than carried as a question nobody can
+  answer.
+- **30 days before deleting the old repo and Pages project** — **an inference,
+  reversible on sight.** It is bracketed in the runbook as `[[HOW LONG? — Masud]]`
+  and T10 will not put a number in his name. **The rollback only works while
+  those two artefacts exist.**
+
+### ⚠️ The runbook was wrong about the repo, and the project still is
+
+`DEPLOYMENT-RUNBOOK.md` §2 said **"the GitHub repo MUST BE PRIVATE"** and called
+the build output directory *"the only thing keeping the research private."*
+**Both are void. R01 ruled the repo PUBLIC** — Masud, 2026-09-03, *"Public, all
+of it — I understand"*, chosen against an option that spelled out the
+consequence. `videoeditor-agency-v2` **is public and that is correct.**
+
+⚠️ **`instructions.md` §7 and `COWORK-PROJECT-INSTRUCTIONS.md` both still say
+private.** Sources: `RULINGS.md` R01 versus `instructions.md` §7 versus the
+Cowork field. **T10 corrected its own file only.** A thread reading either of
+the other two today gets a wrong answer about the one setting the project has
+spent the most words on.
+
+### ⚠️ R26b was ruled 2026-09-03 and is now four threads overdue
+
+*"Now — take it down today."* T1, T6, T9 and now T10 have each recorded the old
+site still live. **It is also a hard precondition of cutover, not just a
+ruling** — Cloudflare will not attach `videoeditor.agency` to two Pages projects,
+so the domain must leave `mangomedia-videoeditor` before it can join
+`videoeditor-agency-v2`.
+
+**Two clicks, reversible:** Cloudflare → Workers & Pages → `mangomedia-videoeditor`
+→ Custom domains → remove both. **Do not delete the project — it is the
+rollback.**
+
+### Open
+
+- ⚠️ **R07 — and T10 agrees with T5 that this is the last real content decision.**
+  T5's entry: the portfolio ships as **57 stills nobody can play**, because every
+  video's YouTube title carries the client's name and the embedded player
+  displays it. **T10 does not call this a launch blocker** — the page is honest,
+  complete and better than what is live today — **but it is the difference
+  between a portfolio and a contact sheet, and it is one of two cheap actions:**
+  rename the YouTube titles, or rule R07's nineteen names. Then `PLAYERS = true`
+  and re-run. **Masud's, and worth doing before cutover rather than after.**
+- **Q-KEEP** — how long the old artefacts stay before deletion.
+- **Q-GIT** — `RULINGS.md` §6.3 warns that a git repo inside a syncing Google
+  Drive folder is a known source of corruption and recommends cloning outside
+  Drive. **Unruled, and it is a workflow decision.**
+- **Q-LAUNCH / R20** — target launch date, still open.
+- **No Open Graph tags anywhere.** A link shared to WhatsApp or LinkedIn shows
+  no card. Not an `instructions.md` §5 rule; worth one pass after launch.
+- **`.section` is overridden in five page-scoped `<style>` blocks** —
+  `index.html` and the four audience pages — so the footer gets spacing on those
+  five that the other nine do not. `/services/` and `/pricing/` are already
+  clean. **Visual inconsistency, not a break.** → **T3.**
+
+### Blocked
+
+- ⛔ **`node tools\sync-shared.mjs` and `--check` STILL NOT RUN BY ANY THREAD.**
+  T3, T4, T6, T7, T8, T9 and now T10 have each recorded this. **T10 measured what
+  it costs: twelve pages with a dead nav.** The bash sandbox has no route into
+  `I:\My Drive\`. **Only Masud can run it.**
+- ⛔ **The 57 images.** Same reason — a binary copy Claude cannot perform.
+- **Nothing pushed.** Nothing has ever been pushed from this folder.
+
+---
+
+## 2026-09-05 — T6 · **PRICING SET — three of four rates are now real numbers**
+
+### Decisions — Masud, 2026-09-05
+
+> **Verbatim:** *"Set the pricing: Short video is $30. Long video is $20 per
+> minute. Thumbnail is $30 per thumbnail."*
+
+| Unit | Rate | Status |
+|---|---|---|
+| Long-Form Video Editing | **$20** per minute of final output | ✅ rendered |
+| Short-Form Reels & TikToks | **$30** per video | ✅ rendered |
+| Thumbnail Design | **$30** per thumbnail | ✅ rendered — **a figure that had never existed in any document** |
+| Motion Graphics & Animation | — | ⚠️ **NOT GIVEN. Still a bracket** |
+
+**R04 is satisfied for the three he named.** They render as real numbers on
+`/pricing/`. Its requirement — *"T6 must have him confirm each rate before it
+renders on a page"* — is met for those and only those.
+
+### ⚠️ Motion Graphics has no rate, and the research figure was NOT carried over
+
+The model has four units. He gave three. The research says **$15 per minute of
+animation** and that figure is **deliberately not used**.
+
+**The reason is the strongest available argument for the rule:** of the two
+research figures he did address, **he changed both** — long-form $15 → **$20**,
+short-form $25 → **$30**. A number he simply did not mention cannot be treated as
+one he endorsed. Motion Graphics stays bracketed on both `/pricing/` and
+`/services/` until he names it.
+
+### ⚠️ This vindicates R04's caution concretely, not as a formality
+
+Had T6 rendered the option-label figures back when R04 was first ruled, the page
+would today advertise **$15/minute and $25/reel** — **under-charging against
+Masud's actual rates on every long-form and short-form order.** That is the real,
+countable cost the "Astro mistake" rule exists to prevent, and it is worth
+recording once because the rule has until now only ever cost time.
+
+### Done
+
+- **Three rates rendered** in `/pricing/`'s table; Motion Graphics bracketed.
+- **Rate-table service names aligned to `/services/`** — the source's TAB 3 used
+  "Short-Form Reel" and "Motion Graphics" while R23's canonical eleven use
+  "Short-Form Reels & TikToks" and "Motion Graphics & Animation". A visitor moving
+  between the two pages now sees the same names. A naming alignment, not a copy
+  change.
+- ✅ **Both CTAs promoted from brackets to real links.** `site\contact\index.html`
+  now exists (T8), so `<a class="btn btn--primary" href="/contact/">` no longer
+  points at a 404 and `instructions.md` §5 is satisfied.
+- ✅ **`/services/` now links to `/pricing/`** on the three priced services.
+- ⚠️ **`/pricing/`'s CTA label changed from "Book a Call" to "Contact Us".**
+  R13 (form backend) is OPEN and **no scheduling link exists anywhere in this
+  project**, so the source's "Book a Call" promised a booking flow that does not
+  exist. The destination is a contact page; the label now says so. The original
+  wording can return if a scheduler is ever added.
+- **The numbers are NOT duplicated onto `/services/`.** That page links to
+  `/pricing/` instead. One page owns the rates, so there is one place to change
+  them — the alternative is two pages drifting apart silently, which is the same
+  failure `sync-shared.mjs` exists to prevent for the nav.
+
+### ⚠️ One thing for Masud, stated once and not argued
+
+**A thumbnail and a whole short-form edit are now the same price — $30 each.**
+A reader comparing the two rows will notice, because a thumbnail is a single still
+and a reel is a full edit. It may be exactly what he intends; thumbnails are
+skilled, fast, high-leverage work and plenty of agencies price them there. It is
+flagged because the rate card puts both lines in one small table where anyone can
+compare them, and it is cheaper to look at now than after a client asks.
+
+### Open
+
+- **The Motion Graphics rate** — the last number either page needs.
+- **The R04/R23 gap is unchanged.** Seven of the eleven services still have no
+  published rate, because R04 deleted the retainer and bundle tabs that were the
+  only place they were ever priced. Three resolutions are written above the rate
+  table; Masud picks one.
+- **R15 — VEA's email.** Now `/contact/`'s problem rather than these two pages',
+  since both CTAs hand off to a real page instead of trying to be the contact
+  route themselves.
+- **`/pricing/` subtext** — the source's line names "monthly retainer, per bundle,
+  or flat rate", two of which R04 killed. Bracketed for a one-line replacement.
+
+### Blocked
+
+- **Rule 4 still not run.** `node tools\sync-shared.mjs` and `--check` have never
+  been executed — the sandbox has no route into Drive. **Eleven pages, six
+  threads. `--check` has never mattered more.**
+- **Nothing pushed.**
+- ⚠️ **Is the old site down?** T6 and T9 both found it live on 2026-09-05, two days
+  after R26b ruled *"take it down today"*. Not re-checked since.
+
+---
+
+## 2026-09-05 — T9b · **ALL ELEVEN HEADS WRITTEN · sitemap.xml SHIPPED**
+
+### ⚠️ FIRST: THREADS ARE WRITING TO `site\` CONCURRENTLY. RULE 3 IS BROKEN.
+
+Evidence, not inference. During this one session: `services\index.html` reported
+modified between a read and the next edit · `pricing\index.html` came back carrying
+a font-block correction T9 did not write · `contact\` and `privacy\` both changed
+under T9 mid-edit · **`WORKLOG.md` itself changed twice while T9 was composing an
+entry for it**, the top entry going T7 → T6 → T4 → T6 again.
+
+**`THREAD-PLAN.md` §1 Rule 3: one thread runs at a time.** Its stated reason is the
+Mango project's duplicate `(1)` files. **Nothing has been lost — every merge came
+out clean and no work was overwritten — but the mechanism that loses work is running
+right now, and the WORKLOG is the file most exposed to it.**
+→ **Masud: close the other threads before the next one opens.**
+
+### Done — T9b is complete. This was blocked at the start of the session and is not now.
+
+- **Eleven `<title>` and eleven `<meta name="description">` written, hand-made, one
+  per page.** Every page in `site\` now has both.
+
+| Page | Title | Chars |
+|---|---|---|
+| `/` | Video Editor Agency — Editing for Creators & Brands | 50 · **T4's, kept** |
+| `/services/` | Video Editing Services — Video Editor Agency | 43 |
+| `/pricing/` | Video Editing Rates — Video Editor Agency | 40 |
+| `/coaches/` | Video Editing for Coaches & Trainers | 39 |
+| `/content-creators/` | Video Editing for Content Creators | 34 |
+| `/business-owners/` | Video Editing for Business Owners | 33 |
+| `/marketers-and-agencies/` | Video Editing for Marketers & Agencies | 41 |
+| `/about/` | About Video Editor Agency | 25 |
+| `/contact/` | Contact Video Editor Agency | 27 |
+| `/privacy/` | Privacy Policy — Video Editor Agency | 36 |
+| `/terms/` | Terms and Conditions — Video Editor Agency | 42 |
+| `/404.html` | Page not found — Video Editor Agency | 36 |
+
+- **`site\sitemap.xml` written.** Eleven URLs. T9 declined to write this earlier
+  today on the grounds that zero pages existed; T4, T6, T7 and T8 have since shipped
+  and **every URL in it was verified against a file in this folder.**
+  ⚠️ **T9 caught a bug in its own first draft:** the namespace was typed
+  `sitemap.org` instead of `sitemaps.org`. Singular parses as valid XML, looks right
+  to a human, and is rejected by every consumer. Fixed and noted in the file.
+
+- **`robots.txt` updated** — the "do not add the Sitemap line, the file does not
+  exist" note is now the opposite instruction.
+
+### ⚠️ Four orphan pages found, and fixed
+
+**All four audience pages existed and NOTHING ON THE SITE LINKED TO ANY OF THEM.**
+The header's "For" dropdown is unbuilt, and no page thread cross-links. A crawler
+reaching the site would never have found them; nor would a visitor.
+
+- **Nav promoted, four spans to links** — Services, Pricing, About, Contact. The
+  SHARED:HEADER comment still claimed *"NONE OF THE TEN PAGES EXISTS YET"*; that
+  stopped being true when T4, T6 and T8 shipped. `instructions.md` §5 requires a nav
+  link to **reach a live page** — it does not require the nav to stay text.
+- **A footer link list added**, covering all ten live pages. Plain `<ul>` of `<a>`s
+  with **no new CSS class**, because `site.css` is T3's file. No Blog link (R10).
+- **"For" and "Portfolio" stay as text**, each for a real reason: `/portfolio/` does
+  not exist, and the dropdown is a CSS component T9 cannot build without `site.css`.
+  → **T3, or Masud reassigning that file.**
+
+### ⚠️ T4's homepage description revised — two specific defects, not taste
+
+T4 filled its own head under the permission T9's block explicitly grants, which is
+correct procedure, and **T9's block also says "T9 reviews them."** The title is good
+and was kept unchanged. The description was not:
+
+1. **"a project manager who keeps it moving" appears nowhere on the page.** T9
+   searched the file: *"Dedicated Editor"* and *"One consistent editor who learns
+   your brand voice"* are both there, so that half was backed. **A project manager is
+   not.** It is a service-delivery promise a client could hold the company to — the
+   same class of claim as a turnaround, and R18 is open precisely because nobody will
+   commit to one. Removed.
+2. **It ran 176 characters.** Google truncates near 155–160, so *"unlimited
+   revisions"* — the one ruled claim in it (R17) and the strongest thing VEA can
+   say — was being cut off the end. The revision is 152 and puts it inside the window.
+
+Also `"YouTubers"` → `"creators"`, matching T7's broadened framing while R21 is open.
+
+### ⚠️ Findings for other threads — none of these are T9's files
+
+- **→ T4: the homepage FAQ says an editor stays with you "throughout your
+  subscription or project."** R04 ruled published per-unit rates and killed the
+  retainer model. **There is no subscription to stay throughout.**
+- **→ T6: `/services/`'s lede says "we edit with purpose, consistency, and speed."**
+  R18 is closed to pressing and the site ships with no speed claim. An adjective is
+  not a commitment the way "48 hours" is, so T9 has not touched it — but it is the
+  thinnest edge of the rule and somebody should decide deliberately.
+- **→ T1: four rulings now live outside the register.** R23, R11, R28 and today's
+  fonts ruling are all recorded only in WORKLOG entries. `RULINGS.md` is the file
+  whose entire purpose is to hold these, and a thread reading it today gets four
+  wrong answers.
+
+### Decisions — Masud, 2026-09-05
+
+| Ruling | His words |
+|---|---|
+| **Google Fonts stays. Colour from MZ Media.** | *"Use Google font and use color from the MZ Media."* |
+
+Chosen from four costed options after T8 raised the load as a GDPR exposure and
+addressed it to T3 — **but T8 wrote that entry after T3 had finished, so T3 never
+saw it.** Rule 2 left it with T9, T9 put it to Masud, Masud ruled. **The trade was
+visible when it was made. No thread argues it again.** Recorded in the template.
+
+⚠️ **One binding consequence, not a reopening:** `/privacy/` **must name the
+`fonts.googleapis.com` request.** T8 already records that `/privacy/` is required
+regardless; this makes its *content* non-optional. Noted in `/privacy/`'s head.
+
+**"Colour from MZ Media" confirms what T3 already built** — every value in `site.css`
+§0 was read from mzmedia.digital. Nothing to change.
+
+### ⚠️ The launch blocker that is not a page
+
+**60 of the 61 rows in `_redirects` point at `/portfolio/`, which does not exist.**
+A 301 to a URL that 404s is worse than no redirect — an error page instead of a dead
+link, and a crawler recording a redirect chain that ends in failure.
+
+**`/portfolio/` is a hard precondition of cutover, not a nice-to-have by launch.**
+T5 has not run and is blocked on R07, still OPEN. Written into `_redirects` §1,
+`sitemap.xml`, `robots.txt` and the nav comment — four places, because it is the one
+thing that quietly breaks everything else T9 has built.
+
+### Open
+
+- **`/404.html`'s noindex NEVER comes off.** Every other page loses it at cutover,
+  page by page. An indexed 404 competes in search with the pages it exists to
+  apologise for. **T10: 404.html is not on the ten-page checklist.** Written into the
+  file itself. ✅ T9 also confirms the question that file asked: **no canonical on a
+  404**, correctly — it would name the error page as canonical for every dead URL.
+- **`/privacy/` and `/terms/` should be indexable at cutover**, agreeing with the
+  note T8 left in `/privacy/`. Both are in the sitemap. **Both are still unreviewed
+  drafts and a lawyer should read them before launch** — that blocks launch, not the
+  sitemap.
+- **The 32 video-type redirects still point at `/portfolio/`, not `/services/#…`.**
+  R23 is ruled and `/services/` exists while `/portfolio/` does not, so the option is
+  live — but `SITE-MAP-v1.md` §3 rules the destination and T9 will not override a
+  ruling on its own judgement. The 23 format / 9 industry classification is recorded
+  in `_redirects` so the decision is mechanical whenever it is taken. **Masud's call.**
+- **Every description is provisional where the page's copy still holds brackets.**
+  None is a placeholder — all are true today — but a reframed page gets a rewritten
+  description.
+
+### Blocked
+
+- **`node tools\sync-shared.mjs` STILL NOT RUN BY ANY THREAD**, and T9 has now made
+  it mandatory: **both SHARED blocks changed this session** (nav promoted, footer
+  link list added, footer ownership note corrected). **Every page's header and footer
+  is currently stale against the template.** The bash sandbox has no route into the
+  Drive folder. **Only Masud can run it. Rule 4 is unsatisfied across T6, T9a and T9b
+  alike, and this is now the single most important pre-push action.**
+  Run `node tools\sync-shared.mjs` from inside `site\`, then `--check` until it
+  prints **"No drift"**.
+- **`/portfolio/` — T5, blocked on R07.**
+- **Nothing pushed.**
+
+---
+
+## 2026-09-05 — T8 · All five pages built · About, Contact, Privacy, Terms, 404
+
+### Done
+
+**Five HTML files, the five T8 owns, and no others:**
+
+| File | State |
+|---|---|
+| `site\about\index.html` | ✅ **Complete.** No visible brackets in the body |
+| `site\contact\index.html` | ⛔ **One bracket left** — the phone. See below |
+| `site\privacy\index.html` | ⚠️ **Draft, visibly marked.** Two brackets |
+| `site\terms\index.html` | ⚠️ **Draft, visibly marked.** Five brackets, all commercial |
+| `site\404.html` | ✅ **Complete** |
+
+- **Built from `03-Build-Ready\about.md` and `contact.md`**, which T8 wrote earlier
+  today from the imported copy doc. Every clause traces to a ruling or a bracket.
+- **`.section` is deliberately NOT redefined** in any T8 page-scoped `<style>`. See
+  the T3 note below — this is a real collision waiting in T6's two files.
+- **Rulings applied:** R05 (100+/10,000+, static text), R13 (no form), R15 (email),
+  R16 (Dhaka), R17 (unlimited revisions), R18 (no speed claim anywhere), R30 (entity).
+
+### ⚠️ Four things landed mid-thread and changed the work
+
+T8 started against a repo with two pages in it and finished against one with eleven.
+**Rule 3 says one thread at a time; that did not hold today.** Each of these was caught
+by re-reading the files rather than by being told:
+
+1. **R13 and R15 were ruled while T8 was drafting.** Both were listed as OPEN blockers
+   in T8's own morning entry. `/contact/` and `/privacy/` were rewritten to match —
+   **the email is now a live `mailto:`, not a bracket.**
+2. **Masud ruled Google Fonts STAYS** *("Use Google font and use color from the MZ
+   Media")*. T8's earlier entry raised it as a GDPR exposure; T9 put it to Masud; he
+   took the trade. **An earlier draft of `/privacy/` §5 said "we are working to remove
+   this" — that would have been FALSE and it was corrected before this entry.** The
+   section is now the mandatory disclosure the template calls for, and it does not
+   promise a change nobody has decided to make. **No thread argues this again.**
+3. **T4 and T7 shipped five pages during the thread.** `/404.html`'s recovery links
+   were written when only `/services/` and `/pricing/` existed. They now include `/`
+   and all four audience pages. **That list went stale inside a single session** —
+   `sync-shared.mjs` will never catch it, because it is page content, not a SHARED
+   block. **T5: add `/portfolio/` when you ship it. Nothing will remind you.**
+4. **T9 filled titles and descriptions** on all five T8 pages after they were written,
+   and confirmed the `/404.html` canonical omission. Left exactly as found.
+
+### Decisions
+
+| ID | Ruling |
+|---|---|
+| **R30** *(was R28 — renumbered, see below)* | **Video Editor Agency is a trading name of Mango Media Digital.** Masud, 2026-09-05 |
+
+**R30 is load-bearing for two pages.** A trading name cannot be a data controller and
+cannot enter a contract, so `/privacy/` §1 and `/terms/` §1 both name Mango Media
+Digital. **It is still not in `RULINGS.md` — that file is T1's. T1 must register it.**
+
+### ⚠️ THREE DECISIONS ARE ALL CALLED "R28". T1 must arbitrate.
+
+| Where | What it means there |
+|---|---|
+| `RULINGS.md` §3 | **"Eleven services, four rates"** (DELEGATED, raised by T6) — **this is the register, so it wins** |
+| `_template\page-template.html`, `site.css` | `[[R28 — Sherika webfont licence]]` (T3/T9) |
+| `WORKLOG.md` 2026-09-05 (T8) | "VEA is a trading name of Mango Media Digital" |
+
+`R29` is separately used in the template for the white logo and is **also not in the
+register**. **This is precisely the failure `RULINGS.md` §1 was created to end**, and it
+happened again — three threads numbering into the same space on the same day with
+nothing arbitrating between them. **T8 renumbered only its own to R30** and did not
+touch the other two. Full note in `/privacy/index.html` §1.
+
+### ⚠️ Requests to the threads that own the files — T8 did not edit any of these
+
+1. **The shared footer still brackets an email that is now RULED.**
+   `_template\page-template.html` prints
+   `[[R15 — which email address does VEA publish?]]` and a comment reading
+   *"R15 — EMAIL. OPEN."* **R15 was ruled 2026-09-05:
+   `videoeditoragency.hello@gmail.com`.** That bracket is on **all eleven pages**.
+   → **T3 or T9.** Rule 2. The phone bracket beside it correctly stays until R14 is
+   dialled.
+2. **`.section` collision in `/services/` and `/pricing/`.** Both carry a page-scoped
+   block redefining `.section` as `margin-block`. `site.css` §3 defines it as
+   `padding-block`, and `.site-footer.section` depends on that. **Absorbing T6's block
+   verbatim changes the footer on every page.** Sources: `site.css` §3 versus
+   `site/services/index.html`. → **T3**, at absorption time.
+3. **`/services/` and `/pricing/` still load Roboto**, not Inter — their `<head>` font
+   link predates T3's switch. → **T6 or T9**, a one-line hand edit each.
+
+### Open
+
+- ⛔ **DIAL `+880 1336433711`.** This is now the single cheapest unblock on the site.
+  R14 ruled the number; nobody has rung it. **R13 ruled no form**, so phone, WhatsApp
+  and one Gmail address are the *only* inbound routes that will exist. `RULINGS.md`
+  R13 states it: *"If it is the typo, the site has one working inbound route instead of
+  three, and nothing on the page will reveal it."* A visitor who tries a dead number
+  does not report it — they leave.
+- **`[[R30 — full registered address]]`** — street, area, Dhaka, postcode. Blocks
+  `/privacy/` §1 and `/terms/` §1. "Dhaka, Bangladesh" is enough on `/contact/`; it is
+  **not** enough where a data controller and a contracting party must be identifiable.
+- **`/terms/` is missing the three clauses that actually decide a dispute** — payment
+  terms, cancellation and refunds, governing law. **None has ever been written down
+  anywhere in this project.** Plus limitation of liability, which needs a lawyer.
+- **`/privacy/` §4 needs a real retention answer** — how long client footage is kept
+  after delivery. A real number beats "as long as necessary", which is what every
+  template says and means nothing.
+- **R12 — founding year.** `/about/` currently opens *"Video Editor Agency is the
+  editing backbone for…"*, dropping the source's `"Since [Year],"` clause so the page
+  ships without a bracket in its first sentence. **Both versions are in
+  `03-Build-Ready\about.md`. If Masud gives a year, restore the source wording — it is
+  the stronger sentence.**
+- **One paragraph on `/about/` has never been approved by anyone at VEA.** R16
+  requires the site to state Dhaka and the source copy never mentions location, so it
+  had to be written. It deliberately avoids "affordable" and "low-cost". **Masud reads
+  it.**
+
+### Blocked
+
+- **Nothing pushed.** Masud pushes.
+- ⚠️ **`node tools\sync-shared.mjs` WAS NOT RUN, and T8 is not claiming it was.**
+  The Drive folder is not reachable from the code sandbox — same blocker T3 and T6
+  hit. **What T8 did verify statically:** all five files carry four `SHARED:` markers
+  matching `sync-shared.mjs`'s regex; exactly one `<h1>` each; no `<script>`, no
+  `<iframe>`, no `onclick`, no `href="#"` anywhere in `site\`; every internal link
+  points at a file that exists in the repo. **Byte-level drift is NOT verified.**
+  **Masud runs both commands before pushing. Rule 4 is not satisfied until he does.**
+
+---
+
+## 2026-09-05 — T6 · Services + Pricing · REBUILT on the dark palette + imported copy
+
+### Done
+
+- **`site\services\index.html` — rebuilt and now carries real copy.** All eleven
+  service blocks are the imported source's own prose, word for word
+  (`01-Research-Import\videoeditor_agency_website_copy.md`, PAGE 3, lines
+  601–671). T6 wrote no marketing sentence of its own on that page.
+- **`site\pricing\index.html` — rebuilt.** Rate table, revisions section, one real
+  FAQ and the custom-volume CTA, all from the source. **Every amount is still a
+  bracket** — see below.
+- **Both pages re-pointed at T3's dark system.** Page-scoped CSS cut back to only
+  what `site.css` has no class for. `.card`, `.section`, `.btn` are T3's now.
+- ⚠️ **Fixed a real bug in `/pricing/`: it was still loading Roboto + Roboto Slab.**
+  T3 moved the site to Inter. Those two families were being downloaded and rendered
+  **nowhere** — the exact failure `instructions.md` §5 names, and the one Mango's
+  site committed with Inter for months. It now loads Inter only, and carries the
+  `color-scheme` / `theme-color` dark paint so it does not flash white.
+
+### ⚠️ THE SAME TWO BUGS ARE LIVE IN AT LEAST FIVE PAGES T6 DOES NOT OWN
+
+Found while fixing them here. **Not fixed — not T6's files.**
+
+| Page | `.section` / `.cta-block` collision | Still loading Roboto |
+|---|---|---|
+| `site\index.html` | line 104, 223 | check |
+| `site\coaches\index.html` | line 76, 125 | line 18 says yes |
+| `site\content-creators\index.html` | line 42, 76 | check |
+| `site\business-owners\index.html` | line 42, 76 | check |
+| `site\marketers-and-agencies\index.html` | line 42, 76 | check |
+| `site\about\index.html` | line 105 | check |
+
+**Why the `.section` one matters:** `site.css` now defines `.section` as
+`padding-block`. A page `<style>` that also defines `.section { margin-block }`
+does not override it — **both apply**, and every section on those pages gets
+T3's padding *plus* a page's margin. Several also add
+`.section > h2 { border-bottom }`, which draws a rule under every H2 that T3's
+system does not have. It is a visual defect, not a crash, which is why nobody
+has noticed. **Each page thread deletes its own block; T3 owns the reconciliation.**
+
+### ⚠️ THE NAV IS NOW WRONG ON EVERY PAGE — T3's file
+
+**Eleven pages exist**: `/`, `/services/`, `/pricing/`, `/about/`, `/contact/`,
+`/privacy/`, `/404.html`, and all four audience pages.
+**`_template\page-template.html` still renders ALL SIX nav items as
+`<span class="nav__pending">` dead text.**
+
+That treatment was correct when nothing existed. It is wrong now.
+`instructions.md` §5 requires every nav link to resolve to a live page — it does
+not require live pages to go unlinked. **Five of the six can be promoted to real
+`<a>` today**: Services, For ▾ (all four children exist), Pricing, About, Contact.
+**Only Portfolio stays text**, because `/portfolio/` is the one nav destination
+that genuinely does not exist yet (T5).
+
+→ **T3 or T9 edits the template, then `node tools\sync-shared.mjs`.** T6 must not
+touch that file — Rule 2.
+
+### Decisions
+
+None new from Masud this session. R23 (eleven services) and R11 (Video Recording
+in, Dhaka-scoped) were ruled in T6's previous session and are **still recorded only
+in this WORKLOG.** `RULINGS.md` is T1's file. ⚠️ **The imported copy file's own
+header (line 106) still says "R23 is OPEN and T6 is blocked on it" — that is stale,
+and it is stale precisely because the ruling never reached the register.**
+
+### ⚠️ THE R04 / R23 GAP — now evidenced, and the cause is structural
+
+Reported last session as a contradiction. **The import proves it and explains it.**
+
+R23 ruled **eleven** services. R04 ruled **published per-unit rates**. The source
+document prices exactly **four** units — long-form, short-form reel, motion
+graphics, thumbnail.
+
+**The seven unpriced services were never priced per unit in the first place.** In
+the source they were sold through the "Monthly Retainer" and "Per Bundle" tabs —
+*"8 videos (long-form or mixed)"*, *"6 videos (mixed formats)"*. **R04 deleted both
+tabs, and with them the only pricing mechanism those seven ever had.** Nothing
+replaced it.
+
+R04 explicitly rejected *"request a quote"*. A rate page that prices 4 of 11
+services **is** a quote page for the other 7. The three resolutions are written
+above the rate table in `/pricing/index.html`. **Masud picks one. T6 did not.**
+
+### Open — what still stops these two pages shipping
+
+- **The four rates, in Masud's own words.** R04 names T6 specifically: *"T6 must
+  have him confirm each rate before it renders on a page."* ⚠️ **T6 reversed its
+  own earlier choice here:** the brackets now CARRY the proposed figures
+  (`[[$15 — UNCONFIRMED]]`) instead of being empty. `instructions.md` §5 rule 3
+  asks a bracket to state exactly what is needed, and an empty one made Masud go
+  and look the number up. Still a bracket, still loud, still unshippable.
+- **The thumbnail price has never existed** — `$XX` in every document ever written
+  for this company, the imported source included.
+- **R15 — VEA's email.** Both CTAs are text, not links, for want of a destination.
+- **`/contact/` now EXISTS**, so the CTAs on both pages can become real
+  `<a class="btn btn--primary" href="/contact/">` — T6 left them as brackets this
+  session because the file appeared mid-thread and was not verified. **Next T6
+  session promotes them.** That is the smallest remaining job on either page.
+
+### ⚠️ Copy decisions T6 made, listed so none is silent
+
+1. **`/pricing/` H2 is the source's verbatim** — *"Transparent Pricing for Every
+   Stage of Growth"* — but it was written for the three-tier page R04 killed.
+   Flagged, not rewritten.
+2. **The source's "Pricing Plans" pre-label is DELETED.** There are no plans.
+   Deleted rather than reworded: rewording source copy is Masud's call.
+3. **One sentence on `/pricing/` is T6's own** — *"We publish our rates. You pay
+   per video, per minute of finished output, or per design…"* It states R04's
+   mechanism because R04 deleted the section that used to explain it. No figure,
+   no speed promise, no outcome claim. **Masud keeps it or strikes it.**
+4. **Three words deleted from FAQ Q5** — *"your subscription or"* — because R04
+   means no subscription exists. A deletion forced by a ruling, not a rewrite.
+5. **`/services/` H1 is "Our Services"**, faithful to the source's hero title.
+   The H2 beneath it is the stronger line and would make the better H1. **A copy
+   decision, so not made by T6.**
+6. **Four unverifiable outcome claims ship in the source's own words** — *"Built
+   to go viral and drive followers"*, *"retains subscribers and grows watch
+   time"*, *"High-converting ad edits"*, *"drives real results"*. Marketing
+   puffery rather than measurable promises, so not bracketed — but they are the
+   only claims on `/services/` that Masud would have to defend if quoted back.
+7. **`/services/` has no breadcrumb.** The source specifies "Home / Services".
+
+### Blocked
+
+- **Rule 4 still not satisfied. `node tools\sync-shared.mjs` has NOT been run by
+  T6** — the bash sandbox has no route into the Drive folder. ⚠️ **With eleven
+  pages now built by five different threads, `--check` matters more than it ever
+  has.** Masud runs both, in order, before pushing.
+- **Nothing pushed.**
+- ⚠️ **Is the old site down yet?** T6 and T9 both reported it live on 2026-09-05,
+  two days after R26b ruled *"take it down today"*. Not re-checked this session.
+
+---
+
+## 2026-09-05 — T4 · Homepage · **`site\index.html` BUILT**
+
+### Done
+
+- **Wrote `site\index.html`.** T4's only output, and the only file T4 touched
+  besides this one. `site.css`, `_template\page-template.html` and `RULINGS.md`
+  were read and not edited.
+- **Built from the imported copy, not from memory.** `01-Research-Import\
+  videoeditor_agency_website_copy.md` PAGE 1. On T4's first pass that file did
+  not exist and T4 refused to write without it.
+- **Filled `<title>`, `<meta description>` and `<link rel=canonical>`** for this
+  page only, under the permission the SEO block itself grants page threads. No
+  turnaround claim, no statistic. **T9 reviews.** Nothing else in that block was
+  touched.
+- **Re-read this file before finalising, and it changed the page twice.**
+  `RULINGS.md` was stale against the T1 batches 5–6 entry below. **R11** (Video
+  Recording IN) turned a bracket into a printed line, and **R13 + R15** (no form;
+  email `videoeditoragency.hello@gmail.com`) turned two bracketed CTAs into
+  working `mailto:` links.
+
+### The page is SEVEN sections, not twelve. Five are deleted.
+
+`THREAD-PLAN.md` §5 T4: *"A section that is not ready is deleted from the page,
+not filled with a placeholder."* Every deletion is traced to a ruling in a
+comment in the file.
+
+| § | Section | Status |
+|---|---|---|
+| 1 | Hero | ✅ ships — minus "Fast delivery" (R18) and the showreel |
+| 2 | Trust logos | ❌ **deleted** — R06 OPEN. Platform logos are not clients |
+| 3 | Stats | ✅ ships — **two** figures, not four. R05 |
+| 4 | Services | ✅ ships — 6 cards + all four secondary, verbatim |
+| 5 | Process | ✅ ships — 5 steps, verbatim, nothing blocked |
+| 6 | Portfolio | ❌ **deleted** — R07 OPEN. Not obvious; see below |
+| 7 | Why Choose Us | ⚠️ **3 of 6 blocks** clean + 1 bracketed. Rating widget deleted |
+| 8 | Pricing | ❌ **deleted** — R04. No tiers exist and `/pricing/` cannot print rates yet |
+| 9 | Testimonials | ❌ **deleted** — R08 CONDITIONAL |
+| 10 | FAQ | ✅ **6 of 8** ship. Q2 (R18) and Q6 (R04) deleted |
+| 11 | CTA banner | ✅ ships — "300+" swapped for R05's 100+ |
+| 12 | Contact | ❌ **deleted** — R13 no form; the footer already carries the details |
+
+**Why the portfolio is deleted even though T2's assets exist.** T2 catalogued 61
+real items and downloaded the thumbnails, so the raw material is there. The
+blocker is **T2's finding 6**: every video's YouTube title carries the client's
+name ("Podcast-Editing-Jay Macallister-…"). A card that ships unnamed opens a
+player that names them. **`NamePublic: NO` is not enforceable through an embed**,
+so "ship it unnamed" is not the safe compromise it looks like. `Featured` is also
+labelled INFERENCE in the catalogue, not ruled.
+
+### Decisions — T4's, labelled, none attributed to Masud
+
+- **Only two changes to source prose beyond deletion**, both marked in the file:
+  ① "Fast delivery." cut from the hero sub-headline (R18). ② "Join 300+ creators
+  and businesses" → "Join 100+ clients" in the CTA banner (R05).
+- **Page-scoped `<style>` block**, following the pattern T6 established. T3's
+  tokens only — no new colour, no second radius, no second font.
+- **`Home-Copy-Final.md` deliberately NOT written.** `03-Build-Ready\README.md`:
+  *"A file containing a bracket is not final and does not ship"* and *"An empty
+  folder is honest; a folder of half-finished stubs looks like progress and is
+  not."* The homepage copy contains two brackets. ⚠️ Noted without editing:
+  `about.md`, `contact.md` and the four `For-*-Copy-Final.md` files are already
+  in that folder.
+
+### Open — requests for files T4 does not own
+
+- **For T3 / `site.css` — three copies of the same CSS now exist.** `.lede`,
+  `.section` spacing, `.section > h2` and `.cta-block` are duplicated in
+  `/services/`, `/pricing/` and `/`. That is three places to fix one hairline.
+  T4 adds `.eyebrow`, `.grid`, `.tile`, `.stat__value`, `.steps` and `.faq` to
+  the pile. **Collapse them into `site.css`.**
+- **For T3 / the nav — two links can go live today.** `/services/` and
+  `/pricing/` exist and are still `nav__pending` spans in the template. T4 does
+  not open that file.
+- **For T6 — a stale bracket, now fixable.** `/services/` and `/pricing/` both
+  carry `[[CTA HEADLINE — Source: copy doc. Not yet imported.]]`. **It was
+  imported on 2026-09-05** and both headlines are in it.
+- **For T1 — R11 and R23 are recorded second-hand.** Both were transcribed by T1
+  from this file rather than heard from Masud, and both now have shipped pages
+  depending on them. Worth one confirmation.
+- **Observation, not an objection (T4, inference):** R15 publishes a
+  `@gmail.com` address on a site selling to US and UK buyers, next to R16's
+  "Dhaka, Bangladesh". Each is defensible alone. Together, on the homepage of an
+  agency asking a stranger to wire money, they compound. A forwarding address on
+  the domain costs nothing and the zone already has live MX records. **Masud's
+  ruling stands and T4 built to it.**
+
+### Blocked
+
+| # | Needs | Effect |
+|---|---|---|
+| 1 | **R14 — dial +880 1336433711** | The footer bracket on all pages. With R13 ruling no form, phone/WhatsApp/email are the *only* inbound routes |
+| 2 | **R30 — NEW.** "We respond within 2 business hours" — confirm or drop | One bracket in Why Choose Us. R18 covers turnaround, not response time, so nothing rules it. Also on the Contact copy; one answer settles both |
+| 3 | **A showreel** — an `.mp4` for a native `<video>`, or the reel's URL on the agency's own channel | Hero secondary CTA and the showreel embed are deleted |
+| 4 | **R06 · R07 · R08 · R09 · R04 rates** | The five deleted sections return one at a time as each is answered |
+
+### ⚠️ Rule 4 steps 1 and 2 were NOT run, and T4 cannot run them
+
+`node tools\sync-shared.mjs` and `--check` have **not** been run. The sandbox has
+no route into `I:\My Drive\`, so node cannot see `site\`. The SHARED header and
+footer blocks in `index.html` were transcribed from `_template\page-template.html`
+by hand and are believed byte-identical — **that is unverified.** Masud runs both
+from inside `site\` before pushing; `--check` must print "No drift".
+
+---
+
+## 2026-09-05 — T7 · The four "For" pages · **BUILT**
+
+### Done
+
+- **Built all four pages** against T3's dark system: `site\coaches\`,
+  `site\content-creators\`, `site\business-owners\`, `site\marketers-and-agencies\`
+  — `index.html` each. The four files T7 owns, and the only files in `site\` it touched.
+- **Re-read before building, not inferred:** the rebuilt `site.css`, the rewritten
+  `page-template.html`, `sync-shared.mjs`'s actual regex, T6's `/services/index.html`
+  for the house pattern, and `RULINGS.md` through batch 6.
+- **Copy is verbatim from the four approved `03-Build-Ready\` files.** Not one sentence
+  was rewritten at build time.
+- ⚠️ **`sync-shared.mjs` was NOT run** — the bash sandbox still has no route into the
+  Drive folder. **Masud runs it, then `--check`, before pushing. Rule 4 is not satisfied
+  until he does.** Both SHARED blocks were copied from the template verbatim and each
+  page carries exactly one START and one END marker for each.
+
+### Verified, not assumed
+
+| Check | Result |
+|---|---|
+| Exactly one real `<h1>` element per page | ✅ four pages, four `<h1>` |
+| SHARED:HEADER / SHARED:FOOTER markers | ✅ one START + one END each, all four |
+| Every link resolves to a live page | ✅ — see the `/contact/` note below |
+| No turnaround claim (**R18**) | ✅ zero. "Hours" appears twice on `/coaches/` as prose about the reader's week, not as a delivery promise |
+| No number anywhere (**R05** is Home/About only) | ✅ zero digits in rendered copy on any of the four |
+| No testimonial (**R08**) | ✅ section deleted, not filled |
+| No tier recommendation (**R04**) | ✅ section deleted, not filled |
+| No `$` in rendered copy | ✅ |
+| No competitor copy | ✅ `becreatives.co` table never opened |
+| No client name written into any T7 file | ✅ still true — see the T7 copy entry below |
+
+### Decision T7 made at build time, and why
+
+**The CTAs point at `/contact/`, not at a raw `mailto:`.**
+
+T8 shipped `site\contact\index.html` after T7's copy pass, which satisfies the intent T6
+wrote into `/services/`: *"becomes a real `<a href="/contact/">` when T8 ships that page."*
+Chosen over `mailto:` because **R13** ruled no form at launch, so `/contact/` carries
+`tel:`, `wa.me` **and** `mailto:` and lets the buyer choose; a `mailto:` does nothing for
+anyone on webmail; and one destination fixes the address in one file rather than five.
+
+### ⚠️ Four things found in other threads' files. None fixed — none are T7's.
+
+1. **`/contact/` publishes an email R15 did not rule.** It shows
+   **`hello@videoeditor.agency`**. **R15 ruled `videoeditoragency.hello@gmail.com`** on
+   2026-09-05 — *after* T8 wrote that page. `RULINGS.md` §4 R15: *"every CTA, the footer
+   and `/contact/` use `videoeditoragency.hello@gmail.com`."* **T8's file is stale and is
+   publishing an unverified address.** The four For pages now funnel every CTA into it.
+   → **T8 fixes this. It is the highest-value one-line fix on the site.**
+2. **`/services/` and `/pricing/` still load Roboto + Roboto Slab.** They were synced
+   before T3's dark rebuild, so they pull two font families that render nowhere —
+   precisely what `instructions.md` §5 forbids — and carry no `color-scheme` or
+   `theme-color`, so they flash white on a `#090909` page. → **T6 or T3.**
+3. **The SHARED:FOOTER block still says "R15 — EMAIL. OPEN."** R15 was ruled on
+   2026-09-05. The template's own comment is now wrong on every page that carries it,
+   including these four. T7 copied it verbatim because editing it is a Rule 2 violation
+   and `--check` would report drift. → **T3 or T8.**
+4. **The nav still renders all six items as `nav__pending` text**, and the comment says
+   *"NONE OF THE TEN PAGES EXISTS YET."* That is no longer true — `/`, `/services/`,
+   `/pricing/`, `/about/`, `/contact/`, `/privacy/` and now these four all exist.
+   **Nine of the ten pages are built and not one is reachable from the nav.** → **T3.**
+
+### ⚠️ The "For" dropdown — second time of asking, and the blocker is gone
+
+`page-template.html` line 134 and `site.css` §5 both still say the dropdown *"lands with
+T7"*. **`THREAD-PLAN.md` §1 Rule 2 says only T3 and T9 may touch that file.** Both cannot
+hold, and T7 did not open it — same position as the copy pass.
+
+**What has changed:** T3's stated reason for not building it was *"an empty menu is worse
+than no menu."* **The menu is no longer empty.** All four child pages exist as of today.
+→ **T3 builds it, single level, CSS `:hover` / `:focus-within` plus native `<details>`.**
+
+### Request to T3 — page-scoped CSS, per Rule 1 (write it down, do not edit)
+
+Each For page carries a `<style>` block, following the precedent T6 set. **Existing tokens
+only — not one new hex, radius or font.** But it is now duplicated in **six** files.
+
+- **`.tile-grid` / `.tile` are byte-identical in their declarations to T6's
+  `.service-grid` / `.service`.** Renamed because a pain point is not a service. **When
+  absorbing, keep ONE pair under the neutral name and update `/services/` to use it.**
+- ⚠️ **T6's `.section { margin-block: var(--space-7) }` override is a bug and T7
+  replicated it for visual consistency rather than letting six pages diverge.** `.section`
+  is a `site.css` class and the footer carries it (`<footer class="site-footer section">`),
+  so the override adds an unintended 4rem margin around the footer on every page that has
+  it. **Absorbing this needs a page-content class, not an override of `.section`.**
+
+### Open — needs Masud
+
+1. **`[[WHITE-LABEL]]`** — still the only T7 bracket, still on the best line of
+   `/marketers-and-agencies/`, and now a visible yellow build gate in the deliverables
+   list. It appears twice in the research and **both times attached to the dead Pro tier**;
+   **R23 ruled eleven services and white-label is not among them.** *Has VEA ever
+   delivered under a client agency's brand, with no VEA marking? Would you commit to it on
+   the site?* Until answered, the page ships with five deliverables and a weaker
+   sub-headline — the second sentence is removed and noted in the file.
+2. **The cost argument on `/business-owners/` still cannot be made.** Unchanged from the
+   copy pass, and R04's four rates are still unconfirmed by Masud.
+3. **R08** — two consented testimonials would unblock a section on all four pages.
+
+### Blocked
+
+- **Nothing pushed.** Editing files in Drive changes nothing live.
+- **`node tools/sync-shared.mjs` and `--check` have not been run.** Rule 4 is Masud's.
+
+---
+
+## 2026-09-05 — T1 · Batches 5–6 · **T3 UNBLOCKED**
+
+### Done
+
+- **Transcribed the rulings other threads took.** T6, T7 and T9 each correctly refused
+  to edit `RULINGS.md` and asked T1 to do it. **Now in the register:** **R23** (eleven
+  services), **R11** (Video Recording in, Dhaka-scoped), **R21** (marked
+  ⚠️ *pre-empted, not answered*). Each is marked **second-hand** — T1 copied them from
+  this file and did not hear the words.
+- **R28 registered** as a new row — T6's 11-services-vs-4-rates contradiction.
+- **Measured VEA's logo** from the live file. **`#1C2448`, a single fill.** Same value
+  T6 got independently. 15.05:1 on white.
+- **Four more rulings taken from Masud** — R19, R15, R13, and R28 delegated.
+
+### Decisions — Masud, 2026-09-05 (batches 5–6)
+
+| ID | Ruling |
+|---|---|
+| **R19** | **`#090909` page · `#111111` cards · `#273FB7` accent · `#31313C` lines.** ⛔ **T3 is unblocked** |
+| **R15** | Email: **`videoeditoragency.hello@gmail.com`** |
+| **R13** | **No form at launch** — WhatsApp, email, phone only |
+| **R28** | ⚠️ **Delegated**, not ruled — *"do whatever is required"* |
+
+### ⛔ R19 makes the site DARK — and breaks two things. Both measured today.
+
+No earlier document anticipated a dark site; they all assume Mango's navy-on-white.
+`instructions.md` §3 ruling 3 survives for radius, type, spacing and layout. **Its
+colour half is gone** — which is the distinction §3 itself drew.
+
+| Pair | Ratio | |
+|---|---|---|
+| White text on `#090909` / `#111111` | 19.91:1 / 18.88:1 | ✅ AAA |
+| **White on `#273FB7` fill** | **8.46:1** | ✅ **AAA — great button** |
+| ⛔ **`#273FB7` as TEXT** on page / card | **2.35:1 / 2.23:1** | ❌ **fails AA, large text and UI** |
+| ⛔ **Logo `#1C2448` on `#090909`** | **1.32:1** | ❌ **INVISIBLE** |
+| `#111111` card vs `#090909` page | 1.05:1 | Cards will not separate visually |
+
+**Two fixes T3 must make. Neither changes Masud's ruling:**
+
+1. **A light `logo.svg` is required before any page ships.** The file is a single-fill
+   SVG, so it is one attribute change — but T1 does not own `04-Assets\` and did not
+   make it. **T3 or Masud.**
+2. **`#273FB7` is a fill colour, not a text colour.** T3 needs a lighter sibling on the
+   same hue for links: **`#677CE6` (5.31:1 / 5.04:1)** — *T1's recommendation, an
+   inference, not ruled.*
+
+*(Card separation at 1.05:1 is **not** a WCAG failure — decorative surfaces are not
+covered — so T1 is not calling it one. But the cards will read as one flat field, and a
+**clickable** card boundary does need 3:1, roughly `#5D5E73`. T3's call.)*
+
+### Open
+
+- 🔓 **The cheapest unblock left: four confirmed prices** — long-form, reel, motion
+  graphics, thumbnail. R04 already binds T6 to get them from Masud directly.
+  **`/pricing/` cannot ship without them, and R28's delegation does not substitute.**
+- **R14's phone number has still not been dialled.** ⚠️ **R13 just made this worse:**
+  with no form, the site's *only* inbound routes are one phone number, one WhatsApp
+  link and one email. `…711` was chosen from the same document set that contains Lorem
+  ipsum and a landscaping company's copy.
+- **Six register rows still open:** R06 R07 R09 R12 R20 R24 R25.
+- **R21 is formally still open** despite `/content-creators/` shipping — ownership
+  between Mango and VEA is unanswered in **both** projects.
+
+### Blocked
+
+- ⚠️ **THE OLD SITE IS STILL LIVE. Third thread to report it.** R26b was ruled
+  **2026-09-03**. `RULINGS.md` §6.3 step 1 — remove two custom domains from
+  `mangomedia-videoeditor` — is two clicks and reversible.
+- **Nothing pushed.** Unchanged.
+
+---
+
+## 2026-09-05 — T6 · Services + Pricing
+
+### Done
+
+- **Wrote `site\services\index.html` and `site\pricing\index.html`.** The two files
+  T6 owns, and the only two files in `site\` it touched. Structure complete; the
+  prose is `[[bracket]]` — see Blocked.
+- **Verified both SHARED blocks against `sync-shared.mjs`'s actual regex** rather
+  than assuming they would match. `SHARED:HEADER` and `SHARED:FOOTER` both match and
+  neither over-runs into `<main>`. ⚠️ **The script itself was NOT run** — the bash
+  sandbox has no route into the Drive folder. **Masud runs it, then `--check`,
+  before pushing. Rule 4 is not satisfied until he does.**
+- **Synced both pages' `<head>` to T9's rewritten block**, which landed in the
+  template *during* this thread. Title suffix dropped, canonical added and filled
+  per page. T6 changed nothing else in that block — it is T9's.
+- **Measured the VEA logo. R19's data, rescued with hours to spare.**
+  `_redirects` §5 and this WORKLOG's T9 entry both flag
+  `/wp-content/uploads/2024/10/logo.svg` as about to die with the old deployment.
+  **T6 fetched it live today and saved it to `04-Assets\logo.svg`.**
+
+| | Value |
+|---|---|
+| **VEA logo colour** | **`#1C2448`** — a single fill. The entire logo is one colour |
+| Contrast on white | **15.05:1** — passes AA and AAA for body text |
+| Mango's `#0D3C87`, currently in `site.css` | 10.43:1. **Not VEA's colour** |
+| ⚠️ **Accent** | **The logo contains NO second colour.** There is no measured source for `--accent` at all. Mango's orange has no basis here whatsoever |
+
+⚠️ **This is DATA, not a ruling. R19 stays OPEN and belongs to T3.** T6 measured a
+file; it did not decide what `--primary` or `--accent` become. **`site.css` is
+untouched.** ⚠️ **Masud should re-save the SVG himself from the live URL while the
+site is still up** — the copy in `04-Assets\` was transcribed through a browser and
+the original is the safer artefact.
+
+### Decisions — Masud, 2026-09-05 (T6 batch)
+
+| ID | Ruling | What he selected |
+|---|---|---|
+| **R23** | **Eleven services.** Settles the 6-vs-11-vs-7 contradiction | *"11 — the full list"* |
+| **R11** | **Video Recording is IN, scoped to Dhaka** | *"In, scoped to Dhaka"* |
+| — | Build against T0 tokens now rather than wait for T3 | *"Build against T0 tokens now"* |
+| — | The research import is a separate thread's job | *"Import it as a separate thread first"* |
+
+⚠️ **R23 and R11 are recorded HERE ONLY. `RULINGS.md` is T1's file and T6 did not
+edit it.** Both need transcribing into the register with today's date. **Until that
+happens the register still shows them OPEN and the next thread will believe it.**
+
+**On R11:** the objection to Video Recording was twofold — production not editing,
+*and* Dhaka-scoping would "reveal the location or confuse the offer." **R16 killed
+the second half.** Masud ruled on what was left. The page states the geographic
+limit inside the service block rather than burying it, which is what makes listing
+it honest. ⚠️ The wording *"Dhaka and select locations"* comes from
+`SITE-MAP-v1.md` §4.2's *description* of the copy doc, not from the doc itself —
+bracketed for confirmation, because "select locations" names nowhere.
+
+**R23 unblocks another thread:** `_redirects` §1 carries a T9b TODO saying the
+re-pointing of the 32 video-type rows is blocked "partly on R23." It no longer is.
+
+### ⚠️ `/pricing/` IS NOT DROPPED — and T6's brief was wrong about why
+
+`THREAD-PLAN.md` §5 T6: *"If Q7 is unanswered when T6 runs, `/pricing/` does not
+ship."* **That trigger does not fire.**
+
+- **"Q7" is ambiguous** — the same numbering collision `RULINGS.md` §1 documents for
+  R19. `SITE-MAP-v1.md` §5 Q7 is pricing; `instructions.md` §8 #7 is contact
+  details. In T6's context it means pricing, and both routes resolve to **R04**.
+- **R04 was RULED 2026-09-03.** The page exists and stays in the nav. The
+  contingency row in `_redirects` §6 correctly stays commented out.
+- **But R04 rules the shape, not the page**, and instructs T6 by name: *"T6 must
+  have him confirm each rate before it renders on a page."* **He has not.** Every
+  amount is a bracket, and **the research figures are not written into the file at
+  all** — not even greyed out. A number in a file is one careless commit away from
+  being a number a client holds the company to.
+
+### ⚠️ NEW CONTRADICTION — R23 and R04 cannot both be executed as written
+
+**R23 ruled 11 services. R04 ruled published per-unit rates. The research supplies a
+rate for FOUR of them** — long-form, short-form reel, motion graphics, thumbnail.
+
+**Seven have no published rate:** YouTube · Podcast · Marketing Video · Ads Video ·
+Event Video · Promotional Video · Video Recording.
+
+R04 explicitly rejected *"request a quote"* as the model. **A rate page that prices
+4 of 11 services is a quote page for the other 7.** No project document has noticed
+this. Sources: `RULINGS.md` R04 versus R23 as ruled today. **Named, not resolved.**
+Three honest resolutions are written into `/pricing/index.html` above the rate
+table. **Masud picks one. T6 did not.**
+
+### Open
+
+- **Four rates need Masud's own words** — long-form, short-form reel, motion
+  graphics, thumbnail design. **Thumbnail has never had a figure in any document.**
+- **The 11-vs-4 gap above.** Bigger than the amounts: it decides how many rows the
+  table has.
+- **R15 — VEA's email.** Both pages' CTAs have no destination without it.
+- **`_template\page-template.html`'s FOOTER comment is stale.** It still says
+  contact details stay absent *"until Q12 is ruled."* **Q12 is R14 and it was ruled
+  2026-09-05: `+880 1336433711`.** T9's own entry confirms it left the SHARED blocks
+  alone, so this is still outstanding. T3 or T8 fixes it; T6 must not.
+- **The wordmark links to `/`, which does not exist** (`site\index.html` is T4's and
+  is unbuilt). Every page carrying the shared header has one link to a 404, against
+  `instructions.md` §5. Pre-existing in the template, not introduced by T6.
+- **Anchor IDs on `/services/` are T6's own, NOT taxonomy slugs.** The `Website`
+  doc's 14 format slugs have never been imported and **T6 did not guess at slugs it
+  has not read.** Reconcile at import — it matters for T9b's `/services/#…` rows.
+
+### Blocked
+
+- ⚠️ **THE OLD SITE IS STILL LIVE — independently confirmed.** T6 fetched
+  `videoeditor.agency` today and saw the `$6.99 / $12.99 / $15.99` **web-hosting**
+  tiers, six Lorem ipsum FAQ answers, `Clients 0 +`, `Videos edited 0 K`, **"100+
+  Client Servered"** *(sic)* and the Premium Addons PRO advertising copy. **This is
+  the second thread today to report it. R26b was ruled 2026-09-03 and `RULINGS.md`
+  §6.3 step 1 has still not been performed.** Two clicks, and reversible.
+- **The Services and Pricing prose does not exist in this folder.**
+  `01-Research-Import\` still contains only its README — *"Empty as of 2026-09-03."*
+  The finished copy is in the Google Doc `videoeditor_agency_website_copy`, which
+  **T6 has not fetched or read** (`instructions.md` §5 rule 5). Masud ruled the
+  import is a separate thread. **Until it runs, neither page can ship.**
+- **T3 has not run.** Both pages carry a page-scoped `<style>` block using **only
+  existing tokens — no new hex, no new radius, no new font** — so R19's real colour
+  flows through without re-cutting either page. **T3 absorbs both blocks into
+  `site.css` and deletes them.**
+- **Nothing pushed.**
+
+### ⚠️ Rule 3 was not held today
+
+`THREAD-PLAN.md` §1 Rule 3: *"One thread runs at a time."* **T9's WORKLOG entry and
+its rewrite of the template `<head>` landed while T6 was mid-build** — T6 read the
+template, wrote two pages, and had to re-read and re-sync because the file had
+changed underneath it. T7 has also touched the template. No damage this time, and
+`sync-shared.mjs` exists precisely to catch the version that does do damage. **But
+this is the failure mode Rule 3 names, and it is the one that produced the Mango
+project's duplicate `(1)` files.** Recorded, not argued.
+
+---
+
+## 2026-09-05 — T9 · SEO and redirects · PART 1 of 2 — the URL harvest
+
+### ⚠️ READ THIS FIRST: videoeditor.agency IS STILL LIVE
+
+**T9 fetched it today, 2026-09-05.** R26b was ruled **2026-09-03** — *"Now — take it
+down today"* — and **has not been executed. Two days late.** Still public right now:
+the `$6.99 / $12.99 / $15.99` **web-hosting** tiers, all six Lorem ipsum FAQ answers,
+`Clients 0 +`, `Videos edited 0 K`, **"100+ Client Servered"** *(sic)*, and the
+Premium Addons PRO plugin's own advertising copy.
+
+**Two things nobody had recorded, on pages no earlier thread opened:**
+
+- **The site-wide footer belongs to a construction company.** Live on `/portfolio/`,
+  `/blog/`, `/business-cat/` and `/video-type/`: *"Our construction business is
+  dedicated to delivering high-quality, innovative building solutions"*, two
+  `facebook.com/xpeedstudio` links, a "Home" link pointing at
+  **`wpmet.com/plugin/elementskit/construction/`**, the phone **`+2 237 467 134-98`**,
+  and the address **`6391 Elgin St. Celina, Delaware 10299`**. **That is where
+  `SITE-MAP-v1.md` Q13's "Delaware address" comes from.** It is not a positioning
+  choice anyone made — it is theme filler. R16 already killed it; this says why it
+  was never really alive.
+- **`/portfolio/` is a landscaping company's page.** Hero: *"We Offer Landscaping
+  Services Provide"*. Body: *"We at The Gardeny…"*. Plus **three fabricated
+  testimonials** — *Stephen Flores, WP Team Lead, Roxnor*; *Marissa Young, Founder,
+  Wpmet*; *Whitney Romero, Founder, Wpmet* — each quoting the Elementor testimonial
+  widget's own ad copy. **The most important page on the site is a plugin demo.**
+
+Recorded, not argued. R26b already ruled it comes down.
+
+### Done
+
+- **The complete old-site URL inventory, harvested before the site goes dark.**
+  Five live pages fetched, not remembered: `/`, `/business-cat/`, `/video-type/`,
+  `/blog/`, `/portfolio/`.
+
+| Group | Count |
+|---|---|
+| Home | 1 |
+| Four audience pages — **kept, no redirect** (R22) | 4 |
+| `/portfolio/`, `/contact/` — same URL on the new site | 2 |
+| Standalone video-type pages | 32 |
+| `/business-cat/` + 12 terms | 13 |
+| `/video-type/` + 9 terms | 10 |
+| `/blog/` + 2 posts | 3 |
+| **Total** | **65** |
+
+  ✅ **That matches commit `76237a2`** — *"Remove site-wide noindex nofollow from all
+  65 pages"* — **exactly.** Corroboration, not proof: the commit counts files, not
+  URLs. But an exact match is the best evidence available that nothing large is
+  missing, and it closes the gap `RULINGS.md` C6 opened between "~40" and "65".
+
+- **`site\_redirects` rewritten — 61 rows, complete, shippable.** The two wildcards
+  that used to stand in for both taxonomy trees are replaced by explicit rows (a
+  wildcard hides how many URLs are moving), with the wildcards kept beneath them as
+  safety nets.
+- **`site\robots.txt` rewritten.** Still `Disallow: /`.
+- **`site\_template\page-template.html` `<head>` scaffolded.** Canonical placeholder,
+  the per-page title/description rules, and why Open Graph and JSON-LD are
+  deliberately absent. **Only the `<head>` was touched** — `SHARED:HEADER` and
+  `SHARED:FOOTER` are untouched, and T7's note about the "For" dropdown comment on
+  line 50 stands as T7 left it.
+
+### Decisions — T9's, inside its own files
+
+- **The Q1 block is deleted from `_redirects`.** That file still carried *"THIS FILE
+  IS A DRAFT AND MUST NOT SHIP UNTIL Q1 IS ANSWERED."* **Q1 is R02, RULED
+  2026-09-03.** The file had been blocking on a question answered two days earlier.
+- **The redirects are kept regardless of R02**, for the reason R02 does not cover:
+  people holding links, bookmarks and citations. That was T1's inference; T9 adopts
+  it and says so rather than inheriting it silently.
+- **`sitemap.xml` was NOT created, on purpose.** A sitemap asserts that a list of
+  URLs exists. **Zero of the ten pages exist.** Writing it now commits ten false
+  assertions, and a crawler reads it before anything else. `THREAD-PLAN.md` §5:
+  publishing a placeholder is the same risk class as a fake testimonial. It is a
+  ten-minute file once T4–T8 ship. **T9b's deliverable.**
+- **The `<title>` suffix was dropped.** The T0 scaffold read
+  `[[PAGE TITLE]] — Video Editor Agency`. Titles are hand-written per page now,
+  which also sidesteps T7's open naming question ("Video Editor Agency" vs
+  "videoeditor.agency") instead of hard-coding an answer to it in ten files.
+
+### ⚠️ Three findings other threads need
+
+1. **THE BLOG POSTS ARE NOT UNDER `/blog/`.** WordPress serves them at the **root**:
+   `/why-flat-rate-video-editing-is-the-future-for-2026-agencies/` and
+   `/this-is-our-title/`. **R10's `/blog/*` redirect would have caught neither.**
+   Both now have explicit rows. `/this-is-our-title/` is the site's **second**
+   placeholder slug after `/hope-you-get-it/`, and its headline duplicates the other
+   post's word for word — two posts, one title.
+2. **THE VEA LOGO IS LIVE AT `/wp-content/uploads/2024/10/logo.svg` AND IS ABOUT TO
+   DISAPPEAR.** **R19 is OPEN; T3 blocks on it; T7 is blocked on T3.** `RULINGS.md`
+   §5 says T1 will measure it "from the logo file in the old repo — before that repo
+   is deleted." It is reachable in one click **right now**. When the domain comes
+   down that route closes, leaving only the repo, which §6.3 step 5 deletes.
+   → **Masud or T3. Not T9's file.**
+3. **THE `noindex` LIFT HAS NO DRIFT PROTECTION.** `tools\sync-shared.mjs`
+   synchronises `SHARED:HEADER` and `SHARED:FOOTER` only — its `BLOCKS` constant is
+   `['HEADER', 'FOOTER']`. **Nothing in `<head>` propagates or is checked.**
+   `--check` will print *"No drift"* on a site where one page is still `noindex`,
+   because it never looks there. That is exactly the silent failure the script
+   exists to prevent, in the one place it does not cover. **It must not be fixed by
+   moving the tag into a shared block** — that makes the lift sitewide, which
+   `instructions.md` §5 bans outright. The fix is a `--check`-only audit.
+   **Proposed, not built:** `tools\` is in no thread's Owns column and T9 will not
+   claim it by writing there.
+
+### ⚠️ A contradiction, named not resolved
+
+**Who lifts `noindex` and opens `robots.txt`?** `THREAD-PLAN.md` §4 gives **T9** both
+`robots.txt` and *"Lift noindex page by page"*. **§5 gives T10** *"noindex off"*. The
+old `robots.txt` header said *"T10 OPENS THIS AT CUTOVER"*. Three sources, two
+answers. **T9's reading, labelled an INFERENCE:** T9 writes the mechanism and the
+checklist, T10 pulls the trigger. Whoever owns `THREAD-PLAN.md` settles it in
+writing. T9 did not edit that file.
+
+### ⚠️ A plan-order bug in THREAD-PLAN.md §4
+
+**T9 is two jobs with opposite dependencies.** `_redirects` depends on the **old**
+site, which R26b is destroying **now**. `<head>` tags and `sitemap.xml` depend on the
+**new** pages, which do not exist **yet**. §4 schedules both at position 9 — after
+the redirect half's source material has been deleted. Had T9 run where the plan puts
+it, the URL list above would have been unrecoverable.
+
+**Split it. T9a** — this session, done. **T9b** — the ten `<title>` /
+`<meta description>` / canonical sets and `sitemap.xml`, after T8.
+
+### Open
+
+- **R23 — the service count (6 vs 11 vs 7).** Until one number wins, the 32
+  video-type rows cannot be re-pointed at `/services/#…` anchors. All 32 go to
+  `/portfolio/` for now: correct, but blunt.
+- **T5's portfolio anchors.** Once they exist, re-point each of the 32 rows at its
+  own anchor so an old link lands on the right group rather than the top of a long
+  page.
+- **R18 binds T9b:** no turnaround claim in any `<title>` or `<meta description>`.
+  Written into the template so nobody adds one by reflex.
+- **The taxonomy term count is a floor, not a ceiling.** The nav shows only the first
+  five terms alphabetically; the archive shows only terms that have items. A term
+  both late in the alphabet and empty is invisible to this crawl. The wildcards
+  cover it, but the true count may exceed 65.
+
+### Blocked
+
+- **T9b is blocked on T4–T8.** Zero of ten pages built — T7 confirmed the same today.
+  There is nothing to write titles for.
+- **`node tools\sync-shared.mjs` was NOT run, and this is stated rather than
+  claimed.** There are **no `.html` page files**; `_template\` is in `SKIP_DIRS`, so
+  the script finds zero pages and changes nothing. Rule 4's sync step is a no-op
+  today. Verified by inspection instead: the new `<head>` comments are balanced
+  (10 open, 10 close) and cannot false-match the block regex —
+  `<!--[^\n]*SHARED:HEADER` cannot span a newline, and no line carrying `<!--` in the
+  new block contains `SHARED:HEADER`.
+- **Nothing pushed.** Unchanged.
+
+---
+
+## 2026-09-05 — T7 · The four "For" pages · COPY ONLY, no HTML
+
+### Done
+
+- **Four copy files written into `03-Build-Ready\`** — `For-Coaches-`, `For-ContentCreators-`,
+  `For-BusinessOwners-`, `For-MarketersAgencies-Copy-Final.md`. **All marked DRAFT.**
+- **Fetched and read both research docs from Drive** (not inferred from memory):
+  `videoeditor_agency_website_copy` (`1bIBHx…`, 35,897 bytes) and
+  `VEA all page content plan` (`1Zjpzy…`, 3.5 MB).
+- **No HTML written.** `site\coaches\` etc. are still empty. See Blocked.
+
+### Decisions — Masud, 2026-09-05 (T7)
+
+| Ask | Answer |
+|---|---|
+| T3 has not run — how to proceed? | **"Copy first, to 03-Build-Ready."** HTML waits for T3 |
+| `/content-creators/` — R21 is open | **"Ship it, broadened beyond YouTube."** ⚠️ pre-empts R21 |
+| Page structure | **"The plainer website_copy 7-section shape"** — not the Coaches/Conversion-Cut shape |
+
+⚠️ **The Content Creators answer pre-empts an OPEN ruling.** R21 asks whether Mango or
+VEA owns that audience, and `Mango Website Rebuild` open item #7 asks the same thing and
+is also unanswered. Masud was shown that consequence and took it. **`RULINGS.md` is T1's
+file — T7 did not edit it, so R21 is still formally OPEN in the register while
+`/content-creators/` is being built on the assumption it is settled.** T1 or Masud closes it.
+
+### ⚠️ Findings — three things the T7 brief got wrong
+
+1. **Three of the four pages do not exist in `VEA all page content plan`.**
+   `# Content Creators`, `# Business Owners` and `# Marketers & Agencies` are **empty
+   headings with nothing beneath them.** Only Coaches & Trainers is written.
+2. **The Coaches page there is not simply "the strongest writing."** It has one genuinely
+   good idea — the named *Conversion Cut system* — wrapped in Adidas and Nike logos under
+   "TRUSTED BY INDUSTRY LEADERS", "12 educators / 1,218 videos" (contradicts R05), **three
+   word-for-word identical testimonials all signed "FOUNDER OF SELF-HYPE"**, the
+   `$6.99/$12.99/$15.99` hosting tiers, a 48-hour promise (R18), and a construction
+   company's footer with a Delaware address.
+3. **"Genuinely different pain points per segment" is only three-quarters true.** Three of
+   the four source pages open on the same complaint — inconsistent quality from
+   freelancers. Coaches is the only one without it. **All three have been rewritten in
+   their own segment's language; no sentence is shared between any two of the four files.**
+
+### ⚠️ R04 silently deleted a section from all four pages
+
+`SITE-MAP-v1.md` §4.3–6 specifies seven sections. **Two do not ship:**
+
+- **Proof / testimonials** — R08 conditional, not ruled.
+- **Recommended plan** — **R04 killed it.** Every one of the four source pages recommends a
+  *Monthly Retainer / Per Bundle / Pro Retainer*. Published per-unit rates leave no tier to
+  recommend, so the section has no possible content. **Nobody had noticed this.**
+
+Per THREAD-PLAN §5 T4, blocked sections are deleted, not filled. **Four 5-section pages.**
+
+### Open — needs Masud
+
+1. **`[[WHITE-LABEL]]`** — the only bracket, and it is on the best line of the Marketers
+   page. It appears twice in the research and **both times attached to the dead Pro tier**;
+   it is not among the 11 services on the Services page. *Has VEA ever delivered under a
+   client agency's brand? Would you commit to it on the site?* Until answered,
+   `For-MarketersAgencies-Copy-Final.md` is not final.
+2. **The cost argument on `/business-owners/` cannot be made.** The whole pitch is "cheaper
+   than hiring" and no number backs it. R04's rates are ruled as a *shape*, not confirmed
+   as figures. A page that asserts value instead of demonstrating it.
+3. **The *Conversion Cut* mechanism** — the one idea worth rescuing from the contaminated
+   doc. Not used, because it traces to nothing Masud has confirmed saying.
+4. **Naming inconsistency, sitewide.** `page-template.html` wordmark says **"Video Editor
+   Agency"**; `website_copy` prose says **"videoeditor.agency"** throughout. T7 used "Video
+   Editor Agency" in body copy. **Named, not silently settled** — T3 or T8 confirms one.
+
+### Blocked
+
+- **T3 has not run, and T7 cannot ship HTML without it.** `page-template.html` is still the
+  T0 scaffold — every nav item an unlinked `nav__pending` span, no footer contact details.
+  `site.css` has tokens, base, header and footer and **nothing else**: no button, hero,
+  card, grid or two-column class exists. R19 (logo hexes) is OPEN, so every page would
+  render in Mango's navy.
+- ⚠️ **Contradiction, named not fixed.** `site\_template\page-template.html` line 50 says
+  *"The 'For' dropdown lands with T7."* `THREAD-PLAN.md` §1 Rule 2 says *"Only T3 and T9 may
+  touch page-template.html. Page threads never open it."* **Both cannot hold.** T7 did not
+  open the file. **T3 builds the dropdown**; whoever owns the template corrects that comment.
+- ⚠️ **`03-Build-Ready\README.md` says a file containing a bracket is not final and does not
+  ship.** `For-MarketersAgencies-Copy-Final.md` contains one. It is marked DRAFT for exactly
+  that reason and does not become approved by sitting in the folder.
+- **No client name was written into any T7 file**, despite R01 + R27 making the repo public.
+  R08's clients consented to mangomedia.digital, not to this. The catalogue in `RULINGS.md`
+  §4 R08 is the single reference. Not a re-litigation of R01 — R01 governs repo visibility,
+  not whose names go in it.
+
+---
+
+## 2026-09-05 — T8 · Research imported, About and Contact copy written, nothing built
+
+**No HTML was written. No file in `site\` was touched.** T3 has not run, and every page
+T8 owns inherits from it.
+
+### Done
+
+- **Imported `videoeditor_agency_website_copy`** → `01-Research-Import\videoeditor_agency_website_copy.md`.
+  Full text, not truncated, with a provenance header and a warning table listing every
+  line the rulings have since killed.
+- **The three-copies problem is CLOSED.** `instructions.md` §4 problem 1 required this
+  *"verified by diff, not assumed."* All three were fetched in full and compared with
+  real `diff` and `md5sum`:
+  - `1bIBHx…` (root) and `1hKAvq…` (subfolder) — **byte-identical, same MD5**
+  - `1GOq6s…` (shared, `videoeditoragency.hello@gmail.com`) — **three whitespace-only
+    lines, zero textual difference.** `diff -w -B` returns nothing
+  - Despite its **2026-07-14** modified date the shared copy has **no content edits** —
+    a save-without-edit. Prices, email, stats, About and Contact identical in all three
+  - **Canonical: `1bIBHxFxX3etBRfQUKedSuoKrKs8RaxeqG-Gxf00RhBI`.** The
+    `videoeditoragency.hello@gmail.com` access risk no longer threatens this document
+- **Wrote `03-Build-Ready\about.md` and `03-Build-Ready\contact.md`** — build-ready copy,
+  resolved against the register, with `[[brackets]]` where facts are missing.
+- Updated `01-Research-Import\README.md` to record the import and close its problem 2.
+
+### ⚠️ Rule 1 was crossed, deliberately and with authorisation
+
+`01-Research-Import\` is **T1's** under `instructions.md` §4 — *"importing them is Thread
+1's entire job."* **T1 never did it.** Both T1 WORKLOG entries record `RULINGS.md` as its
+only output, and the folder held one README.
+
+So `THREAD-PLAN.md` §5's claim that *"About and Contact have finished copy"* was true of
+a Google Doc and false of this project folder. T8 could not write either page.
+**Masud authorised the exception explicitly on 2026-09-05.** It covers that one document
+and that README. Recorded here rather than done quietly.
+
+**Seven of eight documents are still unimported.** The truncation warning in
+`01-Research-Import\README.md` still stands for the three large ones.
+
+### Decisions — Masud, 2026-09-05
+
+| ID | Ruling |
+|---|---|
+| **R28** *(new)* | **Video Editor Agency is a trading name of Mango Media Digital**, not a separate registered entity |
+
+**R28 is not yet in `RULINGS.md` — that file is T1's and T8 does not write it.**
+→ **T1 must register it.** It is load-bearing: Privacy and Terms cannot name a data
+controller without it, and it settles who the address on `/contact/` belongs to.
+It follows cleanly from **R16** (Dhaka stated plainly) and needs no new argument.
+
+### ⚠️ Three contradictions found. Named, not resolved. None is T8's file to fix.
+
+1. **Who owns Contact.** `THREAD-PLAN.md` §5 (T3): *"Build one page from it end to end as
+   a proof — **Contact is the simplest**."* `THREAD-PLAN.md` §4 gives `site\contact\` to
+   **T8**. Same document, opposite instructions. → whoever owns THREAD-PLAN.
+2. **Who fills the footer.** `site\_template\page-template.html` lines 76–89: *"**T8
+   fills this block**, once Q12 is answered."* `THREAD-PLAN.md` §1 Rule 2: **only T3 and
+   T9 may touch that file.** Q12 is now answered — it is **R14, RULED**. The footer needs
+   the `…711` number, Dhaka, the hours, and **no Blog link** (R10). → **T3 or T9 makes
+   that edit.** The requested content is at the foot of `03-Build-Ready\contact.md`.
+3. **The homepage section list.** `SITE-MAP-v1.md` §4.1 lists 12 homepage sections and
+   omits **§12 CONTACT** entirely, numbering the footer as 12. The source document runs
+   §1–§12 then jumps to **§14 — FOOTER**; there is no §13. → T4 and whoever owns the
+   site map.
+
+### ⚠️ For T3 — a GDPR exposure already in the template, before any page is built
+
+`site\_template\page-template.html` lines 14–16 load Roboto and Roboto Slab from
+`fonts.googleapis.com`. **That transmits every visitor's IP address to Google on every
+page load, before consent, on all ten pages.** A German court found exactly that unlawful
+under GDPR in 2022.
+
+It is the same class of problem as the YouTube iframe `THREAD-PLAN.md` §6 already guards
+against, and it is currently sitting in the file every page will be generated from.
+**The fix is self-hosting two font files** and it costs nothing. **`site.css` and the
+template are T3's — T8 cannot make this change and is flagging it before ten pages
+inherit it.**
+
+### Open
+
+- **T8 cannot ship any page until T3 runs.** Scaffold nav, unmeasured Mango hexes.
+- **`03-Build-Ready\` has no owner in `THREAD-PLAN.md` §4.** T8 wrote two files into it
+  on the basis of `instructions.md` §7 (*"final approved copy, one file per page"*).
+  If that is wrong, say so before other threads follow the precedent.
+- **`/privacy/` and `/terms/` are not written.** They need, and do not have: the full
+  registered address under R28, and a decision on R13 — a form changes what the privacy
+  policy has to say. Neither is a document to guess at, and **a lawyer should read
+  whatever is drafted.** ⚠️ Privacy is required regardless of R13, because of the
+  Google Fonts issue above and any YouTube playback on `/portfolio/`.
+- **`/404.html`** — buildable the moment T3 lands. Nothing else blocks it.
+- Still open and hitting T8's pages: **R07** showreel · **R12** founding year ·
+  **R13** form backend · **R15** email · **R19** hexes.
+
+### Blocked
+
+- **Nothing pushed.** `site\` is still the T0 scaffold; no page built.
+- ⚠️ **`+880 1336433711` has still not been dialled** (R14) and
+  **`hello@videoeditor.agency` has still not been tested** (R15). Under R26b the site is
+  dark, so when it returns these are the only inbound routes that exist. Two minutes of
+  work, and both are wrong on all ten pages at once if they are wrong at all.
+
+---
+
+## 2026-09-05 — T3 · Design system rebuilt on a dark palette
+
+### Done
+
+- **R19 ANSWERED — VEA's logo hexes are measured.** Fetched
+  `videoeditor.agency/wp-content/uploads/2024/10/logo.svg` and parsed the file
+  itself, not a screenshot. **The logo is ONE colour: `#1C2448`.** One `<path>`,
+  no `<defs>`, no gradient, no second hex anywhere in 3,526 bytes.
+  Contrast on white **15.05:1** — stronger than Mango's `#0D3C87` at 10.43:1.
+  ⚠️ **The logo contains NO ACCENT COLOUR.** There was nothing to measure, so
+  none was invented.
+  ⚠️ The logo is **not** at `/logo.svg` as `instructions.md` §3 implies.
+- **Masud ruled the palette, 2026-09-05, verbatim: "MZ Media style."** Chosen
+  after being shown three costed options and this one's specific costs.
+- **`site.css` rebuilt on a dark palette.** Every value READ FROM the live
+  mzmedia.digital stylesheet's own CSS custom properties on 2026-09-05:
+  `#090909` page · `#111111` raised · `#181929` tint · `#273FB7` accent ·
+  `#ffffff0f` rule · `#31313C` strong rule · 3px control radius.
+- **`page-template.html` rebuilt.** Six-item nav from `SITE-MAP-v1.md` §2, all
+  six as unlinked muted `<span>`s — **Services, For, Portfolio, Pricing, About,
+  Contact** — because none of the ten pages exists and `instructions.md` §5
+  forbids a nav link to a 404. Footer now states Dhaka per R16.
+- Fonts switched to **Inter** (Google Fonts) for headings and body.
+
+### Decisions — and what they override
+
+| | |
+|---|---|
+| **Palette** | Dark. **This OVERRIDES `instructions.md` §3 ruling 3**, which specified Mango's system "same Roboto Slab 600 / Roboto pairing, same single radius, same navy-primary / orange-accent rule." Sources named in `site.css` §0. The later ruling governs. What survives is the file's STRUCTURE: one radius token, one accent, one pairing, the space scale, the container, the accessibility rules |
+| **Accent rule** | `#273FB7` measures **2.48:1 on `#090909` — it fails even the 3:1 floor for non-text UI.** So: permitted as a FILL with a white label (8.46:1). **Banned as text, as a link colour, and as a hairline border.** This is STRICTER than T3's brief, which allowed a failing accent on borders — on this background it fails too far below the floor for that to hold |
+| **Focus ring** | **White, not the accent.** On Mango's light palette the orange ring was the most visible thing available; on `#090909` the blue would be a near-invisible focus indicator |
+| **Radius** | **One token, 3px** — MZ's measured control radius. They also run 20–25px on cards; `instructions.md` §5 requires one token and that rule survived the palette change. Softer cards need a second token and Masud's ruling |
+| **Two labelled deviations** | Body is **16px at 72% white**, not MZ's 14px at 60%. Their 14px/60% measures 7.34:1 and passes AA, so this is a readability judgement for VEA's older, broader buyer — not a compliance fix. Both reversible, both flagged in `site.css` §0 |
+
+### ⚠️ Contradictions named, not silently resolved
+
+1. **`THREAD-PLAN.md` §4 gives T9 "`<head>` of every page" AND gives T3 this
+   whole file.** Both claims cover the template's `<head>`. T9 has already
+   written an SEO block there. **T3 edited only the font link and added two
+   paint-colour metas, leaving every T9 tag and comment intact.** T3's reading:
+   font load and paint colour are design decisions; title, description,
+   canonical, robots, OG and JSON-LD are SEO. **Masud confirms or corrects.**
+2. **`THREAD-PLAN.md` §4 says T3 is "Blocked by Q9 (logo hexes)." Q9 in
+   `SITE-MAP-v1.md` §5 is "Is Video Recording in the offer?"** The logo hexes
+   are `instructions.md` §8 item 9 = **R19**. `RULINGS.md` §1 already records
+   this. **T3 did NOT edit THREAD-PLAN.md** — it is not in T3's Owns column,
+   and Rule 1 is exclusive. Still wrong. Someone with the right to fix it must.
+3. **`THREAD-PLAN.md` §5 tells T3 to "build one page end to end as a proof —
+   Contact is the simplest," but §4 gives `site\contact\` to T8.** T3 built no
+   page. **Masud picks:** a throwaway proof inside `site\_template\`, or move
+   Contact to T3.
+4. **`SITE-MAP-v1.md` §1's table still lists `/for/…` and is stale** — R22 ruled
+   flat on 2026-09-03. Warned about in both files T3 owns. T3 does not own the
+   site map.
+
+### ⚠️ R26b HAS NOT BEEN EXECUTED — checked today
+
+**`videoeditor.agency` was live when T3 fetched it on 2026-09-05.** R26b was
+ruled on 2026-09-03: *"Now — take it down today."* Still serving the `$6.99`
+web-hosting pricing, the six Lorem ipsum FAQ answers, the `0 +` / `0 K`
+counters, the "100+ Client Servered" typo, and a live paragraph of the Premium
+Addons PRO plugin's own marketing copy. `RULINGS.md` §6.3 step 1 is outstanding.
+
+⚠️ **Do not run §6.3 step 1 until the logo file is saved.** `logo.svg` exists in
+exactly two places — the live site and the old repo — and both are scheduled for
+deletion. **No thread owns `site\assets\img\` or `04-Assets\logo\`**, so T3 could
+not save it without breaking Rule 1.
+
+### Open — needs Masud
+
+- **[[R28 — SHERIKA LICENCE]]** MZ Media's heading font is a commercial,
+  self-hosted `.otf`. Not a Google font. **Buy a webfont licence, or name a free
+  display face?** Until then Inter carries both roles.
+- **[[R29 — WHITE LOGO]]** The logo is `#1C2448` on a `#090909` page — nearly
+  invisible. **A white/reversed version does not exist.** The header is set in
+  type until it does.
+- **[[R14 — DIAL THE NUMBER]]** Ruled `+880 1336433711`, never dialled. In the
+  footer as a bracket, not as a number.
+- **[[R15 — EMAIL]]** Still OPEN.
+- **`04-Assets\logo\Logo.png`** — Masud uploaded a scissors-and-play icon.
+  **T3 could NOT measure it**: Drive is not mounted into the code sandbox, Chrome
+  did not respond to the browser picker, and a hand transcription of the file
+  failed its own checksum. **It is not recorded as measured.** The SVG version,
+  or the hex from an eyedropper, settles it in seconds.
+
+### ⚠️ For T5 — a new problem the dark palette creates
+
+`04-Assets\portfolio\` holds **62 downloaded YouTube thumbnails**. Most YouTube
+stills are bright; on `#090909` a grid of them glares, and any thumbnail with a
+white background reads as a hole cut in the page. **This did not matter on the
+light palette.** Flagged in `site.css` §9. T5 owns the fix.
+
+### Blocked
+
+- **T3 could not run `node tools\sync-shared.mjs`.** The Drive folder is not
+  reachable from the code sandbox. **Masud runs both commands** — see the push
+  summary. Nothing has been verified as drift-free by T3, and T3 is not claiming
+  it has.
+- No page files exist yet, so the sync has nothing to propagate into. It will
+  report 0 pages checked. That is expected, not a failure.
+
+---
+
+## 2026-09-05 — T1 · R03 answered, and a T1 error corrected
+
+### Done
+
+- **R03 answered in full**, from RDAP and the Cloudflare dashboard:
+  - **Registrar: Namecheap, Inc.** Registered **2024-05-22**, expires **2027-05-22**,
+    transfer lock on.
+  - **DNS: Cloudflare** — `coen.ns` / `melody.ns`. The zone **`videoeditor.agency` is in
+    Masud's own account** (`47c84cc8…`), Free plan, 26 records.
+  - `www → CNAME → mangomedia-videoeditor.pages.dev`, proxied.
+  - **Live `MX` records** → `mx1/2/3-hosting.jellyfish.systems`. Email is hosted
+    elsewhere and is untouched by anything in R26b.
+  - Leftover `_caldav`/`_carddav` SRV records pointing at **`creativethumbnail.com`** —
+    another domain's cPanel config sitting in this zone.
+
+### ⚠️ Correction — T1 was wrong on 2026-09-03
+
+The 2026-09-03 entry said the zone was **not** in the Cloudflare account and that
+cutover would need a login found elsewhere. **False.** T1 read a Cloudflare page that
+had not finished rendering and treated a partial list as complete — `instructions.md`
+§5 rule 5, broken by the thread that exists to enforce it. **Logged, not quietly
+edited.** Anything written before 2026-09-05 assuming DNS lives outside Cloudflare is void.
+
+### Decisions — Masud, 2026-09-05 (batch 4)
+
+| ID | Ruling |
+|---|---|
+| **R14** | **Phone: +880 1336433711** — VEA's own line, not Mango's `…710` |
+| **R16** | **Say Dhaka, Bangladesh plainly.** Kills the New York / Delaware addresses outright |
+| **R10** | **Drop the blog** — out of the nav, `/blog/` and every post 301 to `/` |
+| **R08** | ⚠️ **Conditional, not ruled** — see below |
+
+R03 is a verified fact, not a ruling — it needed no answer from Masud.
+
+### ⚠️ R08 — testimonials: source found, mostly not usable
+
+Masud: *"I can take client review from the MangoMedia.Digital website… those are the
+video editing clients."* **T1 fetched and read mangomedia.digital.** Six real, named
+testimonials — a genuine improvement on the research set, which had none. **But:**
+
+- ✅ **Two are usable as-is:** **Raymond But (Quantum Pioneers)** and **Dinesh Godara
+  (BabyBillion TV)** — both purely about video editing, motion graphics, YouTube Shorts
+  and turnaround. Exactly what VEA sells.
+- ⚠️ **One is defective and is live on mangomedia.digital right now.** The quote signed
+  *"Ajoy, StockHealth.in"* is written in **Mango's own voice** — *"**We** played a vital
+  role… **our** expertise… **We** are proud to be currently working with StockHealth."*
+  It is agency copy with a client's name on it. **Belongs to the Mango project. Flagged,
+  not fixed here.**
+- ⚠️ **Three praise services VEA does not sell** — web design, digital marketing,
+  graphic design, course development. Quoting whole advertises the wrong offer; trimming
+  changes what the person said.
+- ⚠️ **Every quote names "MangoMedia" out loud**, and **consent to appear on
+  mangomedia.digital is not consent to appear on videoeditor.agency.** Editing a company
+  name inside a quotation is falsifying it.
+
+**T1's recommendation (inference):** message Raymond But and Dinesh Godara for one fresh
+line each naming Video Editor Agency. Two consented, specific testimonials beat six
+borrowed ones. **Until that exists, R08 is not ruled and the testimonial sections do not
+ship.**
+
+### Open / changed
+
+- **`RULINGS.md` §6.3 rewritten.** The "find the DNS login first" step is gone.
+- **R26b now executes by removing the two custom domains from `mangomedia-videoeditor`,
+  not by deleting it.** Same visible result — site dark today — but reversible, and it
+  keeps a rollback until launch is stable. Deleting moved to after cutover. *(Inference,
+  T1. If Masud wants the old artefacts gone today, the steps simply swap.)*
+- **R12 data point, not a conclusion:** the domain dates to **2024-05-22**. The research
+  claims "5+ years" and "6+ years". A company can predate its domain — but nothing in
+  this project supports either claim. **R12 stays OPEN.**
+
+### Blocked
+
+- Unchanged: nothing pushed, `site\` is still the T0 scaffold, no page built.
+
+---
+
+## 2026-09-03 — T1 · Rulings
+
+### Done
+
+- **Wrote `02-Decisions\RULINGS.md`** — T1's only output, and the only file T1 touched
+  besides this one.
+- **Deduplicated the register.** `SITE-MAP-v1.md` §5 (15 questions) and
+  `instructions.md` §8 (12 items — **not** the 15 THREAD-PLAN §5 claims) overlap on
+  nine subjects. 27 rows collapse to 21. Four new decisions came out of the
+  contradiction pass. **27 decisions total, IDs `R01`–`R27`.** Reverse map to the old
+  numbers is in RULINGS §3, so nothing is lost.
+- **Three interview batches run with Masud.** Every ruling is quoted verbatim with the
+  date. Every T1 judgement is labelled **INFERENCE**. Nothing is attributed to Masud
+  that he did not say.
+- **Checked GitHub and Cloudflare in Masud's browser, at his request.** Findings below.
+- **Built the new infrastructure**, after Masud said *"You have the GitHub access… Do
+  it yourself."* All verified on screen — see `RULINGS.md` §6.1:
+  - **`github.com/submangomedia/videoeditor-agency-v2` — created, PUBLIC** (per R01).
+  - Initial commit `c9e902e` (`README.md`), created **only** because Cloudflare cannot
+    attach to a repo with no branch. Overwrite or delete it freely.
+  - **Cloudflare Pages project `videoeditor-agency-v2`** — branch `main`, framework
+    None, build command empty, **build output directory `site`**, auto-deploy on.
+  - Staging URL **`videoeditor-agency-v2.pages.dev`**. **No custom domain attached, so
+    the staging gate C6 said was missing now exists.**
+  - First deploy produced nothing — no `site\` in the repo yet. Expected; it fixes
+    itself on the first real push.
+- **Did NOT delete the old repo or the old Pages project.** Irreversible, destructive,
+  and together they take the live domain down. R26b stands; the steps are in
+  `RULINGS.md` §6.3 for Masud to run.
+
+### ⚠️ The project's picture of its own infrastructure was wrong — RULINGS §2 C6
+
+Read off the screen on 2026-09-03, not inferred:
+
+- **`submangomedia/videoeditor-agency` exists**, is **private**, 2 commits, last
+  updated ~17 days ago. `WORKLOG` said *"Nothing is in GitHub yet."* It was wrong.
+- **There is no live WordPress install.** `videoeditor.agency` is served by
+  **Cloudflare Pages project `mangomedia-videoeditor`** from that repo. What is live is
+  a **static export** — the repo still carries `wp-content\` and `wp-includes\`.
+- **There was no staging gate.** Production branch `main`, auto-deploy on, custom
+  domains `videoeditor.agency` + `www`. A push to `main` went straight to live.
+  THREAD-PLAN §2's *"every push lands on a `*.pages.dev` staging URL"* was false.
+- **It serves from the repo root, not `site\`.** The protection `instructions.md` §7
+  describes was never configured.
+- **The domain is not registered at Cloudflare and is not a Cloudflare zone.**
+  Registrar still unconfirmed → R03.
+- Last deploy, ~17 days ago: *"Remove site-wide noindex nofollow from all 65 pages."*
+  **65 pages, indexable, for about two weeks.** The redirect map assumed ~40.
+- Homepage loaded and read: renders **`Clients 0 +`** / **`Videos edited 0 K`**, then
+  prints **"100+ Client Servered"** *(sic)* below it, plus a live paragraph of the
+  Elementor **Premium Addons PRO** plugin's own marketing copy.
+
+**`instructions.md` §1, §3 ruling 4, §7 and `THREAD-PLAN.md` §2 all need correcting.
+T1 does not own those files and did not edit them.**
+
+### Decisions — Masud, 2026-09-03
+
+| ID | Ruling | His words |
+|---|---|---|
+| **R01** | **Repo is PUBLIC** — research, prices and the client-permission ledger included | *"Public, all of it — I understand"* |
+| **R02** | **No Search Console export.** Redirect map written without ranking data | *"Do whatever you need to do because I will abandon that old site."* |
+| **R04** | **Published per-unit rates.** No retainer tiers, no "request a quote" | selected *"Published per-unit rates"* |
+| **R05** | **100+ clients / 10,000+ videos edited** | *"Use 100+ clients / 10,000+ videos"* |
+| **R17** | **Revisions genuinely unlimited.** Every cap in the research deleted | *"Genuinely unlimited"* |
+| **R22** | **Flat audience slugs** — `/coaches/`, not `/for/coaches/` | *"Flat — /coaches/, /content-creators/…"* |
+| **R26** | **New repo, discard the old** | *"I don't need the old repo, okay? Build a new repo and discard the old repo."* |
+| **R26b** | **Take videoeditor.agency down TODAY** — not at cutover | *"Now — take it down today"* |
+| **R27** | **Commit `Portfolio-Catalogue.md` as-is** to the public repo | *"Commit everything as-is"* |
+
+**R03 — partial, from the dashboard, not from Masud:** not a Cloudflare registration,
+not a Cloudflare zone. Registrar and DNS host still unconfirmed.
+
+### ⚠️ Three rulings override rules written earlier in this project
+
+Named here so the next thread does not read the old rule and believe it. **None was
+silently applied.**
+
+1. **R01 + R27 reverse `THREAD-PLAN.md` §5/§6** — *"No client name is published
+   without written permission"* and the `NamePublic` gate. A public repo publishes the
+   names the gate exists to withhold. **The exposure is contractual, not cosmetic.**
+   T1 has written no client name anywhere and will not; **T2 must have Masud confirm
+   name-by-name what he has the right to publish.**
+2. **R05 sets aside `instructions.md` §5 rule 2** — *"No round number the page cannot
+   back up"*, which names these two figures specifically. His ruling is later and
+   governs.
+3. **R26b overrides T1's own proposed sequencing**, which was labelled an inference.
+   The site goes dark now rather than at cutover.
+
+### Open
+
+- **R18 — turnaround. Asked twice, declined twice** (*"we will make it quick"*, then
+  *"I have already done research. Okay? So just wondering."*). The research holds four
+  incompatible promises. **Closed to pressing: `/pricing/` and Home §7 ship with no
+  speed claim** until Masud names a figure.
+- **17 still open:** R06 R07 R08 R09 R10 R11 R12 R13 R14 R15 R16 R19 R20 R21 R23 R24 R25.
+- **R24 / R25 — neither `SITE-MAP-v1.md` nor `THREAD-PLAN.md` has been approved**, and
+  both say so in their own headers. Both are already being cited as authority, and T1
+  ran before THREAD-PLAN's stated precondition was met.
+- **`SITE-MAP-v1.md` §1 is now stale** — rows 3–6 still show `/for/…`, which R22 kills.
+- **Batch 4 will press:** R08 testimonials · R19 logo hexes · R14 the phone number.
+
+### Blocked
+
+- ~~**R03 is now urgent** — find the DNS login before deleting anything.~~
+  **RETRACTED 2026-09-05. This was wrong.** See the R03 correction below.
+- **The two deletions are Masud's to run** — `RULINGS.md` §6.3, steps 4 and 5.
+- **Nothing has been pushed anywhere.** `site\` is still the T0 scaffold; no page built.
+  The new Pages project has no successful deployment until that first push.
+- ⚠️ **New, unruled:** this project folder is inside **Google Drive**, and a git repo
+  inside a syncing Drive folder is a known corruption risk. Safer shape is a clone
+  outside Drive with Drive kept as the research archive. **Labelled an inference, not
+  a ruling.** Needs Masud's decision before step 3.
+
+---
+
+## 2026-09-03 — T2 · Portfolio data
+
+### Done
+
+- **Read sources A, C and D in full**, every tab. Source A = 58 rows; the "Upload
+  Status" tab = A rows 1–51 exactly; both report tabs confirmed broken; vocabulary
+  tabs = 43 industries and **55** categories (the audit records 54).
+- **Read the `Website` doc** (`1YKtLJWk…`) for the 28-industry / 14-format vocabulary
+  with slugs.
+- **Wrote `02-Decisions\Portfolio-Catalogue.md`** — 62 rows, all twelve columns, plus
+  the reconciliation, the vocabulary map and the open items.
+- **Wrote `04-Assets\portfolio\fetch-thumbnails.mjs`** — downloads 61 correctly-shaped
+  thumbnails. **Masud runs it; T2 cannot.** Verified: the array holds 61 unique
+  11-character IDs, 5 landscape, the dead ID excluded, and the script runs and fails
+  gracefully.
+- **Measured every video against YouTube** rather than inferring from the sheets:
+  orientation, liveness and real title for all 58 rows plus the 5 IDs the audit names.
+
+### Decisions
+
+- **Q-P8 CLOSED.** `maxresdefault.jpg` is 1280×720 for every Short, as predicted. But
+  `oardefault.jpg` returns the true original aspect ratio for every vertical item.
+  **No frames need extracting from the Drive masters** — that fallback is cancelled.
+- **Q-P2 CLOSED.** 58 is the master count. Source C's per-client video totals sum to
+  exactly 58 and match A client by client. 61 items once source B's four orphans are
+  added and the one dead video is removed. **Nothing was dropped from any source** —
+  A2 and D are subsets of A.
+- **Q-P5 CLOSED.** LVRGAl is uploaded twice; both live, identical titles. Catalogue
+  keeps `LmlOMKBNoew`, the one A and D use.
+- **Q-P6 CLOSED.** All four xlsx-only items are real and on the agency's own channel.
+- **`NamePublic` stays NO on all 62 rows.** Masud's "full permission to do whatever you
+  wish on my site" is recorded and deliberately not read as permission to name clients
+  — naming a client is a claim about someone else's business, and the ruling required
+  is client by client. Reasoning in the catalogue §7. **Labelled T2's reading, not
+  Masud's ruling.**
+- `Featured` and `Order` are marked **INFERENCE** in the catalogue, not a ruling.
+
+### Open — requests for files T2 does not own
+
+- **For the `Website` doc / T5 — two vocabulary rows are missing.** ① A new industry,
+  **Manufacturing & Industrial** (suggested slug `manufacturing-industrial-video`):
+  four of A's terms map to it and source C already uses that exact phrase. ② A new
+  format, **Showreel / Compilation** (`showreel-compilation`): **27 of the 61 items are
+  compilation showreels and no existing format describes one.** Catalogue §4c.
+- **For `Portfolio-Source-Audit.md`** — three figures in it are superseded, named in
+  the catalogue §2 rather than silently fixed: the 53/5 orientation split, the "Islamic
+  has no home" claim, and the 54-category count. T2 does not own that file.
+- **For `RULINGS.md` / T1 — R07 needs 19 yes/no answers**, listed in catalogue §7.
+- **For T5** — the grid needs **two cell shapes**, not one. 27 items are 4:5 and 29 are
+  9:16 or near it. `THREAD-PLAN.md` §6 and the audit both say "a 9:16 card"; that is
+  wrong for 27 items. Three Baby Billion shorts are 1012×1920, not exactly 9:16.
+
+### Blocked
+
+- **Source B was never opened.** `MangoMedia_Video_Embeds.xlsx` is not attached to this
+  thread and no Drive file carries that name. Its four orphans and the LVRGAl duplicate
+  are quoted from the audit and were independently verified live — but the audit says
+  "**at least** four" orphans, so **61 is a floor, not a ceiling.** Re-attach the file
+  and the reconciliation can be closed.
+- **SL 13 — Jay Macallister "MatthewShoutout", `F7AuUoR3ip4` — is dead.** HTTP 404 from
+  oEmbed, placeholder from all three thumbnail endpoints. Present in A, A2 and D. Only
+  source B could show whether it was re-uploaded under another ID.
+- **The audit reports a second ID for "Fear Of Ai"** and does not record its value.
+  Only source B has it.
+- **⚠️ The embedded player names the client even when the card does not.** Every video's
+  YouTube title carries the client name — "Podcast-Editing-Jay Macallister-…",
+  "Agency Video Editing-Served Agency-…". A card that ships unnamed opens into a player
+  that names them. **`NamePublic: NO` is not enforceable through an embed until the
+  YouTube titles are changed or permission is granted.** Catalogue finding 6.
+- **Q-P4 unresolved.** Root IO, CID Foundation and Baby Billion have 9 items in this
+  catalogue and all three also appear in mangomedia.digital's shipped logo and
+  testimonial folders.
+
+---
+
+## 2026-09-03 — T0 · Project setup
+
+### Done
+
+- **Project folder created** at `I:\My Drive\MANGO MEDIA - DEV\Projects\Video Editor\`
+  — it was empty before today.
+- **Read nine Google Docs of existing research.** Eight returned content; one
+  (`1MGid_0IX…`, sent twice) returned "Requested entity was not found."
+- **Fetched the live homepage** at videoeditor.agency and wrote
+  `00-Our-Baseline\VEA-Current-Homepage-Audit.md` from what it actually returned.
+- **Wrote the governing documents:**
+  - `instructions.md` — rules, QA checklist, open items
+  - `02-Decisions\SITE-MAP-v1.md` — 10 pages, nav, taxonomy, 15 open questions
+  - `THREAD-PLAN.md` — T1–T10, file ownership, the portfolio pipeline
+  - `DEPLOYMENT-RUNBOOK.md` — GitHub + Cloudflare, cutover, rollback
+  - `COWORK-PROJECT-INSTRUCTIONS.md` — to paste into the Cowork project field
+- **Built the `site\` scaffold:** `site.css`, `_template\page-template.html`,
+  `tools\sync-shared.mjs`, `robots.txt` (closed), `_redirects` (draft, 34 rows),
+  `.gitignore`, `README.md` stub.
+- **Published the site map** as a shareable page for review.
+
+### Decisions — Masud, 2026-09-03
+
+1. **Plain HTML + CSS.** No framework, no build step. GitHub + Cloudflare Pages.
+2. **Lean core, ~10 pages** — not the ~40+ the WordPress site has.
+3. **Reuse Mango's design system.** *Recorded as: the system — radius, type scale,
+   spacing, structure. NOT the brand colours, which were measured from Mango's logo.
+   This distinction is an inference from the word "system" and Masud should confirm
+   or correct it — see `instructions.md` §3.*
+4. **Leave the live WordPress site alone.** No emergency patch; the rebuild replaces
+   it. Declined the option to strip the fake pricing block first.
+
+### Open
+
+- **All 15 questions in `SITE-MAP-v1.md` §5.** T1 exists to work through them.
+- Three of the four large research docs came back **truncated** at roughly 1% of
+  file size — most of the missing weight is embedded screenshots, but the pricing
+  section of `video editor agency category` was specifically not retrieved. Re-read
+  those three in chunks before treating the site map as complete.
+- `video editor promo` (14 KB) not yet read.
+- Nothing has been imported into `01-Research-Import\` yet. **Four of the eight
+  documents are owned by `videoeditoragency.hello@gmail.com` or
+  `masud.creatives@gmail.com`, not by Masud's main account.** If access to either
+  lapses, half the research goes with it.
+
+### Blocked
+
+- **Nothing is in GitHub yet.** No repo, no Cloudflare project, nothing pushed.
+  The scaffold exists only in Drive.
+- **Domain location unverified.** Bought at Namecheap; possibly transferred to
+  Cloudflare. Nobody has looked.
+- **Q1 — does any of the ~40 pages being retired rank for anything?** Blocks the
+  whole redirect map, and it gets harder to answer after cutover, not easier.
+
+### ⚠️ Contradiction found in the sibling project — for Masud, not for this project
+
+The Cowork project instructions for **Mango Website Rebuild** say *"Framework: Astro,
+static, GitHub, Cloudflare Pages."* But `DECISION-Framework.md` v2 — the file those
+same instructions tell a thread to read second — says **"Not Astro. Not Next.js.
+Hand-written HTML and CSS,"** and its §5 records that the word "Astro" was Claude's
+inference folded into Masud's ruling and attributed to him.
+
+`DECISION-Framework.md` v2 is later and is signed as the correction, so it should
+win. **Named, not resolved** — it belongs to the Mango project, and this project has
+already taken the plain-HTML ruling directly from Masud today.
+
+---
+
+## Template for the next entry
+
+```
+## YYYY-MM-DD — T_ · <thread name>
+
+### Done
+### Decisions
+### Open
+### Blocked
+```

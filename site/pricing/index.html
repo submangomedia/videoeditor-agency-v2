@@ -1,0 +1,702 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- ==========================================================================
+       SEO HEAD — OWNED BY T9. THREAD-PLAN.md §4.
+       Synced by hand from _template/page-template.html on 2026-09-05, AFTER T9
+       rewrote it. T6 filled the canonical for its own page and changed nothing
+       else. The T0 scaffold's "— Video Editor Agency" title suffix is gone
+       because T9 dropped it; titles are hand-written per page.
+
+       ⚠️ THIS BLOCK IS NOT SYNCHRONISED. tools/sync-shared.mjs copies
+       SHARED:HEADER and SHARED:FOOTER only. `--check` will NOT report drift
+       here. If T9 changes the block again, this file needs a hand edit.
+
+       ⚠️ NO PRICE BELONGS IN THIS TITLE OR DESCRIPTION. Not one rate on this
+       page is confirmed (R04). A price in a meta description is a price in a
+       search result, quoted back at you by a client who never opened the page.
+       ========================================================================== -->
+
+  <!-- T9, 2026-09-05. 40 characters.
+       "Rates", not "Prices" or "Plans". R04 ruled published per-unit rates,
+       so there are no plans and no tiers to name. The H1 is the bare word
+       "Pricing"; the title carries the extra word a search result needs. -->
+  <title>Video Editing Rates — Video Editor Agency</title>
+
+  <!-- T9, 2026-09-05. 149 characters.
+       ⚠️ THIS DESCRIBES THE PRICING MODEL, NOT THE PRICES, AND THAT IS THE
+       ONLY HONEST OPTION AVAILABLE TODAY. Per T6's finding, R23 ruled eleven
+       services and R04's research supplies a rate for four. Any wording that
+       implies every service is priced would be false under two of the three
+       resolutions Masud has yet to choose between. "Per-unit rates rather
+       than monthly retainers" is true under all three.
+       "Genuinely unlimited" is R17, verbatim, ruled 2026-09-03.
+       ⚠️ NO FIGURE HERE, EVER, until R04's four rates are confirmed in
+       Masud's own words. A price in a meta description is a price in a
+       search result, quoted back by someone who never opened the page. -->
+  <meta name="description" content="How video editing is priced at Video Editor Agency: per-unit rates rather than monthly retainers, with genuinely unlimited revisions on every project.">
+
+  <link rel="canonical" href="https://videoeditor.agency/pricing/">
+
+  <!-- ⚠️ STAYS until cutover, then comes off PAGE BY PAGE, NEVER SITEWIDE.
+       instructions.md §5. Do not move this tag into a SHARED block. -->
+  <meta name="robots" content="noindex, nofollow">
+
+  <!-- T3's dark paint, declared before the CSS lands. Without these the browser
+       paints white for one frame and the visitor sees a flash on #090909. -->
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#090909">
+
+  <!-- ⚠️ CORRECTED 2026-09-05. This page requested Roboto + Roboto Slab until
+       now. T3 replaced that pairing with Inter on the dark palette, so those
+       two families were being downloaded and rendered NOWHERE — the exact
+       failure instructions.md §5 names ("nothing gets loaded that renders
+       nowhere"), and the one Mango's site committed with Inter for months.
+       Sherika is not loaded: it is commercial and unlicensed. See R28. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;display=swap">
+
+  <link rel="stylesheet" href="/assets/css/site.css">
+
+  <!-- ==========================================================================
+       PAGE-SCOPED CSS — only what T3's system has no class for.
+
+       ⚠️ REWRITTEN 2026-09-05 AFTER T3 SHIPPED THE DARK PALETTE. The previous
+       version defined .section and .cta-block. BOTH NOW EXIST IN site.css, and
+       a page <style> beats the external sheet at equal specificity — T3's
+       .section sets padding-block, T6's set margin-block, so the two would have
+       stacked and doubled the spacing on every section of this page. The old
+       .lede also painted body text --ink-muted, which on #090909 is 5.3:1: fine
+       for a caption, wrong for a lead paragraph. Deleted, not merged.
+
+       WHAT SURVIVES IS ONLY WHAT site.css HAS NO CLASS FOR, AND NOTHING HERE
+       SHARES A NAME WITH ANYTHING IN IT. Every value is a T3 token: no hex, no
+       radius, no font, no size of its own. T3 absorbs these and deletes them.
+       ====================================================================== -->
+  <style>
+    .eyebrow {
+      font-size: var(--step--1);
+      color: var(--ink-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: var(--space-2);
+    }
+
+    .lede {
+      font-size: var(--step-1);
+      color: var(--ink);
+      max-width: var(--measure);
+    }
+
+    /* Wide tables scroll inside their own container. The page body never
+       scrolls sideways. */
+    .table-scroll { overflow-x: auto; }
+
+    .rate-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-block: var(--space-5);
+      text-align: left;
+      min-width: 34rem;
+    }
+
+    .rate-table th,
+    .rate-table td {
+      padding: var(--space-3);
+      border-bottom: 1px solid var(--rule);
+      vertical-align: top;
+    }
+
+    .rate-table thead th {
+      font-family: var(--font-heading);
+      font-weight: var(--weight-heading);
+      color: var(--ink);
+      font-size: var(--step--1);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .rate-table tbody th {
+      color: var(--ink);
+      font-weight: var(--weight-bold);
+    }
+
+    .rate-table__amount { white-space: nowrap; }
+
+    .faq details {
+      border-bottom: 1px solid var(--rule);
+      padding-block: var(--space-3);
+    }
+
+    .faq summary {
+      font-family: var(--font-heading);
+      font-weight: var(--weight-heading);
+      color: var(--ink);
+      font-size: var(--step-1);
+      cursor: pointer;
+    }
+
+    .faq p { margin-top: var(--space-3); }
+  </style>
+</head>
+
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- SHARED:HEADER — START ======================================================
+     GENERATED BLOCK. Edit it HERE, in _template/page-template.html, then run
+     node tools/sync-shared.mjs. Hand-editing it inside a page file works until
+     the next sync, which overwrites it without warning.
+
+     ⚠️ ONLY T3 AND T9 MAY EDIT THIS BLOCK. See THREAD-PLAN.md §1 Rule 2.
+        A page thread that edits it silently rewrites the nav on nine pages
+        it does not own.
+
+     NAV SOURCE: 02-Decisions/SITE-MAP-v1.md §2. Six top-level items.
+
+     ⚠️ THE FOUR AUDIENCE URLS ARE FLAT — /coaches/, /content-creators/,
+        /business-owners/, /marketers-and-agencies/. R22, ruled 2026-09-03,
+        Masud verbatim: "Flat — /coaches/, /content-creators/…"
+        SITE-MAP-v1.md §1's TABLE STILL LISTS /for/… AND IS STALE. RULINGS.md
+        R22 says so in terms. Never take a URL from that table.
+
+     Only the pages that EXIST are links. The rest render as unlinked muted
+     text, because instructions.md §5 requires every nav link to resolve to a
+     live page — and a link to a 404 breaks that rule where plain text does not.
+     ⚠️ NONE OF THE TEN PAGES EXISTS YET, so all six are text today. That is
+        the correct treatment, not a temporary bodge. Promote each to a real
+        <a> as its thread ships it.
+
+     ⚠️ THE WORDMARK IS TYPE, NOT THE LOGO IMAGE, AND THAT IS DELIBERATE.
+        VEA's logo measures #1C2448 — one colour, no accent, read from the live
+        logo.svg at /wp-content/uploads/2024/10/logo.svg on 2026-09-05. On a
+        #090909 page that navy is very nearly invisible, and no white version
+        of the logo exists anywhere in this project.
+        → [[R29 — a white/reversed VEA logo is required before any logo image
+             can appear on a dark page.]]
+     ========================================================================= -->
+<header class="site-header">
+  <div class="container site-header__inner">
+
+    <a class="wordmark" href="/">Video Editor Agency</a>
+
+    <!-- ⚠️ NAV PROMOTED BY T9, 2026-09-05. Four spans became links.
+         The comment above this block still said "NONE OF THE TEN PAGES EXISTS
+         YET, so all six are text today." That stopped being true when T4, T6
+         and T8 shipped. Four of the six now resolve to a real file in this
+         folder, verified today, so under instructions.md §5 they must be links:
+         the rule requires a nav link to reach a live page, not that the nav
+         stay text. Two are still text, and both for a reason. -->
+    <nav class="nav" aria-label="Main">
+      <ul>
+        <li><a href="/services/">Services</a></li>
+
+        <!-- ⚠️ STILL TEXT, AND THIS IS THE ONE THAT NEEDS FIXING NEXT.
+             All four audience pages EXIST — /coaches/, /content-creators/,
+             /business-owners/, /marketers-and-agencies/ — and nothing in the
+             header reaches any of them. THEY ARE ORPHANS IN THE NAV.
+
+             T9 has NOT built the dropdown: it is a CSS :hover/:focus-within
+             component and site.css is T3's file, which T9 does not write.
+             The gap is covered for now by the footer link list below, so no
+             page is unreachable — but a footer link is not a nav item.
+             → T3, or Masud reassigning site.css. -->
+        <li><span class="nav__pending">For</span></li>
+
+        <!-- Still text because /portfolio/ genuinely does not exist. T5 has not
+             run and is blocked on R07. This is the correct treatment, not a
+             bodge — and it is also why _redirects cannot ship yet, since 60 of
+             its 61 rows point here. -->
+        <li><span class="nav__pending">Portfolio</span></li>
+
+        <!-- /pricing/ STAYS in the nav. R04 ruled it ships as a published
+             per-unit rate page, so THREAD-PLAN.md §5 T6's fallback — drop it
+             from the nav and 301 to /contact/ — no longer applies. -->
+        <li><a href="/pricing/" aria-current="page">Pricing</a></li>
+
+        <li><a href="/about/">About</a></li>
+
+        <!-- Contact takes the button treatment SITE-MAP-v1.md §2 specifies.
+             T9 promotes it to a link, not to a button: the button class is a
+             design-system decision and site.css is T3's. → T3. -->
+        <li><a href="/contact/">Contact</a></li>
+      </ul>
+    </nav>
+
+  </div>
+</header>
+<!-- SHARED:HEADER — END ===================================================== -->
+
+<!-- ============================================================================
+     ⚠️⚠️ THIS PAGE DOES NOT SHIP YET. NOT ONE PRICE ON IT IS CONFIRMED. ⚠️⚠️
+
+     Written by T6, 2026-09-05.
+
+     THE PAGE IS NOT DROPPED. T6's brief said "if Q7 is unanswered, /pricing/
+     does not ship — the page is dropped from the nav and /pricing/ redirects to
+     /contact/." That trigger DOES NOT FIRE. "Q7" resolves to R04, and R04 was
+     RULED by Masud on 2026-09-03: published per-unit rates, no retainer tiers,
+     no "request a quote". So the page exists and stays in the nav.
+
+     WHAT R04 ALSO SAYS, ADDRESSED TO THIS THREAD BY NAME:
+
+       "He picked the option; he did not retype the numbers. T6 MUST HAVE HIM
+        CONFIRM EACH RATE BEFORE IT RENDERS ON A PAGE. Recording an option-label
+        as a price quote would be exactly the Astro mistake."
+
+     ✅ UPDATED 2026-09-05 — THREE OF THE FOUR RATES ARE NOW MASUD'S OWN.
+
+     > Masud, 2026-09-05, verbatim: "Set the pricing: Short video is $30. Long
+     > video is $20 per minute. Thumbnail is $30 per thumbnail."
+
+     Those three are RENDERED AS REAL NUMBERS. R04's requirement — "T6 must have
+     him confirm each rate before it renders on a page" — is satisfied for them.
+
+     ⚠️ MOTION GRAPHICS & ANIMATION WAS NOT AMONG THEM AND REMAINS A BRACKET.
+        Three rates were given; the model has four units. The research says $15
+        per minute of animation. THAT FIGURE IS NOT CARRIED OVER, and the reason
+        matters: of the two research figures he did address, he CHANGED BOTH —
+        long-form $15 → $20, short-form $25 → $30. A stale figure he silently
+        left alone cannot be treated as one he endorsed. It needs his number.
+
+     ⚠️ AND THIS VINDICATES R04's CAUTION RATHER THAN BEING A FORMALITY. If T6
+        had rendered the option-label figures when R04 was first ruled, this page
+        would today be advertising $15/minute and $25/reel — under-charging
+        against Masud's actual rates on every long-form and short-form order.
+        That is the concrete cost the "Astro mistake" rule exists to prevent.
+
+     THE SUPERSEDED SOURCES, recorded so nobody reinstates them:
+       · 01-Research-Import/videoeditor_agency_website_copy.md, PAGE 1
+         SECTION 8, "TAB 3 — Flat Rate" (lines 380–387) — $15 / $25 / $15 / $XX
+       · the client brief, per SITE-MAP-v1.md §4.8 — the same figures
+     Both predate every ruling. Two of their four numbers are now wrong.
+
+     ⚠️ DEAD AND DELETED FROM THIS PAGE — killed by ruling, not by preference:
+        · "TAB 1 — Monthly Retainer" (Starter/Growth/Pro, all $XXX)    → R04
+        · "TAB 2 — Per Bundle" (Starter/Standard/Premium Pack, $XXX)   → R04
+        · every revision cap: "3 revisions", "2 revisions"             → R17
+        · every delivery promise: "5-day", "3-day", "24-hour",
+          "48-hour priority", "3–5 business days"                      → R18
+        · FAQ Q2 (turnaround) and FAQ Q6 (which of the three pricing
+          models suits you — a choice that no longer exists here)      → R18, R04
+        · the $6.99/$12.99/$15.99 web-hosting set, LIVE on the old
+          site right now                                               → R04
+        · the $99/$199/$299 set                                        → R04
+        None of them appears in this file and none may be reintroduced.
+
+     CLEAR ALL OF THESE BEFORE THIS PAGE IS PUSHED:
+
+       1. THE MOTION GRAPHICS RATE. The one unit of four with no number.
+       2. RESOLVE THE 11-SERVICES-VS-4-RATES GAP. See the note above the table.
+          The import shows the cause is structural, not an oversight.
+       3. R15 — VEA's email, for the CTA.
+       4. T3 — promote "Pricing" in the nav from <span> to <a href="/pricing/">.
+
+     ✅ CLEARED SINCE THE FIRST DRAFT:
+       · the copy import — T8 landed it 2026-09-05, provenance verified and
+         all three Drive copies diffed byte-for-byte
+       · <title> and <meta name="description"> — T9 wrote both, 2026-09-05
+       · THE LONG-FORM, SHORT-FORM AND THUMBNAIL RATES — Masud, 2026-09-05
+       · the thumbnail price, which had never existed in any document
+
+     ⚠️ ONE THING FOR MASUD TO LOOK AT, STATED ONCE AND NOT ARGUED: a thumbnail
+        and a whole short-form edit are now THE SAME PRICE — $30 each. A reader
+        comparing the two rows will notice, because a thumbnail is a single
+        still and a reel is a full edit. It may be exactly what he intends
+        (thumbnails are skilled, fast, and high-leverage work). It is flagged
+        because the rate card puts the two lines four rows apart where anyone
+        can compare them, and it is cheaper to look at now than after a client
+        asks.
+
+     WHAT IS REAL ON THIS PAGE:
+       · Per-unit model, no tiers, no quote-gate   — R04, 2026-09-03
+       · "No revision caps. No extra fees. Ever."  — R17, 2026-09-03
+       · No turnaround claim, anywhere             — R18, closed to pressing
+       · Dhaka stated rather than hidden           — R16, 2026-09-05
+     ========================================================================= -->
+
+<main class="site-main" id="main">
+  <div class="container">
+
+    <h1>Pricing</h1>
+
+    <!-- ⚠️ THE SOURCE'S PRE-LABEL WAS "Pricing Plans" AND IT IS NOT USED.
+         There are no plans. R04 replaced them with published per-unit rates, so
+         the label would name something this page does not contain. DELETED
+         rather than reworded — rewording source copy is a copy decision and it
+         belongs to Masud, not to a build thread.
+
+         ⚠️ THE H2 BELOW IS THE SOURCE'S, VERBATIM (PAGE 1 SECTION 8) — but it
+         was written for the three-tier page R04 killed, and "Every Stage of
+         Growth" originally pointed at those tiers. It reads acceptably without
+         them. Flagged rather than rewritten, for the same reason. -->
+    <section class="section" aria-labelledby="model-heading">
+      <h2 id="model-heading">Transparent Pricing for Every Stage of Growth</h2>
+
+      <p class="lede"><span class="todo">[[SUBTEXT — the source line is "Choose the
+        plan that fits your workflow — monthly retainer, per bundle, or flat
+        rate. All plans include a dedicated editor and unlimited revisions."
+        THE FIRST SENTENCE IS DEAD (R04). The second is true but says "plans".
+        Masud: approve a one-line replacement, or this section runs with no
+        subtext at all.]]</span></p>
+
+      <p>We publish our rates. You pay per video, per minute of finished output,
+        or per design — there is no monthly retainer, and no sales call before
+        you can see a price.</p>
+
+      <!-- ⚠️ THE PARAGRAPH ABOVE IS T6'S OWN WORDING AND IT IS THE ONLY SENTENCE
+           ON THIS PAGE THAT COMES FROM NEITHER THE SOURCE DOCUMENT NOR A RULING.
+           It states R04's mechanism, because R04 deleted the three-tab section
+           that used to explain the model and left nothing in its place. It
+           carries no figure, no speed promise and no outcome claim — only what
+           the page itself demonstrates. Masud keeps it or strikes it. -->
+    </section>
+
+    <!-- ======================================================================
+         THE RATES
+
+         ⚠️⚠️ EVERY AMOUNT IS A BRACKET. See the build gate at the top of this
+              file. R04 requires Masud to confirm each figure before it renders.
+
+         ⚠️⚠️ A CONTRADICTION BETWEEN TWO RULINGS. NAMED, NOT RESOLVED.
+
+              R23 (2026-09-05) ruled ELEVEN services.
+              R04 (2026-09-03) ruled PUBLISHED PER-UNIT RATES.
+              The imported source prices exactly FOUR units.
+
+              SEVEN SERVICES HAVE NO PUBLISHED RATE: YouTube · Podcast ·
+              Marketing Video · Ads Video · Event Video · Promotional Video ·
+              Video Recording.
+
+              ⚠️ THE IMPORT MAKES THE CAUSE VISIBLE, AND IT IS STRUCTURAL RATHER
+              THAN AN OVERSIGHT. In the source document those seven were never
+              priced per unit at all. They were sold through the Monthly
+              Retainer and Per Bundle tabs — "8 videos (long-form or mixed)",
+              "6 videos (mixed formats)". R04 deleted both tabs. It therefore
+              deleted the ONLY pricing mechanism those seven services ever had,
+              and nothing replaced it.
+
+              R04 explicitly rejected "request a quote" as the model. But a rate
+              page that prices 4 of 11 services IS a quote page for the other 7.
+              As things stand the two rulings cannot both be executed.
+
+              THREE HONEST RESOLUTIONS. MASUD PICKS ONE — T6 DOES NOT:
+
+                a) THE SEVEN COLLAPSE INTO THE FOUR UNITS. YouTube, Podcast,
+                   Event and Promotional are long-form; Ads and Marketing are
+                   long- or short-form by length. The table stays at four rows
+                   and /services/ says which unit each service bills as. This is
+                   the tidiest answer and may be what was always meant — but it
+                   is still a decision, because "a podcast edit bills per
+                   finished minute" is a commercial claim nobody has made yet.
+                b) SEVEN MORE RATES ARE PUBLISHED. Masud supplies them.
+                c) THOSE SEVEN ARE QUOTED, and the page says so in one plain
+                   line. This is a partial retreat from R04 and belongs in
+                   RULINGS.md as one, not slipped in here.
+
+              Until one is chosen this table cannot be finished. It is a bigger
+              open item than the amounts, because it decides how many rows
+              there are.
+         ================================================================== -->
+    <section class="section" aria-labelledby="rates-heading">
+      <h2 id="rates-heading">Our rates</h2>
+
+      <div class="table-scroll">
+        <table class="rate-table">
+          <caption class="visually-hidden">Published per-unit editing rates</caption>
+          <thead>
+            <tr>
+              <th scope="col">Service</th>
+              <th scope="col">Unit</th>
+              <th scope="col">Rate</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- ⚠️ SERVICE NAMES HERE MATCH /services/ EXACTLY, not the source's
+                 TAB 3 wording ("Short-Form Reel", "Motion Graphics"). A visitor
+                 moving between the two pages has to recognise the same service,
+                 and R23 made /services/ the canonical list of eleven names.
+                 A naming alignment, not a copy change.
+
+                 ⚠️ THE THREE CONFIRMED RATES BELOW ARE MASUD'S OWN, 2026-09-05,
+                 verbatim: "Short video is $30. Long video is $20 per minute.
+                 Thumbnail is $30 per thumbnail."
+
+                 TWO OF THEM CHANGED THE RESEARCH FIGURE — long-form was $15/min
+                 and short-form was $25 in both the source document and the
+                 client brief. He did not confirm those numbers; he replaced
+                 them. That is exactly why R04 required him to retype rather
+                 than approve an option label, and it is the reason no research
+                 figure was ever rendered on this page. -->
+            <tr>
+              <th scope="row">Long-Form Video Editing</th>
+              <td>Per minute of final output</td>
+              <td class="rate-table__amount">$20</td>
+            </tr>
+            <tr>
+              <th scope="row">Short-Form Reels &amp; TikToks</th>
+              <td>Per video</td>
+              <td class="rate-table__amount">$30</td>
+            </tr>
+            <tr>
+              <th scope="row">Motion Graphics &amp; Animation</th>
+              <td>Per minute of animation</td>
+              <td class="rate-table__amount"><span class="todo">[[NOT GIVEN.
+                Masud supplied three rates on 2026-09-05 and this was not one of
+                them. The research says $15 per minute of animation — NOT
+                CARRIED OVER, because he raised both of the other research
+                figures rather than confirming them, so $15 cannot be assumed
+                current. Needs his number.]]</span></td>
+            </tr>
+            <tr>
+              <th scope="row">Thumbnail Design</th>
+              <td>Per thumbnail</td>
+              <td class="rate-table__amount">$30</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p><span class="todo">[[THE OTHER SEVEN SERVICES — resolve (a), (b) or (c)
+        in the note above this table. Seven of the eleven services ruled under
+        R23 have no published rate, because R04 deleted the retainer and bundle
+        tabs that were the only place they were ever priced.]]</span></p>
+    </section>
+
+    <!-- ======================================================================
+         WHAT IS INCLUDED
+
+         R17, Masud 2026-09-03, verbatim: "Genuinely unlimited". Every revision
+         cap in the research — Starter's 3, Starter Pack's 2, and the rest — is
+         deleted. Under R04 there are no tiers left to cap anyway.
+
+         ⚠️ NO TURNAROUND LINE APPEARS HERE AND ITS ABSENCE IS DELIBERATE.
+            R18 was asked twice and declined twice. RULINGS.md §4 records the
+            consequence explicitly: "/pricing/ and Home §7 ship with no
+            turnaround claim." The research holds FOUR incompatible promises —
+            24–72h, 24–48h, 48h, 3–5 business days. A later thread must not
+            resolve that by choosing one. If Masud names a figure, it is added
+            to RULINGS.md with a date and then it may appear here.
+
+            RULINGS.md §4 also records T1's objection, once: unlimited rounds on
+            a per-unit price with no time limit is an unbounded commitment on a
+            bounded fee. Masud ruled. T6 does not re-argue it — noted only so
+            that the trade stays visible.
+         ================================================================== -->
+    <section class="section" aria-labelledby="included-heading">
+      <h2 id="included-heading">What every rate includes</h2>
+
+      <p class="lede">No revision caps. No extra fees. Ever.</p>
+
+      <!-- ⚠️ THE SOURCE'S OWN INCLUSION LISTS CANNOT BE USED WHOLE. Every one
+           of them sat inside a retainer or bundle tier — "project manager",
+           "priority support", "white-label available", "5-day delivery" — and
+           R04 deleted the tiers while R18 forbids the delivery promises. The
+           two items below are drawn from FAQ answers Q3 and Q5, which survive
+           both rulings.
+           ⚠️ Q5's answer reads "throughout your subscription or project". THREE
+           WORDS ARE DROPPED HERE — "your subscription or" — because R04 means
+           no subscription exists. That is a DELETION forced by a ruling, not a
+           rewrite, and it is recorded rather than made silently. -->
+      <ul>
+        <li>A dedicated editor who stays with you throughout your project, and
+          who learns your brand style so quality improves with every video</li>
+        <li>Unlimited revision rounds, with zero extra charges</li>
+        <li><span class="todo">[[A THIRD INCLUSION, IF THERE IS ONE — every
+          remaining item in the source belonged to a deleted tier. Which of
+          "project manager", "priority support" or "white-label" applies to a
+          per-unit order?]]</span></li>
+      </ul>
+    </section>
+
+    <!-- ======================================================================
+         FAQ — native <details>/<summary>, per instructions.md §5.
+         A JS accordion is banned. These are real HTML elements: they work with
+         no script, in every browser, and in every accessibility tool.
+
+         Q3 below is the source's answer, VERBATIM. It is clean and it says
+         exactly what R17 ruled.
+
+         ⚠️ THE SOURCE HAS EIGHT FAQs AND ONLY ONE OF THEM BELONGS HERE:
+            Q2 (turnaround)                     — DEAD, R18.
+            Q6 (which pricing model suits you)  — DEAD, R04. It walks the reader
+                through choosing between retainer, bundle and flat rate. Two of
+                those three no longer exist on this site.
+            Q1, Q4, Q5, Q7, Q8 are alive but belong on /services/, /contact/ or
+                the homepage — not on a pricing page.
+            ⚠️ Q1 also lists only NINE services and omits Video Recording, which
+                R23 and R11 put in the offer. Whoever uses Q1 must reconcile it.
+
+         An FAQ with one real answer beats one padded out to eight. Six Lorem
+         ipsum FAQ answers are live on the old site right now; that is precisely
+         the failure this restraint exists to avoid.
+         ================================================================== -->
+    <section class="section" aria-labelledby="faq-heading">
+      <h2 id="faq-heading">Pricing questions</h2>
+
+      <div class="faq">
+
+        <details>
+          <summary>What does "unlimited revisions" really mean?</summary>
+          <p>It means exactly what it says. There is no cap on the number of
+            revision rounds. We keep revising until you're completely satisfied
+            with the final output — with zero extra charges.</p>
+        </details>
+
+        <details>
+          <summary><span class="todo">[[A SECOND PRICING QUESTION IS NEEDED, and
+            the source has none that survives its own rulings. The obvious one is
+            "how are the seven unpriced services quoted?" — which cannot be
+            written until the R04/R23 gap above is resolved.]]</span></summary>
+          <p><span class="todo">[[ANSWER — blocked on that same decision.]]</span></p>
+        </details>
+
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         CTA — the source's "CUSTOM PLAN CTA (BELOW ALL TABS)", PAGE 1 §8.
+         This one survives R04 intact: it is about custom volume for teams and
+         agencies, which is a conversation rather than a published tier.
+
+         ⚠️ "Book a Call" NEEDS A BOOKING DESTINATION AND THERE ISN'T ONE.
+            R13 (form backend) is OPEN, /contact/ does not exist yet (T8), and
+            no scheduling link appears anywhere in this project. A CTA that
+            leads nowhere is worse than a sentence that leads nowhere, so it
+            stays text. When T8 ships /contact/ this becomes:
+                <a class="btn btn--primary" href="/contact/">Book a Call</a>
+            .btn--primary is T3's blue fill with a white label at 8.46:1 — the
+            ONLY correct use of the accent. Never blue text on the dark page.
+         ================================================================== -->
+    <section class="section" aria-labelledby="cta-heading">
+      <h2 id="cta-heading">Running a team or agency and need a custom volume deal?</h2>
+
+      <p class="lede">Let's talk.</p>
+
+      <!-- ✅ PROMOTED TO A REAL LINK 2026-09-05. T8 shipped site\contact\index.html.
+           ⚠️ THE LABEL CHANGED FROM "Book a Call" TO "Contact Us", DELIBERATELY.
+           R13 (form backend) is OPEN and no scheduling link exists anywhere in
+           this project, so "Book a Call" would promise a booking flow that does
+           not exist. The destination is a contact page; the label now says so.
+           If a scheduling link is ever added, the source's original wording can
+           come back. -->
+      <p><a class="btn btn--primary" href="/contact/">Contact Us</a></p>
+    </section>
+
+  </div>
+</main>
+
+<!-- SHARED:FOOTER — START ======================================================
+     GENERATED BLOCK. Edit it HERE, then run node tools/sync-shared.mjs.
+
+     SETTLED, THEREFORE PRINTED:
+       R16 — LOCATION. Masud, 2026-09-05, selected "Say it plainly — Dhaka,
+             Bangladesh." This kills the New York and Delaware addresses in
+             the research outright. No US address appears anywhere on this site.
+             ⚠️ Stating Dhaka is a fact about location. It is NOT a licence to
+             borrow Mango's positioning — instructions.md §2 stands: Mango
+             sells full-service marketing to Bangladeshi businesses; VEA sells
+             editing to price- and speed-sensitive international buyers.
+
+     NOT SETTLED, THEREFORE BRACKETED RATHER THAN GUESSED:
+       R14 — PHONE. RULINGS.md §4 records this RULED as +880 1336433711 on
+             2026-09-05 — and THE SAME ENTRY records that it has NOT been
+             dialled. RULINGS §2 C5: "settled by dialling it, not by reasoning
+             about it." The research set that supplies that number also
+             supplies Lorem ipsum, a job board's FAQ and a landscaping
+             company's copy. Mango's number is ONE DIGIT away at
+             +880 1336433710. Wrong here means wrong on ten pages at once.
+             → It goes in the moment Masud confirms it rings.
+
+       R15 — EMAIL. OPEN. hello@videoeditor.agency recurs across the research
+             and has never been verified as a live mailbox. The zone's MX
+             records point at a cPanel host, so a mailbox COULD exist — which
+             is not the same as one existing.
+
+     ⚠️ THESE ARE BRACKETS, NOT PLACEHOLDERS, AND THE DIFFERENCE IS THE POINT.
+        A bracket is loud by design (site.css §9) and cannot reach production
+        unnoticed. Every page carries noindex and nothing ships until T10.
+        A plausible-looking wrong phone number would be the same risk class as
+        a fabricated testimonial — THREAD-PLAN.md §5 T4 says so in terms.
+
+     ⚠️ CORRECTED BY T9, 2026-09-05. THIS LINE PREVIOUSLY READ "T8 fills this
+        block once R14 is dialled and R15 is answered." IT NAMED THE ONE
+        THREAD THAT IS NOT ALLOWED TO OPEN THIS FILE.
+
+        THREAD-PLAN.md §1 Rule 2: only T3 and T9 may touch
+        _template/page-template.html. T8 raised the same contradiction in its
+        own WORKLOG entry (contradiction #2) and correctly did not edit it.
+        T3 has now finished. **T9 owns this block until Masud says otherwise.**
+
+        Sources: this file's own footer comment versus THREAD-PLAN.md §1
+        Rule 2 and §4. Corrected here rather than argued, because leaving it
+        would eventually be obeyed — a stale instruction in a file is a trap,
+        not a note.
+
+     WHO FILLS THE TWO BRACKETS, AND WHEN:
+       R14 — the moment Masud confirms +880 1336433711 actually rings.
+             T3's reasoning for bracketing rather than printing it stands and
+             T9 does not overturn it: RULINGS §2 C5 says this one is settled
+             by dialling, not by reasoning.
+       R15 — the moment an email address is confirmed to receive mail.
+
+     Bring either answer to T9 (or to whoever holds this file at the time).
+     Do NOT hand-edit the footer inside a page file: sync-shared.mjs
+     overwrites it on the next run without warning.
+     ========================================================================= -->
+<footer class="site-footer section">
+  <div class="container">
+    <h2 class="visually-hidden">Site footer</h2>
+
+    <p>Video editing from Dhaka, Bangladesh — for creators, coaches and brands worldwide.</p>
+
+    <!-- ⚠️ ADDED BY T9, 2026-09-05, AND IT FIXES A REAL PROBLEM.
+         Before this, the four audience pages existed and NOTHING ON THE SITE
+         LINKED TO THEM. The header's "For" dropdown is unbuilt (see the note in
+         SHARED:HEADER) and no page threads cross-link. Four orphan pages: a
+         crawler reaching the site would never find them, and neither would a
+         visitor.
+
+         This is a plain <ul> of <a>s using nothing but the base link styles —
+         NO NEW CSS CLASS, because site.css is T3's file and T9 does not write
+         it. If T3 wants to style this list properly, the markup is here to
+         hang a class on.
+
+         ⚠️ NO BLOG LINK. R10, ruled 2026-09-05: "Drop it — out of nav, 301 to
+         home." Every research document's footer has one. It does not come back.
+         ⚠️ NO /portfolio/ LINK. The page does not exist. It joins this list the
+         day T5 ships, and so does the sitemap entry.
+         ⚠️ The seven links below are every page that exists except /404.html,
+         which is deliberately unlinked and permanently noindexed. -->
+    <nav aria-label="Footer">
+      <ul>
+        <li><a href="/services/">Services</a></li>
+        <li><a href="/pricing/" aria-current="page">Pricing</a></li>
+        <li><a href="/coaches/">For Coaches &amp; Trainers</a></li>
+        <li><a href="/content-creators/">For Content Creators</a></li>
+        <li><a href="/business-owners/">For Business Owners</a></li>
+        <li><a href="/marketers-and-agencies/">For Marketers &amp; Agencies</a></li>
+        <li><a href="/about/">About</a></li>
+        <li><a href="/contact/">Contact</a></li>
+        <li><a href="/privacy/">Privacy policy</a></li>
+        <li><a href="/terms/">Terms and conditions</a></li>
+      </ul>
+    </nav>
+
+    <p>
+      <span class="todo">[[R14 — phone +880 1336433711: RULED, NOT YET DIALLED]]</span>
+      <span class="todo">[[R15 — which email address does VEA publish?]]</span>
+    </p>
+
+    <p class="legal">© 2026 Video Editor Agency</p>
+  </div>
+</footer>
+<!-- SHARED:FOOTER — END ===================================================== -->
+
+</body>
+</html>

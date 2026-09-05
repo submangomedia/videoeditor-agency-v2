@@ -1,0 +1,24 @@
+# There is no build step and no dependencies, so there is very little to ignore.
+# This file exists mainly to keep OS, editor and Google Drive clutter out of the
+# repository.
+
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+.vscode/
+.idea/
+
+# Google Drive Desktop artefacts. This folder lives inside I:\My Drive, so Drive
+# will occasionally drop these in. They must never be committed.
+.tmp.drivedownload/
+.tmp.driveupload/
+*.gdoc
+*.gsheet
+*.gslides
+
+# Nothing here should ever appear. If it does, something has quietly introduced a
+# build step and the platform ruling has been broken.
+node_modules/
+dist/
+build/

@@ -1,0 +1,289 @@
+# ============================================================================
+# _redirects — Cloudflare Pages
+# Owner: T9. Rewritten 2026-09-05 from a live crawl of videoeditor.agency.
+# ============================================================================
+#
+# STATUS: COMPLETE AND SHIPPABLE. 61 rows for 65 known URLs.
+#
+# ⚠️ INERT UNTIL CUTOVER. These rules only matter once videoeditor.agency
+# points at THIS Pages project. On videoeditor-agency-v2.pages.dev nothing
+# hits these paths.
+#
+#
+# THE Q1 BLOCK THAT USED TO BE HERE IS GONE — R02, RULED 2026-09-03
+# ---------------------------------------------------------------------------
+# The previous version of this file carried a block reading "THIS FILE IS A
+# DRAFT AND MUST NOT SHIP UNTIL Q1 IS ANSWERED." That is stale.
+#
+# Q1 is R02, and Masud ruled on it: "Do whatever you need to do because I will
+# abandon that old site." No Search Console export is coming. This map is
+# written WITHOUT ranking data, deliberately, and T9 must not wait for it.
+#
+# The accepted cost, stated once and not re-argued: if any of these URLs
+# carried organic traffic, nobody will ever know what was lost, because the
+# measurement was declined before the change. See RULINGS.md R02.
+#
+# The redirects are kept anyway, for the reason R02 does NOT cover: anyone
+# holding a link, a bookmark or a citation to one of these 65 URLs. That is
+# a different argument from ranking, and it survives the ruling.
+#
+#
+# HOW THE INVENTORY WAS BUILT — fetched, not remembered
+# ---------------------------------------------------------------------------
+# T9 fetched these five live pages on 2026-09-05:
+#   /                /business-cat/    /video-type/    /blog/    /portfolio/
+#
+# The 32 standalone slugs come off the live homepage cards. The taxonomy terms
+# come from the union of two sources: the nav dropdown (which shows the first
+# five of each, alphabetically) and the archive index (which shows only terms
+# that actually have items). The blog posts come off /blog/.
+#
+# ⚠️ ONE LIMIT, STATED HONESTLY. Neither the nav nor the archive lists EVERY
+# taxonomy term — the nav truncates at five and the archive hides empty terms.
+# A term that is both alphabetically past the first five AND has no portfolio
+# items would be invisible to this crawl. The trailing wildcards on lines
+# marked SAFETY NET exist for exactly that case.
+#
+# ✅ CORROBORATION: the last deploy of the old repo was commit 76237a2,
+# "Remove site-wide noindex nofollow from all 65 pages." The inventory below
+# totals EXACTLY 65 URLs. That is not proof — the commit counts HTML files,
+# not URLs — but an exact match is meaningful, and it is the best evidence
+# available that nothing large is missing.
+#
+#
+# WHAT IS DELIBERATELY ABSENT
+# ---------------------------------------------------------------------------
+# 1. THE FOUR AUDIENCE PAGES. /coaches/, /content-creators/, /business-owners/
+#    and /marketers-and-agencies/ keep their URLs — R22, RULED 2026-09-03,
+#    "Flat — /coaches/, /content-creators/…". All four verified live today.
+#    A redirect for any of them would be a bug, not an omission.
+#
+# 2. /portfolio/ AND /contact/. Both exist on the old site and both exist in
+#    the new ten-page map. Same URL, no redirect needed.
+#
+# 3. /pricing/. There is NO /pricing/ page on the old site — the nav points at
+#    the fragment /#pricing, which a server never sees. Nothing to redirect
+#    FROM. (The contingency row for T6 is at the bottom of this file.)
+#
+# 4. /wp-content/* AND /wp-includes/*. Old asset URLs. They are left to 404 on
+#    purpose. Redirecting an image URL to an HTML page produces a soft 404,
+#    which is worse than an honest one.
+#    ⚠️ EXCEPTION WORTH KNOWING: the VEA logo is live right now at
+#    /wp-content/uploads/2024/10/logo.svg. R19 — the logo hexes — is still
+#    OPEN and T3 blocks on it. That file dies with the old deployment.
+#    SAVE IT BEFORE THE DOMAIN COMES DOWN. Flagged for Masud; not T9's file.
+#
+#
+# 301 = permanent. Correct here: these pages are not coming back as URLs.
+# Their CONTENT returns as sections and filters on /portfolio/, per
+# 02-Decisions/SITE-MAP-v1.md §3.
+#
+# ORDER MATTERS. Cloudflare takes the FIRST match. Every explicit row must
+# stay above its wildcard.
+# ============================================================================
+
+
+# ---------------------------------------------------------------------------
+# 1. THE 32 STANDALONE VIDEO-TYPE PAGES  →  /portfolio/
+# ---------------------------------------------------------------------------
+# Read off the live homepage cards, 2026-09-05.
+#
+# ⚠️⚠️ THE BIGGEST RISK IN THIS FILE, AND IT IS NOT A ROW — IT IS THE TARGET.
+# ---------------------------------------------------------------------------
+# 60 of the 61 rows below point at /portfolio/. AS OF 2026-09-05 THAT PAGE DOES
+# NOT EXIST. T5 has not run; site/ contains only /services/ and /pricing/.
+#
+# A 301 to a URL that 404s is WORSE than no redirect: the visitor gets an error
+# page instead of a dead link they could at least understand, and a crawler
+# records a redirect chain ending in failure.
+#
+# ⚠️ /portfolio/ IS A HARD PRECONDITION OF CUTOVER. It is not "nice to have by
+# launch" — if T10 runs before T5, this entire file misfires on every row.
+# T5 is also blocked on R07 (real portfolio items, still OPEN), so this is a
+# genuine sequencing risk, not a formality.
+#
+#
+# ⚠️ TODO FOR T9b, AFTER T5 SHIPS: re-point each row at its own anchor.
+# ---------------------------------------------------------------------------
+# SITE-MAP-v1.md §3 rules the destination — /portfolio/, with the 42 taxonomy
+# labels as filters on it. T9 does NOT override that here.
+#
+# But §3's filters split on TWO axes, industry and format, and the 32 slugs
+# below split the same way. Classifying them now makes T9b mechanical instead
+# of a fresh judgement call under launch pressure. THIS IS A CLASSIFICATION,
+# NOT A REDIRECT CHANGE — every row still goes to /portfolio/ today.
+#
+#   FORMAT (23) — these describe how a video is made or shaped. They map to
+#   the format filter, and several map cleanly onto R23's eleven services:
+#     ad-campaign-videos · product-ecommerce-videos · corporate-videos ·
+#     testimonial-case-study-videos · shorts-reels-tiktoks · youtube-videos ·
+#     educational-video · tutorial-how-to-videos · review-unboxing-videos ·
+#     vlog-editing · gaming-videos · full-online-course-editing ·
+#     lecture-webinar-editing · screen-recording-tutorial-editing ·
+#     e-learning-animations-graphics · branded-intros-outros ·
+#     interactive-video-integration · custom-animations-vfx ·
+#     explainer-videos · whiteboard-animation · kinetic-typography ·
+#     cinematic-storytelling · hope-you-get-it
+#
+#   INDUSTRY (9) — these describe WHO the video is for, not what it is. They
+#   belong to the industry filter and to NO service anchor:
+#     real-estate-videos · medical-healthcare-videos · finance-business ·
+#     tech-product-demos · education-e-learning · beauty-fashion-lifestyle ·
+#     fitness-wellness · food-cooking · travel-videos
+#
+# ⚠️ THE /services/#… OPTION IS OPEN AND IT IS MASUD'S CALL, NOT T9's.
+# R23 is now ruled (eleven services, 2026-09-05) and /services/ EXISTS TODAY
+# while /portfolio/ does not. So the 23 format slugs could be pointed at
+# /services/#long-form, #youtube, #motion-graphics and so on — a real page,
+# available now, topically closer for someone who arrived searching for a
+# service. THE COST: SITE-MAP-v1.md §3 rules the destination as /portfolio/,
+# and portfolio pages show work while service pages describe an offer — for a
+# visitor following an old link, work is usually the better landing.
+# T9 has NOT made that change. Raised in WORKLOG.md 2026-09-05.
+#
+# ⚠️ IF THAT OPTION IS TAKEN, THE ANCHORS ARE NOT SETTLED EITHER.
+# T6 records that /services/'s anchor ids (#long-form, #short-form-reels,
+# #youtube, #podcast, #motion-graphics, #marketing-video, #ads-video,
+# #event-video, #promotional-video, #video-recording, #thumbnail-design) are
+# T6's OWN, derived from the service names — NOT the `Website` doc's 14 format
+# slugs, which have never been imported. They may be renamed at import.
+# A stale anchor degrades safely (the visitor lands at the top of a real page);
+# a stale PATH does not. That asymmetry is why the classification above is
+# recorded and the re-pointing is not done.
+#
+# ⚠️ /hope-you-get-it/ IS A REAL LIVE URL carrying the "Promotional & Brand
+# Videos" card. Somebody's placeholder slug that was never renamed. Listed
+# because it exists, not because it should.
+/hope-you-get-it/                     /portfolio/     301
+
+/ad-campaign-videos/                  /portfolio/     301
+/product-ecommerce-videos/            /portfolio/     301
+/corporate-videos/                    /portfolio/     301
+/testimonial-case-study-videos/       /portfolio/     301
+/shorts-reels-tiktoks/                /portfolio/     301
+/youtube-videos/                      /portfolio/     301
+/educational-video/                   /portfolio/     301
+/tutorial-how-to-videos/              /portfolio/     301
+/review-unboxing-videos/              /portfolio/     301
+/vlog-editing/                        /portfolio/     301
+/gaming-videos/                       /portfolio/     301
+/full-online-course-editing/          /portfolio/     301
+/lecture-webinar-editing/             /portfolio/     301
+/screen-recording-tutorial-editing/   /portfolio/     301
+/e-learning-animations-graphics/      /portfolio/     301
+/branded-intros-outros/               /portfolio/     301
+/interactive-video-integration/       /portfolio/     301
+/real-estate-videos/                  /portfolio/     301
+/medical-healthcare-videos/           /portfolio/     301
+/finance-business/                    /portfolio/     301
+/tech-product-demos/                  /portfolio/     301
+/education-e-learning/                /portfolio/     301
+/beauty-fashion-lifestyle/            /portfolio/     301
+/fitness-wellness/                    /portfolio/     301
+/food-cooking/                        /portfolio/     301
+/travel-videos/                       /portfolio/     301
+/custom-animations-vfx/               /portfolio/     301
+/explainer-videos/                    /portfolio/     301
+/whiteboard-animation/                /portfolio/     301
+/kinetic-typography/                  /portfolio/     301
+/cinematic-storytelling/              /portfolio/     301
+
+
+# ---------------------------------------------------------------------------
+# 2. THE INDUSTRY TAXONOMY — /business-cat/  →  /portfolio/
+# ---------------------------------------------------------------------------
+# 12 terms enumerated 2026-09-05, plus the archive index itself.
+# The previous version of this file covered all of these with a single
+# wildcard, which hid how many URLs were actually moving. Now explicit.
+/business-cat/advertising-ad-agency/          /portfolio/     301
+/business-cat/architecture-interior-design/   /portfolio/     301
+/business-cat/automotive-vehicles/            /portfolio/     301
+/business-cat/banking-financial-services/     /portfolio/     301
+/business-cat/beauty-skincare/                /portfolio/     301
+/business-cat/corporate-enterprise/           /portfolio/     301
+/business-cat/education-coaching/             /portfolio/     301
+/business-cat/healthcare-medical/             /portfolio/     301
+/business-cat/legal-law-firm/                 /portfolio/     301
+/business-cat/podcast-channel/                /portfolio/     301
+/business-cat/real-estate/                    /portfolio/     301
+/business-cat/youtube-channel/                /portfolio/     301
+/business-cat/                                /portfolio/     301
+
+# SAFETY NET — catches any term the crawl could not see. Must stay LAST in
+# this section.
+/business-cat/*                               /portfolio/     301
+
+
+# ---------------------------------------------------------------------------
+# 3. THE FORMAT TAXONOMY — /video-type/  →  /portfolio/
+# ---------------------------------------------------------------------------
+# 9 terms enumerated 2026-09-05, plus the archive index itself.
+/video-type/cinematic-documentary/      /portfolio/     301
+/video-type/corporate-brand-film/       /portfolio/     301
+/video-type/event-highlight-video/      /portfolio/     301
+/video-type/explainer-video/            /portfolio/     301
+/video-type/motion-graphics-animation/  /portfolio/     301
+/video-type/online-course-e-learning/   /portfolio/     301
+/video-type/podcast-interview/          /portfolio/     301
+/video-type/talking-head-video/         /portfolio/     301
+/video-type/ugc-style-video/            /portfolio/     301
+/video-type/                            /portfolio/     301
+
+# SAFETY NET — must stay LAST in this section.
+/video-type/*                           /portfolio/     301
+
+
+# ---------------------------------------------------------------------------
+# 4. THE BLOG — R10, RULED 2026-09-05: "Drop it — out of nav, 301 to home"
+# ---------------------------------------------------------------------------
+# ⚠️⚠️ THE TRAP THIS SECTION EXISTS TO AVOID.
+# The posts are NOT under /blog/. WordPress is serving them at the ROOT:
+#
+#     videoeditor.agency/why-flat-rate-video-editing-is-the-future-for-2026-agencies/
+#     videoeditor.agency/this-is-our-title/
+#
+# A /blog/* wildcard would have caught NEITHER of them. Both verified on the
+# live /blog/ index, 2026-09-05.
+#
+# Only two posts exist, and no pagination link appears on /blog/. If more are
+# published before cutover this section needs re-checking — but under R26b the
+# old site is coming down, so no more will be.
+#
+# ⚠️ /this-is-our-title/ is the SECOND placeholder slug on this site, and it
+# carries a post whose headline duplicates the other one word for word. Two
+# posts, one title. Recorded because it is evidence for how little the blog is
+# worth keeping, which is what R10 concluded.
+/why-flat-rate-video-editing-is-the-future-for-2026-agencies/   /   301
+/this-is-our-title/                                             /   301
+/blog/                                                          /   301
+
+# SAFETY NET for any /blog/… archive, category, tag or pagination URL.
+/blog/*                                                         /   301
+
+
+# ---------------------------------------------------------------------------
+# 5. HOUSEKEEPING
+# ---------------------------------------------------------------------------
+# site/README.md is a stub, but the filename is a known probe target and the
+# Mango project published its real runbook this way. Closed pre-emptively.
+#
+# ⚠️ NOTE UNDER R01 (repo is PUBLIC): this row hides the file from the WEBSITE.
+# It does nothing about GitHub, where the whole repo is world-readable by
+# ruling. It is not a privacy control and must not be mistaken for one.
+/README.md                            /               301
+
+
+# ---------------------------------------------------------------------------
+# 6. CONTINGENCY — not active
+# ---------------------------------------------------------------------------
+# R04 ruled the pricing SHAPE (published per-unit rates) but three things still
+# block the page: the thumbnail rate, R17's unlimited-revisions wording, and
+# R18 (turnaround, asked twice, declined twice — the page ships with no speed
+# claim). If /pricing/ does not ship, T6 drops it from the nav and this row
+# goes live:
+#
+# /pricing/                           /contact/       301
+#
+# It is commented out because /pricing/ is currently PLANNED TO EXIST. Shipping
+# a redirect for a page that exists would break it.
+# ============================================================================

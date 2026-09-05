@@ -1,0 +1,432 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- ==========================================================================
+       SEO HEAD — OWNED BY T9. THREAD-PLAN.md §4.
+       Synced by hand from _template/page-template.html on 2026-09-05, AFTER T3
+       added the Inter font load and the dark-paint meta. T7 filled the canonical
+       for its own page and changed nothing else in this block.
+
+       ⚠️ THIS BLOCK IS NOT SYNCHRONISED. `--check` will NOT report drift here.
+       ========================================================================== -->
+
+  <!-- T9, 2026-09-05. Title 33 chars, description 155.
+       The first sentence is this page's own lede. "Genuinely unlimited" is R17,
+       verbatim, ruled 2026-09-03.
+       ⚠️ NOT USED, DELIBERATELY: the cost comparison. T7 flagged that the whole
+       "cheaper than hiring" pitch has no number behind it and R04's rates are a
+       shape, not confirmed figures. A saving claimed in a search result is a
+       saving quoted back at you. -->
+  <title>Video Editing for Business Owners</title>
+
+  <meta name="description" content="Consistent, professional video for your business — without carrying an in-house editing team on the payroll. Genuinely unlimited revisions on every project.">
+
+  <link rel="canonical" href="https://videoeditor.agency/business-owners/">
+
+  <!-- ⚠️ STAYS until cutover, then comes off PAGE BY PAGE, NEVER SITEWIDE. -->
+  <meta name="robots" content="noindex, nofollow">
+
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#090909">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;display=swap">
+
+  <link rel="stylesheet" href="/assets/css/site.css">
+
+  <!-- ==========================================================================
+       ⚠️ PAGE-SCOPED CSS — T3 ABSORBS THIS INTO site.css AND DELETES IT.
+       Identical in all four For pages. Existing tokens only, no new values.
+       See /coaches/index.html for the full note and the request to T3.
+       ====================================================================== -->
+  <style>
+    .lede { font-size: var(--step-1); color: var(--ink-muted); }
+
+    .section { margin-block: var(--space-7); }
+    .section > h2 { padding-bottom: var(--space-2); border-bottom: 1px solid var(--rule); }
+
+    .actions {
+      display: flex; flex-wrap: wrap; align-items: center;
+      gap: var(--space-3); margin-block: var(--space-5);
+    }
+
+    .tile-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+      gap: var(--space-5);
+      margin-block: var(--space-6);
+      padding: 0;
+      list-style: none;
+    }
+
+    .tile {
+      border: 1px solid var(--rule);
+      border-radius: var(--radius);
+      padding: var(--space-4);
+    }
+
+    .tile h3 { margin-bottom: var(--space-2); }
+    .tile p  { margin-bottom: 0; }
+
+    .deliverables {
+      max-width: var(--measure);
+      margin-block: var(--space-5);
+      padding-left: var(--space-4);
+    }
+
+    .deliverables li { margin-bottom: var(--space-3); }
+
+    .cta-block {
+      border: 1px solid var(--rule);
+      border-radius: var(--radius);
+      padding: var(--space-5);
+      margin-block: var(--space-7);
+    }
+  </style>
+</head>
+
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- SHARED:HEADER — START ======================================================
+     GENERATED BLOCK. Edit it HERE, in _template/page-template.html, then run
+     node tools/sync-shared.mjs. Hand-editing it inside a page file works until
+     the next sync, which overwrites it without warning.
+
+     ⚠️ ONLY T3 AND T9 MAY EDIT THIS BLOCK. See THREAD-PLAN.md §1 Rule 2.
+        A page thread that edits it silently rewrites the nav on nine pages
+        it does not own.
+
+     NAV SOURCE: 02-Decisions/SITE-MAP-v1.md §2. Six top-level items.
+
+     ⚠️ THE FOUR AUDIENCE URLS ARE FLAT — /coaches/, /content-creators/,
+        /business-owners/, /marketers-and-agencies/. R22, ruled 2026-09-03,
+        Masud verbatim: "Flat — /coaches/, /content-creators/…"
+        SITE-MAP-v1.md §1's TABLE STILL LISTS /for/… AND IS STALE. RULINGS.md
+        R22 says so in terms. Never take a URL from that table.
+
+     Only the pages that EXIST are links. The rest render as unlinked muted
+     text, because instructions.md §5 requires every nav link to resolve to a
+     live page — and a link to a 404 breaks that rule where plain text does not.
+     ⚠️ NONE OF THE TEN PAGES EXISTS YET, so all six are text today. That is
+        the correct treatment, not a temporary bodge. Promote each to a real
+        <a> as its thread ships it.
+
+     ⚠️ THE WORDMARK IS TYPE, NOT THE LOGO IMAGE, AND THAT IS DELIBERATE.
+        VEA's logo measures #1C2448 — one colour, no accent, read from the live
+        logo.svg at /wp-content/uploads/2024/10/logo.svg on 2026-09-05. On a
+        #090909 page that navy is very nearly invisible, and no white version
+        of the logo exists anywhere in this project.
+        → [[R29 — a white/reversed VEA logo is required before any logo image
+             can appear on a dark page.]]
+     ========================================================================= -->
+<header class="site-header">
+  <div class="container site-header__inner">
+
+    <a class="wordmark" href="/">Video Editor Agency</a>
+
+    <!-- ⚠️ NAV PROMOTED BY T9, 2026-09-05. Four spans became links.
+         The comment above this block still said "NONE OF THE TEN PAGES EXISTS
+         YET, so all six are text today." That stopped being true when T4, T6
+         and T8 shipped. Four of the six now resolve to a real file in this
+         folder, verified today, so under instructions.md §5 they must be links:
+         the rule requires a nav link to reach a live page, not that the nav
+         stay text. Two are still text, and both for a reason. -->
+    <nav class="nav" aria-label="Main">
+      <ul>
+        <li><a href="/services/">Services</a></li>
+
+        <!-- ⚠️ STILL TEXT, AND THIS IS THE ONE THAT NEEDS FIXING NEXT.
+             All four audience pages EXIST — /coaches/, /content-creators/,
+             /business-owners/, /marketers-and-agencies/ — and nothing in the
+             header reaches any of them. THEY ARE ORPHANS IN THE NAV.
+
+             T9 has NOT built the dropdown: it is a CSS :hover/:focus-within
+             component and site.css is T3's file, which T9 does not write.
+             The gap is covered for now by the footer link list below, so no
+             page is unreachable — but a footer link is not a nav item.
+             → T3, or Masud reassigning site.css. -->
+        <li><span class="nav__pending">For</span></li>
+
+        <!-- Still text because /portfolio/ genuinely does not exist. T5 has not
+             run and is blocked on R07. This is the correct treatment, not a
+             bodge — and it is also why _redirects cannot ship yet, since 60 of
+             its 61 rows point here. -->
+        <li><span class="nav__pending">Portfolio</span></li>
+
+        <!-- /pricing/ STAYS in the nav. R04 ruled it ships as a published
+             per-unit rate page, so THREAD-PLAN.md §5 T6's fallback — drop it
+             from the nav and 301 to /contact/ — no longer applies. -->
+        <li><a href="/pricing/">Pricing</a></li>
+
+        <li><a href="/about/">About</a></li>
+
+        <!-- Contact takes the button treatment SITE-MAP-v1.md §2 specifies.
+             T9 promotes it to a link, not to a button: the button class is a
+             design-system decision and site.css is T3's. → T3. -->
+        <li><a href="/contact/">Contact</a></li>
+      </ul>
+    </nav>
+
+  </div>
+</header>
+<!-- SHARED:HEADER — END ===================================================== -->
+
+<!-- ============================================================================
+     /business-owners/ — written by T7, 2026-09-05.
+
+     COPY SOURCE: 03-Build-Ready/For-BusinessOwners-Copy-Final.md, built from
+     `videoeditor_agency_website_copy` PAGE 4 ("FOR BUSINESSES"), fetched from
+     Drive and read on 2026-09-05. `VEA all page content plan` has only an empty
+     `# Business Owners` heading with nothing beneath it.
+
+     ⚠️ FIVE SECTIONS, NOT SEVEN. Proof (R08 conditional) and Recommended plan
+        (R04 killed "Monthly Retainer or Per Bundle") are DELETED, not unbuilt.
+
+     ⚠️⚠️ THE STRONGEST ARGUMENT ON THIS PAGE IS THE ONE IT CANNOT MAKE, AND A
+           LATER THREAD MUST NOT INVENT IT.
+
+        The pitch to a business owner is a COST pitch — an editing team costs
+        less than an editor on staff. The source copy asserts this three times
+        and never once puts a number to it. Under R04 the published per-unit
+        rates would be that argument, but:
+          1. R04 ruled the SHAPE. RULINGS.md §4 R04: "T6 must have him confirm
+             each rate before it renders on a page." He has not.
+          2. An in-house editor's salary varies by country. This page is read in
+             the US, the UK and Bangladesh. One number is wrong in two of three.
+          3. instructions.md §5 rule 3: never invent a figure.
+        NO COST COMPARISON IS BUILT HERE. Carried as an open item in WORKLOG.
+
+     ⚠️ R11 — VIDEO RECORDING IS NOT OFFERED ON THIS PAGE, AND THAT IS A CHOICE.
+        R11 was ruled IN on 2026-09-05, scoped to Dhaka, and /services/ lists it.
+        This is the For page most likely to attract a buyer who wants filming as
+        well as editing. It is absent because the deliverables list below comes
+        from the copy doc, which does not include it. If it is added, the Dhaka
+        scope goes in the same sentence — under R16 that is a fact, not a
+        confession, but most of this page's readers still cannot buy it.
+
+     ⚠️ NO TURNAROUND CLAIM. R18 closed to pressing.
+
+     WHAT IS REAL HERE:
+       · Prose                — `videoeditor_agency_website_copy` PAGE 4
+       · Unlimited revisions  — R17, Masud 2026-09-03
+       · CTA → /contact/      — T8 shipped that page 2026-09-05. See the note in
+                                /coaches/index.html for why /contact/ and not a
+                                raw mailto:, and for the ⚠️ that /contact/
+                                currently publishes an email R15 did NOT rule
+     ========================================================================= -->
+
+<main class="site-main" id="main">
+  <div class="container">
+
+    <h1>Video Editing for Business Owners</h1>
+
+    <p class="lede">Consistent, professional video — without carrying an in-house
+      editing team on the payroll.</p>
+
+    <p class="actions">
+      <a class="btn btn--primary" href="/contact/">Get started</a>
+      <span class="todo">[[SECONDARY CTA — becomes &lt;a href="/portfolio/"&gt;
+        "See our work" when T5 ships that page]]</span>
+    </p>
+
+    <section class="section" aria-labelledby="problem-heading">
+      <h2 id="problem-heading">Why video is the thing that keeps slipping</h2>
+
+      <ul class="tile-grid">
+
+        <li class="tile">
+          <h3>Editing is a full-time skill you need part-time</h3>
+          <p>Hiring for it means a salary, equipment, software, management and cover
+            when they are away — for output that varies month to month.</p>
+        </li>
+
+        <li class="tile">
+          <h3>The content calendar bends around the edit</h3>
+          <p>Filming gets done. Publishing waits, then slides, then stops being a
+            calendar.</p>
+        </li>
+
+        <li class="tile">
+          <h3>Quality swings depending on who picked up the job</h3>
+          <p>Freelancer to freelancer, the pacing, the captions and the colour are
+            all slightly different — and a brand that looks different every week
+            reads as a brand that is not paying attention.</p>
+        </li>
+
+        <li class="tile">
+          <h3>Nobody owns the feedback loop</h3>
+          <p>Revisions turn into an email chain between three people, and the video
+            that was two days from finished is now three weeks old.</p>
+        </li>
+
+      </ul>
+    </section>
+
+    <section class="section" aria-labelledby="solution-heading">
+      <h2 id="solution-heading">Your business runs on content. We keep it running.</h2>
+
+      <p>Video is one of the few things that does work across every part of a
+        business at once — marketing, sales, hiring, training, launches. Producing it
+        in-house is where it gets expensive and operationally awkward, because the
+        skill is specialised and the workload is uneven.</p>
+
+      <p>Video Editor Agency gives you the editing team without the hiring, the
+        management or the overhead. A dedicated editor who learns your brand, and a
+        project manager who owns the schedule and the feedback so it does not land
+        back on your desk. Weekly social content, a brand film, or a full launch
+        campaign — same team, same standard. Revisions are genuinely unlimited.</p>
+    </section>
+
+    <section class="section" aria-labelledby="deliver-heading">
+      <h2 id="deliver-heading">What we edit for businesses</h2>
+
+      <ul class="deliverables">
+        <li><strong>Corporate explainer and brand films</strong> — the video that says
+          who you are, cut properly.</li>
+
+        <li><strong>Marketing and promotional campaigns</strong> — structured around
+          one message and one action.</li>
+
+        <li><strong>Social content</strong> — reels, shorts and LinkedIn video,
+          formatted per platform rather than reposted across them.</li>
+
+        <li><strong>Internal training and onboarding</strong> — the videos that stop
+          you explaining the same thing every quarter.</li>
+
+        <li><strong>Product launch videos</strong> — built to carry a date, not to be
+          re-cut the week before it.</li>
+
+        <li><strong>Event highlights and recaps</strong> — the day, made useful for
+          the eleven months afterwards.</li>
+      </ul>
+    </section>
+
+    <section class="cta-block" aria-labelledby="cta-heading">
+      <h2 id="cta-heading">Stop treating video as the thing you get to later</h2>
+
+      <p>Tell us what you are trying to publish and how often. We will tell you what
+        it takes.</p>
+
+      <p class="actions">
+        <a class="btn btn--primary" href="/contact/">Start editing for your business</a>
+      </p>
+    </section>
+
+  </div>
+</main>
+
+<!-- SHARED:FOOTER — START ======================================================
+     GENERATED BLOCK. Edit it HERE, then run node tools/sync-shared.mjs.
+
+     SETTLED, THEREFORE PRINTED:
+       R16 — LOCATION. Masud, 2026-09-05, selected "Say it plainly — Dhaka,
+             Bangladesh." This kills the New York and Delaware addresses in
+             the research outright. No US address appears anywhere on this site.
+             ⚠️ Stating Dhaka is a fact about location. It is NOT a licence to
+             borrow Mango's positioning — instructions.md §2 stands: Mango
+             sells full-service marketing to Bangladeshi businesses; VEA sells
+             editing to price- and speed-sensitive international buyers.
+
+     NOT SETTLED, THEREFORE BRACKETED RATHER THAN GUESSED:
+       R14 — PHONE. RULINGS.md §4 records this RULED as +880 1336433711 on
+             2026-09-05 — and THE SAME ENTRY records that it has NOT been
+             dialled. RULINGS §2 C5: "settled by dialling it, not by reasoning
+             about it." The research set that supplies that number also
+             supplies Lorem ipsum, a job board's FAQ and a landscaping
+             company's copy. Mango's number is ONE DIGIT away at
+             +880 1336433710. Wrong here means wrong on ten pages at once.
+             → It goes in the moment Masud confirms it rings.
+
+       R15 — EMAIL. OPEN. hello@videoeditor.agency recurs across the research
+             and has never been verified as a live mailbox. The zone's MX
+             records point at a cPanel host, so a mailbox COULD exist — which
+             is not the same as one existing.
+
+     ⚠️ THESE ARE BRACKETS, NOT PLACEHOLDERS, AND THE DIFFERENCE IS THE POINT.
+        A bracket is loud by design (site.css §9) and cannot reach production
+        unnoticed. Every page carries noindex and nothing ships until T10.
+        A plausible-looking wrong phone number would be the same risk class as
+        a fabricated testimonial — THREAD-PLAN.md §5 T4 says so in terms.
+
+     ⚠️ CORRECTED BY T9, 2026-09-05. THIS LINE PREVIOUSLY READ "T8 fills this
+        block once R14 is dialled and R15 is answered." IT NAMED THE ONE
+        THREAD THAT IS NOT ALLOWED TO OPEN THIS FILE.
+
+        THREAD-PLAN.md §1 Rule 2: only T3 and T9 may touch
+        _template/page-template.html. T8 raised the same contradiction in its
+        own WORKLOG entry (contradiction #2) and correctly did not edit it.
+        T3 has now finished. **T9 owns this block until Masud says otherwise.**
+
+        Sources: this file's own footer comment versus THREAD-PLAN.md §1
+        Rule 2 and §4. Corrected here rather than argued, because leaving it
+        would eventually be obeyed — a stale instruction in a file is a trap,
+        not a note.
+
+     WHO FILLS THE TWO BRACKETS, AND WHEN:
+       R14 — the moment Masud confirms +880 1336433711 actually rings.
+             T3's reasoning for bracketing rather than printing it stands and
+             T9 does not overturn it: RULINGS §2 C5 says this one is settled
+             by dialling, not by reasoning.
+       R15 — the moment an email address is confirmed to receive mail.
+
+     Bring either answer to T9 (or to whoever holds this file at the time).
+     Do NOT hand-edit the footer inside a page file: sync-shared.mjs
+     overwrites it on the next run without warning.
+     ========================================================================= -->
+<footer class="site-footer section">
+  <div class="container">
+    <h2 class="visually-hidden">Site footer</h2>
+
+    <p>Video editing from Dhaka, Bangladesh — for creators, coaches and brands worldwide.</p>
+
+    <!-- ⚠️ ADDED BY T9, 2026-09-05, AND IT FIXES A REAL PROBLEM.
+         Before this, the four audience pages existed and NOTHING ON THE SITE
+         LINKED TO THEM. The header's "For" dropdown is unbuilt (see the note in
+         SHARED:HEADER) and no page threads cross-link. Four orphan pages: a
+         crawler reaching the site would never find them, and neither would a
+         visitor.
+
+         This is a plain <ul> of <a>s using nothing but the base link styles —
+         NO NEW CSS CLASS, because site.css is T3's file and T9 does not write
+         it. If T3 wants to style this list properly, the markup is here to
+         hang a class on.
+
+         ⚠️ NO BLOG LINK. R10, ruled 2026-09-05: "Drop it — out of nav, 301 to
+         home." Every research document's footer has one. It does not come back.
+         ⚠️ NO /portfolio/ LINK. The page does not exist. It joins this list the
+         day T5 ships, and so does the sitemap entry.
+         ⚠️ The seven links below are every page that exists except /404.html,
+         which is deliberately unlinked and permanently noindexed. -->
+    <nav aria-label="Footer">
+      <ul>
+        <li><a href="/services/">Services</a></li>
+        <li><a href="/pricing/">Pricing</a></li>
+        <li><a href="/coaches/">For Coaches &amp; Trainers</a></li>
+        <li><a href="/content-creators/">For Content Creators</a></li>
+        <li><a href="/business-owners/" aria-current="page">For Business Owners</a></li>
+        <li><a href="/marketers-and-agencies/">For Marketers &amp; Agencies</a></li>
+        <li><a href="/about/">About</a></li>
+        <li><a href="/contact/">Contact</a></li>
+        <li><a href="/privacy/">Privacy policy</a></li>
+        <li><a href="/terms/">Terms and conditions</a></li>
+      </ul>
+    </nav>
+
+    <p>
+      <span class="todo">[[R14 — phone +880 1336433711: RULED, NOT YET DIALLED]]</span>
+      <span class="todo">[[R15 — which email address does VEA publish?]]</span>
+    </p>
+
+    <p class="legal">© 2026 Video Editor Agency</p>
+  </div>
+</footer>
+<!-- SHARED:FOOTER — END ===================================================== -->
+
+</body>
+</html>

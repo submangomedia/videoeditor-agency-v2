@@ -1,0 +1,100 @@
+# ============================================================================
+# robots.txt — videoeditor.agency
+# Owner: T9. Rewritten 2026-09-05.
+# ============================================================================
+#
+# STATUS: CLOSED. Correct for staging. Do not open it early.
+#
+#
+# WHY IT IS CLOSED
+# ---------------------------------------------------------------------------
+# This site is on videoeditor-agency-v2.pages.dev and has no custom domain.
+# Two crawlable copies of the same content is a duplicate-content problem, and
+# a *.pages.dev subdomain would lose that contest to the real domain every
+# time. It also keeps an unfinished site out of the index while it is being
+# built in public — which under R01 it is.
+#
+# ⚠️ CORRECTION — the previous version of this file was wrong.
+# It said the site "must not be crawled while videoeditor.agency is still
+# served by WordPress." THERE IS NO WORDPRESS. RULINGS.md §2 C6 established
+# that videoeditor.agency is served by Cloudflare Pages from a STATIC EXPORT
+# of the old WordPress site. The reason to stay closed is unchanged; the
+# reason written down was false. Corrected rather than quietly edited.
+#
+#
+# ⚠️ THIS FILE IS NOT THE noindex CONTROL. THEY ARE TWO SEPARATE LOCKS.
+# ---------------------------------------------------------------------------
+# Every page carries its own <meta name="robots" content="noindex, nofollow">
+# in its <head>. Both locks have to move, and moving one alone does nothing:
+#
+#   Open robots.txt while pages still carry noindex   → nothing gets indexed
+#   Remove every noindex while robots.txt is closed   → nothing gets crawled,
+#                                                       so nothing sees that
+#                                                       the noindex is gone
+#
+# And there is a worse trap, which is why the ORDER matters:
+# a crawler blocked by robots.txt CANNOT READ the noindex tag. If a URL is
+# blocked in robots.txt but linked from elsewhere, Google can index the URL
+# without ever fetching it. So robots.txt is not a reliable way to keep a page
+# out of the index — the meta tag is. robots.txt controls CRAWLING; the meta
+# tag controls INDEXING.
+#
+# THE ORDER THAT WORKS AT CUTOVER:
+#   1. Lift <meta robots> on the pages that are ready — PAGE BY PAGE.
+#   2. Only then open robots.txt and publish the sitemap.
+#
+#
+# ⚠️ WHO ACTUALLY DOES THIS — A CONTRADICTION, NAMED NOT RESOLVED
+# ---------------------------------------------------------------------------
+# THREAD-PLAN.md §4 gives T9 robots.txt and "Lift noindex page by page".
+# THREAD-PLAN.md §5 gives T10 "noindex off".
+# The previous version of THIS file said "T10 OPENS THIS AT CUTOVER".
+#
+# Three sources, two answers. T9's reading — LABELLED AN INFERENCE, not a
+# ruling: T9 writes the mechanism and the checklist, T10 pulls the trigger at
+# cutover. Whoever owns THREAD-PLAN.md should settle it in writing. T9 does
+# not own that file and has not edited it.
+#
+#
+# ⚠️ THE noindex LIFT HAS NO DRIFT PROTECTION. NEW FINDING, 2026-09-05.
+# ---------------------------------------------------------------------------
+# tools/sync-shared.mjs synchronises the SHARED:HEADER and SHARED:FOOTER
+# blocks ONLY — read its BLOCKS constant. It does not touch <head>.
+#
+# So the ten <meta robots> tags are ten independent hand edits with no
+# checker behind them. `--check` will print "No drift" on a site where one
+# page is still noindex, because it is not looking there. That is the exact
+# silent failure sync-shared.mjs was written to prevent, in the one place it
+# does not cover.
+#
+# THIS MUST NOT BE FIXED BY MOVING THE TAG INTO A SHARED BLOCK. A shared tag
+# makes the lift SITEWIDE, and instructions.md §5 bans that outright: page by
+# page, never sitewide. The right fix is a --check-only audit that reports
+# which pages still carry noindex. Proposed, not built: tools/ is not in any
+# thread's Owns column and T9 will not claim it by writing to it.
+#
+# UNTIL THAT EXISTS, THE LIFT IS A MANUAL CHECKLIST. T10 opens all ten files
+# and confirms each one, by eye, against the list in the WORKLOG.
+#
+#
+# WHAT REPLACES THE BLOCK BELOW, AT CUTOVER AND NOT BEFORE:
+#
+#     User-agent: *
+#     Allow: /
+#
+#     Sitemap: https://videoeditor.agency/sitemap.xml
+#
+# ✅ UPDATED 2026-09-05: sitemap.xml NOW EXISTS. The earlier version of this
+# note said not to add the Sitemap line because the file had deliberately not
+# been written — zero pages existed and every URL in it would have been false.
+# T4, T6, T7 and T8 have since shipped, so T9 wrote it against the eleven
+# pages that are actually in this folder. The line above is ready to go live.
+#
+# ⚠️ sitemap.xml LISTS ELEVEN URLs, NOT TWELVE. /portfolio/ is absent because
+# site/portfolio/ does not exist (T5 unrun, blocked on R07), and /404.html is
+# absent permanently. When T5 ships, /portfolio/ is added to BOTH sitemap.xml
+# and the footer link list in _template/page-template.html.
+# ============================================================================
+
+User-agent: *
+Disallow: /

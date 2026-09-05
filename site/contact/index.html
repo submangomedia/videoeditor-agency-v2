@@ -1,0 +1,542 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- ==========================================================================
+       SEO HEAD — OWNED BY T9. THREAD-PLAN.md §4.
+       Synced by hand from _template/page-template.html on 2026-09-05, after both
+       T9's rewrite and T3's font/paint edit. T8 filled the canonical for this
+       page and changed nothing else in T9's tags.
+
+       ⚠️ THIS BLOCK IS NOT SYNCHRONISED. tools/sync-shared.mjs copies
+       SHARED:HEADER and SHARED:FOOTER only. `--check` will NOT report drift
+       here. If T9 changes the block again, this file needs a hand edit.
+
+       ⚠️ T9 — NO "reply within 2 hours" IN THE DESCRIPTION. It is a commitment
+       the company has to meet on every enquiry, and search snippets are exactly
+       where an unmet promise gets quoted back. See the note on the intro below.
+       ========================================================================== -->
+
+  <!-- T9, 2026-09-05. Title 27 chars, description 147.
+       ⚠️ THIS DESCRIPTION NAMES NO CONTACT ROUTE, AND THAT IS DELIBERATE.
+       R13 (form backend) is OPEN, R15 (which email) is OPEN, and R14's phone
+       +880 1336433711 is RULED BUT NOT YET DIALLED. A search result that
+       promises "call us" or "email us" is a promise made in the one place a
+       correction never reaches. It goes in the moment those three are settled. -->
+  <title>Contact Video Editor Agency</title>
+
+  <meta name="description" content="Have a project in mind? Get in touch with Video Editor Agency — a dedicated video editing team in Dhaka, Bangladesh, working with clients worldwide.">
+
+  <link rel="canonical" href="https://videoeditor.agency/contact/">
+
+  <!-- ⚠️ STAYS until cutover, then comes off PAGE BY PAGE, NEVER SITEWIDE.
+       instructions.md §5. Do not move this tag into a SHARED block. -->
+  <meta name="robots" content="noindex, nofollow">
+
+  <!-- T3's paint colours. Without these the browser flashes white for one frame
+       on every navigation, which on #090909 is very visible. -->
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#090909">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;display=swap">
+
+  <link rel="stylesheet" href="/assets/css/site.css">
+
+  <!-- ==========================================================================
+       PAGE-SCOPED CSS — T3 ABSORBS INTO site.css AND DELETES THIS.
+       Every value is an existing token. No new hex, no new radius, no new font.
+       ⚠️ `.section` is NOT redefined here. See the note in 404.html.
+       ====================================================================== -->
+  <style>
+    .lede {
+      font-size: var(--step-1);
+      color: var(--ink-muted);
+    }
+
+    .stack { margin-block: var(--space-7); }
+
+    .contact-list {
+      list-style: none;
+      margin: var(--space-5) 0 0;
+      padding: 0;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+      gap: var(--space-4);
+    }
+
+    .contact-list li {
+      border: 1px solid var(--rule);
+      border-radius: var(--radius);
+      padding: var(--space-4);
+    }
+
+    .contact-list h3 {
+      font-size: var(--step-1);
+      margin-bottom: var(--space-2);
+    }
+
+    .contact-list p {
+      margin: 0 0 var(--space-2);
+    }
+
+    .contact-list p:last-child { margin-bottom: 0; }
+
+    .contact-list .note {
+      font-size: var(--step--1);
+      color: var(--ink-muted);
+    }
+
+    /* Native <details>. A JS accordion is banned outright by instructions.md §5.
+       The marker is left as the browser's own so keyboard and screen-reader
+       behaviour is whatever the platform already does correctly. */
+    .faq details {
+      border-top: 1px solid var(--rule);
+      padding-block: var(--space-3);
+    }
+
+    .faq details:last-of-type { border-bottom: 1px solid var(--rule); }
+
+    .faq summary {
+      font-family: var(--font-heading);
+      font-weight: var(--weight-heading);
+      color: var(--ink);
+      cursor: pointer;
+      padding-block: var(--space-2);
+    }
+
+    .faq details p {
+      margin: var(--space-2) 0 var(--space-2);
+    }
+  </style>
+</head>
+
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- SHARED:HEADER — START ======================================================
+     GENERATED BLOCK. Edit it HERE, in _template/page-template.html, then run
+     node tools/sync-shared.mjs. Hand-editing it inside a page file works until
+     the next sync, which overwrites it without warning.
+
+     ⚠️ ONLY T3 AND T9 MAY EDIT THIS BLOCK. See THREAD-PLAN.md §1 Rule 2.
+        A page thread that edits it silently rewrites the nav on nine pages
+        it does not own.
+
+     NAV SOURCE: 02-Decisions/SITE-MAP-v1.md §2. Six top-level items.
+
+     ⚠️ THE FOUR AUDIENCE URLS ARE FLAT — /coaches/, /content-creators/,
+        /business-owners/, /marketers-and-agencies/. R22, ruled 2026-09-03,
+        Masud verbatim: "Flat — /coaches/, /content-creators/…"
+        SITE-MAP-v1.md §1's TABLE STILL LISTS /for/… AND IS STALE. RULINGS.md
+        R22 says so in terms. Never take a URL from that table.
+
+     Only the pages that EXIST are links. The rest render as unlinked muted
+     text, because instructions.md §5 requires every nav link to resolve to a
+     live page — and a link to a 404 breaks that rule where plain text does not.
+     ⚠️ NONE OF THE TEN PAGES EXISTS YET, so all six are text today. That is
+        the correct treatment, not a temporary bodge. Promote each to a real
+        <a> as its thread ships it.
+
+     ⚠️ THE WORDMARK IS TYPE, NOT THE LOGO IMAGE, AND THAT IS DELIBERATE.
+        VEA's logo measures #1C2448 — one colour, no accent, read from the live
+        logo.svg at /wp-content/uploads/2024/10/logo.svg on 2026-09-05. On a
+        #090909 page that navy is very nearly invisible, and no white version
+        of the logo exists anywhere in this project.
+        → [[R29 — a white/reversed VEA logo is required before any logo image
+             can appear on a dark page.]]
+     ========================================================================= -->
+<header class="site-header">
+  <div class="container site-header__inner">
+
+    <a class="wordmark" href="/">Video Editor Agency</a>
+
+    <!-- ⚠️ NAV PROMOTED BY T9, 2026-09-05. Four spans became links.
+         The comment above this block still said "NONE OF THE TEN PAGES EXISTS
+         YET, so all six are text today." That stopped being true when T4, T6
+         and T8 shipped. Four of the six now resolve to a real file in this
+         folder, verified today, so under instructions.md §5 they must be links:
+         the rule requires a nav link to reach a live page, not that the nav
+         stay text. Two are still text, and both for a reason. -->
+    <nav class="nav" aria-label="Main">
+      <ul>
+        <li><a href="/services/">Services</a></li>
+
+        <!-- ⚠️ STILL TEXT, AND THIS IS THE ONE THAT NEEDS FIXING NEXT.
+             All four audience pages EXIST — /coaches/, /content-creators/,
+             /business-owners/, /marketers-and-agencies/ — and nothing in the
+             header reaches any of them. THEY ARE ORPHANS IN THE NAV.
+
+             T9 has NOT built the dropdown: it is a CSS :hover/:focus-within
+             component and site.css is T3's file, which T9 does not write.
+             The gap is covered for now by the footer link list below, so no
+             page is unreachable — but a footer link is not a nav item.
+             → T3, or Masud reassigning site.css. -->
+        <li><span class="nav__pending">For</span></li>
+
+        <!-- Still text because /portfolio/ genuinely does not exist. T5 has not
+             run and is blocked on R07. This is the correct treatment, not a
+             bodge — and it is also why _redirects cannot ship yet, since 60 of
+             its 61 rows point here. -->
+        <li><span class="nav__pending">Portfolio</span></li>
+
+        <!-- /pricing/ STAYS in the nav. R04 ruled it ships as a published
+             per-unit rate page, so THREAD-PLAN.md §5 T6's fallback — drop it
+             from the nav and 301 to /contact/ — no longer applies. -->
+        <li><a href="/pricing/">Pricing</a></li>
+
+        <li><a href="/about/">About</a></li>
+
+        <!-- Contact takes the button treatment SITE-MAP-v1.md §2 specifies.
+             T9 promotes it to a link, not to a button: the button class is a
+             design-system decision and site.css is T3's. → T3. -->
+        <li><a href="/contact/" aria-current="page">Contact</a></li>
+      </ul>
+    </nav>
+
+  </div>
+</header>
+<!-- SHARED:HEADER — END ===================================================== -->
+
+<main class="site-main" id="main">
+  <div class="container">
+
+    <h1>Contact us</h1>
+
+    <p class="lede">
+      Have a project in mind? We&rsquo;re ready to talk.
+    </p>
+
+    <!-- ============================================================
+         ⚠️ ONE VERIFICATION LEFT BEFORE THIS PAGE CAN SHIP.
+
+         STATE AS OF THE END OF T8, 2026-09-05:
+
+           ✅ EMAIL — LIVE. R15 ruled: videoeditoragency.hello@gmail.com.
+              This page has a working inbound route.
+           ⛔ PHONE and WHATSAPP — still brackets. R14 ruled the NUMBER
+              (+880 1336433711) but nobody has RUNG it.
+
+         WHY THE NUMBER IS STILL A BRACKET WHEN THE RULING EXISTS. RULINGS.md
+         §2 C5: "settled by dialling it, not by reasoning about it." Mango's
+         number is ONE DIGIT away at +880 1336433710, and the research set that
+         supplied …711 also contains Lorem ipsum, a job board's FAQ and a
+         landscaping company's copy. T3 made the same call in the shared
+         footer; this page matches it rather than contradicting it.
+
+         ⚠️ AND R13 MAKES IT WORSE, NOT BETTER. R13 ruled NO FORM at launch.
+         So the phone, the WhatsApp link and one Gmail address are the ONLY
+         inbound routes on the entire site. RULINGS.md R13 states the
+         consequence plainly: "If it is the typo, the site has one working
+         inbound route instead of three, and nothing on the page will reveal
+         it." A visitor who tries a dead number does not report it. They leave.
+
+         TO FINISH THIS PAGE: dial +880 1336433711 once. Then replace the two
+         <span class="todo"> blocks below with the <a href="tel:"> and
+         <a href="https://wa.me/…"> markup written out beside each one — it is
+         a copy-paste, not a rebuild. Then the same in the shared footer, which
+         is T3's or T9's file, not T8's.
+         ============================================================ -->
+
+    <div class="stack">
+      <h2>Let&rsquo;s start with a conversation</h2>
+
+      <!-- ⚠️ THE SOURCE COPY CONTRADICTS ITSELF ON THIS PROMISE, IN ONE
+           DOCUMENT. PAGE 13's info block says "Response Time GUARANTEE:
+           Within 2 business hours". This paragraph and the homepage both say
+           "we TYPICALLY respond within 2 hours".
+           Sources: videoeditor_agency_website_copy PAGE 13 intro vs PAGE 13
+           info block vs PAGE 1 §12.
+
+           "Typically" is kept and "Guarantee" is dropped everywhere. It is the
+           honest version of the same sentence, it is the version that appears
+           twice, and a guarantee is enforceable in a way a tendency is not.
+
+           NOT covered by R18. R18 closed DELIVERY turnaround — no speed claim
+           on any page. This is REPLY time, a different promise. It stays,
+           worded as a tendency. → Masud may still want it gone entirely. -->
+      <p>
+        Whether you&rsquo;re ready to place your first order or just want to
+        understand how our process works &mdash; reach out. We typically respond
+        within two business hours.
+      </p>
+
+      <ul class="contact-list">
+        <li>
+          <h3>WhatsApp</h3>
+          <!-- WHEN R14 IS DIALLED, this whole <p> becomes:
+               <p><a href="https://wa.me/8801336433711">+880 1336433711</a></p> -->
+          <p><span class="todo">[[R14 — WhatsApp: +880 1336433711, RULED but NOT YET DIALLED]]</span></p>
+          <p class="note">Fastest for a quick question or a file link.</p>
+        </li>
+
+        <li>
+          <h3>Phone</h3>
+          <!-- WHEN R14 IS DIALLED, this whole <p> becomes:
+               <p><a href="tel:+8801336433711">+880 1336433711</a></p> -->
+          <p><span class="todo">[[R14 — phone: +880 1336433711, RULED but NOT YET DIALLED]]</span></p>
+          <p class="note">Within working hours below.</p>
+        </li>
+
+        <li>
+          <h3>Email</h3>
+          <!-- R15 — RULED 2026-09-05. Masud selected
+               videoeditoragency.hello@gmail.com.
+
+               ⚠️ NOT hello@videoeditor.agency. That address appears in every
+               research document and was never verified; Masud ruled for the
+               Gmail address instead. Do not "tidy" this to the branded one.
+
+               ⚠️ TWO THINGS RULINGS.md R15 RECORDS, NEITHER A RE-ASK:
+               1. This mailbox belongs to videoeditoragency.hello@gmail.com —
+                  an account that is NOT Masud's main one. instructions.md §4
+                  already flags that four of the eight research documents die
+                  if access to it lapses. The site's only email route now dies
+                  with it too.
+               2. The domain HAS live MX records (mx1/2/3-hosting.jellyfish
+                  .systems), so a branded @videoeditor.agency address is
+                  available and costs nothing to add later. Switching is a
+                  find-and-replace across ten pages, not a rebuild. -->
+          <p><a href="mailto:videoeditoragency.hello@gmail.com">videoeditoragency.hello@gmail.com</a></p>
+          <p class="note">Best for briefs, scripts and anything with detail in it.</p>
+        </li>
+      </ul>
+    </div>
+
+    <div class="stack">
+      <h2>Where and when</h2>
+
+      <p>
+        We work from <strong>Dhaka, Bangladesh</strong> (GMT+6), with clients
+        across the US, UK, Canada and Australia.
+      </p>
+
+      <p>
+        <strong>Working hours:</strong> Monday to Saturday, 9:00&nbsp;AM &ndash;
+        7:00&nbsp;PM (GMT+6).
+      </p>
+
+      <!-- ⚠️ NO EMBEDDED MAP, AND NO STREET ADDRESS YET.
+
+           NO MAP: instructions.md §5 says "link out to Google Maps rather than
+           embedding it." An embedded map is a third-party iframe that sets
+           cookies before consent — the same problem as a YouTube iframe, and it
+           drags a disclosure onto /privacy/ for no gain.
+
+           NO ADDRESS: R30 (WORKLOG 2026-09-05, T8 batch) establishes that Video
+           Editor Agency is a TRADING NAME of Mango Media Digital, so the
+           registered address is Mango's Uttara office. The full street address
+           has never been written into this project.
+           → [[R30 — FULL REGISTERED ADDRESS: street, area, Dhaka, postcode.
+                Needed here, and required on /privacy/ and /terms/ where a data
+                controller and a contracting party must be identifiable.]]
+
+           ⚠️ RENUMBERED FROM R28 — three decisions share that id. RULINGS.md
+           registers R28 as "Eleven services, four rates"; the template uses it
+           for the Sherika licence; T8's WORKLOG used it for the trading name.
+           The register wins. Full note in /privacy/ §1. -->
+
+           A "Dhaka, Bangladesh" line with no street is honest and adequate for
+           a remote service business. It is NOT adequate for the two legal
+           pages. That is why the bracket lives there too. -->
+      <p class="note">
+        <span class="todo">[[R30 — full registered address, for the legal pages and a Maps link]]</span>
+      </p>
+    </div>
+
+    <!-- ⚠️ NO CONTACT FORM. R13 — RULED 2026-09-05.
+
+         Masud selected "No form at launch — WhatsApp, email, phone."
+         SITE-MAP-v1.md Q11 is closed. This is not a gap waiting to be filled;
+         it is the decision. The source copy's form — Full Name · Email ·
+         Service Needed · Budget Range · Message · Submit — does not ship.
+
+         TWO CONSEQUENCES RULINGS.md R13 RECORDS:
+
+         1. No form means no form submissions, which removes the UK/EU-data
+            trigger SITE-MAP-v1.md §1 gave for /privacy/. It does NOT remove
+            the other triggers — /privacy/ still ships. See that page.
+
+         2. ⚠️ IT RAISES THE STAKES ON R14 TO THE MAXIMUM. With no form, the
+            phone number, the WhatsApp link and one email address are the ONLY
+            inbound routes on the entire site. R14's number has still not been
+            dialled, and it came from a document set that also contains Lorem
+            ipsum and a landscaping company's copy. If it is the typo, the site
+            has one working route instead of three — AND NOTHING ON THE PAGE
+            WILL REVEAL IT. A visitor who tries it just goes away.
+
+         IF A FORM IS EVER ADDED, two things from the source must not be copied:
+         the Budget Range dropdown ($500 bands — it contradicts R04's published
+         rates and makes a transparent price page look like a qualifying gate),
+         and the assumption that /privacy/ can be updated afterwards. Build it
+         as a native <form method="post"> with no JS validation gate and no
+         JS-rendered success state. instructions.md §5. -->
+
+    <div class="stack faq">
+      <h2>Before you write</h2>
+
+      <details>
+        <summary>How quickly will you respond?</summary>
+        <p>
+          Within two business hours on weekdays. We also respond on Saturdays.
+        </p>
+      </details>
+
+      <!-- ⚠️ REWORDED FROM THE SOURCE, AND THIS ONE MATTERS.
+           Source: "…suggest a pricing model during a free 15-minute discovery
+           call." There is no booking link anywhere in this project and no
+           calendar tool has been chosen. Naming a call with no way to book it
+           is a dead end, and a `#` href breaks instructions.md §5 rule 1
+           outright.
+
+           The call is still offered — it is just arranged by replying, which
+           is true today and needs no third-party JS widget.
+           → IF MASUD SETS UP A BOOKING LINK, restore the original sentence and
+             link it. -->
+      <details>
+        <summary>Do I need to have everything ready before reaching out?</summary>
+        <p>
+          Not at all. Message us and we&rsquo;ll set up a short call to plan the
+          scope, recommend the right service and suggest a pricing model.
+        </p>
+      </details>
+
+      <!-- ⚠️ "for qualifying clients" was dropped from the source sentence.
+           It reads as a hedge a prospect cannot evaluate — nobody knows whether
+           they qualify, so it functions as a quiet no. Either state the bar or
+           don't imply one. → Masud's call; it is his copy and he can put it
+           back with a definition. -->
+      <details>
+        <summary>Do you offer a sample edit before committing?</summary>
+        <p>
+          Yes. We offer a short sample edit so you can judge our quality and
+          your editor fit before committing to anything.
+        </p>
+      </details>
+    </div>
+
+    <!-- ⚠️ DELIBERATELY NOT ON THIS PAGE:
+         · Embedded Google Map — third-party iframe, cookies before consent.
+         · Budget Range dropdown — contradicts R04's published rates.
+         · Any US address — killed by R16.
+         · +880 1336433710 — that is Mango's number. R14 rules …711 for VEA.
+         · A delivery turnaround promise — R18, asked twice, declined twice.
+         · Live chat or a WhatsApp widget — third-party JS. A plain wa.me link
+           does the same job at zero cost and zero cookies. -->
+
+  </div>
+</main>
+
+<!-- SHARED:FOOTER — START ======================================================
+     GENERATED BLOCK. Edit it HERE, then run node tools/sync-shared.mjs.
+
+     SETTLED, THEREFORE PRINTED:
+       R16 — LOCATION. Masud, 2026-09-05, selected "Say it plainly — Dhaka,
+             Bangladesh." This kills the New York and Delaware addresses in
+             the research outright. No US address appears anywhere on this site.
+             ⚠️ Stating Dhaka is a fact about location. It is NOT a licence to
+             borrow Mango's positioning — instructions.md §2 stands: Mango
+             sells full-service marketing to Bangladeshi businesses; VEA sells
+             editing to price- and speed-sensitive international buyers.
+
+     NOT SETTLED, THEREFORE BRACKETED RATHER THAN GUESSED:
+       R14 — PHONE. RULINGS.md §4 records this RULED as +880 1336433711 on
+             2026-09-05 — and THE SAME ENTRY records that it has NOT been
+             dialled. RULINGS §2 C5: "settled by dialling it, not by reasoning
+             about it." The research set that supplies that number also
+             supplies Lorem ipsum, a job board's FAQ and a landscaping
+             company's copy. Mango's number is ONE DIGIT away at
+             +880 1336433710. Wrong here means wrong on ten pages at once.
+             → It goes in the moment Masud confirms it rings.
+
+       R15 — EMAIL. OPEN. hello@videoeditor.agency recurs across the research
+             and has never been verified as a live mailbox. The zone's MX
+             records point at a cPanel host, so a mailbox COULD exist — which
+             is not the same as one existing.
+
+     ⚠️ THESE ARE BRACKETS, NOT PLACEHOLDERS, AND THE DIFFERENCE IS THE POINT.
+        A bracket is loud by design (site.css §9) and cannot reach production
+        unnoticed. Every page carries noindex and nothing ships until T10.
+        A plausible-looking wrong phone number would be the same risk class as
+        a fabricated testimonial — THREAD-PLAN.md §5 T4 says so in terms.
+
+     ⚠️ CORRECTED BY T9, 2026-09-05. THIS LINE PREVIOUSLY READ "T8 fills this
+        block once R14 is dialled and R15 is answered." IT NAMED THE ONE
+        THREAD THAT IS NOT ALLOWED TO OPEN THIS FILE.
+
+        THREAD-PLAN.md §1 Rule 2: only T3 and T9 may touch
+        _template/page-template.html. T8 raised the same contradiction in its
+        own WORKLOG entry (contradiction #2) and correctly did not edit it.
+        T3 has now finished. **T9 owns this block until Masud says otherwise.**
+
+        Sources: this file's own footer comment versus THREAD-PLAN.md §1
+        Rule 2 and §4. Corrected here rather than argued, because leaving it
+        would eventually be obeyed — a stale instruction in a file is a trap,
+        not a note.
+
+     WHO FILLS THE TWO BRACKETS, AND WHEN:
+       R14 — the moment Masud confirms +880 1336433711 actually rings.
+             T3's reasoning for bracketing rather than printing it stands and
+             T9 does not overturn it: RULINGS §2 C5 says this one is settled
+             by dialling, not by reasoning.
+       R15 — the moment an email address is confirmed to receive mail.
+
+     Bring either answer to T9 (or to whoever holds this file at the time).
+     Do NOT hand-edit the footer inside a page file: sync-shared.mjs
+     overwrites it on the next run without warning.
+     ========================================================================= -->
+<footer class="site-footer section">
+  <div class="container">
+    <h2 class="visually-hidden">Site footer</h2>
+
+    <p>Video editing from Dhaka, Bangladesh — for creators, coaches and brands worldwide.</p>
+
+    <!-- ⚠️ ADDED BY T9, 2026-09-05, AND IT FIXES A REAL PROBLEM.
+         Before this, the four audience pages existed and NOTHING ON THE SITE
+         LINKED TO THEM. The header's "For" dropdown is unbuilt (see the note in
+         SHARED:HEADER) and no page threads cross-link. Four orphan pages: a
+         crawler reaching the site would never find them, and neither would a
+         visitor.
+
+         This is a plain <ul> of <a>s using nothing but the base link styles —
+         NO NEW CSS CLASS, because site.css is T3's file and T9 does not write
+         it. If T3 wants to style this list properly, the markup is here to
+         hang a class on.
+
+         ⚠️ NO BLOG LINK. R10, ruled 2026-09-05: "Drop it — out of nav, 301 to
+         home." Every research document's footer has one. It does not come back.
+         ⚠️ NO /portfolio/ LINK. The page does not exist. It joins this list the
+         day T5 ships, and so does the sitemap entry.
+         ⚠️ The seven links below are every page that exists except /404.html,
+         which is deliberately unlinked and permanently noindexed. -->
+    <nav aria-label="Footer">
+      <ul>
+        <li><a href="/services/">Services</a></li>
+        <li><a href="/pricing/">Pricing</a></li>
+        <li><a href="/coaches/">For Coaches &amp; Trainers</a></li>
+        <li><a href="/content-creators/">For Content Creators</a></li>
+        <li><a href="/business-owners/">For Business Owners</a></li>
+        <li><a href="/marketers-and-agencies/">For Marketers &amp; Agencies</a></li>
+        <li><a href="/about/">About</a></li>
+        <li><a href="/contact/" aria-current="page">Contact</a></li>
+        <li><a href="/privacy/">Privacy policy</a></li>
+        <li><a href="/terms/">Terms and conditions</a></li>
+      </ul>
+    </nav>
+
+    <p>
+      <span class="todo">[[R14 — phone +880 1336433711: RULED, NOT YET DIALLED]]</span>
+      <span class="todo">[[R15 — which email address does VEA publish?]]</span>
+    </p>
+
+    <p class="legal">© 2026 Video Editor Agency</p>
+  </div>
+</footer>
+<!-- SHARED:FOOTER — END ===================================================== -->
+
+</body>
+</html>

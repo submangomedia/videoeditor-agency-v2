@@ -1,0 +1,889 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- ==========================================================================
+       SEO HEAD — OWNED BY T9. THREAD-PLAN.md §4.
+       A page thread fills the [[...]] values for ITS OWN page and changes
+       nothing else in this block.
+
+       T5 filled <title>, <meta description> and <link canonical> for THIS page
+       on 2026-09-05, which is what the block above instructs a page thread to
+       do. Everything else is untouched. T9 rewrites these freely.
+
+       R05 permits "100+ clients" and "10,000+ videos edited" and nothing else.
+       NEITHER IS USED HERE — this page states 57, which is the number of items
+       it actually renders and which a reader can count. R18 is OPEN, so there
+       is no turnaround claim anywhere on this page.
+       ========================================================================== -->
+
+  <title>Video editing portfolio — Video Editor Agency</title>
+
+  <meta name="description" content="Podcast intros, short-form reels, explainers, course videos and YouTube edits. Fifty-seven pieces of client work, grouped by industry. Video editing from Dhaka.">
+
+  <link rel="canonical" href="https://videoeditor.agency/portfolio/">
+
+  <!-- ⚠️ STAYS until cutover, then comes off PAGE BY PAGE, NEVER SITEWIDE.
+       instructions.md §5. Do not move this tag into a SHARED block to make it
+       easier to remove — making it easy to remove everywhere at once is the
+       precise thing the rule forbids. See site/robots.txt for the order the
+       two locks come off in, and why that order matters. -->
+  <meta name="robots" content="noindex, nofollow">
+
+  <!-- OPEN GRAPH — deliberately not scaffolded.
+       ⚠️ T9b: THIS page is the first one that HAS artwork. 65 stills sit in
+       /assets/img/portfolio/. og:image still needs a deliberate choice of
+       WHICH still, and a 1200×630 crop that does not letterbox a 9:16 image.
+       Not T5's file to add. -->
+
+  <!-- ⚠️ NO JSON-LD HERE YET. Blocked on facts, not effort: R12, R15, R09.
+       An ItemList of portfolio work would be the obvious schema for this page
+       and it is NOT added, because every item is unnamed pending R07 and a
+       structured-data list of anonymous items asserts nothing worth asserting. -->
+
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#090909">
+
+  <!-- ⚠️ RULED 2026-09-05. GOOGLE FONTS STAYS. DO NOT REOPEN THIS.
+       Masud, 2026-09-05, verbatim: "Use Google font and use color from the
+       MZ Media." He was shown the cost — loading from fonts.googleapis.com
+       transmits every visitor's IP to Google before consent — and ruled.
+       ONE BINDING CONSEQUENCE: /privacy/ must disclose this third-party
+       request by name. → T8. See _template/page-template.html for the full
+       note; this page carries the same three lines. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;display=swap">
+
+  <link rel="stylesheet" href="/assets/css/site.css">
+
+  <!-- ==========================================================================
+       ⚠️ PAGE-SCOPED CSS — AN OWNERSHIP GAP, NAMED NOT SILENTLY TAKEN
+
+       site.css §9 says: "T5 writes the real rules."
+       THREAD-PLAN.md §4 gives site\assets\css\* to T3, EXCLUSIVELY, and Rule 1
+       says a thread that needs a change to a file it does not own writes the
+       request into WORKLOG.md and does not edit.
+
+       Both cannot hold: T5 is told to write rules into a file T5 may not open,
+       and T5 is granted no CSS file of its own. Sources: site.css §9 versus
+       THREAD-PLAN.md §4 row T3 and §1 Rule 1.
+
+       T5's resolution, and it is the conservative one: these rules live in the
+       one file T5 does own, scoped to this page, rather than editing T3's.
+       → REQUEST TO T3: move this block into site.css §9. It is not page-
+         specific — T4's homepage needs the same grid for its eight featured
+         items, and a second copy is how two grids drift apart.
+       Logged in WORKLOG.md 2026-09-05.
+
+       Every value below is a site.css token. No new colour, no second radius.
+       ========================================================================== -->
+  <style>
+  /* --- The grid ------------------------------------------------------------
+     MULTI-COLUMN, NOT A UNIFORM GRID, AND THE DATA FORCED IT.
+
+     Portfolio-Catalogue.md finding 2, measured: 27 items are 4:5, 26 are 9:16,
+     3 are 1012×1920 and 5 are 16:9. THREAD-PLAN.md §6 and the source audit both
+     specify a "vertical-first 9:16 card" — that is wrong for 27 of the 57. A
+     9:16 cell crops a 4:5 still by 25% top and bottom; a 4:5 cell letterboxes a
+     9:16 one. Neither single shape works.
+
+     CSS columns give every still its true aspect ratio with no crop and no
+     letterbox, in pure CSS. The one honest cost: flow is column-major, so the
+     visual order down a column is not the source order across it. Source order
+     is preserved for keyboard and screen-reader users, which is where order
+     carries meaning. */
+  .work {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    columns: 2;
+    column-gap: var(--space-3);
+  }
+
+  @media (min-width: 40rem) { .work { columns: 3; } }
+  @media (min-width: 60rem) { .work { columns: 4; } }
+
+  .work__item {
+    break-inside: avoid;
+    margin: 0 0 var(--space-3);
+    padding: var(--space-2);
+    background: var(--bg-raised);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+  }
+
+  /* ⚠️ THE GLARE FIX T3 FLAGGED IN site.css §9.
+     YouTube stills are bright and this page is #090909. Sixty-five of them at
+     full brightness reads as holes cut in the page. The card's own raised
+     surface and hairline give each still an edge, and the still sits slightly
+     back until it is hovered or focused. This is the whole of the fix — it
+     needs no new token and no second colour. */
+  .work__item img {
+    display: block;
+    width: 100%;
+    opacity: 0.88;
+    transition: opacity 120ms linear;
+  }
+
+  .work__item:hover img,
+  .work__item:focus-within img { opacity: 1; }
+
+  .work__title {
+    font-size: var(--step-0);
+    letter-spacing: 0;
+    margin: var(--space-3) 0 var(--space-1);
+  }
+
+  /* max-width:none overrides the 68ch measure site.css sets on every <p>. In a
+     260px column the measure would never bite, but it would if the columns
+     ever widen. */
+  .work__meta {
+    margin: 0;
+    max-width: none;
+    font-size: var(--step--1);
+    color: var(--ink-muted);
+  }
+
+  /* --- Sections and the filter row ---------------------------------------- */
+  .work__lede { font-size: var(--step-1); color: var(--ink); }
+
+  .work__group { margin-block: var(--space-7) 0; }
+
+  /* h2 defaults to --step-3, which clamps up to 3.25rem. That is a hero size
+     and this page has fifteen of them. Stepped down; the scale is unchanged. */
+  .work__group h2,
+  .work__filters h2 {
+    font-size: var(--step-2);
+    padding-bottom: var(--space-2);
+    border-bottom: 1px solid var(--rule);
+  }
+
+  /* Anchor targets. Without this the heading lands hard against the viewport
+     edge when a filter link is followed. */
+  .work__group { scroll-margin-top: var(--space-5); }
+
+  .work__count {
+    font-weight: var(--weight-body);
+    font-size: var(--step--1);
+    color: var(--ink-muted);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .work__filters { margin-block: var(--space-7) 0; }
+
+  .work__filters ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin: var(--space-4) 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  /* Chips stay UNDERLINED. site.css makes underline the affordance for every
+     link on this site, and the border alone could not carry it: --rule-strong
+     on --bg measures about 1.6:1, far under the 3:1 floor for a UI component.
+     The white label is 21:1 and the underline is what identifies it. */
+  .work__filters a {
+    display: inline-block;
+    padding: var(--space-2) var(--space-3);
+    border: 1px solid var(--rule-strong);
+    border-radius: var(--radius);
+    font-size: var(--step--1);
+  }
+
+  .work__filters a:hover { background: var(--bg-raised); }
+
+  .work__note { margin-top: var(--space-4); color: var(--ink-muted); }
+  </style>
+</head>
+
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- SHARED:HEADER — START ======================================================
+     GENERATED BLOCK. Edit it HERE, in _template/page-template.html, then run
+     node tools/sync-shared.mjs. Hand-editing it inside a page file works until
+     the next sync, which overwrites it without warning.
+
+     ⚠️ ONLY T3 AND T9 MAY EDIT THIS BLOCK. See THREAD-PLAN.md §1 Rule 2.
+        A page thread that edits it silently rewrites the nav on nine pages
+        it does not own.
+
+     NAV SOURCE: 02-Decisions/SITE-MAP-v1.md §2. Six top-level items.
+
+     ⚠️ THE FOUR AUDIENCE URLS ARE FLAT — /coaches/, /content-creators/,
+        /business-owners/, /marketers-and-agencies/. R22, ruled 2026-09-03,
+        Masud verbatim: "Flat — /coaches/, /content-creators/…"
+        SITE-MAP-v1.md §1's TABLE STILL LISTS /for/… AND IS STALE. RULINGS.md
+        R22 says so in terms. Never take a URL from that table.
+
+     Only the pages that EXIST are links. The rest render as unlinked muted
+     text, because instructions.md §5 requires every nav link to resolve to a
+     live page — and a link to a 404 breaks that rule where plain text does not.
+     ⚠️ NONE OF THE TEN PAGES EXISTS YET, so all six are text today. That is
+        the correct treatment, not a temporary bodge. Promote each to a real
+        <a> as its thread ships it.
+
+     ⚠️ THE WORDMARK IS TYPE, NOT THE LOGO IMAGE, AND THAT IS DELIBERATE.
+        VEA's logo measures #1C2448 — one colour, no accent, read from the live
+        logo.svg at /wp-content/uploads/2024/10/logo.svg on 2026-09-05. On a
+        #090909 page that navy is very nearly invisible, and no white version
+        of the logo exists anywhere in this project.
+        → [[R29 — a white/reversed VEA logo is required before any logo image
+             can appear on a dark page.]]
+     ========================================================================= -->
+<header class="site-header">
+  <div class="container site-header__inner">
+
+    <a class="wordmark" href="/">Video Editor Agency</a>
+
+    <!-- ⚠️ NAV PROMOTED BY T9, 2026-09-05. Four spans became links.
+         The comment above this block still said "NONE OF THE TEN PAGES EXISTS
+         YET, so all six are text today." That stopped being true when T4, T6
+         and T8 shipped. Four of the six now resolve to a real file in this
+         folder, verified today, so under instructions.md §5 they must be links:
+         the rule requires a nav link to reach a live page, not that the nav
+         stay text. Two are still text, and both for a reason. -->
+    <nav class="nav" aria-label="Main">
+      <ul>
+        <li><a href="/services/">Services</a></li>
+
+        <!-- ⚠️ STILL TEXT, AND THIS IS THE ONE THAT NEEDS FIXING NEXT.
+             All four audience pages EXIST — /coaches/, /content-creators/,
+             /business-owners/, /marketers-and-agencies/ — and nothing in the
+             header reaches any of them. THEY ARE ORPHANS IN THE NAV.
+
+             T9 has NOT built the dropdown: it is a CSS :hover/:focus-within
+             component and site.css is T3's file, which T9 does not write.
+             The gap is covered for now by the footer link list below, so no
+             page is unreachable — but a footer link is not a nav item.
+             → T3, or Masud reassigning site.css. -->
+        <li><span class="nav__pending">For</span></li>
+
+        <!-- Still text because /portfolio/ genuinely does not exist. T5 has not
+             run and is blocked on R07. This is the correct treatment, not a
+             bodge — and it is also why _redirects cannot ship yet, since 60 of
+             its 61 rows point here. -->
+        <li><span class="nav__pending">Portfolio</span></li>
+
+        <!-- /pricing/ STAYS in the nav. R04 ruled it ships as a published
+             per-unit rate page, so THREAD-PLAN.md §5 T6's fallback — drop it
+             from the nav and 301 to /contact/ — no longer applies. -->
+        <li><a href="/pricing/">Pricing</a></li>
+
+        <li><a href="/about/">About</a></li>
+
+        <!-- Contact takes the button treatment SITE-MAP-v1.md §2 specifies.
+             T9 promotes it to a link, not to a button: the button class is a
+             design-system decision and site.css is T3's. → T3. -->
+        <li><a href="/contact/">Contact</a></li>
+      </ul>
+    </nav>
+
+  </div>
+</header>
+<!-- SHARED:HEADER — END ===================================================== -->
+
+<main class="site-main" id="main">
+  <div class="container">
+
+    <h1>Our work</h1>
+
+    <!-- ==========================================================================
+         EVERYTHING BETWEEN THE MARKERS BELOW IS GENERATED.
+
+         Edit it in tools/build-portfolio.mjs, then run:
+             node tools/build-portfolio.mjs
+             node tools/build-portfolio.mjs --check      (must print "No change")
+
+         Hand-editing a card here works until the next run, which overwrites it
+         without warning. Same contract as tools/sync-shared.mjs.
+
+         ⚠️ NO CARD CARRIES A CLIENT NAME, AND NONE MAY UNTIL R07 IS RULED.
+            RULINGS.md R07 is OPEN. Portfolio-Catalogue.md §7.1 holds NamePublic
+            at NO on every row and lists the nineteen names awaiting a yes.
+
+         ⚠️ NO CARD PLAYS, AND THAT IS THE R07 PROBLEM, NOT AN OMISSION.
+            THREAD-PLAN.md §6 rules that an item is a still inside a native
+            <details> with the iframe in the closed panel — correct, and built
+            in build-portfolio.mjs behind PLAYERS. It cannot ship yet:
+            Portfolio-Catalogue.md finding 6 measured the real YouTube titles
+            and they NAME THE CLIENTS ("Podcast-Editing-Jay Macallister-…").
+            An unnamed card that opens a player naming the client has protected
+            nothing. Linking out instead does not help — YouTube shows the same
+            title. Rename the videos, or rule R07. Then set PLAYERS = true.
+         ========================================================================== -->
+    <!-- PORTFOLIO:GRID — START -->
+      <p class="work__lede">57 edits, in 14 industries. Every still below is a video we cut.</p>
+
+      <section class="work__group" id="selected" aria-labelledby="selected-h">
+        <h2 id="selected-h">Selected work</h2>
+        <ul class="work">
+        <li class="work__item">
+          <img src="/assets/img/portfolio/fKs9q1E9y94.jpg" width="1080" height="1350" loading="lazy" decoding="async" alt="Video still — Medical explainer showreel">
+          <h3 class="work__title">Medical explainer showreel</h3>
+          <p class="work__meta">Healthcare &amp; Medical · Explainer Video</p>
+        </li>
+        <li class="work__item">
+          <img src="/assets/img/portfolio/HtF06XQq5VQ.jpg" width="1080" height="1350" loading="lazy" decoding="async" alt="Video still — Law podcast intro">
+          <h3 class="work__title">Law podcast intro</h3>
+          <p class="work__meta">Legal &amp; Law Firm · Podcast &amp; Interview</p>
+        </li>
+        <li class="work__item">
+          <img src="/assets/img/portfolio/IZIw8Q-z0ak.jpg" width="1080" height="1350" loading="lazy" decoding="async" alt="Video still — Cyber-security product explainer">
+          <h3 class="work__title">Cyber-security product explainer</h3>
+          <p class="work__meta">SaaS &amp; Technology · Explainer Video</p>
+        </li>
+        <li class="work__item">
+          <img src="/assets/img/portfolio/ulOiBnEzNzw.jpg" width="1080" height="1350" loading="lazy" decoding="async" alt="Video still — Real estate floor plan">
+          <h3 class="work__title">Real estate floor plan</h3>
+          <p class="work__meta">Real Estate · Explainer Video</p>
+        </li>
+        <li class="work__item">
+          <img src="/assets/img/portfolio/LhHqpgKHfvE.jpg" width="1080" height="1920" loading="lazy" decoding="async" alt="Video still — Foodie influencer">
+          <h3 class="work__title">Foodie influencer</h3>
+          <p class="work__meta">Advertising &amp; Ad Agency · Short-Form (Reels &amp; Shorts)</p>
+        </li>
+        <li class="work__item">
+          <img src="/assets/img/portfolio/0aap4alrgdk.jpg" width="1080" height="1350" loading="lazy" decoding="async" alt="Video still — Wedding industry CEO course">
+          <h3 class="work__title">Wedding industry CEO course</h3>
+          <p class="work__meta">Business &amp; Personal Branding · Online Course &amp; E-Learning</p>
+        </li>
+        <li class="work__item">
+          <img src="/assets/img/portfolio/q8Us_7ZMxqY.jpg" width="1280" height="720" loading="lazy" decoding="async" alt="Video still — Story arc, part one">
+          <h3 class="work__title">Story arc, part one</h3>
+          <p class="work__meta">YouTube Channel · Online Course &amp; E-Learning</p>
+        </li>
+        <li class="work__item">
+          <img src="/assets/img/portfolio/GIbOpOMjF5w.jpg" width="1012" height="1920" loading="lazy" decoding="async" alt="Video still — Kids short 02">
+          <h3 class="work__title">Kids short 02</h3>
+          <p class="work__meta">Education &amp; Coaching · Short-Form (Reels &amp; Shorts)</p>
+        </li>
+        </ul>
+      </section>
+
+      <nav class="work__filters" aria-labelledby="filters-h">
+        <h2 id="filters-h">Browse by industry</h2>
+        <ul>
+            <li><a href="#legal-and-law-firm">Legal &amp; Law Firm <span class="work__count">13</span></a></li>
+            <li><a href="#podcast-channel">Podcast Channel <span class="work__count">13</span></a></li>
+            <li><a href="#advertising-and-ad-agency">Advertising &amp; Ad Agency <span class="work__count">10</span></a></li>
+            <li><a href="#education-and-coaching">Education &amp; Coaching <span class="work__count">9</span></a></li>
+            <li><a href="#finance-and-investment">Finance &amp; Investment <span class="work__count">2</span></a></li>
+            <li><a href="#youtube-channel">YouTube Channel <span class="work__count">2</span></a></li>
+            <li><a href="#business-and-personal-branding">Business &amp; Personal Branding <span class="work__count">1</span></a></li>
+            <li><a href="#fitness-and-wellness">Fitness &amp; Wellness <span class="work__count">1</span></a></li>
+            <li><a href="#food-and-restaurant">Food &amp; Restaurant <span class="work__count">1</span></a></li>
+            <li><a href="#healthcare-and-medical">Healthcare &amp; Medical <span class="work__count">1</span></a></li>
+            <li><a href="#mental-health-and-therapy">Mental Health &amp; Therapy <span class="work__count">1</span></a></li>
+            <li><a href="#non-profit-and-social-cause">Non-Profit &amp; Social Cause <span class="work__count">1</span></a></li>
+            <li><a href="#real-estate">Real Estate <span class="work__count">1</span></a></li>
+            <li><a href="#saas-and-technology">SaaS &amp; Technology <span class="work__count">1</span></a></li>
+        </ul>
+        <p class="work__note">Filtering by video format is not built yet.
+          <span class="todo">[[Two taxonomy rows are missing before every
+          item has an honest home — Portfolio-Catalogue.md §4c:
+          "Manufacturing &amp; Industrial" in the 28-list, and "Showreel /
+          Compilation" in the 14-list. 27 of these items are compilation
+          showreels and no format in the list describes one.]]</span></p>
+      </nav>
+
+      <section class="work__group" id="legal-and-law-firm" aria-labelledby="legal-and-law-firm-h">
+        <h2 id="legal-and-law-firm-h">Legal &amp; Law Firm <span class="work__count">13</span></h2>
+        <ul class="work">
+        <li class="work__item">
+          <img src="/assets/img/portfolio/HtF06XQq5VQ.jpg" width="1080" height="1350" loading="lazy" decoding="async" alt="Video still — Law podcast intro">
+          <h3 class="work__title">Law podcast intro</h3>
+          <p class="work__meta">Legal &amp; Law Firm · Podcast &amp; Interview</p>
+        </li>
+        <li class="work__item">
+          <img src="/assets/img/portfolio/ggyM4XlELXo.jpg" width="1080" height="1920" loading="lazy" decoding="async" alt="Video still — Best software">
+          <h3 class="work__title">Best software</h3>
+          <p class="work__meta">Legal &amp; Law Firm · Podcast &amp; Interview</p>
+        </li>
+        <li class="work__item">
+          <img src="/assets/img/portfolio/9lTVyaiEWMo.jpg" width="1280" height="720" loading="lazy" decoding="async" alt="Video still — Favorite tech">
+          <h3 class="work__title">Favorite tech</h3>
+          <p class="work__meta">Legal &amp; Law Firm · Podcast &amp; Interview</p>
+        </li>
+        <li class="work__item">
+          <img src="/assets/img/portfolio/Bo5R1CDI7ok.jpg" width="1080" height="1920" loading="lazy" decoding="async" alt="Video still — Fear of AI">
+          <h3 class="work__title">Fear of AI</h3>
+          <p class="work__meta">Legal &amp; Law Firm · Podcast &amp; Interview</p>
+        </li>
+        <li class="work__item">
+          <img src="/assets/img/portfolio/ImTQjAo486Q.jpg" width="1080" height="1920" loading="lazy" decoding="async" alt="Video still — Goal budget">
+          <h3 class="work__title">Goal budget</h3>
+          <p class="work__meta">Legal &amp; Law Firm · Podcast &amp; Interview</p>
+        </li>
+        <li class="work__item">
+          <img src="/assets/img/portfolio/LmlOMKBNoew.jpg" width="1080" height="1920" loading="lazy" decoding="async" alt="Video still — Podcast clip">
+          <h3 class="work__title">Podcast clip</h3>
+          <p class="work__meta">Legal &amp; Law Firm · Podcast &amp; Interview</p>
+        </li>
+        <li class="work__item">
+          <img src="/assets/img/portfolio/mIrb8pjJSuw.jpg" width="1080" height="1920" loading="lazy" decoding="async" alt="Video still — Podcast clip — announcement">
+          <h3 class="work__title">Podcast clip — announcement</h3>
+          <p class="work__meta">Legal &amp; Law Firm · Podcast &amp; Interview</p>
+        </li>
+        <li class="work__item">
+          <img src="/assets/img/portfolio/K4DOxWjWhw4.jpg" width="1080" height="1920" loading="lazy" decoding="async" alt="Video still — Productivity myth">
+          <h3 class="work__title">Productivity myth</h3>
+          <p class="work__meta">Legal &amp; Law Firm · Podcast &amp; Interview</p>
+        </li>
+        <li class="work__item">
+          <img src="/assets/img/portfolio/zCxBnpHJeWY.jpg" width="1080" height="1920" loading="lazy" decoding="async" alt="Video still — Professional group lessons">
+          <h3 class="work__title">Professional group lessons</h3>
+          <p class="work__meta">Legal &amp; Law Firm · Podcast &amp; Interview</p>
+        </li>
+        <li class="work__item">
+          <img src="/assets/img/portfolio/2Ehpl9IE5HE.jpg" width="1080" height="1920" loading="lazy" decoding="async" alt="Video still — Sora and C2PA">
+          <h3 class="work__title">Sora and C2PA</h3>
+          <p class="work__meta">Legal &amp; Law Firm · Podcast &amp; Interview</p>
+        </li>
+        <li class="work__item">
+          <img src="/assets/img/portfolio/pueZS7AXTUU.jpg" width="1080" height="1920" loading="lazy" decoding="async" alt="Video still — Value anchors">
+          <h3 class="work__title">Value anchors</h3>
+          <p class="work__meta">Legal &amp; Law Firm · Podcast &amp; Interview</p>
+        </li>
+        <li class="work__item">
+          <img src="/assets/img/portfolio/BHgL_J-eMFU.jpg" width="1080" height="1920" loading="lazy" decoding="async" alt="Video still — What I learned working with lawyers">
+          <h3 class="work__title">What I learned working with lawyers</h3>
+          <p class="work__meta">Legal &amp; Law Firm · Podcast &amp; Interview</p>
+        </li>
+        <li class="work__item">
+          <img src="/assets/img/portfolio/mdKx0eGpFbU.jpg" width="1080" height="1920" loading="lazy" decoding="async" alt="Video still — Working with lawyers">
+          <h3 class="work__title">Working with lawyers</h3>
+          <p class="work__meta">Legal &amp; Law Firm · Podcast &amp; Interview</p>
+        </li>
+        </ul>
+      </section>
+
+      <section class="work__group" id="podcast-channel" aria-labelledby="podcast-channel-h">
+        <h2 id="podcast-channel-h">Podcast Channel <span class="work__count">13</span></h2>
+        <ul class="work">
+        <li class="work__item">
+          <img src="/assets/img/portfolio/ro11a9PRaVs.jpg" width="1080" height="1350" loading="lazy" decoding="async" alt="Video still — Podcast intros compilation">
+          <h3 class="work__title">Podcast intros compilation</h3>
+          <p class="work__meta">Podcast Channel · Podcast &amp; Interview</p>
+        </li>
+        <li class="work__item">
+          <img src="/assets/img/portfolio/GPegR9XaENI.jpg" width="1080" height="1350" loading="lazy" decoding="async" alt="Video still — Podcast intro (1 of 7)">
+          <h3 class="work__title">Podcast intro (1 of 7)</h3>
+          <p class="work__meta">Podcast Channel · Podcast &amp; Interview</p>
+        </li>
+        <li class="work__item">
+          <img src="/assets/img/portfolio/niSouAnFGR0.jpg" width="1080" height="1350" loading="lazy" decoding="async" alt="Video still — Podcast intro (2 of 7)">
+          <h3 class="work__title">Podcast intro (2 of 7)</h3>
+          <p class="work__meta">Podcast Channel · Podcast &amp; Interview</p>
+        </li>
+        <li class="work__item">
+          <img src="/assets/img/portfolio/S-cuYKmDmK4.jpg" width="1080" height="1350" loading="lazy" decoding="async" alt="Video still — Podcast intro (3 of 7)">
+          <h3 class="work__title">Podcast intro (3 of 7)</h3>
+          <p class="work__meta">Podcast Channel · Podcast &amp; Interview</p>
+        </li>
+        <li class="work__item">
+          <img src="/assets/img/portfolio/qQsZkf4QfyA.jpg" width="1080" height="1350" loading="lazy" decoding="async" alt="Video still — Podcast intro (4 of 7)">
+          <h3 class="work__title">Podcast intro (4 of 7)</h3>
+          <p class="work__meta">Podcast Channel · Podcast &amp; Interview</p>
+        </li>
+        <li class="work__item">
+          <img src="/assets/img/portfolio/A-51_t-9M1s.jpg" width="1080" height="1350" loading="lazy" decoding="async" alt="Video still — Podcast intro (5 of 7)">
+          <h3 class="work__title">Podcast intro (5 of 7)</h3>
+          <p class="work__meta">Podcast Channel · Podcast &amp; Interview</p>
+        </li>
+        <li class="work__item">
+          <img src="/assets/img/portfolio/xO5sNykXpTM.jpg" width="1080" height="1350" loading="lazy" decoding="async" alt="Video still — Podcast intro (6 of 7)">
+          <h3 class="work__title">Podcast intro (6 of 7)</h3>
+          <p class="work__meta">Podcast Channel · Podcast &amp; Interview</p>
+        </li>
+        <li class="work__item">
+          <img src="/assets/img/portfolio/J34kZwv0NDw.jpg" width="1080" height="1350" loading="lazy" decoding="async" alt="Video still — Podcast intro (7 of 7)">
+          <h3 class="work__title">Podcast intro (7 of 7)</h3>
+          <p class="work__meta">Podcast Channel · Podcast &amp; Interview</p>
+        </li>
+        <li class="work__item">
+          <img src="/assets/img/portfolio/WC8bbLrEzOc.jpg" width="1080" height="1350" loading="lazy" decoding="async" alt="Video still — Podcast shorts compilation">
+          <h3 class="work__title">Podcast shorts compilation</h3>
+          <p class="work__meta">Podcast Channel · Podcast &amp; Interview</p>
+        </li>
+        <li class="work__item">
+          <img src="/assets/img/portfolio/C1aP9YXVOFs.jpg" width="1080" height="1350" loading="lazy" decoding="async" alt="Video still — Podcast intro — gym">
+          <h3 class="work__title">Podcast intro — gym</h3>
+          <p class="work__meta">Podcast Channel · Podcast &amp; Interview</p>
+        </li>
+        <li class="work__item">
+          <img src="/assets/img/portfolio/q2hiA2g84YU.jpg" width="1080" height="1350" loading="lazy" decoding="async" alt="Video still — Podcast short — guest episode">
+          <h3 class="work__title">Podcast short — guest episode</h3>
+          <p class="work__meta">Podcast Channel · Podcast &amp; Interview</p>
+        </li>
+        <li class="work__item">
+          <img src="/assets/img/portfolio/1WQeMP875GM.jpg" width="1080" height="1350" loading="lazy" decoding="async" alt="Video still — Podcast intro — lawyer episode">
+          <h3 class="work__title">Podcast intro — lawyer episode</h3>
+          <p class="work__meta">Podcast Channel · Podcast &amp; Interview</p>
+        </li>
+        <li class="work__item">
+          <img src="/assets/img/portfolio/bT98FYI48mM.jpg" width="1080" height="1350" loading="lazy" decoding="async" alt="Video still — Podcast short — gym">
+          <h3 class="work__title">Podcast short — gym</h3>
+          <p class="work__meta">Podcast Channel · Podcast &amp; Interview</p>
+        </li>
+        </ul>
+      </section>
+
+      <section class="work__group" id="advertising-and-ad-agency" aria-labelledby="advertising-and-ad-agency-h">
+        <h2 id="advertising-and-ad-agency-h">Advertising &amp; Ad Agency <span class="work__count">10</span></h2>
+        <ul class="work">
+        <li class="work__item">
+          <img src="/assets/img/portfolio/LhHqpgKHfvE.jpg" width="1080" height="1920" loading="lazy" decoding="async" alt="Video still — Foodie influencer">
+          <h3 class="work__title">Foodie influencer</h3>
+          <p class="work__meta">Advertising &amp; Ad Agency · Short-Form (Reels &amp; Shorts)</p>
+        </li>
+        <li class="work__item">
+          <img src="/assets/img/portfolio/NxFnKPfNimQ.jpg" width="1080" height="1920" loading="lazy" decoding="async" alt="Video still — Function &amp; event inquiries">
+          <h3 class="work__title">Function &amp; event inquiries</h3>
+          <p class="work__meta">Advertising &amp; Ad Agency · Short-Form (Reels &amp; Shorts)</p>
+        </li>
+        <li class="work__item">
+          <img src="/assets/img/portfolio/_nt_Vt1rOaM.jpg" width="1080" height="1920" loading="lazy" decoding="async" alt="Video still — Turning influencer posts into customers">
+          <h3 class="work__title">Turning influencer posts into customers</h3>
+          <p class="work__meta">Advertising &amp; Ad Agency · Short-Form (Reels &amp; Shorts)</p>
+        </li>
+        <li class="work__item">
+          <img src="/assets/img/portfolio/vgKUxP8Wgtw.jpg" width="1080" height="1920" loading="lazy" decoding="async" alt="Video still — How to use Google Ads">
+          <h3 class="work__title">How to use Google Ads</h3>
+          <p class="work__meta">Advertising &amp; Ad Agency · Short-Form (Reels &amp; Shorts)</p>
+        </li>
+        <li class="work__item">
+          <img src="/assets/img/portfolio/P3lAp0aocO0.jpg" width="1080" height="1920" loading="lazy" decoding="async" alt="Video still — Making customers return 3x more">
+          <h3 class="work__title">Making customers return 3x more</h3>
+          <p class="work__meta">Advertising &amp; Ad Agency · Short-Form (Reels &amp; Shorts)</p>
+        </li>
+        <li class="work__item">
+          <img src="/assets/img/portfolio/ymfq-L9iLJw.jpg" width="1080" height="1920" loading="lazy" decoding="async" alt="Video still — Free restaurant posts">
+          <h3 class="work__title">Free restaurant posts</h3>
+          <p class="work__meta">Advertising &amp; Ad Agency · Short-Form (Reels &amp; Shorts)</p>
+        </li>
+        <li class="work__item">
+          <img src="/assets/img/portfolio/unWprrKQjqs.jpg" width="1080" height="1920" loading="lazy" decoding="async" alt="Video still — VIP customer lists">
+          <h3 class="work__title">VIP customer lists</h3>
+          <p class="work__meta">Advertising &amp; Ad Agency · Short-Form (Reels &amp; Shorts)</p>
+        </li>
+        <li class="work__item">
+          <img src="/assets/img/portfolio/1ctUzRbXVw4.jpg" width="1080" height="1920" loading="lazy" decoding="async" alt="Video still — The Google Reviews hack">
+          <h3 class="work__title">The Google Reviews hack</h3>
+          <p class="work__meta">Advertising &amp; Ad Agency · Short-Form (Reels &amp; Shorts)</p>
+        </li>
+        <li class="work__item">
+          <img src="/assets/img/portfolio/DDDVW6KUsQo.jpg" width="1080" height="1920" loading="lazy" decoding="async" alt="Video still — The Instagram ad strategy">
+          <h3 class="work__title">The Instagram ad strategy</h3>
+          <p class="work__meta">Advertising &amp; Ad Agency · Short-Form (Reels &amp; Shorts)</p>
+        </li>
+        <li class="work__item">
+          <img src="/assets/img/portfolio/r7v7nr6C2no.jpg" width="1080" height="1920" loading="lazy" decoding="async" alt="Video still — Why 90% of restaurant ads fail">
+          <h3 class="work__title">Why 90% of restaurant ads fail</h3>
+          <p class="work__meta">Advertising &amp; Ad Agency · Short-Form (Reels &amp; Shorts)</p>
+        </li>
+        </ul>
+      </section>
+
+      <section class="work__group" id="education-and-coaching" aria-labelledby="education-and-coaching-h">
+        <h2 id="education-and-coaching-h">Education &amp; Coaching <span class="work__count">9</span></h2>
+        <ul class="work">
+        <li class="work__item">
+          <img src="/assets/img/portfolio/GIbOpOMjF5w.jpg" width="1012" height="1920" loading="lazy" decoding="async" alt="Video still — Kids short 02">
+          <h3 class="work__title">Kids short 02</h3>
+          <p class="work__meta">Education &amp; Coaching · Short-Form (Reels &amp; Shorts)</p>
+        </li>
+        <li class="work__item">
+          <img src="/assets/img/portfolio/vQUZtcqNUVE.jpg" width="1080" height="1350" loading="lazy" decoding="async" alt="Video still — Online course showreel">
+          <h3 class="work__title">Online course showreel</h3>
+          <p class="work__meta">Education &amp; Coaching · Online Course &amp; E-Learning</p>
+        </li>
+        <li class="work__item">
+          <img src="/assets/img/portfolio/Cdwn1cidxvE.jpg" width="1080" height="1350" loading="lazy" decoding="async" alt="Video still — Tools &amp; DIY tutorial showreel">
+          <h3 class="work__title">Tools &amp; DIY tutorial showreel</h3>
+          <p class="work__meta">Education &amp; Coaching · Tutorial &amp; How-To</p>
+        </li>
+        <li class="work__item">
+          <img src="/assets/img/portfolio/-HrZ7PmPtrg.jpg" width="1012" height="1920" loading="lazy" decoding="async" alt="Video still — Kids short 03">
+          <h3 class="work__title">Kids short 03</h3>
+          <p class="work__meta">Education &amp; Coaching · Short-Form (Reels &amp; Shorts)</p>
+        </li>
+        <li class="work__item">
+          <img src="/assets/img/portfolio/WmIXSZc9Omo.jpg" width="1080" height="1920" loading="lazy" decoding="async" alt="Video still — Mystery letter">
+          <h3 class="work__title">Mystery letter</h3>
+          <p class="work__meta">Education &amp; Coaching · Short-Form (Reels &amp; Shorts)</p>
+        </li>
+        <li class="work__item">
+          <img src="/assets/img/portfolio/wK8n9X4QLS8.jpg" width="1080" height="1920" loading="lazy" decoding="async" alt="Video still — Never procrastinate">
+          <h3 class="work__title">Never procrastinate</h3>
+          <p class="work__meta">Education &amp; Coaching · Short-Form (Reels &amp; Shorts)</p>
+        </li>
+        <li class="work__item">
+          <img src="/assets/img/portfolio/FGHLvZ8gv3g.jpg" width="1080" height="1920" loading="lazy" decoding="async" alt="Video still — Germs experiment">
+          <h3 class="work__title">Germs experiment</h3>
+          <p class="work__meta">Education &amp; Coaching · Short-Form (Reels &amp; Shorts)</p>
+        </li>
+        <li class="work__item">
+          <img src="/assets/img/portfolio/k5Uv7edbZJI.jpg" width="1012" height="1920" loading="lazy" decoding="async" alt="Video still — Prince keeps forgetting">
+          <h3 class="work__title">Prince keeps forgetting</h3>
+          <p class="work__meta">Education &amp; Coaching · Short-Form (Reels &amp; Shorts)</p>
+        </li>
+        <li class="work__item">
+          <img src="/assets/img/portfolio/6lePn7BX8J4.jpg" width="1080" height="1920" loading="lazy" decoding="async" alt="Video still — Medicine skip">
+          <h3 class="work__title">Medicine skip</h3>
+          <p class="work__meta">Education &amp; Coaching · Short-Form (Reels &amp; Shorts)</p>
+        </li>
+        </ul>
+      </section>
+
+      <section class="work__group" id="finance-and-investment" aria-labelledby="finance-and-investment-h">
+        <h2 id="finance-and-investment-h">Finance &amp; Investment <span class="work__count">2</span></h2>
+        <ul class="work">
+        <li class="work__item">
+          <img src="/assets/img/portfolio/Wdh3BOftG5E.jpg" width="1080" height="1350" loading="lazy" decoding="async" alt="Video still — Real estate bridge loan">
+          <h3 class="work__title">Real estate bridge loan</h3>
+          <p class="work__meta">Finance &amp; Investment · Talking Head Video</p>
+        </li>
+        <li class="work__item">
+          <img src="/assets/img/portfolio/tXYLpEnnuCs.jpg" width="1080" height="1350" loading="lazy" decoding="async" alt="Video still — Business education showreel">
+          <h3 class="work__title">Business education showreel</h3>
+          <p class="work__meta">Finance &amp; Investment · Talking Head Video</p>
+        </li>
+        </ul>
+      </section>
+
+      <section class="work__group" id="youtube-channel" aria-labelledby="youtube-channel-h">
+        <h2 id="youtube-channel-h">YouTube Channel <span class="work__count">2</span></h2>
+        <ul class="work">
+        <li class="work__item">
+          <img src="/assets/img/portfolio/q8Us_7ZMxqY.jpg" width="1280" height="720" loading="lazy" decoding="async" alt="Video still — Story arc, part one">
+          <h3 class="work__title">Story arc, part one</h3>
+          <p class="work__meta">YouTube Channel · Online Course &amp; E-Learning</p>
+        </li>
+        <li class="work__item">
+          <img src="/assets/img/portfolio/zb6qyP7zU78.jpg" width="1280" height="720" loading="lazy" decoding="async" alt="Video still — Story arc, part two">
+          <h3 class="work__title">Story arc, part two</h3>
+          <p class="work__meta">YouTube Channel · Online Course &amp; E-Learning</p>
+        </li>
+        </ul>
+      </section>
+
+      <section class="work__group" id="business-and-personal-branding" aria-labelledby="business-and-personal-branding-h">
+        <h2 id="business-and-personal-branding-h">Business &amp; Personal Branding <span class="work__count">1</span></h2>
+        <ul class="work">
+        <li class="work__item">
+          <img src="/assets/img/portfolio/0aap4alrgdk.jpg" width="1080" height="1350" loading="lazy" decoding="async" alt="Video still — Wedding industry CEO course">
+          <h3 class="work__title">Wedding industry CEO course</h3>
+          <p class="work__meta">Business &amp; Personal Branding · Online Course &amp; E-Learning</p>
+        </li>
+        </ul>
+      </section>
+
+      <section class="work__group" id="fitness-and-wellness" aria-labelledby="fitness-and-wellness-h">
+        <h2 id="fitness-and-wellness-h">Fitness &amp; Wellness <span class="work__count">1</span></h2>
+        <ul class="work">
+        <li class="work__item">
+          <img src="/assets/img/portfolio/gB5JBkmJ3So.jpg" width="1080" height="1350" loading="lazy" decoding="async" alt="Video still — Posture &amp; position">
+          <h3 class="work__title">Posture &amp; position</h3>
+          <p class="work__meta">Fitness &amp; Wellness · UGC Style Video</p>
+        </li>
+        </ul>
+      </section>
+
+      <section class="work__group" id="food-and-restaurant" aria-labelledby="food-and-restaurant-h">
+        <h2 id="food-and-restaurant-h">Food &amp; Restaurant <span class="work__count">1</span></h2>
+        <ul class="work">
+        <li class="work__item">
+          <img src="/assets/img/portfolio/Ptwyy3kOioc.jpg" width="1080" height="1350" loading="lazy" decoding="async" alt="Video still — Cookie recipe tutorial">
+          <h3 class="work__title">Cookie recipe tutorial</h3>
+          <p class="work__meta">Food &amp; Restaurant · Tutorial &amp; How-To</p>
+        </li>
+        </ul>
+      </section>
+
+      <section class="work__group" id="healthcare-and-medical" aria-labelledby="healthcare-and-medical-h">
+        <h2 id="healthcare-and-medical-h">Healthcare &amp; Medical <span class="work__count">1</span></h2>
+        <ul class="work">
+        <li class="work__item">
+          <img src="/assets/img/portfolio/fKs9q1E9y94.jpg" width="1080" height="1350" loading="lazy" decoding="async" alt="Video still — Medical explainer showreel">
+          <h3 class="work__title">Medical explainer showreel</h3>
+          <p class="work__meta">Healthcare &amp; Medical · Explainer Video</p>
+        </li>
+        </ul>
+      </section>
+
+      <section class="work__group" id="mental-health-and-therapy" aria-labelledby="mental-health-and-therapy-h">
+        <h2 id="mental-health-and-therapy-h">Mental Health &amp; Therapy <span class="work__count">1</span></h2>
+        <ul class="work">
+        <li class="work__item">
+          <img src="/assets/img/portfolio/h-T_FVLYMiM.jpg" width="1080" height="1350" loading="lazy" decoding="async" alt="Video still — Hypnotherapy course showreel">
+          <h3 class="work__title">Hypnotherapy course showreel</h3>
+          <p class="work__meta">Mental Health &amp; Therapy · Online Course &amp; E-Learning</p>
+        </li>
+        </ul>
+      </section>
+
+      <section class="work__group" id="non-profit-and-social-cause" aria-labelledby="non-profit-and-social-cause-h">
+        <h2 id="non-profit-and-social-cause-h">Non-Profit &amp; Social Cause <span class="work__count">1</span></h2>
+        <ul class="work">
+        <li class="work__item">
+          <img src="/assets/img/portfolio/oL5SS-8LgVk.jpg" width="1080" height="1350" loading="lazy" decoding="async" alt="Video still — Boat retreat &amp; launch">
+          <h3 class="work__title">Boat retreat &amp; launch</h3>
+          <p class="work__meta">Non-Profit &amp; Social Cause · Explainer Video</p>
+        </li>
+        </ul>
+      </section>
+
+      <section class="work__group" id="real-estate" aria-labelledby="real-estate-h">
+        <h2 id="real-estate-h">Real Estate <span class="work__count">1</span></h2>
+        <ul class="work">
+        <li class="work__item">
+          <img src="/assets/img/portfolio/ulOiBnEzNzw.jpg" width="1080" height="1350" loading="lazy" decoding="async" alt="Video still — Real estate floor plan">
+          <h3 class="work__title">Real estate floor plan</h3>
+          <p class="work__meta">Real Estate · Explainer Video</p>
+        </li>
+        </ul>
+      </section>
+
+      <section class="work__group" id="saas-and-technology" aria-labelledby="saas-and-technology-h">
+        <h2 id="saas-and-technology-h">SaaS &amp; Technology <span class="work__count">1</span></h2>
+        <ul class="work">
+        <li class="work__item">
+          <img src="/assets/img/portfolio/IZIw8Q-z0ak.jpg" width="1080" height="1350" loading="lazy" decoding="async" alt="Video still — Cyber-security product explainer">
+          <h3 class="work__title">Cyber-security product explainer</h3>
+          <p class="work__meta">SaaS &amp; Technology · Explainer Video</p>
+        </li>
+        </ul>
+      </section>
+<!-- PORTFOLIO:GRID — END -->
+
+    <!-- CTA. ✅ A REAL LINK, not a bracket: site\contact\index.html exists
+         (T8, confirmed 2026-09-05 in WORKLOG), so instructions.md §5's rule
+         that every link reach a live page is satisfied. T6 promoted its own
+         CTAs from brackets on the same basis.
+         No phone number here — R14 is ruled but NOT YET DIALLED, and the
+         footer already carries that bracket once. -->
+    <section class="work__group" aria-labelledby="cta-h">
+      <h2 id="cta-h">Want work like this?</h2>
+      <p>Tell us what you are making and we will tell you what it takes to cut it.</p>
+      <p><a class="btn btn--primary" href="/contact/">Contact us</a></p>
+    </section>
+
+  </div>
+</main>
+
+<!-- SHARED:FOOTER — START ======================================================
+     GENERATED BLOCK. Edit it HERE, then run node tools/sync-shared.mjs.
+
+     SETTLED, THEREFORE PRINTED:
+       R16 — LOCATION. Masud, 2026-09-05, selected "Say it plainly — Dhaka,
+             Bangladesh." This kills the New York and Delaware addresses in
+             the research outright. No US address appears anywhere on this site.
+             ⚠️ Stating Dhaka is a fact about location. It is NOT a licence to
+             borrow Mango's positioning — instructions.md §2 stands: Mango
+             sells full-service marketing to Bangladeshi businesses; VEA sells
+             editing to price- and speed-sensitive international buyers.
+
+     NOT SETTLED, THEREFORE BRACKETED RATHER THAN GUESSED:
+       R14 — PHONE. RULINGS.md §4 records this RULED as +880 1336433711 on
+             2026-09-05 — and THE SAME ENTRY records that it has NOT been
+             dialled. RULINGS §2 C5: "settled by dialling it, not by reasoning
+             about it." The research set that supplies that number also
+             supplies Lorem ipsum, a job board's FAQ and a landscaping
+             company's copy. Mango's number is ONE DIGIT away at
+             +880 1336433710. Wrong here means wrong on ten pages at once.
+             → It goes in the moment Masud confirms it rings.
+
+       R15 — EMAIL. OPEN. hello@videoeditor.agency recurs across the research
+             and has never been verified as a live mailbox. The zone's MX
+             records point at a cPanel host, so a mailbox COULD exist — which
+             is not the same as one existing.
+
+     ⚠️ THESE ARE BRACKETS, NOT PLACEHOLDERS, AND THE DIFFERENCE IS THE POINT.
+        A bracket is loud by design (site.css §9) and cannot reach production
+        unnoticed. Every page carries noindex and nothing ships until T10.
+        A plausible-looking wrong phone number would be the same risk class as
+        a fabricated testimonial — THREAD-PLAN.md §5 T4 says so in terms.
+
+     ⚠️ CORRECTED BY T9, 2026-09-05. THIS LINE PREVIOUSLY READ "T8 fills this
+        block once R14 is dialled and R15 is answered." IT NAMED THE ONE
+        THREAD THAT IS NOT ALLOWED TO OPEN THIS FILE.
+
+        THREAD-PLAN.md §1 Rule 2: only T3 and T9 may touch
+        _template/page-template.html. T8 raised the same contradiction in its
+        own WORKLOG entry (contradiction #2) and correctly did not edit it.
+        T3 has now finished. **T9 owns this block until Masud says otherwise.**
+
+        Sources: this file's own footer comment versus THREAD-PLAN.md §1
+        Rule 2 and §4. Corrected here rather than argued, because leaving it
+        would eventually be obeyed — a stale instruction in a file is a trap,
+        not a note.
+
+     WHO FILLS THE TWO BRACKETS, AND WHEN:
+       R14 — the moment Masud confirms +880 1336433711 actually rings.
+             T3's reasoning for bracketing rather than printing it stands and
+             T9 does not overturn it: RULINGS §2 C5 says this one is settled
+             by dialling, not by reasoning.
+       R15 — the moment an email address is confirmed to receive mail.
+
+     Bring either answer to T9 (or to whoever holds this file at the time).
+     Do NOT hand-edit the footer inside a page file: sync-shared.mjs
+     overwrites it on the next run without warning.
+     ========================================================================= -->
+<footer class="site-footer section">
+  <div class="container">
+    <h2 class="visually-hidden">Site footer</h2>
+
+    <p>Video editing from Dhaka, Bangladesh — for creators, coaches and brands worldwide.</p>
+
+    <!-- ⚠️ ADDED BY T9, 2026-09-05, AND IT FIXES A REAL PROBLEM.
+         Before this, the four audience pages existed and NOTHING ON THE SITE
+         LINKED TO THEM. The header's "For" dropdown is unbuilt (see the note in
+         SHARED:HEADER) and no page threads cross-link. Four orphan pages: a
+         crawler reaching the site would never find them, and neither would a
+         visitor.
+
+         This is a plain <ul> of <a>s using nothing but the base link styles —
+         NO NEW CSS CLASS, because site.css is T3's file and T9 does not write
+         it. If T3 wants to style this list properly, the markup is here to
+         hang a class on.
+
+         ⚠️ NO BLOG LINK. R10, ruled 2026-09-05: "Drop it — out of nav, 301 to
+         home." Every research document's footer has one. It does not come back.
+         ⚠️ NO /portfolio/ LINK. The page does not exist. It joins this list the
+         day T5 ships, and so does the sitemap entry.
+         ⚠️ The seven links below are every page that exists except /404.html,
+         which is deliberately unlinked and permanently noindexed. -->
+    <nav aria-label="Footer">
+      <ul>
+        <li><a href="/services/">Services</a></li>
+        <li><a href="/pricing/">Pricing</a></li>
+        <li><a href="/coaches/">For Coaches &amp; Trainers</a></li>
+        <li><a href="/content-creators/">For Content Creators</a></li>
+        <li><a href="/business-owners/">For Business Owners</a></li>
+        <li><a href="/marketers-and-agencies/">For Marketers &amp; Agencies</a></li>
+        <li><a href="/about/">About</a></li>
+        <li><a href="/contact/">Contact</a></li>
+        <li><a href="/privacy/">Privacy policy</a></li>
+        <li><a href="/terms/">Terms and conditions</a></li>
+      </ul>
+    </nav>
+
+    <p>
+      <span class="todo">[[R14 — phone +880 1336433711: RULED, NOT YET DIALLED]]</span>
+      <span class="todo">[[R15 — which email address does VEA publish?]]</span>
+    </p>
+
+    <p class="legal">© 2026 Video Editor Agency</p>
+  </div>
+</footer>
+<!-- SHARED:FOOTER — END ===================================================== -->
+
+</body>
+</html>
