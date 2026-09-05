@@ -39,12 +39,18 @@ Shared HEADER/FOOTER blocks copied byte-for-byte from `index.html` so
 `sync-shared.mjs --check` should print "No drift" — **not run; Drive is not
 reachable from the sandbox. Masud runs it.**
 
-### ⚠️ Brackets that now exist and must not reach the custom domain
+### ⚠️ STAND-IN STRIPS — added later the same day, on Masud's instruction
 
-`/healthcare/` proof · `/ads/` proof · `/real-estate/` proof · homepage Doctors
-and Ads strips · `/legal/` "one client" note · `/podcasters/` "14 held" note.
-**T10 gate.** If the items do not arrive, delete the section (or the page, for
-`/ads/` and `/real-estate/`).
+> **Masud, 2026-09-06:** *"You just make a placeholder and make things polished
+> … take any of the links from our page and place any of the videos repeatedly.
+> Tomorrow, I will send you a link to replace the video with the updated links."*
+
+Five bracket strips (homepage Doctors + Ads, `/healthcare/`, `/ads/`,
+`/real-estate/`) now show **four real VEA stills each, labelled "Sample edit"
+only** — never as medical, ad or property work, because they are not. Each
+carries an HTML comment marking it a stand-in. **T10 gate: none of the five
+reaches the custom domain until swapped.** The `/legal/` and `/podcasters/`
+notes moved from visible brackets to HTML comments.
 
 ### Requests to other threads — none executed by T11
 
