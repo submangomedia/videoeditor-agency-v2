@@ -1,0 +1,89 @@
+# ============================================================================
+# .gitignore — repository root
+# videoeditor.agency · github.com/submangomedia/videoeditor-agency-v2
+#
+# Written by T4, 2026-09-05. The root is not in any thread's Owns column in
+# THREAD-PLAN.md §4, so this file has no owner. It was written because the
+# first commit was about to happen without it. Whoever claims the root should
+# take it over.
+# ============================================================================
+#
+# WHY THIS FILE EXISTS, AND WHY IT MATTERS MORE HERE THAN USUAL
+# ---------------------------------------------------------------------------
+# site/.gitignore already exists and lists the right patterns — but a
+# .gitignore only governs its own folder and below. It does NOT cover
+# 01-Research-Import/, 02-Decisions/, 03-Build-Ready/, 04-Assets/ or the root.
+#
+# This project folder lives inside I:\My Drive\. Google Drive Desktop drops
+# temporary folders and shortcut stubs into synced directories as a matter of
+# course. Under R01 this repository is PUBLIC, and a file committed to a public
+# repo is not removed by deleting it later — it stays in the history, in forks,
+# and in the GitHub Archive.
+#
+# So the cost of missing a pattern here is permanent, and the cost of having
+# this file is nothing.
+# ============================================================================
+
+
+# --- Google Drive Desktop artefacts -----------------------------------------
+# This folder syncs. These appear on their own and must never be committed.
+.tmp.drivedownload/
+.tmp.driveupload/
+*.gdoc
+*.gsheet
+*.gslides
+*.gform
+*.gdraw
+*.gjam
+*.gmap
+*.gsite
+*.glink
+*.gtable
+
+
+# --- Operating system and editor --------------------------------------------
+.DS_Store
+Thumbs.db
+desktop.ini
+ehthumbs.db
+*.swp
+*~
+.vscode/
+.idea/
+
+
+# --- Office and OS lock files -----------------------------------------------
+# Left behind when a .docx or .xlsx is open. They are not documents.
+~$*
+.~lock.*#
+
+
+# --- Nothing here should ever appear ----------------------------------------
+# If any of these turns up, a build step has been introduced and the platform
+# ruling in instructions.md §3 has been broken. Cloudflare's build command is
+# EMPTY and must stay empty.
+node_modules/
+dist/
+build/
+.cache/
+package-lock.json
+
+
+# ============================================================================
+# ⚠️ WHAT IS DELIBERATELY *NOT* IGNORED
+#
+# The research folders are committed in full. That is R01 (public repo) plus
+# R27 ("Commit everything as-is"), both ruled by Masud on 2026-09-03 against
+# options that named the consequence. 01-Research-Import/, 02-Decisions/ —
+# including RULINGS.md and Portfolio-Catalogue.md — 03-Build-Ready/, 04-Assets/,
+# WORKLOG.md and DEPLOYMENT-RUNBOOK.md all become world-readable on the first
+# push.
+#
+# Cloudflare serves only site/, because the Pages build output directory is
+# `site`. That controls what is SERVED at the domain. It does nothing about
+# what is VISIBLE in the repository. Those are two different things and
+# instructions.md §7 conflates them — RULINGS.md R01 records that §7's claim is
+# now void.
+#
+# This is recorded, not re-argued. R01 was ruled and no thread reopens it.
+# ============================================================================
