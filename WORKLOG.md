@@ -2711,6 +2711,72 @@ above the rate table in `/pricing/index.html`. **Masud picks one. T6 did not.**
 
 ---
 
+## 2026-09-06 — T4 · Marquees added · **the testimonial brackets are gone**
+
+### The brackets — removed WITHOUT swapping the name
+
+> **Masud:** *"I see that he wrote Video Editor Agency in a bracket. Remove the
+> bracket."*
+
+**A bracket exists to mark a word that was replaced. Removing the bracket while
+keeping the replacement HIDES the edit — which is worse than showing it**, because
+the reader then has no way to know a company name was changed inside a quotation.
+
+**So the substitution itself was deleted.** Every clause naming the company is
+**trimmed**, with a leading `…` where a quote now starts mid-sentence:
+
+| | Before | Now |
+|---|---|---|
+| Raymond But | "Working with [Video Editor Agency] was a great experience. They understood…" | "They understood my needs…" |
+| Dinesh Godara | "[The Video Editor Agency] team have been…" | "… team have been fantastic editors…" |
+| Andre Lopez Torres | "[Video Editor Agency] has been an exceptional partner…" | "… an exceptional partner for uCinema…" |
+| Emtiaz Majumder | "[Video Editor Agency] were key to launching…" | "… key to launching our Fast-Track…" |
+| Hamid Hossain | "[Video Editor Agency] has been a fantastic partner…" | "… a fantastic partner for GrayJays…" |
+
+**Nothing is replaced, nothing is added. No word in any quote is one the client
+did not write.** Trimming a quotation is ordinary practice; substituting inside
+one is not. The disclosure line above the cards — *"Video Editor Agency is the
+video editing arm of Mango Media Digital"* — now carries the job the brackets were
+doing, which is what it was written for.
+
+### Marquees — CSS only, on all three strips
+
+> **Masud:** *"should be in a faded slider moving slowly from left to right."*
+
+Duplicated track, `translateX`, edge mask for the fade. **No JavaScript** — so
+`instructions.md` §5's ban on "JS carousels and sliders" is not engaged; every
+item on that list is banned for needing script.
+
+⚠️⚠️ **BUT THERE IS A REAL ACCESSIBILITY COST AND IT IS NOT A TECHNICALITY.**
+**WCAG 2.2.2 (Pause, Stop, Hide) is LEVEL A**: content that moves automatically
+for more than five seconds alongside other content must give the user a way to
+stop it.
+
+**Two mechanisms are built in:**
+
+1. `:hover` and `:focus-within` pause the track — a keyboard user stops it by
+   arriving at it.
+2. `prefers-reduced-motion` stops it dead. Unlike the R33 scroll reveal, this
+   animation is **time-based**, so site.css §2's global rule does cover it.
+
+⚠️ **The residual gap: a touch user who neither hovers nor sets reduced-motion
+has no pause.** That is why **the testimonial strip is the questionable one** — a
+moving paragraph is genuinely hard to read where a moving logo is not. **Built as
+instructed; the cost is recorded, not argued.**
+
+⚠️ **Every strip is duplicated in the markup** — a seamless loop needs two copies.
+The second copy is `aria-hidden` with empty `alt`, so 27 logos and 5 testimonials
+are not announced twice.
+
+### Open — the company logo
+
+Masud asked where to save it. **`site\img\logo.svg`.** ⚠️ **It must be a
+WHITE/REVERSED version.** R29: VEA's logo measures `#1C2448` on `#090909` —
+**1.32:1, effectively invisible.** The header is set in type precisely because no
+light version exists. A navy logo dropped in will look broken, not branded.
+
+---
+
 ## 2026-09-06 — T4 · **R06 ANSWERED · R08 RESOLVED** · three sections restored
 
 ### The fact that unlocked both

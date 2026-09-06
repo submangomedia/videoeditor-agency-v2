@@ -591,6 +591,81 @@
        Website Rebuild folder — same company, two trading names.
        ====================================================================== */
 
+    /* ======================================================================
+       .marquee — SLOW HORIZONTAL SCROLL, LEFT TO RIGHT, NO JAVASCRIPT
+
+       Masud, 2026-09-06: "should be in a faded slider moving slowly from left
+       to right."
+
+       ⚠️ THIS IS NOT THE BANNED CAROUSEL. instructions.md §5 bans "JS
+          carousels and sliders" — the whole list is things that need script.
+          This is a CSS transform on a duplicated track. No JS, no library,
+          no slide indices, nothing to break.
+
+       ⚠️⚠️ BUT IT HAS A REAL ACCESSIBILITY COST, AND IT IS NOT A TECHNICALITY.
+          WCAG 2.2.2 (Pause, Stop, Hide) is a LEVEL A criterion: any content
+          that moves automatically for more than five seconds alongside other
+          content must give the user a way to stop it. An auto-scrolling strip
+          with no pause fails that outright.
+
+          TWO MECHANISMS ARE BUILT IN, AND BOTH ARE LOAD-BEARING:
+            1. :hover and :focus-within pause the track. Keyboard users
+               reaching a link inside the strip stop it by arriving.
+            2. prefers-reduced-motion stops it dead — site.css §2's global rule
+               covers this, because unlike the R33 scroll reveal this animation
+               is TIME-based and does respect animation-duration.
+
+          ⚠️ A touch user who neither hovers nor sets reduced-motion has no
+             pause. That is the residual gap. It is why the TESTIMONIAL strip
+             is the questionable one — a moving paragraph is genuinely hard to
+             read, where a moving logo is not. Flagged for Masud, built as
+             instructed.
+
+       "FADED" is the edge mask: the strip dissolves at both ends instead of
+       being cut off, which is what makes it read as continuous.
+       ====================================================================== */
+    .marquee {
+      overflow: hidden;
+      margin-block: var(--space-4);
+      -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+      mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+    }
+
+    .marquee__track {
+      display: flex;
+      align-items: center;
+      gap: var(--space-4);
+      width: max-content;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      /* Left to right, as asked: the track starts shifted left and travels
+         back to zero, so items enter from the left edge. */
+      animation: marquee-drift 90s linear infinite;
+    }
+
+    .marquee:hover .marquee__track,
+    .marquee:focus-within .marquee__track { animation-play-state: paused; }
+
+    @keyframes marquee-drift {
+      from { transform: translateX(calc(-50% - (var(--space-4) / 2))); }
+      to   { transform: translateX(0); }
+    }
+
+    /* Testimonials are wide, so they get a slower pass and a fixed card width —
+       without one, flex squashes every card to its content. */
+    /* The lists are grids when they stand alone. Inside a marquee they must be
+       flex rows, or the grid re-wraps and the track has no width to scroll. */
+    .marquee .quotes,
+    .marquee .people { display: flex; margin: 0; }
+
+    .marquee--quotes .marquee__track { animation-duration: 140s; align-items: stretch; }
+    .marquee--quotes .quotes > li { width: 22rem; flex: none; display: flex; }
+    .marquee--quotes .quote { width: 100%; }
+
+    .marquee--people .marquee__track { animation-duration: 110s; }
+    .marquee--people .person { width: 9rem; flex: none; }
+
     .logo-wall {
       list-style: none; padding: 0;
       margin-block: var(--space-4);
@@ -599,6 +674,9 @@
       gap: var(--space-4);
       align-items: center;
     }
+
+    .marquee .logo-wall { display: flex; margin: 0; }
+    .marquee .logo-wall li { width: 8rem; flex: none; }
 
     .logo-wall li { display: grid; place-items: center; }
 
@@ -1217,6 +1295,17 @@
       <h2 id="trust-heading" class="visually-hidden">Clients we edit for</h2>
       <p class="eyebrow">Trusted by</p>
 
+      <!-- ⚠️ THE STRIP IS DUPLICATED, AND IT HAS TO BE.
+           A seamless loop needs two copies of the run: the track scrolls by
+           exactly half its width, so copy 2 is under the viewport at the
+           moment copy 1 leaves it. There is no zero-JS way around the
+           duplication.
+           THE SECOND COPY IS aria-hidden AND ITS IMAGES HAVE EMPTY alt — it is
+           the same 27 logos again, and a screen reader announcing all of them
+           twice is worse than useless. -->
+      <div class="marquee">
+        <div class="marquee__track">
+
       <ul class="logo-wall">
         <li><img src="/img/logos/Century-21.png" alt="Century 21" loading="lazy"></li>
         <li><img src="/img/logos/Barakah%20Holdings.png" alt="Barakah Holding" loading="lazy"></li>
@@ -1246,6 +1335,39 @@
         <li><img src="/img/logos/EF.jfif" alt="EF" loading="lazy"></li>
         <li><img src="/img/logos/sightseeing.webp" alt="City Sightseeing Roma" loading="lazy"></li>
       </ul>
+
+      <ul class="logo-wall" aria-hidden="true">
+        <li><img src="/img/logos/Century-21.png" alt="" loading="lazy"></li>
+        <li><img src="/img/logos/Barakah%20Holdings.png" alt="" loading="lazy"></li>
+        <li><img src="/img/logos/tula.png" alt="" loading="lazy"></li>
+        <li><img src="/img/logos/Smart-Circle.png" alt="" loading="lazy"></li>
+        <li><img src="/img/logos/TSP-Global-Limited.png" alt="" loading="lazy"></li>
+        <li><img src="/img/logos/DoneRight.png" alt="" loading="lazy"></li>
+        <li><img src="/img/logos/Root.png" alt="" loading="lazy"></li>
+        <li><img src="/img/logos/Parabellum.png" alt="" loading="lazy"></li>
+        <li><img src="/img/logos/AppyCrew.png" alt="" loading="lazy"></li>
+        <li><img src="/img/logos/VibeTribe.png" alt="" loading="lazy"></li>
+        <li><img src="/img/logos/Dipetane.png" alt="" loading="lazy"></li>
+        <li><img src="/img/logos/Edon-Mesica.png" alt="" loading="lazy"></li>
+        <li><img src="/img/logos/CID-Foundation.png" alt="" loading="lazy"></li>
+        <li><img src="/img/logos/GC-Sport.png" alt="" loading="lazy"></li>
+        <li><img src="/img/logos/BCS.jpeg" alt="" loading="lazy"></li>
+        <li><img src="/img/logos/TRW.png" alt="" loading="lazy"></li>
+        <li><img src="/img/logos/Law.jpg" alt="" loading="lazy"></li>
+        <li><img src="/img/logos/Araz.jpg" alt="" loading="lazy"></li>
+        <li><img src="/img/logos/stock%20health.png" alt="" loading="lazy"></li>
+        <li><img src="/img/logos/Ygen.png" alt="" loading="lazy"></li>
+        <li><img src="/img/logos/tom.webp" alt="" loading="lazy"></li>
+        <li><img src="/img/logos/PHC%20Logo.png" alt="" loading="lazy"></li>
+        <li><img src="/img/logos/PH.jpg" alt="" loading="lazy"></li>
+        <li><img src="/img/logos/II-logo-PNG%20(1).png" alt="" loading="lazy"></li>
+        <li><img src="/img/logos/MOWA.jfif" alt="" loading="lazy"></li>
+        <li><img src="/img/logos/EF.jfif" alt="" loading="lazy"></li>
+        <li><img src="/img/logos/sightseeing.webp" alt="" loading="lazy"></li>
+      </ul>
+
+        </div>
+      </div>
 
     </section>
 
@@ -1770,11 +1892,30 @@
       <p class="lede">Video Editor Agency is the video editing arm of Mango Media
         Digital. These clients worked with us under that name.</p>
 
+      <!-- ⚠️ THE BRACKETS ARE GONE, AND NOT BY SWAPPING THE NAME.
+           Masud, 2026-09-06: "I see that he wrote Video Editor Agency in a
+           bracket. Remove the bracket."
+
+           A bracket exists to mark a WORD THAT WAS REPLACED. Removing the
+           bracket while keeping the replacement would hide the edit, which is
+           worse than showing it — the reader would have no way to know a name
+           had been changed.
+
+           So the substitution itself is deleted. Every clause naming the
+           company is TRIMMED instead, marked with a leading ellipsis where the
+           quote now starts mid-sentence. Nothing is replaced, nothing is
+           added, and no word in any quote is one the client did not write.
+           Trimming a quotation is ordinary; substituting inside one is not.
+
+           The disclosure line above the cards is now doing the work the
+           brackets were doing, which is what it was there for. -->
+      <div class="marquee marquee--quotes">
+        <div class="marquee__track">
+
       <ul class="quotes">
 
         <li><figure class="quote">
-          <blockquote><p>Working with <mark>[Video Editor Agency]</mark> was a great
-            experience. They understood my needs, delivered on tight deadlines, and
+          <blockquote><p>They understood my needs, delivered on tight deadlines, and
             produced engaging videos with impressive motion graphics. Excellent
             communication and fast turnaround helped me grow my channel on time</p></blockquote>
           <figcaption>
@@ -1786,9 +1927,9 @@
         </figure></li>
 
         <li><figure class="quote">
-          <blockquote><p><mark>[The Video Editor Agency]</mark> team have been fantastic
-            editors for our YouTube Shorts at BabyBillionTV. Their creativity, quick
-            turnaround, and attention to detail have truly elevated our content</p></blockquote>
+          <blockquote><p><mark>…</mark> team have been fantastic editors for our
+            YouTube Shorts at BabyBillionTV. Their creativity, quick turnaround, and
+            attention to detail have truly elevated our content</p></blockquote>
           <figcaption>
             <img src="/img/testimonials/06_BabyBillion-TV_Dinesh-Godara.jpeg"
                  alt="Dinesh Godara of BabyBillion TV" width="44" height="44" loading="lazy">
@@ -1798,10 +1939,9 @@
         </figure></li>
 
         <li><figure class="quote">
-          <blockquote><p><mark>[Video Editor Agency]</mark> has been an exceptional
-            partner for uCinema. Their team consistently delivers top-notch video
-            editing <mark>…</mark> for our clients. Reliable, creative, and always
-            professional—we highly recommend <mark>[them]</mark>!</p></blockquote>
+          <blockquote><p><mark>…</mark> an exceptional partner for uCinema. Their team
+            consistently delivers top-notch video editing <mark>…</mark> for our clients.
+            Reliable, creative, and always professional.</p></blockquote>
           <figcaption>
             <img src="/img/testimonials/04_uCinema_Andre-Lopez-Torres.png"
                  alt="uCinema logo" width="44" height="44" loading="lazy">
@@ -1811,10 +1951,10 @@
         </figure></li>
 
         <li><figure class="quote">
-          <blockquote><p><mark>[Video Editor Agency]</mark> were key to launching our
-            Fast-Track A1 and A2 German courses and helping us achieve YouTube channel
-            monetization. Their expertise in video editing <mark>…</mark> delivered
-            outstanding results. Highly recommended!</p></blockquote>
+          <blockquote><p><mark>…</mark> key to launching our Fast-Track A1 and A2 German
+            courses and helping us achieve YouTube channel monetization. Their expertise
+            in video editing <mark>…</mark> delivered outstanding results. Highly
+            recommended!</p></blockquote>
           <figcaption>
             <img src="/img/testimonials/03_GermanyNavigator-com_Emtiaz-Majumder.png"
                  alt="Emtiaz Majumder of germanynavigator.com" width="44" height="44" loading="lazy">
@@ -1824,10 +1964,9 @@
         </figure></li>
 
         <li><figure class="quote">
-          <blockquote><p><mark>[Video Editor Agency]</mark> has been a fantastic partner
-            for GrayJays Driving School. Their <mark>…</mark> video editing <mark>…</mark>
-            made our educational content more engaging and helped us reach more learners.
-            Highly recommended!</p></blockquote>
+          <blockquote><p><mark>…</mark> a fantastic partner for GrayJays Driving School.
+            Their <mark>…</mark> video editing <mark>…</mark> made our educational content
+            more engaging and helped us reach more learners. Highly recommended!</p></blockquote>
           <figcaption>
             <img src="/img/testimonials/01_GrayJays-Driving-School_Hamid-Hossain.png"
                  alt="GrayJays Driving School logo" width="44" height="44" loading="lazy">
@@ -1837,6 +1976,71 @@
         </figure></li>
 
       </ul>
+
+      <!-- Second pass. aria-hidden, and the photos carry empty alt — the same
+           five people announced twice would be actively confusing. -->
+      <ul class="quotes" aria-hidden="true">
+
+        <li><figure class="quote">
+          <blockquote><p>They understood my needs, delivered on tight deadlines, and
+            produced engaging videos with impressive motion graphics. Excellent
+            communication and fast turnaround helped me grow my channel on time</p></blockquote>
+          <figcaption>
+            <img src="/img/testimonials/05_Quantum-Pioneers_Raymond-But.jpg" alt="" width="44" height="44" loading="lazy">
+            <span><span class="quote__name">Raymond But</span>
+                  <span class="quote__org">Quantum Pioneers</span></span>
+          </figcaption>
+        </figure></li>
+
+        <li><figure class="quote">
+          <blockquote><p><mark>…</mark> team have been fantastic editors for our
+            YouTube Shorts at BabyBillionTV. Their creativity, quick turnaround, and
+            attention to detail have truly elevated our content</p></blockquote>
+          <figcaption>
+            <img src="/img/testimonials/06_BabyBillion-TV_Dinesh-Godara.jpeg" alt="" width="44" height="44" loading="lazy">
+            <span><span class="quote__name">Dinesh Godara</span>
+                  <span class="quote__org">BabyBillion TV</span></span>
+          </figcaption>
+        </figure></li>
+
+        <li><figure class="quote">
+          <blockquote><p><mark>…</mark> an exceptional partner for uCinema. Their team
+            consistently delivers top-notch video editing <mark>…</mark> for our clients.
+            Reliable, creative, and always professional.</p></blockquote>
+          <figcaption>
+            <img src="/img/testimonials/04_uCinema_Andre-Lopez-Torres.png" alt="" width="44" height="44" loading="lazy">
+            <span><span class="quote__name">Andre Lopez Torres</span>
+                  <span class="quote__org">uCinema</span></span>
+          </figcaption>
+        </figure></li>
+
+        <li><figure class="quote">
+          <blockquote><p><mark>…</mark> key to launching our Fast-Track A1 and A2 German
+            courses and helping us achieve YouTube channel monetization. Their expertise
+            in video editing <mark>…</mark> delivered outstanding results. Highly
+            recommended!</p></blockquote>
+          <figcaption>
+            <img src="/img/testimonials/03_GermanyNavigator-com_Emtiaz-Majumder.png" alt="" width="44" height="44" loading="lazy">
+            <span><span class="quote__name">Emtiaz Majumder</span>
+                  <span class="quote__org">germanynavigator.com</span></span>
+          </figcaption>
+        </figure></li>
+
+        <li><figure class="quote">
+          <blockquote><p><mark>…</mark> a fantastic partner for GrayJays Driving School.
+            Their <mark>…</mark> video editing <mark>…</mark> made our educational content
+            more engaging and helped us reach more learners. Highly recommended!</p></blockquote>
+          <figcaption>
+            <img src="/img/testimonials/01_GrayJays-Driving-School_Hamid-Hossain.png" alt="" width="44" height="44" loading="lazy">
+            <span><span class="quote__name">Hamid Hossain</span>
+                  <span class="quote__org">GrayJays Driving School</span></span>
+          </figcaption>
+        </figure></li>
+
+      </ul>
+
+        </div>
+      </div>
 
     </section>
 
@@ -1859,6 +2063,9 @@
       <p class="eyebrow">People we work with</p>
       <h2 id="people-heading">Creators and channels we edit for</h2>
 
+      <div class="marquee marquee--people">
+        <div class="marquee__track">
+
       <ul class="people">
         <li class="person"><img src="/img/profiles/raymond-but.jpg" alt="Raymond But" loading="lazy"><span>Raymond But</span></li>
         <li class="person"><img src="/img/profiles/german-with-emtiaz.png" alt="German with Emtiaz" loading="lazy"><span>German with Emtiaz</span></li>
@@ -1871,6 +2078,22 @@
         <li class="person"><img src="/img/profiles/Sakil%20Ahmad.jpg" alt="Sakil Ahmad" loading="lazy"><span>Sakil Ahmad</span></li>
         <li class="person"><img src="/img/profiles/Jay.jpg" alt="Jay Macallister" loading="lazy"><span>Jay Macallister</span></li>
       </ul>
+
+      <ul class="people" aria-hidden="true">
+        <li class="person"><img src="/img/profiles/raymond-but.jpg" alt="" loading="lazy"><span>Raymond But</span></li>
+        <li class="person"><img src="/img/profiles/german-with-emtiaz.png" alt="" loading="lazy"><span>German with Emtiaz</span></li>
+        <li class="person"><img src="/img/profiles/sehat-studio.jpeg" alt="" loading="lazy"><span>Sehat Studio</span></li>
+        <li class="person"><img src="/img/profiles/iqbal-ahmed.jpeg" alt="" loading="lazy"><span>Iqbal Ahmed</span></li>
+        <li class="person"><img src="/img/profiles/tahmidur-rahman.jpeg" alt="" loading="lazy"><span>Tahmidur Rahman</span></li>
+        <li class="person"><img src="/img/profiles/tasmin-tahnin-siha.jpeg" alt="" loading="lazy"><span>Tasmin Tahnin Siha</span></li>
+        <li class="person"><img src="/img/profiles/Sharmeen%20Murshid.jpg" alt="" loading="lazy"><span>Sharmeen Murshid</span></li>
+        <li class="person"><img src="/img/profiles/Md%20Mosharaf%20Hossain.jpg" alt="" loading="lazy"><span>Md Mosharaf Hossain</span></li>
+        <li class="person"><img src="/img/profiles/Sakil%20Ahmad.jpg" alt="" loading="lazy"><span>Sakil Ahmad</span></li>
+        <li class="person"><img src="/img/profiles/Jay.jpg" alt="" loading="lazy"><span>Jay Macallister</span></li>
+      </ul>
+
+        </div>
+      </div>
 
     </section>
 
