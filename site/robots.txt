@@ -96,5 +96,25 @@
 # and the footer link list in _template/page-template.html.
 # ============================================================================
 
+# ============================================================================
+# OPENED AT CUTOVER — T10, 2026-09-06.
+#
+# The order this file specifies was followed, and it matters:
+#   1. <meta robots> lifted on all 20 live pages, one file at a time.
+#   2. THEN this file opened.
+# Opening this first would have done nothing, because a page still carrying
+# noindex is not indexed however freely it is crawled. Doing it the other way
+# round is worse: a crawler BLOCKED by robots.txt cannot READ a noindex tag,
+# so a blocked-but-linked URL can be indexed without ever being fetched.
+#
+# ⚠️ TWO PAGES DELIBERATELY KEEP THEIR noindex AND MUST NOT LOSE IT:
+#   · /404.html — an indexed error page competes in search with the pages it
+#     exists to apologise for. Its noindex NEVER comes off.
+#   · _template/page-template.html — not served, but it keeps the tag so that
+#     any NEW page built from it starts closed rather than open.
+# ============================================================================
+
 User-agent: *
-Disallow: /
+Allow: /
+
+Sitemap: https://videoeditor.agency/sitemap.xml

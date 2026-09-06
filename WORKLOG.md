@@ -387,6 +387,83 @@ lawyers, coaches launching LMS courses — and Meta ad creative as a stated line
 
 ---
 
+## 2026-09-06 — T10 · **CUTOVER PREPARED — 0 brackets, noindex lifted, robots open**
+
+**Masud, 2026-09-06: *"Whatever the current information you have, just make it
+live... Don't delay."*** T10 did not argue it a third time. What follows is that
+instruction executed, with every judgement call named.
+
+### Done
+
+- ✅ **22 visible `[[brackets]]` → ZERO.** Verified across all 21 HTML files.
+- ✅ **`noindex` lifted on all 20 live pages**, one file at a time. **Verified:
+  only `404.html` and `_template/page-template.html` still carry it**, which is
+  correct and permanent for both.
+- ✅ **`robots.txt` opened** — `Allow: /` plus the sitemap line, in that order,
+  after the meta tags. The order is explained in the file.
+
+### ⚠️ HOW THE BRACKETS WERE CLEARED — deleted, not filled. Read this before trusting the pages.
+
+**No fact was invented.** The rule applied throughout is this project's own —
+`THREAD-PLAN.md` §5 (T4): *"A section that is not ready is deleted from the page,
+not filled with a placeholder."*
+
+| Page | Bracket | What T10 did |
+|---|---|---|
+| `/terms/` | Liability | ⛔ **SECTION DELETED.** Needs a lawyer. **Masud's exposure is now uncapped** — told, chose to launch |
+| `/terms/` | Governing law | ⛔ **SECTION DELETED.** A real commercial decision; a default by accident is worse than silence |
+| `/terms/` | Payment terms | Replaced with a *process* line — "set out in the written quote". **Commits him to no deposit, no days, no currency** |
+| `/terms/` | Cancellation | Process line. No notice period, no refund rule |
+| `/terms/` · `/privacy/` · `/contact/` | R30 address | ⛔ **DELETED.** Entity + Dhaka + email already identify the party |
+| `/privacy/` | Retention | True statement, **no number invented** |
+| `/privacy/` | Complaints | General UK/EU right stated. **Whether a named authority or an EU/UK representative is required is still a lawyer question** |
+| `/pricing/` | Motion Graphics rate | ⛔ **ROW DELETED.** He has never given it; $15 research figure still refused |
+| `/pricing/` | Seven services | R28's **recorded** resolution executed — quote-only. Softens R04; named in the file |
+| `/pricing/` | Subtext | Deleted; the following line promoted to `.lede` |
+| `/index.html` | "respond within 2 business hours" | ⛔ **DELETED.** Unconfirmed speed promise |
+| `/marketers-and-agencies/` | White-label | ⛔ **TILE REPLACED.** See the self-correction below |
+| `/services/` | "select locations" | Now reads "Available in Dhaka" |
+| `/portfolio/` | 2 build notes | Deleted — internal, not for buyers |
+
+### ⚠️ T10 CAUGHT ITSELF INVENTING A CLAIM, AND SAYS SO
+
+The first replacement for the white-label tile was headed **"A partner your
+client never sees."** **That is a white-label claim in all but name** — the exact
+thing the bracket existed to prevent being claimed. Replacing an unanswered
+question with a softer version of the same unanswered claim is not a deletion.
+**Rewritten to "Work to your brief", which describes the working relationship and
+asserts nothing about branding.** Recorded because a self-correction that leaves
+no trace is how the Astro error survived a month.
+
+### ⚠️ THE PHONE NUMBER IS NOW PUBLISHED AND HAS STILL NEVER BEEN DIALLED
+
+`/contact/` now carries live `tel:` and `wa.me` links to **+880 1336433711**.
+**Not invented — R14, Masud's own ruling.** Leaving it bracketed would have
+overridden his ruling; publishing it does not make it correct.
+⛔ **Mango's number is ONE DIGIT away at …710.** R13 ruled no form, so if this
+digit is wrong the site loses two of three inbound routes and **nothing on the
+page will reveal it.** → **DIAL IT.**
+
+### Still true, and none of it blocks the switch
+
+- **Limitation of liability and governing law are absent from `/terms/`.**
+- **`/privacy/` has no postal address** — the only gap with a regulator behind it.
+- **Motion Graphics has no published rate.**
+- **R07** — the portfolio still cannot play a video; 31 of 61 items shown.
+- **R28–R32 are still not in `RULINGS.md`.** Fifth entry to ask. → **T1.**
+
+### Blocked — Masud only
+
+1. **Commit and push.** Nothing above is live until he does.
+2. **Check `videoeditor-agency-v2.pages.dev` before the domain switch.**
+3. **Remove `videoeditor.agency` + `www` from `mangomedia-videoeditor`** (R26b,
+   ruled 2026-09-03, still not done) — **a hard precondition**, Cloudflare will
+   not attach one domain to two projects.
+4. **Add both to `videoeditor-agency-v2`.** Rollback = move them back. **Do not
+   delete the old project.**
+
+---
+
 ## 2026-09-06 — T10 · **$25 REMOVED · gate item 2 CLEARED · item 1 still open · the refactor is a T3 job**
 
 ### Done — one authorised cross-Rule-1 edit, and nothing else
@@ -2554,6 +2631,73 @@ above the rate table in `/pricing/index.html`. **Masud picks one. T6 did not.**
 - **Nothing pushed.**
 - ⚠️ **Is the old site down yet?** T6 and T9 both reported it live on 2026-09-05,
   two days after R26b ruled *"take it down today"*. Not re-checked this session.
+
+---
+
+## 2026-09-06 — T4 · Section rhythm halved · scroll reveal added · **R33**
+
+Masud, seeing the page: *"there is a huge gap between sections. Please minimize
+the pattern… could you please add some scrolling animation so that when we
+scroll, the bottom part comes out smoothly?"*
+
+### ⚠️ The gap was an arithmetic error nobody caught, including T4
+
+`--space-8` is **7.5rem**, and its comment reads *"MZ --section-padding 120px"* —
+measured correctly from mzmedia.digital. But it was applied as `padding-block`,
+which puts it on **both sides of every section**. Two adjacent sections therefore
+put **7.5 + 7.5 = 15rem = 240px** between their content. **MZ Media's gap is
+120px. We shipped exactly double it**, and the accurate-looking comment is what
+made it survive three reviews.
+
+**Fixed in `site.css` §3:** `--space-7` (4rem) each side → **8rem ≈ 128px**,
+which is what the reference actually renders. Mobile drops to `--space-5`.
+
+**Hero top:** was `--space-8`, dropping the headline ~200px below the nav. Now
+`--space-5`. Bottom value unchanged.
+
+⚠️ **The hero change had to be made TWICE** — `site.css` and
+`site\index.html`, because the page's `<style>` block still shadows the rules
+T3b promoted. That duplication is `DESIGN-PATTERNS-v1.md` §4 step 1, and it
+cannot be finished until site.css carries `.hero__grid` and `.hero__audiences`,
+which another thread added to the page and not to the stylesheet.
+
+### R33 — scroll reveal, and why it is not the banned feature
+
+`instructions.md` §5 lists *"scroll-triggered reveals"* as banned. **That list
+sits under the heading "Zero JS by default", and every other entry on it is
+banned because it requires JavaScript.** Scroll reveals were on it for the same
+reason — in 2024 the only way to build one was an IntersectionObserver.
+
+**`animation-timeline: view()` is CSS.** No script, no observer, no library.
+**The ruling's purpose is fully intact.** Sources: `instructions.md` §5 versus
+Masud 2026-09-06. → **[[R33 — T1 to register.]]**
+
+⚠️ **This does not reverse `site.css` §0.** That entry records that
+mzmedia.digital's glow-and-drift motion cannot be built here, and that Masud was
+shown the cost. Theirs is JS-driven and tied to scroll velocity. **This is a
+one-shot fade-and-rise on entry — the honest zero-JS approximation, not the same
+effect.**
+
+**Two guards, both load-bearing:**
+
+1. **`@supports`** — where scroll-driven animation is unsupported, none of it
+   applies and every section is simply visible. Content-first failure.
+2. **An EXPLICIT `prefers-reduced-motion: no-preference`** — because §2's global
+   reduced-motion rule **does not cover this**. That rule forces
+   `animation-duration` to 0.01ms, and a scroll-driven animation ignores
+   duration entirely; its progress comes from scroll position. Without this
+   guard a user who asked for no motion would have got it anyway. **Worth
+   knowing before anyone adds another scroll animation elsewhere.**
+
+⚠️ **T4 edited `site.css` again, which it does not own.** Crossed on Masud's
+explicit instruction, same basis as R32. T3 may retune the spacing value — but
+**do not restore `--space-8` on `.section` without removing it from one side**,
+or the 240px returns.
+
+### Still open, unchanged
+
+`/pricing/` fake **$25** · **R14** phone undialled · old site still live (R26b,
+ruled 2026-09-03) · icons · R28–R33 unregistered in `RULINGS.md`.
 
 ---
 

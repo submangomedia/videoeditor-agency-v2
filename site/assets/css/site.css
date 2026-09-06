@@ -349,10 +349,94 @@ img {
 
 /* MZ Media runs 120px section padding. Halved below 48rem so a phone does not
    scroll through empty space. */
-.section { padding-block: var(--space-6); }
+/* ⚠️ HALVED 2026-09-06. Masud, on seeing the page: "there is a huge gap
+   between sections. Please minimize the pattern."
+
+   THE ARITHMETIC NOBODY DID. --space-8 is 7.5rem, taken from MZ Media's
+   measured 120px --section-padding. But that padding sits on BOTH sides of
+   every section, so two adjacent sections put 7.5rem + 7.5rem = 15rem = 240px
+   between their content. MZ Media's gap is 120px. We had exactly double it,
+   and the original comment "MZ --section-padding 120px" is what made it look
+   correct.
+
+   --space-7 (4rem) on each side gives 8rem ≈ 128px between sections, which is
+   the number the reference actually renders.
+
+   ⚠️ WRITTEN BY T4, WHICH DOES NOT OWN THIS FILE. Rule 1 gives site.css to
+      T3. Crossed on Masud's explicit instruction, same as R32. T3 may retune
+      the value — but do not restore --space-8 here without also removing it
+      from one side, or the 240px comes back. */
+.section { padding-block: var(--space-5); }
 
 @media (min-width: 48rem) {
-  .section { padding-block: var(--space-8); }
+  .section { padding-block: var(--space-7); }
+}
+
+
+/* --------------------------------------------------------------------------
+   3b. SCROLL REVEAL — CSS SCROLL-DRIVEN ANIMATION, NO JAVASCRIPT
+
+   Masud, 2026-09-06: "could you please add some scrolling animation so that
+   when we scroll, the bottom part comes out smoothly?"
+
+   ⚠️ THIS LOOKS LIKE A BANNED FEATURE AND IS NOT. NAMED, NOT SLIPPED IN.
+   instructions.md §5 lists "scroll-triggered reveals" among the banned items.
+   That list sits under the heading "Zero JS by default", and every other entry
+   on it — carousels, preloader gates, count-up counters, Load More, lightboxes
+   — is banned because it REQUIRES JAVASCRIPT. Scroll reveals were on that list
+   for the same reason: in 2024 the only way to build one was an
+   IntersectionObserver.
+
+   `animation-timeline: view()` is CSS. No script, no observer, no library,
+   nothing to load, nothing that can fail at runtime. The ruling's PURPOSE —
+   no JavaScript — is fully intact.
+
+   Sources named: instructions.md §5 banned list versus Masud, 2026-09-06.
+   The later instruction governs, and the reason the rule existed does not
+   apply to this implementation. → [[R33 — T1 to register.]]
+
+   ⚠️ WHAT THIS STILL DOES NOT DO. site.css §0 records that the glow-and-drift
+      motion on mzmedia.digital "cannot be built under the zero-JS ruling", and
+      that Masud was shown that cost. This does not reverse it. Theirs is
+      JS-driven, continuous, and tied to scroll velocity. This is a one-shot
+      fade-and-rise as each block enters the viewport. It is the honest
+      zero-JS approximation, not the same thing.
+
+   TWO GUARDS, AND BOTH MATTER:
+
+   1. @supports — in a browser without scroll-driven animation support, NONE of
+      this applies and every section is simply visible. That is the correct
+      failure: content-first. Firefox shipped this late, so this is not a
+      hypothetical branch.
+
+   2. prefers-reduced-motion: no-preference — an EXPLICIT guard, because §2's
+      global reduced-motion rule DOES NOT COVER THIS. That rule works by
+      forcing animation-duration to 0.01ms, and a scroll-driven animation
+      ignores duration entirely — its progress comes from scroll position, not
+      from time. Without this guard, a user who asked for no motion would get
+      it anyway.
+   -------------------------------------------------------------------------- */
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+
+    .section,
+    .cta-block,
+    .hero__grid {
+      animation: reveal-rise linear both;
+      animation-timeline: view();
+      /* Runs while the block travels the first 55% of its entry into the
+         viewport, so it has settled before the reader reaches it. Anything
+         already on screen at load is past this range and renders at the end
+         state — no flash, no empty first screen. */
+      animation-range: entry 0% entry 55%;
+    }
+
+    @keyframes reveal-rise {
+      from { opacity: 0; transform: translateY(1.5rem); }
+      to   { opacity: 1; transform: none; }
+    }
+  }
 }
 
 
@@ -771,7 +855,12 @@ img {
 
 .hero {
   position: relative;
-  padding-block: var(--space-8) var(--space-7);
+  /* ⚠️ TOP REDUCED 2026-09-06. Was --space-8 (7.5rem), which dropped the
+     headline ~200px below the nav and left the top of the page looking empty.
+     --space-5 (2rem) sits it directly under the header the way MZ Media does.
+     The larger bottom value stays: the hero still needs to separate itself
+     from the first section. */
+  padding-block: var(--space-5) var(--space-7);
   isolation: isolate;
 }
 

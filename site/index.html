@@ -58,7 +58,8 @@
        easier to remove — making it easy to remove everywhere at once is the
        precise thing the rule forbids. See site/robots.txt for the order the
        two locks come off in, and why that order matters. -->
-  <meta name="robots" content="noindex, nofollow">
+  <!-- noindex LIFTED at cutover — T10, 2026-09-06. 404.html keeps its own
+       permanently; the template keeps its own so new pages start closed. -->
 
   <!-- OPEN GRAPH — deliberately not scaffolded. Same reasoning as the template:
        og:image needs a real image that does not exist, and the homepage is the
@@ -156,7 +157,13 @@
        pointer-events:none so it can never eat a click, and costs no request. */
     .hero {
       position: relative;
-      padding-block: var(--space-8) var(--space-7);
+      /* ⚠️ 2026-09-06 — matches the same change in site.css §3. This page's
+         style block still shadows site.css for the rules T3b promoted, so the
+         value has to be changed in BOTH or the page ignores the stylesheet.
+         → That duplication is the thing DESIGN-PATTERNS-v1.md §4 step 1 asks
+           this page to delete once site.css carries .hero__grid and
+           .hero__audiences, which it does not yet. */
+      padding-block: var(--space-5) var(--space-7);
       isolation: isolate;
     }
 
@@ -1272,10 +1279,13 @@
                Deleting it would remove a genuine differentiator on Masud's own
                say-so, which is not T4's to do. Bracketing it asks him. -->
           <p>Because slow agencies cost you opportunities.
-            <span class="todo">[[R31 — "We respond within 2 business hours" is an
-            unverified speed promise. R18 covers turnaround, not response time,
-            so no ruling touches it. Confirm the figure, or the sentence ships
-            without one.]]</span></p>
+            <!-- ⛔ "We respond within 2 business hours" IS DELETED, NOT FILLED.
+                 T10, 2026-09-06. R31 was never answered. It is a speed promise
+                 a client can hold Masud to on every enquiry, and R18 already
+                 closed the equivalent question for delivery turnaround with the
+                 site shipping no speed claim at all. Publishing an unconfirmed
+                 response time would be the one place this site made a promise
+                 nobody had agreed to. → Returns the day he confirms a figure. --></p>
           <!-- ⚠️ RENUMBERED R30 → R31. T4 and T8 both minted "R30" for different
                questions on the same day, in different files, with no register
                entry for either — T8's R30 is "full registered address" in
