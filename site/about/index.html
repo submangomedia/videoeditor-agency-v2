@@ -49,83 +49,21 @@
 
   <link rel="stylesheet" href="/assets/css/site.css">
 
-  <!-- ==========================================================================
-       PAGE-SCOPED CSS — T3 ABSORBS INTO site.css AND DELETES THIS.
-       Every value is an existing token. No new hex, no new radius, no new font.
-       ⚠️ `.section` is NOT redefined here. See the note in 404.html.
-       ====================================================================== -->
-  <style>
-    .lede {
-      font-size: var(--step-1);
-      color: var(--ink-muted);
-    }
+  <!-- ✅ PAGE-SCOPED <style> BLOCK DELETED IN FULL, 2026-09-06.
+       DESIGN-PATTERNS-v1.md §4.1. This page now has NO private CSS.
 
-    .stack { margin-block: var(--space-7); }
+       What it used to define, and what replaced it:
+         .lede    → site.css §8, identical
+         .stack   → gone. Sections are <section class="section">, and site.css
+                    §8 owns section rhythm AND draws the glow divider between
+                    consecutive ones. .stack existed only because T8 refused to
+                    redefine .section; that reason is now spent.
+         .stats   → .grid + .stat__value / .stat__label
+         .values  → .grid + .tile
+         .cta-block → site.css §8, which adds the glow this page never had
 
-    /* R05's two figures. Static text — never a counter. See the comment on the
-       markup below for why that is not a style preference. */
-    .stats {
-      list-style: none;
-      margin: var(--space-5) 0 0;
-      padding: 0;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
-      gap: var(--space-4);
-    }
-
-    .stats li {
-      border-top: 1px solid var(--rule-strong);
-      padding-top: var(--space-3);
-    }
-
-    .stats b {
-      display: block;
-      font-family: var(--font-heading);
-      font-weight: var(--weight-heading);
-      font-size: var(--step-3);
-      line-height: 1.1;
-      letter-spacing: -0.02em;
-      color: var(--ink);
-    }
-
-    .stats span {
-      font-size: var(--step--1);
-      color: var(--ink-muted);
-    }
-
-    .values {
-      list-style: none;
-      margin: var(--space-5) 0 0;
-      padding: 0;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
-      gap: var(--space-5);
-    }
-
-    /* R32, 2026-09-05 — soft radius on anything you READ, sharp on anything
-       you CLICK. site.css §8 lists the pages still to be swapped and does not
-       list T8's five, because they were written after that note. Swapped here
-       2026-09-06 so this page is not the odd one out. */
-    .values li {
-      border: 1px solid var(--rule);
-      border-radius: var(--radius-card);
-      padding: var(--space-4);
-    }
-
-    .values h3 { margin-bottom: var(--space-2); }
-    .values p  { margin: 0; }
-
-    .cta-block {
-      border: 1px solid var(--rule);
-      border-radius: var(--radius-card);
-      padding: var(--space-5);
-      margin-block: var(--space-7);
-      background: var(--bg-tint);
-    }
-
-    .cta-block h2 { margin-bottom: var(--space-4); }
-    .cta-block p  { margin-bottom: var(--space-4); }
-  </style>
+       Nothing was copied from site/index.html. Every class used below was read
+       out of site.css. -->
 </head>
 
 <body>
@@ -318,17 +256,21 @@
 <main class="site-main" id="main">
   <div class="container">
 
-    <h1>About Video Editor Agency</h1>
+    <!-- ⚠️ NO BREADCRUMB, AND THE REASON HAS CHANGED.
+         The source copy specifies "Home / About". The original reason not to
+         build it was that / did not exist. It does now. The reason it still is
+         not here is different and weaker: a one-level breadcrumb on a flat
+         site duplicates the nav's own "About" link, which already carries
+         aria-current="page". → T9's call, not T8's. -->
 
-    <!-- ⚠️ NO BREADCRUMB. The source copy specifies "Home / About", but / does
-         not exist yet (T4 owns it) and instructions.md §5 forbids a link to a
-         404. A one-level breadcrumb on a flat six-page site earns nothing
-         anyway. → T4 or T9 decides whether it returns once / is live. -->
+    <section class="hero">
+      <h1>About Video Editor Agency</h1>
 
-    <p class="lede">
-      A dedicated editing team that works like your in-house department, at a
-      fraction of the cost.
-    </p>
+      <p class="lede">
+        A dedicated editing team that works like your in-house department, at a
+        fraction of the cost.
+      </p>
+    </section>
 
     <!-- ⚠️ SHOWREEL SECTION DELETED, NOT PLACEHELD.
          The source copy (PAGE 2) puts a showreel embed here, labelled
@@ -346,7 +288,8 @@
          it sets tracking cookies before the visitor consents to anything, and
          /privacy/ would have to disclose it. -->
 
-    <div class="stack">
+    <section class="section">
+      <p class="eyebrow">About us</p>
       <h2>We turn raw footage into content that actually performs</h2>
 
       <!-- ⚠️ THE OPENING SENTENCE DEVIATES FROM THE SOURCE COPY, DELIBERATELY.
@@ -401,9 +344,10 @@
         and Australia. Everything runs remotely &mdash; briefs, drafts,
         revisions and delivery.
       </p>
-    </div>
+    </section>
 
-    <div class="stack">
+    <section class="section">
+      <p class="eyebrow">By the numbers</p>
       <h2>Where we are so far</h2>
 
       <!-- ⚠️ STATIC TEXT. NOT A COUNTER. NOT NEGOTIABLE.
@@ -430,23 +374,24 @@
 
            ⚠️ "Clients served" — NOT "Client Servered". The live homepage
            carries that typo today. Do not carry it across. -->
-      <ul class="stats">
-        <li>
-          <b>100+</b>
-          <span>Clients served</span>
+      <ul class="grid">
+        <li class="tile">
+          <span class="stat__value">100+</span>
+          <span class="stat__label">Clients served</span>
         </li>
-        <li>
-          <b>10,000+</b>
-          <span>Videos edited</span>
+        <li class="tile">
+          <span class="stat__value">10,000+</span>
+          <span class="stat__label">Videos edited</span>
         </li>
       </ul>
-    </div>
+    </section>
 
-    <div class="stack">
+    <section class="section">
+      <p class="eyebrow">Our values</p>
       <h2>What we stand for</h2>
 
-      <ul class="values">
-        <li>
+      <ul class="grid">
+        <li class="tile">
           <h3>Creative excellence</h3>
           <p>
             We don&rsquo;t just cut &mdash; we craft. Every edit is shaped by
@@ -461,7 +406,7 @@
              posture; "24–72 hours" is a commitment the editing team has to
              meet on every order. If a figure is ever added here it needs
              Masud's own words and a RULINGS.md entry. -->
-        <li>
+        <li class="tile">
           <h3>Speed without compromise</h3>
           <p>
             Fast delivery doesn&rsquo;t mean rushed work. We&rsquo;ve built
@@ -470,7 +415,7 @@
           </p>
         </li>
 
-        <li>
+        <li class="tile">
           <h3>Dedicated accountability</h3>
           <p>
             One editor. One manager. One point of contact. Total clarity on
@@ -483,7 +428,7 @@
              revisions" row, the Starter Pack "2", all of them. T1's objection
              to the unbounded commitment is recorded under R17 and is not
              reopened here. -->
-        <li>
+        <li class="tile">
           <h3>Client-first revision policy</h3>
           <p>
             Unlimited revisions, no arguments, no extra fees. Your satisfaction
@@ -491,7 +436,7 @@
           </p>
         </li>
       </ul>
-    </div>
+    </section>
 
     <!-- ⚠️ DELIBERATELY NOT ON THIS PAGE, EACH FOR A NAMED REASON:
          · Team photos, named staff, bios — nothing in the research supports

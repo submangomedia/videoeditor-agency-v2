@@ -2,117 +2,166 @@
 <!--
   ============================================================================
   sitemap.xml — videoeditor.agency
-  Owner: T9. Written 2026-09-05, once the pages actually existed.
+  Owner: T9. Rewritten 2026-09-06 for the 20-page site.
   ============================================================================
 
-  WHY THIS FILE DID NOT EXIST UNTIL NOW
-  A sitemap is an ASSERTION that a list of URLs exists. On 2026-09-05 T9
-  declined to write one because zero of the ten pages had been built and every
-  line would have been false. T4, T6, T7 and T8 have since shipped. Every URL
-  below was verified against the file it resolves to, in this folder, today.
+  TWENTY URLs. The previous version listed eleven and was stale the moment T5
+  shipped /portfolio/ and T7/T11 added eight industry and role pages. Every
+  <loc> below was checked against a real index.html in this folder today —
+  none is asserted from a plan document.
 
-  ⚠️ /portfolio/ IS DELIBERATELY ABSENT. site/portfolio/ DOES NOT EXIST — T5
-  has not run and is blocked on R07 (real portfolio items, still OPEN).
-  Listing it would be the exact failure this file was postponed to avoid.
-  ⚠️ AND IT IS NOT ONLY A SITEMAP PROBLEM: 60 of the 61 rows in _redirects
-  point at /portfolio/. A 301 to a URL that 404s is worse than no redirect.
-  /portfolio/ IS A HARD PRECONDITION OF CUTOVER. → T5, then add it here.
+  ⚠️ /404.html IS DELIBERATELY ABSENT AND ALWAYS WILL BE. It is the one page
+  whose noindex never comes off: an indexed error page competes in search with
+  the pages it exists to apologise for.
 
-  ⚠️ /404.html IS DELIBERATELY ABSENT and always will be. It is the one page
-  whose noindex never comes off — an indexed error page competes in search
-  with the pages it exists to apologise for.
+  ⚠️ THIS FILE IS INERT UNTIL T10. Every page still carries
+  <meta name="robots" content="noindex, nofollow"> and robots.txt still says
+  Disallow: /. Both locks move at cutover, in the order robots.txt sets out:
+  LIFT THE META TAGS FIRST, PAGE BY PAGE, THEN OPEN robots.txt. A crawler
+  blocked by robots.txt cannot read a noindex tag.
 
-  ⚠️ THIS FILE IS INERT UNTIL T10. Every page below still carries
-  <meta name="robots" content="noindex, nofollow">, and robots.txt still says
-  Disallow: /. A sitemap listing noindexed pages on a disallowed site does
-  nothing at all. Both locks move at cutover, in the order robots.txt sets
-  out: LIFT THE META TAGS FIRST, PAGE BY PAGE, THEN OPEN robots.txt.
+  ⚠️ THREE URLs BELOW SHOULD PROBABLY NOT ALL SHIP. /healthcare/, /medical/
+  and /aesthetics/ address the same buyer — the commit of 2026-09-06 records
+  it as a known issue awaiting a decision and a 301. A sitemap is the wrong
+  place to resolve that, so all three are listed and the duplication is named
+  instead. WHICHEVER TWO SURVIVE, THE THIRD COMES OUT OF THIS FILE AND GETS A
+  ROW IN _redirects. It cannot be left to the crawler to work out.
 
   NO <priority> AND NO <changefreq>. Google has ignored both for years.
-  They are noise that invites arguments about numbers nobody acts on.
 
-  <lastmod> IS THE DATE THE PAGE'S CONTENT WAS LAST WRITTEN, not the date this
-  file was generated. ⚠️ IT MUST BE UPDATED WHEN A PAGE CHANGES. An always-
-  current lastmod on an unchanged page teaches a crawler to ignore the field.
-  Every page here was written on 2026-09-05, so today they are all the same —
-  that will stop being true with the first edit after launch.
+  <lastmod> IS THE DATE THE PAGE'S CONTENT WAS LAST WRITTEN. It must be
+  updated when a page changes; an always-today lastmod teaches a crawler to
+  ignore the field entirely.
   ============================================================================
 -->
-<!-- The namespace is sitemapS.org, plural. A singular "sitemap.org" here is a
-     silent killer: the file parses as XML, looks correct to a human, and is
-     rejected by every consumer of it. Caught by T9 on its own first draft. -->
+<!-- The namespace is sitemapS.org, plural. Singular parses as valid XML, looks
+     right to a human, and is rejected by every consumer of it. -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
-  <!-- Home — T4 -->
+  <!-- ===== Core ============================================================ -->
+
   <url>
     <loc>https://videoeditor.agency/</loc>
-    <lastmod>2026-09-05</lastmod>
+    <lastmod>2026-09-06</lastmod>
   </url>
 
-  <!-- Services — T6. Eleven services under R23. -->
   <url>
     <loc>https://videoeditor.agency/services/</loc>
-    <lastmod>2026-09-05</lastmod>
+    <lastmod>2026-09-06</lastmod>
   </url>
 
-  <!-- Pricing — T6. Ships under R04 as a published per-unit rate page.
-       ⚠️ Its rates are still brackets. If it ships with no confirmed figure,
-       reconsider whether it belongs in the sitemap at launch. -->
+  <!-- ⚠️ /pricing/ renders a placeholder $25 against four different units and
+       the 2026-09-06 commit records that it must not reach the live domain.
+       Listed because the page exists and this file is inert until cutover —
+       BUT IF IT IS STILL BRACKETED AT T10, IT COMES OUT OF HERE FIRST. -->
   <url>
     <loc>https://videoeditor.agency/pricing/</loc>
-    <lastmod>2026-09-05</lastmod>
+    <lastmod>2026-09-06</lastmod>
   </url>
 
-  <!-- The four audience pages — T7.
-       FLAT SLUGS, per R22, ruled 2026-09-03: "Flat — /coaches/,
-       /content-creators/…". These four are the ONLY URLs on the site that
-       carry over from the old one unchanged, and they take no redirect.
-       ⚠️ SITE-MAP-v1.md §1's table still shows /for/… and is stale. Never
-       take a URL from that table. -->
   <url>
-    <loc>https://videoeditor.agency/coaches/</loc>
-    <lastmod>2026-09-05</lastmod>
-  </url>
-  <url>
-    <loc>https://videoeditor.agency/content-creators/</loc>
-    <lastmod>2026-09-05</lastmod>
-  </url>
-  <url>
-    <loc>https://videoeditor.agency/business-owners/</loc>
-    <lastmod>2026-09-05</lastmod>
-  </url>
-  <url>
-    <loc>https://videoeditor.agency/marketers-and-agencies/</loc>
-    <lastmod>2026-09-05</lastmod>
+    <loc>https://videoeditor.agency/portfolio/</loc>
+    <lastmod>2026-09-06</lastmod>
   </url>
 
-  <!-- About — T8 -->
   <url>
     <loc>https://videoeditor.agency/about/</loc>
-    <lastmod>2026-09-05</lastmod>
+    <lastmod>2026-09-06</lastmod>
   </url>
 
-  <!-- Contact — T8 -->
   <url>
     <loc>https://videoeditor.agency/contact/</loc>
-    <lastmod>2026-09-05</lastmod>
+    <lastmod>2026-09-06</lastmod>
   </url>
 
-  <!-- Utility pages — T8. Listed, though they are not in the nav: people do
-       search for a company's privacy policy, and a legal page that cannot be
-       found is worth less than one that can.
-       ⚠️ BOTH ARE DRAFTS. T8 records that a lawyer should read them, that
-       /privacy/ must disclose the fonts.googleapis.com request under Masud's
-       2026-09-05 ruling, and that /terms/ cannot name a contracting entity
-       until R28 is in RULINGS.md. None of that blocks the sitemap; all of it
-       blocks LAUNCH. -->
+  <!-- ===== By role =========================================================
+       ⚠️ FLAT SLUGS, per R22, ruled 2026-09-03: "Flat — /coaches/,
+       /content-creators/…". The four original audience URLs carry over from
+       the old site unchanged and take no redirect. SITE-MAP-v1.md §1's table
+       still shows /for/… and is stale — never take a URL from it. -->
+
+  <url>
+    <loc>https://videoeditor.agency/content-creators/</loc>
+    <lastmod>2026-09-06</lastmod>
+  </url>
+
+  <url>
+    <loc>https://videoeditor.agency/coaches/</loc>
+    <lastmod>2026-09-06</lastmod>
+  </url>
+
+  <url>
+    <loc>https://videoeditor.agency/business-owners/</loc>
+    <lastmod>2026-09-06</lastmod>
+  </url>
+
+  <url>
+    <loc>https://videoeditor.agency/marketers-and-agencies/</loc>
+    <lastmod>2026-09-06</lastmod>
+  </url>
+
+  <url>
+    <loc>https://videoeditor.agency/podcasters/</loc>
+    <lastmod>2026-09-06</lastmod>
+  </url>
+
+  <url>
+    <loc>https://videoeditor.agency/course-creators/</loc>
+    <lastmod>2026-09-06</lastmod>
+  </url>
+
+  <!-- ===== By industry =====================================================
+       ⚠️ THE THREE HEALTHCARE URLs. See the note at the top of this file.
+       /healthcare/, /medical/ and /aesthetics/ are one buyer with three
+       addresses. This is recorded, not resolved. -->
+
+  <url>
+    <loc>https://videoeditor.agency/healthcare/</loc>
+    <lastmod>2026-09-06</lastmod>
+  </url>
+
+  <url>
+    <loc>https://videoeditor.agency/medical/</loc>
+    <lastmod>2026-09-06</lastmod>
+  </url>
+
+  <url>
+    <loc>https://videoeditor.agency/aesthetics/</loc>
+    <lastmod>2026-09-06</lastmod>
+  </url>
+
+  <url>
+    <loc>https://videoeditor.agency/legal/</loc>
+    <lastmod>2026-09-06</lastmod>
+  </url>
+
+  <url>
+    <loc>https://videoeditor.agency/real-estate/</loc>
+    <lastmod>2026-09-06</lastmod>
+  </url>
+
+  <!-- ===== By format ======================================================= -->
+
+  <url>
+    <loc>https://videoeditor.agency/ads/</loc>
+    <lastmod>2026-09-06</lastmod>
+  </url>
+
+  <!-- ===== Utility =========================================================
+       In the sitemap though not in the nav: people search for a company's
+       privacy policy by name, and a legal page nobody can find is worth less
+       than one they can.
+       ⚠️ BOTH ARE UNREVIEWED DRAFTS. A lawyer should read them before launch.
+       That blocks LAUNCH, not this file. -->
+
   <url>
     <loc>https://videoeditor.agency/privacy/</loc>
-    <lastmod>2026-09-05</lastmod>
+    <lastmod>2026-09-06</lastmod>
   </url>
+
   <url>
     <loc>https://videoeditor.agency/terms/</loc>
-    <lastmod>2026-09-05</lastmod>
+    <lastmod>2026-09-06</lastmod>
   </url>
 
 </urlset>

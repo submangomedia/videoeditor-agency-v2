@@ -37,37 +37,10 @@
 
   <link rel="stylesheet" href="/assets/css/site.css">
 
-  <!-- ==========================================================================
-       ✅ PAGE-SCOPED CSS CUT TO ONE RULE — 2026-09-06.
-
-       T3 landed Design-Patterns-v1 §1 and §2 into site.css §10 on 2026-09-06.
-       .lede, .actions, .section, .grid, .tile and .cta-block ALL NOW EXIST
-       THERE, in better versions than the local copies — the real .tile has a
-       top-lit gradient and a hover lift, and section rhythm and the glow
-       dividers are handled centrally. Every duplicated rule is deleted.
-
-       ⚠️ .section > h2 { border-bottom } WAS DELETED DELIBERATELY, not
-          overlooked. site.css now draws a glow divider between sections
-          (§10, `.section + .section::before`). A hairline under every h2 on
-          top of that is two dividers doing one job.
-
-       ONE RULE REMAINS because it is genuinely unique to the four original
-       For pages, which is exactly what T3's note permits: the deliverables
-       list is a plain <ul>, not a tile grid, and `ul` has no max-width in
-       site.css. Without this the bullets run the full 72rem container.
-       ⚠️ The SIX pages added on 2026-09-06 use .grid/.tile for deliverables
-          instead and carry NO <style> block at all. If T3 adds a list
-          utility, this last rule goes too.
-       ====================================================================== -->
-  <style>
-    .deliverables {
-      max-width: var(--measure);
-      margin-block: var(--space-5);
-      padding-left: var(--space-4);
-    }
-
-    .deliverables li { margin-bottom: var(--space-3); }
-  </style>
+  <!-- ✅ NO PAGE-SCOPED CSS — Design-Patterns-v1.md §4 step 1, in full.
+       The last rule, `.deliverables`, went on 2026-09-06 when that list was
+       converted to .grid/.tile. Everything comes from site.css §10.
+       See /coaches/index.html for the full note. -->
 </head>
 
 <body>
@@ -323,21 +296,28 @@
 <main class="site-main" id="main">
   <div class="container">
 
-    <h1>Video Editing for Marketers &amp; Agencies</h1>
+    <!-- .hero and .eyebrow added 2026-09-06 — Design-Patterns-v1.md §4 step 4
+         and §2a/2h. The eyebrow is a <p>, never an <h*>. -->
+    <section class="hero">
+      <p class="eyebrow">For marketers &amp; agencies</p>
 
-    <!-- ⚠️ THE SOURCE SUB-HEADLINE WAS TWO SENTENCES:
-         "Scale your video output without scaling your team. White-label editing
-          for agencies that want to deliver more."
-         The second sentence is REMOVED pending [[WHITE-LABEL]] above. It is a
-         better sub-headline with it. Put it back the moment Masud confirms. -->
-    <p class="lede">Scale your video output without scaling your team.</p>
+      <h1>Video Editing for Marketers &amp; Agencies</h1>
 
-    <p class="actions">
-      <a class="btn btn--primary" href="/contact/">Talk to us</a>
-      <a class="btn btn--secondary" href="/portfolio/">See our work</a>
-    </p>
+      <!-- ⚠️ THE SOURCE SUB-HEADLINE WAS TWO SENTENCES:
+           "Scale your video output without scaling your team. White-label editing
+            for agencies that want to deliver more."
+           The second sentence is REMOVED pending [[WHITE-LABEL]] above. It is a
+           better sub-headline with it. Put it back the moment Masud confirms. -->
+      <p class="lede">Scale your video output without scaling your team.</p>
+
+      <p class="actions">
+        <a class="btn btn--primary" href="/contact/">Talk to us</a>
+        <a class="btn btn--secondary" href="/portfolio/">See our work</a>
+      </p>
+    </section>
 
     <section class="section" aria-labelledby="problem-heading">
+      <p class="eyebrow">The problem</p>
       <h2 id="problem-heading">Post-production is where agency video projects go to die</h2>
 
       <ul class="grid">
@@ -370,6 +350,7 @@
     </section>
 
     <section class="section" aria-labelledby="solution-heading">
+      <p class="eyebrow">How we work</p>
       <h2 id="solution-heading">Your agency's unfair advantage in video</h2>
 
       <p>Agencies rarely lose video work on strategy. They lose it on delivery — on
@@ -386,27 +367,51 @@
     </section>
 
     <section class="section" aria-labelledby="deliver-heading">
+      <p class="eyebrow">What we deliver</p>
       <h2 id="deliver-heading">What we edit for agencies</h2>
 
-      <ul class="deliverables">
-        <li><strong>Ad creative</strong> — Meta, Google Display and YouTube pre-roll,
-          hook-first, with multiple cuts for A/B testing.</li>
+      <!-- Converted from <ul class="deliverables"> to .grid/.tile, 2026-09-06.
+           That was this page's last page-scoped rule. -->
+      <ul class="grid">
 
-        <li><strong>Client social content at volume</strong> — the recurring output
-          that fills a calendar rather than one hero film.</li>
+        <li class="tile">
+          <h3>Ad creative</h3>
+          <p>Meta, Google Display and YouTube pre-roll, hook-first, with multiple cuts
+            for A/B testing. See <a href="/ads/">Meta ad creative</a>.</p>
+        </li>
 
-        <li><strong>Corporate and brand video</strong> — the pieces the client's board
-          will watch.</li>
+        <li class="tile">
+          <h3>Client social content at volume</h3>
+          <p>The recurring output that fills a calendar rather than one hero film.</p>
+        </li>
 
-        <li><strong>Campaign packages across formats</strong> — one shoot, cut for
-          every placement in the media plan.</li>
+        <li class="tile">
+          <h3>Corporate and brand video</h3>
+          <p>The pieces the client's board will watch.</p>
+        </li>
 
-        <li><strong>Multi-platform format optimisation</strong> — 16:9, 9:16 and 1:1
-          cut properly, not letterboxed from one master.</li>
+        <li class="tile">
+          <h3>Campaign packages across formats</h3>
+          <p>One shoot, cut for every placement in the media plan.</p>
+        </li>
 
-        <li><span class="todo">[[WHITE-LABEL — has VEA ever delivered under a client
-          agency's brand, with no VEA marking? See the build gate at the top of this
-          file. This item does not ship until Masud answers.]]</span></li>
+        <li class="tile">
+          <h3>Multi-platform format optimisation</h3>
+          <p>16:9, 9:16 and 1:1 cut properly, not letterboxed from one master.</p>
+        </li>
+
+        <!-- ⚠️ THE BRACKET STAYS. It is the one open content question T7 holds
+             and it sits on the strongest line this page could carry. Converting
+             the list to tiles did not resolve it and must not be read as
+             resolving it. See the build gate at the top of this file. -->
+        <li class="tile">
+          <h3>White-label delivery</h3>
+          <p><span class="todo">[[WHITE-LABEL — has VEA ever delivered under a client
+            agency's brand, with no VEA marking on the file or the delivery? Would you
+            commit to it on the site? This tile does not ship until Masud
+            answers.]]</span></p>
+        </li>
+
       </ul>
     </section>
 

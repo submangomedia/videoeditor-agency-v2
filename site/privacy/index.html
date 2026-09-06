@@ -50,14 +50,24 @@
        Shared with /terms/. Every value is an existing token.
        ⚠️ `.section` is NOT redefined here. See the note in 404.html.
        ====================================================================== -->
+  <!-- ⚠️ THIS BLOCK IS REDUCED, NOT DELETED — DESIGN-PATTERNS-v1.md §4.1
+       allows "reduce it to rules genuinely unique to that page." Deleted:
+       `.lede` (now site.css §8, identical) and `.stack` (site.css §8 owns
+       section rhythm). What remains is genuinely unique to the two legal pages
+       and is duplicated only between /privacy/ and /terms/.
+
+       ⚠️ WHY THESE PAGES DO NOT USE <section class="section">.
+       site.css §8 draws a glow divider between every consecutive .section. A
+       privacy policy has twelve clauses; twelve glowing dividers would turn a
+       legal document into a landing page. The clauses are <h2>s inside ONE
+       column instead, with a plain hairline under each. Deliberate, and the
+       one place T8 departs from the pattern.
+
+       ⚠️ ONE THING T8 DID NOT INVENT: a small-muted-text utility. `.meta` is
+       here because site.css has no such class — see the WORKLOG request. If T3
+       adds one, `.meta` is deleted and this drops to `.legal-doc` +
+       `.draft-warning`. -->
   <style>
-    .lede {
-      font-size: var(--step-1);
-      color: var(--ink-muted);
-    }
-
-    .stack { margin-block: var(--space-7); }
-
     /* A legal document is read in sequence, so it is a single measured column
        rather than a grid. h2s carry a rule so the eye can find a clause. */
     .legal-doc h2 {

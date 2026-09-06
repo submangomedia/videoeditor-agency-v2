@@ -44,14 +44,12 @@
        Identical to the block in /privacy/. Every value is an existing token.
        ⚠️ `.section` is NOT redefined here. See the note in 404.html.
        ====================================================================== -->
+  <!-- ⚠️ REDUCED, NOT DELETED — DESIGN-PATTERNS-v1.md §4.1 allows keeping
+       "rules genuinely unique to that page." `.lede` and `.stack` are gone;
+       site.css §8 owns both. Identical to the block in /privacy/.
+       Full reasoning, including why these two pages do not use
+       <section class="section">, is in /privacy/index.html's equivalent note. -->
   <style>
-    .lede {
-      font-size: var(--step-1);
-      color: var(--ink-muted);
-    }
-
-    .stack { margin-block: var(--space-7); }
-
     .legal-doc h2 {
       font-size: var(--step-2);
       margin-top: var(--space-6);

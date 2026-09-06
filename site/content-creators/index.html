@@ -40,25 +40,10 @@
        Identical in all four For pages. Existing tokens only, no new values.
        See /coaches/index.html for the full note and the request to T3.
        ====================================================================== -->
-  <style>
-    /* ✅ CUT TO ONE RULE, 2026-09-06. T3 landed Design-Patterns-v1 §1 and §2
-       into site.css §10, so .lede, .actions, .section, .grid, .tile and
-       .cta-block all live there now, in better versions. Every duplicate is
-       deleted. `.section > h2 { border-bottom }` went deliberately: site.css
-       now draws a glow divider between sections and a hairline on top of that
-       is two dividers doing one job.
-       This last rule is genuinely unique — the deliverables list is a plain
-       <ul>, and `ul` has no max-width in site.css. See
-       /marketers-and-agencies/index.html for the full note. */
-
-    .deliverables {
-      max-width: var(--measure);
-      margin-block: var(--space-5);
-      padding-left: var(--space-4);
-    }
-
-    .deliverables li { margin-bottom: var(--space-3); }
-  </style>
+  <!-- ✅ NO PAGE-SCOPED CSS — Design-Patterns-v1.md §4 step 1, in full.
+       The last rule, `.deliverables`, went on 2026-09-06 when that list was
+       converted to .grid/.tile. Everything comes from site.css §10.
+       See /coaches/index.html for the full note. -->
 </head>
 
 <body>
@@ -302,17 +287,25 @@
 <main class="site-main" id="main">
   <div class="container">
 
-    <h1>Video Editing for Content Creators</h1>
+    <!-- .hero and .eyebrow added 2026-09-06 — Design-Patterns-v1.md §4 step 4
+         and §2a/2h. The eyebrow is a <p>, never an <h*>, so it stays out of the
+         heading tree and cannot compete with the single real <h1>. -->
+    <section class="hero">
+      <p class="eyebrow">For content creators</p>
 
-    <p class="lede">Post more. Edit less. Consistent editing across YouTube, TikTok,
-      Reels and Shorts — so your time goes into making things, not cutting them.</p>
+      <h1>Video Editing for Content Creators</h1>
 
-    <p class="actions">
-      <a class="btn btn--primary" href="/contact/">Get started</a>
-      <a class="btn btn--secondary" href="/portfolio/">See our work</a>
-    </p>
+      <p class="lede">Post more. Edit less. Consistent editing across YouTube, TikTok,
+        Reels and Shorts — so your time goes into making things, not cutting them.</p>
+
+      <p class="actions">
+        <a class="btn btn--primary" href="/contact/">Get started</a>
+        <a class="btn btn--secondary" href="/portfolio/">See our work</a>
+      </p>
+    </section>
 
     <section class="section" aria-labelledby="problem-heading">
+      <p class="eyebrow">The problem</p>
       <h2 id="problem-heading">Four things that stall a channel</h2>
 
       <ul class="grid">
@@ -344,6 +337,7 @@
     </section>
 
     <section class="section" aria-labelledby="solution-heading">
+      <p class="eyebrow">How we work</p>
       <h2 id="solution-heading">Less time editing. More time creating.</h2>
 
       <p>A channel grows on two things: consistency and quality. Most creators can
@@ -359,29 +353,48 @@
     </section>
 
     <section class="section" aria-labelledby="deliver-heading">
+      <p class="eyebrow">What we deliver</p>
       <h2 id="deliver-heading">What we edit for creators</h2>
 
-      <ul class="deliverables">
-        <li><strong>Long-form YouTube editing, any length</strong> — cut, colour,
-          audio, b-roll, and a structure that holds retention.</li>
+      <!-- Converted from <ul class="deliverables"> to .grid/.tile, 2026-09-06.
+           That was this page's last page-scoped rule. -->
+      <ul class="grid">
+
+        <li class="tile">
+          <h3>Long-form YouTube editing, any length</h3>
+          <p>Cut, colour, audio, b-roll, and a structure that holds retention.</p>
+        </li>
 
         <!-- "Cut vertical from the start" is supported by the project's own
              data, not by marketing instinct: THREAD-PLAN.md §6 counted 53 of 58
              catalogued videos at 9:16. This describes work VEA already does. -->
-        <li><strong>Short-form for TikTok, Reels and Shorts</strong> — cut vertical
-          from the start, not cropped down from a landscape edit afterwards.</li>
+        <li class="tile">
+          <h3>Short-form for TikTok, Reels and Shorts</h3>
+          <p>Cut vertical from the start, not cropped down from a landscape edit
+            afterwards.</p>
+        </li>
 
-        <li><strong>A consistent channel look</strong> — custom intro and outro,
-          lower thirds, and b-roll handled the same way every time.</li>
+        <li class="tile">
+          <h3>A consistent channel look</h3>
+          <p>Custom intro and outro, lower thirds, and b-roll handled the same way
+            every time.</p>
+        </li>
 
-        <li><strong>Clips pulled out of long-form</strong> — one long upload becomes
-          a run of short-form posts.</li>
+        <li class="tile">
+          <h3>Clips pulled out of long-form</h3>
+          <p>One long upload becomes a run of short-form posts.</p>
+        </li>
 
-        <li><strong>Chapter markers, end screens and card placement</strong> — the
-          retention and click work that happens after the cut.</li>
+        <li class="tile">
+          <h3>Chapter markers, end screens and card placement</h3>
+          <p>The retention and click work that happens after the cut.</p>
+        </li>
 
-        <li><strong>Thumbnail design</strong> — bold, one clear focal point, A/B-ready
-          variations.</li>
+        <li class="tile">
+          <h3>Thumbnail design</h3>
+          <p>Bold, one clear focal point, A/B-ready variations.</p>
+        </li>
+
       </ul>
     </section>
 

@@ -14,11 +14,20 @@
        SHARED:HEADER and SHARED:FOOTER only. `--check` will NOT report drift
        here. If T9 or T3 changes the block again, this file needs a hand edit.
 
-       ⚠️ site/services/index.html AND site/pricing/index.html ARE STALE HERE.
-          Both still load Roboto + Roboto Slab and carry no color-scheme or
-          theme-color meta — they were synced before T3's 2026-09-05 rebuild.
-          Two fonts that render nowhere is the exact thing instructions.md §5
-          forbids. NOT T7's files. Flagged in WORKLOG.md for T6 or T3.
+       ✅ RESOLVED — T9 VERIFIED AND CLEARED THIS, 2026-09-06.
+          This note said /services/ and /pricing/ still loaded Roboto + Roboto
+          Slab and carried no color-scheme or theme-color meta. NEITHER IS TRUE
+          ANY MORE. Grepped every .html in site/ today: the only two occurrences
+          of the string "Roboto" left in the repo are this comment and a
+          historical note in /pricing/'s own head. Every page loads Inter and
+          only Inter, and every page carries both paint metas.
+          Both files were corrected on 2026-09-05, which is likely the same day
+          this note was written — the two threads simply crossed.
+
+          CLEARED RATHER THAN DELETED, because the note was correct when made
+          and the trail is worth more than the tidiness. It is cleared here
+          because a stale warning sends someone to fix what is already fixed,
+          and this block is T9's.
        ========================================================================== -->
 
   <!-- T9, 2026-09-05. Title 39 chars, description 156.
@@ -47,78 +56,21 @@
 
   <link rel="stylesheet" href="/assets/css/site.css">
 
-  <!-- ==========================================================================
-       ⚠️ PAGE-SCOPED CSS — T3 ABSORBS THIS INTO site.css AND DELETES IT.
+  <!-- ✅ NO PAGE-SCOPED CSS — Design-Patterns-v1.md §4 step 1, IN FULL.
 
-       T7 does not own site.css and has not touched it. This block follows the
-       precedent T6 set in /services/index.html: a page thread may ship
-       page-scoped rules built from EXISTING TOKENS ONLY, marked for T3.
+       The last rule this page held, `.deliverables`, went on 2026-09-06 when
+       its list was converted to .grid/.tile. Nothing here is declared locally:
+       .hero, .eyebrow, .lede, .actions, .section, .grid, .tile and .cta-block
+       all come from site.css §10.
 
-       THERE IS NOT ONE NEW HEX, RADIUS OR FONT HERE.
+       ⚠️ `.section > h2 { border-bottom }` was deleted deliberately, not
+          overlooked — site.css §10 draws a glow divider between sections and a
+          hairline on top of it is two dividers doing one job.
 
-       ⚠️ UPDATED 2026-09-06 AGAINST 02-Decisions/DESIGN-PATTERNS-v1.md.
-
-       T4's handover instructs every page thread (§4) to delete this block —
-       BUT §4 opens with "Once §1 and §2 are in site.css", AND THEY ARE NOT.
-       Checked on 2026-09-06: site.css has --radius-card (R32) and nothing else
-       from that file. No --ink-accent, no --glow-* tokens, and none of .tile,
-       .grid, .eyebrow, .steps, .faq, .lede or .cta-block.
-
-       SO ONLY THE UNGATED STEPS WERE APPLIED HERE:
-         ✅ §4 step 3 — the .section { margin-block } override is DELETED.
-                        It needed nothing from T3 and it was a live defect.
-         ✅ §4 step 2 — .tile and .cta-block now use --radius-card, which
-                        already exists. One-word swap, no dependency.
-         ✅ §4 step 6 — checked: nothing on this page uses --accent as text or
-                        as a thin border. The only accent use is .btn--primary,
-                        which is a FILL with a white label at 8.46:1.
-         ⛔ §4 step 1 — NOT done. Deleting this block before T3 lands the
-                        components would leave the page unstyled.
-         ⛔ §4 step 4 — NOT done. <p class="eyebrow"> markup is pointless until
-                        .eyebrow exists; adding it now renders as a stray
-                        sentence above every h2.
-         ⛔ §2c full .tile — NOT copied. DESIGN-PATTERNS-v1.md §0 is explicit:
-                        "The fix is not 'each thread copies the homepage.' That
-                        makes five copies instead of four."
-
-       Class names and the 17rem minmax were aligned to §2 so that when T3
-       finally lands the components, deleting this block is a clean subtraction
-       rather than a re-layout.
-
-       ⚠️ STILL DUPLICATED ACROSS THE SITE, and T3 still owns collapsing it.
-       ====================================================================== -->
-  <style>
-    /* ✅ CUT TO ONE RULE — 2026-09-06.
-
-       T3 landed Design-Patterns-v1 §1 and §2 into site.css §10 on 2026-09-06.
-       .lede, .actions, .section, .grid, .tile and .cta-block ALL EXIST THERE
-       NOW, in better versions than these were — the real .tile carries a
-       top-lit gradient and a hover lift, and section rhythm plus the glow
-       dividers are handled centrally. Every duplicated rule is deleted, which
-       is Design-Patterns-v1.md §4 step 1 finally being satisfiable.
-
-       ⚠️ `.section > h2 { border-bottom }` WAS DELETED DELIBERATELY, not
-          overlooked. site.css §10 now draws a glow divider between sections
-          (`.section + .section::before`). A hairline under every h2 on top of
-          that is two dividers doing one job.
-
-       ONE RULE REMAINS, which is exactly what T3's note permits — "cut it to
-       what is genuinely unique to that page". The deliverables list here is a
-       plain <ul>, not a tile grid, and `ul` has no max-width in site.css;
-       without this the bullets run the full 72rem container.
-
-       ⚠️ The SIX pages added on 2026-09-06 use .grid/.tile for deliverables
-          and carry NO <style> block at all. If T3 adds a list utility, this
-          last rule goes too and these four match them exactly. */
-
-    .deliverables {
-      max-width: var(--measure);
-      margin-block: var(--space-5);
-      padding-left: var(--space-4);
-    }
-
-    .deliverables li { margin-bottom: var(--space-3); }
-  </style>
+       ALL TEN T7 PAGES NOW CARRY ZERO <style> BLOCKS. Any thread tempted to
+       add one should check site.css §10 first; it is probably already there,
+       and if it genuinely is not, the rule is to write the request into
+       WORKLOG.md and stop. -->
 </head>
 
 <body>
@@ -358,23 +310,32 @@
 <main class="site-main" id="main">
   <div class="container">
 
-    <!-- Exactly ONE real <h1> per page. Everything else is <h2> and below. -->
-    <h1>Video Editing for Coaches &amp; Trainers</h1>
+    <!-- .hero and .eyebrow added 2026-09-06 — Design-Patterns-v1.md §4 step 4
+         and §2a/2h. .hero carries the two-radial light flare from site.css §10;
+         the eyebrow is a <p>, never an <h*>, so it stays out of the heading
+         tree and cannot compete with the single real <h1>. -->
+    <section class="hero">
+      <p class="eyebrow">For coaches &amp; trainers</p>
 
-    <p class="lede">Turn your expertise into content that attracts clients, builds
-      authority, and sells your programmes — without you spending your evenings in a
-      timeline.</p>
+      <!-- Exactly ONE real <h1> per page. Everything else is <h2> and below. -->
+      <h1>Video Editing for Coaches &amp; Trainers</h1>
 
-    <!-- ✅ SECONDARY CTA IS NOW A REAL LINK — 2026-09-06.
-         It was a bracket because /portfolio/ did not exist. T5 has since
-         shipped site/portfolio/index.html, verified today, so under
-         instructions.md §5 the link resolves and the bracket is closed. -->
-    <p class="actions">
-      <a class="btn btn--primary" href="/contact/">Get started</a>
-      <a class="btn btn--secondary" href="/portfolio/">See our work</a>
-    </p>
+      <p class="lede">Turn your expertise into content that attracts clients, builds
+        authority, and sells your programmes — without you spending your evenings in a
+        timeline.</p>
+
+      <!-- ✅ SECONDARY CTA IS NOW A REAL LINK — 2026-09-06.
+           It was a bracket because /portfolio/ did not exist. T5 has since
+           shipped site/portfolio/index.html, verified today, so under
+           instructions.md §5 the link resolves and the bracket is closed. -->
+      <p class="actions">
+        <a class="btn btn--primary" href="/contact/">Get started</a>
+        <a class="btn btn--secondary" href="/portfolio/">See our work</a>
+      </p>
+    </section>
 
     <section class="section" aria-labelledby="problem-heading">
+      <p class="eyebrow">The problem</p>
       <h2 id="problem-heading">Four things that quietly cap a coaching business</h2>
 
       <ul class="grid">
@@ -407,6 +368,7 @@
     </section>
 
     <section class="section" aria-labelledby="solution-heading">
+      <p class="eyebrow">How we work</p>
       <h2 id="solution-heading">Your content should work as hard as you do</h2>
 
       <p>Coaches who publish consistently attract more clients, command higher rates,
@@ -424,38 +386,68 @@
     </section>
 
     <section class="section" aria-labelledby="deliver-heading">
+      <p class="eyebrow">What we deliver</p>
       <h2 id="deliver-heading">What we edit for coaches and trainers</h2>
 
-      <ul class="deliverables">
-        <!-- T11, 2026-09-06, on Masud's instruction: course / LMS editing is
-             folded into THIS page rather than a new one (EXPANSION-v1.md §6.4).
-             Two bullets added; nothing of T7's removed. No count is stated —
-             "hundreds of courses" is E7, unconfirmed, and does not ship. -->
-        <li><strong>Online course editing</strong> — module by module, structured for
-          completion, consistent from lesson one to the last.</li>
+      <!-- CONVERTED FROM <ul class="deliverables"> TO .grid/.tile, 2026-09-06.
+           That was the LAST page-scoped rule T7 held. All ten T7 pages now
+           carry ZERO <style> blocks — Design-Patterns-v1.md §4 step 1, in full
+           rather than in part.
 
-        <li><strong>LMS-ready delivery</strong> — chaptered lessons, slide-and-camera
-          composites, screen-recording clean-up, and exports in the resolution,
-          bitrate and captions format your platform asks for.</li>
+           ⚠️ T11's three items (2026-09-06) are PRESERVED VERBATIM, only
+              re-marked-up. Nothing of theirs was removed. Their note read:
+              "course / LMS editing is folded into THIS page rather than a new
+              one (EXPANSION-v1.md §6.4)."
+              → ⚠️ BUT T7 BUILT /course-creators/ AS A NEW ONE, on Masud's
+                2026-09-06 answer. Same collision as /healthcare/ vs /medical/
+                + /aesthetics/. NAMED, NOT RESOLVED — see WORKLOG. -->
+      <ul class="grid">
 
-        <li><strong>Course launch content</strong> — the trailer, the module previews
-          and the ad variants that sell the programme. See <a href="/ads/">Meta ad
-          creative</a>.</li>
+        <li class="tile">
+          <h3>Online course editing</h3>
+          <p>Module by module, structured for completion, consistent from lesson one
+            to the last.</p>
+        </li>
 
-        <li><strong>Coaching session highlight reels</strong> — the moments worth
-          showing, cut out of hours of recording.</li>
+        <li class="tile">
+          <h3>LMS-ready delivery</h3>
+          <p>Chaptered lessons, slide-and-camera composites, screen-recording
+            clean-up, and exports in the resolution, bitrate and captions format your
+            platform asks for.</p>
+        </li>
 
-        <li><strong>Short-form clips from long-form teaching</strong> — one deep
-          session becomes a fortnight of posts.</li>
+        <li class="tile">
+          <h3>Course launch content</h3>
+          <p>The trailer, the module previews and the ad variants that sell the
+            programme. See <a href="/ads/">Meta ad creative</a>.</p>
+        </li>
 
-        <li><strong>Webinar and masterclass editing</strong> — tightened, captioned,
-          and ready to run as evergreen.</li>
+        <li class="tile">
+          <h3>Coaching session highlight reels</h3>
+          <p>The moments worth showing, cut out of hours of recording.</p>
+        </li>
 
-        <li><strong>YouTube content for organic lead generation</strong> —
-          channel-consistent, with intros, lower thirds, chapters and end screens.</li>
+        <li class="tile">
+          <h3>Short-form clips from long-form teaching</h3>
+          <p>One deep session becomes a fortnight of posts.</p>
+        </li>
 
-        <li><strong>Podcast video editing</strong> — multi-cam, speaker switching,
-          branded, with social clips pulled out.</li>
+        <li class="tile">
+          <h3>Webinar and masterclass editing</h3>
+          <p>Tightened, captioned, and ready to run as evergreen.</p>
+        </li>
+
+        <li class="tile">
+          <h3>YouTube content for organic lead generation</h3>
+          <p>Channel-consistent, with intros, lower thirds, chapters and end
+            screens.</p>
+        </li>
+
+        <li class="tile">
+          <h3>Podcast video editing</h3>
+          <p>Multi-cam, speaker switching, branded, with social clips pulled out.</p>
+        </li>
+
       </ul>
     </section>
 

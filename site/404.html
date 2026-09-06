@@ -62,47 +62,11 @@
 
        Every value is an existing token. No new hex, no new radius, no new font.
 
-       ⚠️ T3, READ THIS BEFORE ABSORBING T6's EQUIVALENT BLOCK.
-       /services/ and /pricing/ each carry a page-scoped block that REDEFINES
-       `.section` as `margin-block: var(--space-7)`. site.css §3 defines
-       `.section` as `padding-block`, and the footer depends on that
-       (`.site-footer.section`). Absorbing T6's block verbatim would change
-       `.section` for every page including the footer. T8 has deliberately NOT
-       redefined `.section` and uses its own `.stack` instead.
-       Sources: site.css §3 versus site/services/index.html page-scoped <style>.
-       Named, not silently resolved — T3 owns the collapse.
+       ✅ RESOLVED 2026-09-06. T3 landed the components and put the rule in the
+       right place: site.css §8 now says "NO margin-block ANYWHERE ON .section",
+       which is the dead-space bug fixed at source. T8's `.stack` workaround is
+       deleted and this page has no private CSS at all.
        ====================================================================== -->
-  <style>
-    .lede {
-      font-size: var(--step-1);
-      color: var(--ink-muted);
-    }
-
-    /* Vertical rhythm between blocks WITHOUT touching .section. */
-    .stack { margin-block: var(--space-7); }
-
-    .link-list {
-      list-style: none;
-      margin: var(--space-4) 0 0;
-      padding: 0;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
-      gap: var(--space-3);
-    }
-
-    /* R32, 2026-09-05 — soft radius on anything you READ. */
-    .link-list li {
-      border: 1px solid var(--rule);
-      border-radius: var(--radius-card);
-      padding: var(--space-4);
-    }
-
-    .link-list p {
-      margin: var(--space-2) 0 0;
-      font-size: var(--step--1);
-      color: var(--ink-muted);
-    }
-  </style>
 </head>
 
 <body>
@@ -295,92 +259,76 @@
 <main class="site-main" id="main">
   <div class="container">
 
-    <h1>That page isn&rsquo;t here</h1>
+    <section class="hero">
+      <h1>That page isn&rsquo;t here</h1>
 
-    <p class="lede">
-      The link may be old, or the address may have a typo in it. Nothing is
-      broken on your end.
-    </p>
+      <p class="lede">
+        The link may be old, or the address may have a typo in it. Nothing is
+        broken on your end.
+      </p>
+    </section>
 
-    <!-- ⚠️ EVERY LINK BELOW POINTS AT A FILE THAT EXISTS IN THIS REPO.
-         Verified against the repo on 2026-09-05, at the END of T8 — not at the
-         start. instructions.md §5: "Every nav link resolves to a live page — no
-         exceptions." A 404 page that sends people to a second 404 is the worst
-         possible version of that rule being broken.
+    <!-- ⚠️ THIS LIST IS NOW THE SIX TOP-LEVEL NAV DESTINATIONS AND NOTHING
+         ELSE. THAT IS A DELIBERATE CHANGE, 2026-09-06, AND THE REASON IS
+         MAINTENANCE, NOT TASTE.
 
-         ⚠️ THIS LIST WENT STALE ONCE ALREADY, DURING THE THREAD THAT WROTE IT.
-         When T8 first drafted this page, only /services/ and /pricing/ existed.
-         By the time T8 finished, T4 had shipped / and T7 had shipped all four
-         audience pages. They are linked below now.
+         The previous version listed the four audience pages by name. It went
+         stale TWICE in two days: first when T4 and T7 shipped five pages during
+         the thread that wrote it, then again when T11 shipped nine more —
+         /portfolio/, /podcasters/, /course-creators/, /healthcare/, /medical/,
+         /aesthetics/, /legal/, /real-estate/, /ads/. There are 19 page folders
+         in this repo now. A 404 that tries to list them all is a list nobody
+         will maintain, and NOTHING WARNS YOU when it rots: this is page
+         content, not a SHARED block, so sync-shared.mjs --check never sees it.
 
-         STILL NOT LINKED, because the file does not exist:
-           /portfolio/    T5
+         Six links that mirror the nav do not go stale, because the nav is what
+         changes last and T3/T9 own keeping it correct. Anyone who wants an
+         audience page reaches it from "For" in the header, which is one click
+         and always current.
 
-         ⚠️ T5 — ADD /portfolio/ HERE WHEN YOU SHIP IT. This list is the site's
-            only fallback and NOTHING will tell you it is out of date. It is not
-            covered by sync-shared.mjs: this is page content, not a SHARED
-            block, so `--check` will never report it. -->
-    <div class="stack">
-      <h2>Try one of these</h2>
+         ⚠️ Every href below was checked against the folders that actually exist
+            on 2026-09-06 — read from the filesystem, not from the site map. -->
+    <section class="section">
+      <p class="eyebrow">Try one of these</p>
+      <h2>Where you probably meant to go</h2>
 
-      <ul class="link-list">
-        <li>
-          <a href="/">Home</a>
+      <ul class="grid">
+        <li class="tile">
+          <h3><a href="/">Home</a></h3>
           <p>Start from the beginning.</p>
         </li>
-        <li>
-          <a href="/services/">Services</a>
+        <li class="tile">
+          <h3><a href="/services/">Services</a></h3>
           <p>Every format we edit.</p>
         </li>
-        <li>
-          <a href="/pricing/">Pricing</a>
+        <li class="tile">
+          <h3><a href="/portfolio/">Portfolio</a></h3>
+          <p>The work itself.</p>
+        </li>
+        <li class="tile">
+          <h3><a href="/pricing/">Pricing</a></h3>
           <p>What the work costs.</p>
         </li>
-        <li>
-          <a href="/about/">About</a>
+        <li class="tile">
+          <h3><a href="/about/">About</a></h3>
           <p>Who we are and how we work.</p>
         </li>
-        <li>
-          <a href="/contact/">Contact</a>
+        <li class="tile">
+          <h3><a href="/contact/">Contact</a></h3>
           <p>Reach us directly.</p>
         </li>
       </ul>
-    </div>
 
-    <div class="stack">
-      <h2>Or by who you are</h2>
+      <!-- ⚠️ NO SEARCH BOX. Site search needs JavaScript or a third-party
+           service, and instructions.md §5 bans both. Six honest links beat a
+           search box that returns nothing. -->
 
-      <ul class="link-list">
-        <li>
-          <a href="/content-creators/">Content creators</a>
-          <p>YouTube, Shorts and channel-consistent editing.</p>
-        </li>
-        <li>
-          <a href="/coaches/">Coaches &amp; trainers</a>
-          <p>Courses, webinars and social clips.</p>
-        </li>
-        <li>
-          <a href="/business-owners/">Business owners</a>
-          <p>Brand, marketing and social video.</p>
-        </li>
-        <li>
-          <a href="/marketers-and-agencies/">Marketers &amp; agencies</a>
-          <p>Ad creative and white-label volume.</p>
-        </li>
-      </ul>
-    </div>
-
-    <!-- ⚠️ NO SEARCH BOX. Site search needs JavaScript or a third-party
-         service, and instructions.md §5 bans both. Four honest links beat a
-         search box that returns nothing. -->
-
-    <div class="stack">
       <p>
         If you followed a link from somewhere else and it landed here,
-        <a href="/contact/">tell us</a> — we would rather fix it than have it
-        keep happening.
+        <a href="/contact/">tell us</a> &mdash; we would rather fix it than have
+        it keep happening.
       </p>
-    </div>
+    </section>
 
   </div>
 </main>

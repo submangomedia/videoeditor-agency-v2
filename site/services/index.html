@@ -54,55 +54,39 @@
   <link rel="stylesheet" href="/assets/css/site.css">
 
   <!-- ==========================================================================
-       PAGE-SCOPED CSS — three rules T3's system does not yet carry.
+       PAGE-SCOPED CSS — ONE RULE. Everything else now comes from site.css.
 
-       ⚠️ REWRITTEN 2026-09-05 AFTER T3 SHIPPED THE DARK PALETTE. The earlier
-       version of this block defined .section, .card and .cta-block, ALL THREE OF
-       WHICH NOW EXIST IN site.css. Keeping them would have double-applied
-       spacing — T3's .section sets padding-block, T6's set margin-block, and a
-       page <style> wins over the external sheet. Deleted, not merged.
+       DESIGN-PATTERNS-v1 §4 applied 2026-09-06. DELETED from this block:
+         .eyebrow · .lede           → site.css §9, identical roles
+         .service-grid              → replaced by site.css's .grid
+         .service-grid > li > h3    → site.css's .tile h3 does it
+         .service-grid > li.card    → the temporary R32 rule T6 added on
+                                      2026-09-06. site.css's .card and .tile
+                                      BOTH now carry --radius-card, so it is
+                                      redundant. Removed the same day, as its
+                                      own comment promised.
 
-       WHAT IS LEFT IS ONLY WHAT site.css HAS NO CLASS FOR, AND NOTHING HERE
-       SHARES A NAME WITH ANYTHING IN IT. Every value is a T3 token: no hex, no
-       radius, no font, no size of its own. T3 absorbs these and deletes them.
+       ⚠️ NOTHING WAS COPIED FROM site\index.html. Per Masud's instruction, the
+          class names below and above are read from site.css only.
+
+       WHY .service__meta STAYS: site.css has no small-muted line for use INSIDE
+       a .tile. `.tile p` is --ink-body at body size with margin-bottom: 0, which
+       is the description, not a caption under it. `.stat__label` is the nearest
+       shape but belongs to the stats component.
+       → REQUEST TO T3, also written into WORKLOG.md: promote this to site.css as
+         a general `.tile__meta` if any other page needs a caption inside a card.
+         Until then one rule in one file is cheaper than a shared class with one
+         user.
        ========================================================================== -->
   <style>
-    .eyebrow {
-      font-size: var(--step--1);
-      color: var(--ink-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      margin-bottom: var(--space-2);
-    }
-
-    .lede {
-      font-size: var(--step-1);
-      color: var(--ink);
-      max-width: var(--measure);
-    }
-
-    .service-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
-      gap: var(--space-4);
-      margin-block: var(--space-6);
-      padding: 0;
-      list-style: none;
-    }
-
-    .service-grid > li > h3 { margin-bottom: var(--space-2); }
-
-    /* ⚠️ TEMPORARY — R32 APPLIED LOCALLY, 2026-09-06. DELETE WHEN .tile LANDS.
-       R32 (Masud, 2026-09-05) gives two radius tokens: --radius for anything
-       clickable, --radius-card for anything you read. site.css's .card still
-       uses --radius (3px), so R32 is currently applied on the homepage and
-       NOWHERE ELSE — Design-Patterns-v1 §0 consequence 3.
-       An unapplied ruling is worse than a temporary local rule, so these eleven
-       cards take --radius-card now. This is exactly the private-copy duplication
-       Design-Patterns-v1 exists to end: it goes the moment T3 ships .tile. */
-    .service-grid > li.card { border-radius: var(--radius-card); }
-
-    .service__meta {
+    /* ⚠️ SELECTOR IS `.tile .service__meta`, NOT `.service__meta`, AND THE
+       EXTRA CLASS IS LOAD-BEARING. site.css sets `.tile p { color:
+       var(--ink-body) }` — specificity 0,0,1,1. A bare `.service__meta` is
+       0,0,1,0 and LOSES, so the caption would silently render at --ink-body
+       (0.72) instead of --ink-muted (0.50) and read as a second body line
+       rather than a caption. Both pass AA on #090909, so nothing would have
+       flagged it; it would just have looked wrong. */
+    .tile .service__meta {
       font-size: var(--step--1);
       color: var(--ink-muted);
       margin: var(--space-3) 0 0;
@@ -348,8 +332,16 @@
          Kept in that order, faithfully.
          ⚠️ T6's note, not a change: the H2 is by far the stronger line and
          would make the better H1. Swapping them is a copy decision, not a
-         build decision, so it is Masud's — not made here. -->
-    <h1>Our Services</h1>
+         build decision, so it is Masud's — not made here.
+
+         .hero is site.css §9's component: top padding plus the radial glow that
+         every other page's masthead carries. The H1 sits in it ALONE — the
+         source's subtext belongs under the H2 below, and moving copy up into
+         the hero would be a structural rewrite of the source, not a build
+         decision. → offered to Masud in WORKLOG, not taken here. -->
+    <div class="hero">
+      <h1>Our Services</h1>
+    </div>
 
     <section class="section" aria-labelledby="intro-heading">
       <p class="eyebrow">What We Do</p>
@@ -375,9 +367,11 @@
            guess at slugs it has not seen. These ids are for in-page anchors
            only. Reconcile at import; it matters for T9b's /services/#… rows.
            ================================================================== -->
-      <ul class="service-grid">
+      <!-- site.css's .grid — auto-fit minmax(17rem, 1fr). The old local
+           .service-grid was the same idea at 18rem and is deleted. -->
+      <ul class="grid">
 
-        <li class="card" id="long-form">
+        <li class="tile" id="long-form">
           <h3>Long-Form Video Editing</h3>
           <p>For documentaries, brand films, corporate videos, and deep-dive YouTube
             content. We handle cutting, color grading, audio sync, transitions,
@@ -387,7 +381,7 @@
             <a href="/pricing/">see Pricing</a>.</p>
         </li>
 
-        <li class="card" id="short-form-reels">
+        <li class="tile" id="short-form-reels">
           <h3>Short-Form Reels &amp; TikToks</h3>
           <p>Thumb-stopping short edits for Instagram Reels, TikTok, and YouTube
             Shorts. We apply dynamic pacing, trending audio, on-screen text, and
@@ -396,7 +390,7 @@
             <a href="/pricing/">see Pricing</a>.</p>
         </li>
 
-        <li class="card" id="youtube">
+        <li class="tile" id="youtube">
           <h3>YouTube Video Editing</h3>
           <p>Channel-consistent editing that retains subscribers and grows watch
             time. Includes custom intros/outros, lower thirds, b-roll integration,
@@ -405,7 +399,7 @@
           <p class="service__meta">Published rate — <a href="/pricing/">see Pricing</a>.</p>
         </li>
 
-        <li class="card" id="podcast">
+        <li class="tile" id="podcast">
           <h3>Podcast Video Editing</h3>
           <p>Multi-cam podcast editing with speaker switching, branded lower thirds,
             chapter markers, auto-captions, and short-form clip extraction for social
@@ -413,7 +407,7 @@
           <p class="service__meta">Published rate — <a href="/pricing/">see Pricing</a>.</p>
         </li>
 
-        <li class="card" id="motion-graphics">
+        <li class="tile" id="motion-graphics">
           <h3>Motion Graphics &amp; Animation</h3>
           <p>Custom text animations, logo reveals, kinetic typography, explainer
             sequences, and visual overlays. We add the motion design layer that
@@ -422,7 +416,7 @@
             <a href="/pricing/">see Pricing</a>.</p>
         </li>
 
-        <li class="card" id="marketing-video">
+        <li class="tile" id="marketing-video">
           <h3>Marketing Video Editing</h3>
           <p>Scroll-stopping marketing edits for social campaigns, product launches,
             and brand awareness. We structure your footage around a clear message and
@@ -430,7 +424,7 @@
           <p class="service__meta">Published rate — <a href="/pricing/">see Pricing</a>.</p>
         </li>
 
-        <li class="card" id="ads-video">
+        <li class="tile" id="ads-video">
           <h3>Ads Video Editing</h3>
           <p>High-converting ad edits for Meta (Facebook/Instagram), Google Display,
             and YouTube pre-roll. Includes multiple cut variations for A/B testing.
@@ -438,7 +432,7 @@
           <p class="service__meta">Published rate — <a href="/pricing/">see Pricing</a>.</p>
         </li>
 
-        <li class="card" id="event-video">
+        <li class="tile" id="event-video">
           <h3>Event Video Editing</h3>
           <p>Highlights, full-length event recaps, and multi-cam live event edits. We
             turn raw event footage into polished content that captures energy and
@@ -446,7 +440,7 @@
           <p class="service__meta">Published rate — <a href="/pricing/">see Pricing</a>.</p>
         </li>
 
-        <li class="card" id="promotional-video">
+        <li class="tile" id="promotional-video">
           <h3>Promotional Video Editing</h3>
           <p>Product promos, service launches, seasonal campaigns, and announcement
             videos. Fast-paced, visually engaging, and built to generate action from
@@ -467,7 +461,7 @@
              ⚠️ "select locations" NAMES NOWHERE. It is the source's phrase and
              T6 did not invent it, but a buyer in Manchester cannot tell whether
              they qualify. → bracketed for Masud. -->
-        <li class="card" id="video-recording">
+        <li class="tile" id="video-recording">
           <h3>Video Recording (Production)</h3>
           <p>Need footage? We offer in-person and remote-assisted video recording for
             clients in Dhaka and select locations. Professional equipment, proper
@@ -479,7 +473,7 @@
           </p>
         </li>
 
-        <li class="card" id="thumbnail-design">
+        <li class="tile" id="thumbnail-design">
           <h3>Thumbnail Design</h3>
           <p>Click-through-optimized thumbnails for YouTube and other platforms. Bold
             typography, clear focal point, A/B-ready variations. A great thumbnail
@@ -509,6 +503,15 @@
             If Masud names a figure it goes into RULINGS.md with a date first.
          ================================================================== -->
     <section class="section" aria-labelledby="included-heading">
+      <!-- ⚠️ EYEBROW WRITTEN BY T6, NOT FROM THE SOURCE. §4 step 4 asks for one
+           above every section <h2>; the source document supplies a pre-label for
+           the intro section ("What We Do") and for none of the others.
+           "Included as standard" NAMES THE SECTION — it makes no claim, quotes
+           no figure and promises no outcome, which is why T6 was willing to
+           write it where it will not write marketing copy. Masud replaces it
+           with a word he prefers at no cost. -->
+      <p class="eyebrow">Included as standard</p>
+
       <h2 id="included-heading">Included with every service</h2>
 
       <p class="lede">No revision caps. No extra fees. Ever.</p>
@@ -525,14 +528,16 @@
     <!-- ======================================================================
          CTA — source PAGE 3, "SERVICES PAGE CTA".
 
-         ⚠️ NOT A LINK, AND THAT IS CORRECT. /contact/ does not exist — T8 owns
-         it. instructions.md §5 requires every link to resolve to a live page.
-         When T8 ships it, this becomes:
-             <a class="btn btn--primary" href="/contact/">Contact Us</a>
-         .btn--primary is T3's blue fill with a white label, 8.46:1. It is the
-         ONLY correct use of the accent — never blue text on the dark page.
+         Now site.css's .cta-block: --radius-card, centred, with the heaviest
+         glow on the page lit from below.
+
+         ⚠️ IT IS DELIBERATELY NOT class="section". site.css draws its glow-line
+         divider with `.section + .section::before`, so leaving .section on this
+         element would put a hairline directly above a block that already has
+         its own border and glow — two dividers stacked. .cta-block carries its
+         own vertical rhythm via margin-block.
          ================================================================== -->
-    <section class="section" aria-labelledby="cta-heading">
+    <section class="cta-block" aria-labelledby="cta-heading">
       <h2 id="cta-heading">Not sure which service fits your project?</h2>
 
       <p class="lede">Let's talk.</p>

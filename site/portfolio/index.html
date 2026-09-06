@@ -60,25 +60,27 @@
   <link rel="stylesheet" href="/assets/css/site.css">
 
   <!-- ==========================================================================
-       ⚠️ PAGE-SCOPED CSS — AN OWNERSHIP GAP, NAMED NOT SILENTLY TAKEN
+       PAGE-SCOPED CSS — CUT DOWN TO WHAT IS GENUINELY UNIQUE, 2026-09-06
 
-       site.css §9 says: "T5 writes the real rules."
-       THREAD-PLAN.md §4 gives site\assets\css\* to T3, EXCLUSIVELY, and Rule 1
-       says a thread that needs a change to a file it does not own writes the
-       request into WORKLOG.md and does not edit.
+       Design-Patterns-v1.md §4 applied. site.css §8 now owns .lede, .eyebrow,
+       .section rhythm, the glow divider, .tile and .cta-block, and this page
+       uses all of them. What was here before — a private .lede, a private
+       section-heading rule, a private card surface, a local .work__group
+       margin — is DELETED, not re-copied.
 
-       Both cannot hold: T5 is told to write rules into a file T5 may not open,
-       and T5 is granted no CSS file of its own. Sources: site.css §9 versus
-       THREAD-PLAN.md §4 row T3 and §1 Rule 1.
+       Nothing below is copied from site\index.html. Three rules remain and
+       each is either unique to this page or a documented stand-in:
 
-       T5's resolution, and it is the conservative one: these rules live in the
-       one file T5 does own, scoped to this page, rather than editing T3's.
-       → REQUEST TO T3: move this block into site.css §9. It is not page-
-         specific — T4's homepage needs the same grid for its eight featured
-         items, and a second copy is how two grids drift apart.
-       Logged in WORKLOG.md 2026-09-05.
+         .work            multi-column masonry. UNIQUE. This is the only page
+                          carrying four aspect ratios at once, so it is the
+                          only page that cannot use .grid.
+         .work__item      ⚠️ STAND-IN for `.tile--media`. See the block above
+                          it. Four properties, no duplication of .tile.
+         .work__filters   the anchor chips. UNIQUE — no other page filters.
 
-       Every value below is a site.css token. No new colour, no second radius.
+       Every value is a site.css token. No new colour, no third radius, and
+       --accent appears nowhere: the only blue used as text or as a line is
+       --ink-accent, per site.css §8.
        ========================================================================== -->
   <style>
   /* --- The grid ------------------------------------------------------------
@@ -106,28 +108,26 @@
   @media (min-width: 40rem) { .work { columns: 3; } }
   @media (min-width: 60rem) { .work { columns: 4; } }
 
-  /* ⚠️ R32 APPLIED, 2026-09-05. site.css §8 names this card by thread:
-     "/portfolio/ its item card (T5) … a one-word swap to var(--radius-card)".
-     Done. --radius stays on the filter chips below, which are clickable —
-     R32 gives --radius to what you click and --radius-card to what you read.
+  /* ⚠️ STAND-IN FOR `.tile--media`. REQUESTED FROM T3 — WORKLOG 2026-09-06.
 
-     The padding went with it. At 20px the card's corners no longer matched a
-     3px still inset by 8px, and matching them would have needed a third
-     radius token, which R32 does not allow. Instead the still runs full-bleed
-     and `overflow: hidden` clips it to the card — one radius, no third token,
-     and the corners agree. The label carries its own inline padding.
+     The card itself is now site.css §8's `.tile`: the border, --radius-card,
+     the top-lit gradient and the hover lift all come from there, and the
+     markup carries class="tile work__item". NOTHING IS DUPLICATED HERE.
 
-     ⚠️ THIS CLASS IS TEMPORARY. Design-Patterns-v1 §2c replaces it with
-     `.tile` once T3 puts that in site.css. This block is then deleted, not
-     re-copied — §0 of that file is explicit that copying the homepage makes
-     five copies instead of four. */
+     What `.tile` cannot do is hold a photograph. It sets padding:
+     var(--space-5), and a still inset by 2rem inside a ~260px column leaves
+     almost no picture. Matching an inset image's corners to the card would
+     need a THIRD radius token, which R32 forbids. So the still runs full-bleed
+     and the card clips it.
+
+     Those four properties belong in site.css as `.tile--media`, because T4's
+     homepage portfolio strip needs exactly the same thing. DELETE THIS RULE
+     the day it exists, change the class in tools/build-portfolio.mjs, re-run. */
   .work__item {
+    padding: 0;
+    overflow: hidden;
     break-inside: avoid;
     margin: 0 0 var(--space-3);
-    background: var(--bg-raised);
-    border: 1px solid var(--rule);
-    border-radius: var(--radius-card);
-    overflow: hidden;
   }
 
   /* ⚠️ THE GLARE FIX T3 FLAGGED IN site.css §9.
@@ -150,7 +150,12 @@
   .work__item:hover img,
   .work__item:focus-within img { opacity: 1; }
 
-  .work__title {
+  /* ⚠️ BOTH SELECTORS ARE .work__item-SCOPED ON PURPOSE.
+     site.css §8's `.tile h3` and `.tile p` are two-class selectors. A bare
+     `.work__title` would lose the cascade to them — `.tile p` would repaint
+     the meta line --ink-body and `.tile h3` would drop the inline padding
+     these need now that the card has none. */
+  .work__item .work__title {
     font-size: var(--step-0);
     letter-spacing: 0;
     margin: var(--space-3) var(--space-3) var(--space-1);
@@ -159,30 +164,24 @@
   /* max-width:none overrides the 68ch measure site.css sets on every <p>. In a
      260px column the measure would never bite, but it would if the columns
      ever widen. */
-  .work__meta {
+  .work__item .work__meta {
     margin: 0 var(--space-3) var(--space-3);
     max-width: none;
     font-size: var(--step--1);
     color: var(--ink-muted);
   }
 
-  /* --- Sections and the filter row ---------------------------------------- */
-  .work__lede { font-size: var(--step-1); color: var(--ink); }
-
-  .work__group { margin-block: var(--space-7) 0; }
-
-  /* h2 defaults to --step-3, which clamps up to 3.25rem. That is a hero size
-     and this page has fifteen of them. Stepped down; the scale is unchanged. */
-  .work__group h2,
-  .work__filters h2 {
-    font-size: var(--step-2);
-    padding-bottom: var(--space-2);
-    border-bottom: 1px solid var(--rule);
-  }
-
-  /* Anchor targets. Without this the heading lands hard against the viewport
-     edge when a filter link is followed. */
-  .work__group { scroll-margin-top: var(--space-5); }
+  /* --- The filter chips — unique to this page ------------------------------
+     DELETED FROM THIS BLOCK on 2026-09-06, now that site.css §8 carries them:
+       .work__lede          → .lede
+       .work__group         → .section  (and its margin-block, which was the
+                              dead-space bug, is simply gone — §8 owns rhythm)
+       .work__group h2      → .section > h2, plus the glow-line divider, which
+                              is a better separator than the border-bottom
+                              this page was drawing for itself
+       scroll-margin-top    → not needed. .section carries 120px of padding
+                              above 48rem, so an anchored heading already
+                              lands clear of the viewport edge. */
 
   .work__count {
     font-weight: var(--weight-body);
@@ -191,7 +190,10 @@
     font-variant-numeric: tabular-nums;
   }
 
-  .work__filters { margin-block: var(--space-7) 0; }
+  /* ⚠️ `.work__filters { margin-block: … }` WAS HERE AND IS DELETED.
+     The nav now carries class="section", so that margin would have stacked on
+     §3's 120px padding-block — the exact ~11rem dead-space bug T4 found on
+     /services/ and /pricing/. site.css owns section rhythm. */
 
   .work__filters ul {
     display: flex;
@@ -214,7 +216,12 @@
     font-size: var(--step--1);
   }
 
-  .work__filters a:hover { background: var(--bg-raised); }
+  /* --glow-edge, matching .tile:hover in site.css §8. NOT --accent: that is
+     2.48:1 on this background and site.css bans it as a hairline. */
+  .work__filters a:hover {
+    background: var(--bg-raised);
+    border-color: var(--glow-edge);
+  }
 
   .work__note { margin-top: var(--space-4); color: var(--ink-muted); }
   </style>
@@ -410,10 +417,16 @@
 <main class="site-main" id="main">
   <div class="container">
 
-    <h1>Our work</h1>
-
     <!-- ==========================================================================
-         EVERYTHING BETWEEN THE MARKERS BELOW IS GENERATED.
+         EVERYTHING BETWEEN THE MARKERS BELOW IS GENERATED — INCLUDING THE <h1>.
+
+         ⚠️ THE <h1> MOVED INSIDE THE MARKERS ON 2026-09-06 and is no longer
+            hand-written here. Design-Patterns-v1.md §2 puts the page opener in
+            `.hero`, which carries the top-lit glow, and the hero holds the
+            eyebrow, the h1 and the lede as one unit. Generating all three
+            together is what stops this page ending up with two <h1>s — one
+            hand-written and one emitted — which instructions.md §5 forbids.
+            Do not add another <h1> here.
 
          Edit it in tools/build-portfolio.mjs, then run:
              node tools/build-portfolio.mjs
@@ -437,37 +450,42 @@
             title. Rename the videos, or rule R07. Then set PLAYERS = true.
          ========================================================================== -->
     <!-- PORTFOLIO:GRID — START -->
-      <p class="work__lede">31 edits. Every image below is a frame from the video itself.</p>
+      <section class="hero">
+        <p class="eyebrow">Portfolio</p>
+        <h1>Our work</h1>
+        <p class="lede">31 edits. Every image below is a frame from the video itself.</p>
+      </section>
 
-      <section class="work__group" id="selected" aria-labelledby="selected-h">
+      <section class="section" id="selected" aria-labelledby="selected-h">
+        <p class="eyebrow">Start here</p>
         <h2 id="selected-h">Selected work</h2>
         <ul class="work">
-        <li class="work__item">
+        <li class="tile work__item">
           <img src="/assets/img/portfolio/ggyM4XlELXo.jpg" width="1080" height="1920" loading="lazy" decoding="async" alt="Video still — Best software">
           <h3 class="work__title">Best software</h3>
           <p class="work__meta">Legal &amp; Law Firm · Podcast &amp; Interview</p>
         </li>
-        <li class="work__item">
+        <li class="tile work__item">
           <img src="/assets/img/portfolio/LhHqpgKHfvE.jpg" width="1080" height="1920" loading="lazy" decoding="async" alt="Video still — Foodie influencer">
           <h3 class="work__title">Foodie influencer</h3>
           <p class="work__meta">Advertising &amp; Ad Agency · Short-Form (Reels &amp; Shorts)</p>
         </li>
-        <li class="work__item">
+        <li class="tile work__item">
           <img src="/assets/img/portfolio/q8Us_7ZMxqY.jpg" width="1280" height="720" loading="lazy" decoding="async" alt="Video still — Story arc, part one">
           <h3 class="work__title">Story arc, part one</h3>
           <p class="work__meta">YouTube Channel · Online Course &amp; E-Learning</p>
         </li>
-        <li class="work__item">
+        <li class="tile work__item">
           <img src="/assets/img/portfolio/GIbOpOMjF5w.jpg" width="1012" height="1920" loading="lazy" decoding="async" alt="Video still — Kids short 02">
           <h3 class="work__title">Kids short 02</h3>
           <p class="work__meta">Education &amp; Coaching · Short-Form (Reels &amp; Shorts)</p>
         </li>
-        <li class="work__item">
+        <li class="tile work__item">
           <img src="/assets/img/portfolio/9lTVyaiEWMo.jpg" width="1280" height="720" loading="lazy" decoding="async" alt="Video still — Favorite tech">
           <h3 class="work__title">Favorite tech</h3>
           <p class="work__meta">Legal &amp; Law Firm · Podcast &amp; Interview</p>
         </li>
-        <li class="work__item">
+        <li class="tile work__item">
           <img src="/assets/img/portfolio/r7v7nr6C2no.jpg" width="1080" height="1920" loading="lazy" decoding="async" alt="Video still — Why 90% of restaurant ads fail">
           <h3 class="work__title">Why 90% of restaurant ads fail</h3>
           <p class="work__meta">Advertising &amp; Ad Agency · Short-Form (Reels &amp; Shorts)</p>
@@ -475,8 +493,9 @@
         </ul>
       </section>
 
-      <nav class="work__filters" aria-labelledby="filters-h">
-        <h2 id="filters-h">Browse by industry</h2>
+      <nav class="section work__filters" aria-labelledby="filters-h">
+        <p class="eyebrow">Browse</p>
+        <h2 id="filters-h">By industry</h2>
         <ul>
             <li><a href="#legal-and-law-firm">Legal &amp; Law Firm <span class="work__count">12</span></a></li>
             <li><a href="#advertising-and-ad-agency">Advertising &amp; Ad Agency <span class="work__count">10</span></a></li>
@@ -494,65 +513,66 @@
           rows that do not exist — Portfolio-Catalogue.md §4c.]]</span></p>
       </nav>
 
-      <section class="work__group" id="legal-and-law-firm" aria-labelledby="legal-and-law-firm-h">
-        <h2 id="legal-and-law-firm-h">Legal &amp; Law Firm <span class="work__count">12</span></h2>
+      <section class="section" id="legal-and-law-firm" aria-labelledby="legal-and-law-firm-h">
+        <p class="eyebrow">12 edits</p>
+        <h2 id="legal-and-law-firm-h">Legal &amp; Law Firm</h2>
         <ul class="work">
-        <li class="work__item">
+        <li class="tile work__item">
           <img src="/assets/img/portfolio/ggyM4XlELXo.jpg" width="1080" height="1920" loading="lazy" decoding="async" alt="Video still — Best software">
           <h3 class="work__title">Best software</h3>
           <p class="work__meta">Legal &amp; Law Firm · Podcast &amp; Interview</p>
         </li>
-        <li class="work__item">
+        <li class="tile work__item">
           <img src="/assets/img/portfolio/9lTVyaiEWMo.jpg" width="1280" height="720" loading="lazy" decoding="async" alt="Video still — Favorite tech">
           <h3 class="work__title">Favorite tech</h3>
           <p class="work__meta">Legal &amp; Law Firm · Podcast &amp; Interview</p>
         </li>
-        <li class="work__item">
+        <li class="tile work__item">
           <img src="/assets/img/portfolio/Bo5R1CDI7ok.jpg" width="1080" height="1920" loading="lazy" decoding="async" alt="Video still — Fear of AI">
           <h3 class="work__title">Fear of AI</h3>
           <p class="work__meta">Legal &amp; Law Firm · Podcast &amp; Interview</p>
         </li>
-        <li class="work__item">
+        <li class="tile work__item">
           <img src="/assets/img/portfolio/ImTQjAo486Q.jpg" width="1080" height="1920" loading="lazy" decoding="async" alt="Video still — Goal budget">
           <h3 class="work__title">Goal budget</h3>
           <p class="work__meta">Legal &amp; Law Firm · Podcast &amp; Interview</p>
         </li>
-        <li class="work__item">
+        <li class="tile work__item">
           <img src="/assets/img/portfolio/LmlOMKBNoew.jpg" width="1080" height="1920" loading="lazy" decoding="async" alt="Video still — Podcast clip">
           <h3 class="work__title">Podcast clip</h3>
           <p class="work__meta">Legal &amp; Law Firm · Podcast &amp; Interview</p>
         </li>
-        <li class="work__item">
+        <li class="tile work__item">
           <img src="/assets/img/portfolio/mIrb8pjJSuw.jpg" width="1080" height="1920" loading="lazy" decoding="async" alt="Video still — Podcast clip — announcement">
           <h3 class="work__title">Podcast clip — announcement</h3>
           <p class="work__meta">Legal &amp; Law Firm · Podcast &amp; Interview</p>
         </li>
-        <li class="work__item">
+        <li class="tile work__item">
           <img src="/assets/img/portfolio/K4DOxWjWhw4.jpg" width="1080" height="1920" loading="lazy" decoding="async" alt="Video still — Productivity myth">
           <h3 class="work__title">Productivity myth</h3>
           <p class="work__meta">Legal &amp; Law Firm · Podcast &amp; Interview</p>
         </li>
-        <li class="work__item">
+        <li class="tile work__item">
           <img src="/assets/img/portfolio/zCxBnpHJeWY.jpg" width="1080" height="1920" loading="lazy" decoding="async" alt="Video still — Professional group lessons">
           <h3 class="work__title">Professional group lessons</h3>
           <p class="work__meta">Legal &amp; Law Firm · Podcast &amp; Interview</p>
         </li>
-        <li class="work__item">
+        <li class="tile work__item">
           <img src="/assets/img/portfolio/2Ehpl9IE5HE.jpg" width="1080" height="1920" loading="lazy" decoding="async" alt="Video still — Sora and C2PA">
           <h3 class="work__title">Sora and C2PA</h3>
           <p class="work__meta">Legal &amp; Law Firm · Podcast &amp; Interview</p>
         </li>
-        <li class="work__item">
+        <li class="tile work__item">
           <img src="/assets/img/portfolio/pueZS7AXTUU.jpg" width="1080" height="1920" loading="lazy" decoding="async" alt="Video still — Value anchors">
           <h3 class="work__title">Value anchors</h3>
           <p class="work__meta">Legal &amp; Law Firm · Podcast &amp; Interview</p>
         </li>
-        <li class="work__item">
+        <li class="tile work__item">
           <img src="/assets/img/portfolio/BHgL_J-eMFU.jpg" width="1080" height="1920" loading="lazy" decoding="async" alt="Video still — What I learned working with lawyers">
           <h3 class="work__title">What I learned working with lawyers</h3>
           <p class="work__meta">Legal &amp; Law Firm · Podcast &amp; Interview</p>
         </li>
-        <li class="work__item">
+        <li class="tile work__item">
           <img src="/assets/img/portfolio/mdKx0eGpFbU.jpg" width="1080" height="1920" loading="lazy" decoding="async" alt="Video still — Working with lawyers">
           <h3 class="work__title">Working with lawyers</h3>
           <p class="work__meta">Legal &amp; Law Firm · Podcast &amp; Interview</p>
@@ -560,55 +580,56 @@
         </ul>
       </section>
 
-      <section class="work__group" id="advertising-and-ad-agency" aria-labelledby="advertising-and-ad-agency-h">
-        <h2 id="advertising-and-ad-agency-h">Advertising &amp; Ad Agency <span class="work__count">10</span></h2>
+      <section class="section" id="advertising-and-ad-agency" aria-labelledby="advertising-and-ad-agency-h">
+        <p class="eyebrow">10 edits</p>
+        <h2 id="advertising-and-ad-agency-h">Advertising &amp; Ad Agency</h2>
         <ul class="work">
-        <li class="work__item">
+        <li class="tile work__item">
           <img src="/assets/img/portfolio/LhHqpgKHfvE.jpg" width="1080" height="1920" loading="lazy" decoding="async" alt="Video still — Foodie influencer">
           <h3 class="work__title">Foodie influencer</h3>
           <p class="work__meta">Advertising &amp; Ad Agency · Short-Form (Reels &amp; Shorts)</p>
         </li>
-        <li class="work__item">
+        <li class="tile work__item">
           <img src="/assets/img/portfolio/NxFnKPfNimQ.jpg" width="1080" height="1920" loading="lazy" decoding="async" alt="Video still — Function &amp; event inquiries">
           <h3 class="work__title">Function &amp; event inquiries</h3>
           <p class="work__meta">Advertising &amp; Ad Agency · Short-Form (Reels &amp; Shorts)</p>
         </li>
-        <li class="work__item">
+        <li class="tile work__item">
           <img src="/assets/img/portfolio/_nt_Vt1rOaM.jpg" width="1080" height="1920" loading="lazy" decoding="async" alt="Video still — Turning influencer posts into customers">
           <h3 class="work__title">Turning influencer posts into customers</h3>
           <p class="work__meta">Advertising &amp; Ad Agency · Short-Form (Reels &amp; Shorts)</p>
         </li>
-        <li class="work__item">
+        <li class="tile work__item">
           <img src="/assets/img/portfolio/vgKUxP8Wgtw.jpg" width="1080" height="1920" loading="lazy" decoding="async" alt="Video still — How to use Google Ads">
           <h3 class="work__title">How to use Google Ads</h3>
           <p class="work__meta">Advertising &amp; Ad Agency · Short-Form (Reels &amp; Shorts)</p>
         </li>
-        <li class="work__item">
+        <li class="tile work__item">
           <img src="/assets/img/portfolio/P3lAp0aocO0.jpg" width="1080" height="1920" loading="lazy" decoding="async" alt="Video still — Making customers return 3x more">
           <h3 class="work__title">Making customers return 3x more</h3>
           <p class="work__meta">Advertising &amp; Ad Agency · Short-Form (Reels &amp; Shorts)</p>
         </li>
-        <li class="work__item">
+        <li class="tile work__item">
           <img src="/assets/img/portfolio/ymfq-L9iLJw.jpg" width="1080" height="1920" loading="lazy" decoding="async" alt="Video still — Free restaurant posts">
           <h3 class="work__title">Free restaurant posts</h3>
           <p class="work__meta">Advertising &amp; Ad Agency · Short-Form (Reels &amp; Shorts)</p>
         </li>
-        <li class="work__item">
+        <li class="tile work__item">
           <img src="/assets/img/portfolio/unWprrKQjqs.jpg" width="1080" height="1920" loading="lazy" decoding="async" alt="Video still — VIP customer lists">
           <h3 class="work__title">VIP customer lists</h3>
           <p class="work__meta">Advertising &amp; Ad Agency · Short-Form (Reels &amp; Shorts)</p>
         </li>
-        <li class="work__item">
+        <li class="tile work__item">
           <img src="/assets/img/portfolio/1ctUzRbXVw4.jpg" width="1080" height="1920" loading="lazy" decoding="async" alt="Video still — The Google Reviews hack">
           <h3 class="work__title">The Google Reviews hack</h3>
           <p class="work__meta">Advertising &amp; Ad Agency · Short-Form (Reels &amp; Shorts)</p>
         </li>
-        <li class="work__item">
+        <li class="tile work__item">
           <img src="/assets/img/portfolio/DDDVW6KUsQo.jpg" width="1080" height="1920" loading="lazy" decoding="async" alt="Video still — The Instagram ad strategy">
           <h3 class="work__title">The Instagram ad strategy</h3>
           <p class="work__meta">Advertising &amp; Ad Agency · Short-Form (Reels &amp; Shorts)</p>
         </li>
-        <li class="work__item">
+        <li class="tile work__item">
           <img src="/assets/img/portfolio/r7v7nr6C2no.jpg" width="1080" height="1920" loading="lazy" decoding="async" alt="Video still — Why 90% of restaurant ads fail">
           <h3 class="work__title">Why 90% of restaurant ads fail</h3>
           <p class="work__meta">Advertising &amp; Ad Agency · Short-Form (Reels &amp; Shorts)</p>
@@ -616,40 +637,41 @@
         </ul>
       </section>
 
-      <section class="work__group" id="education-and-coaching" aria-labelledby="education-and-coaching-h">
-        <h2 id="education-and-coaching-h">Education &amp; Coaching <span class="work__count">7</span></h2>
+      <section class="section" id="education-and-coaching" aria-labelledby="education-and-coaching-h">
+        <p class="eyebrow">7 edits</p>
+        <h2 id="education-and-coaching-h">Education &amp; Coaching</h2>
         <ul class="work">
-        <li class="work__item">
+        <li class="tile work__item">
           <img src="/assets/img/portfolio/GIbOpOMjF5w.jpg" width="1012" height="1920" loading="lazy" decoding="async" alt="Video still — Kids short 02">
           <h3 class="work__title">Kids short 02</h3>
           <p class="work__meta">Education &amp; Coaching · Short-Form (Reels &amp; Shorts)</p>
         </li>
-        <li class="work__item">
+        <li class="tile work__item">
           <img src="/assets/img/portfolio/-HrZ7PmPtrg.jpg" width="1012" height="1920" loading="lazy" decoding="async" alt="Video still — Kids short 03">
           <h3 class="work__title">Kids short 03</h3>
           <p class="work__meta">Education &amp; Coaching · Short-Form (Reels &amp; Shorts)</p>
         </li>
-        <li class="work__item">
+        <li class="tile work__item">
           <img src="/assets/img/portfolio/WmIXSZc9Omo.jpg" width="1080" height="1920" loading="lazy" decoding="async" alt="Video still — Mystery letter">
           <h3 class="work__title">Mystery letter</h3>
           <p class="work__meta">Education &amp; Coaching · Short-Form (Reels &amp; Shorts)</p>
         </li>
-        <li class="work__item">
+        <li class="tile work__item">
           <img src="/assets/img/portfolio/wK8n9X4QLS8.jpg" width="1080" height="1920" loading="lazy" decoding="async" alt="Video still — Never procrastinate">
           <h3 class="work__title">Never procrastinate</h3>
           <p class="work__meta">Education &amp; Coaching · Short-Form (Reels &amp; Shorts)</p>
         </li>
-        <li class="work__item">
+        <li class="tile work__item">
           <img src="/assets/img/portfolio/FGHLvZ8gv3g.jpg" width="1080" height="1920" loading="lazy" decoding="async" alt="Video still — Germs experiment">
           <h3 class="work__title">Germs experiment</h3>
           <p class="work__meta">Education &amp; Coaching · Short-Form (Reels &amp; Shorts)</p>
         </li>
-        <li class="work__item">
+        <li class="tile work__item">
           <img src="/assets/img/portfolio/k5Uv7edbZJI.jpg" width="1012" height="1920" loading="lazy" decoding="async" alt="Video still — Prince keeps forgetting">
           <h3 class="work__title">Prince keeps forgetting</h3>
           <p class="work__meta">Education &amp; Coaching · Short-Form (Reels &amp; Shorts)</p>
         </li>
-        <li class="work__item">
+        <li class="tile work__item">
           <img src="/assets/img/portfolio/6lePn7BX8J4.jpg" width="1080" height="1920" loading="lazy" decoding="async" alt="Video still — Medicine skip">
           <h3 class="work__title">Medicine skip</h3>
           <p class="work__meta">Education &amp; Coaching · Short-Form (Reels &amp; Shorts)</p>
@@ -657,15 +679,16 @@
         </ul>
       </section>
 
-      <section class="work__group" id="youtube-channel" aria-labelledby="youtube-channel-h">
-        <h2 id="youtube-channel-h">YouTube Channel <span class="work__count">2</span></h2>
+      <section class="section" id="youtube-channel" aria-labelledby="youtube-channel-h">
+        <p class="eyebrow">2 edits</p>
+        <h2 id="youtube-channel-h">YouTube Channel</h2>
         <ul class="work">
-        <li class="work__item">
+        <li class="tile work__item">
           <img src="/assets/img/portfolio/q8Us_7ZMxqY.jpg" width="1280" height="720" loading="lazy" decoding="async" alt="Video still — Story arc, part one">
           <h3 class="work__title">Story arc, part one</h3>
           <p class="work__meta">YouTube Channel · Online Course &amp; E-Learning</p>
         </li>
-        <li class="work__item">
+        <li class="tile work__item">
           <img src="/assets/img/portfolio/zb6qyP7zU78.jpg" width="1280" height="720" loading="lazy" decoding="async" alt="Video still — Story arc, part two">
           <h3 class="work__title">Story arc, part two</h3>
           <p class="work__meta">YouTube Channel · Online Course &amp; E-Learning</p>
@@ -680,7 +703,11 @@
          CTAs from brackets on the same basis.
          No phone number here — R14 is ruled but NOT YET DIALLED, and the
          footer already carries that bracket once. -->
-    <section class="work__group" aria-labelledby="cta-h">
+    <!-- `.cta-block` is site.css §8's shared closing banner — its own border,
+         --radius-card, and the heaviest glow on the page beneath it. This page
+         adds nothing to it. It stays OUTSIDE the markers because it is the one
+         part of the page the script does not generate. -->
+    <section class="cta-block" aria-labelledby="cta-h">
       <h2 id="cta-h">Want work like this?</h2>
       <p>Tell us what you are making and we will tell you what it takes to cut it.</p>
       <p><a class="btn btn--primary" href="/contact/">Contact us</a></p>

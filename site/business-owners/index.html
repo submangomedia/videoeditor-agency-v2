@@ -43,25 +43,10 @@
        Identical in all four For pages. Existing tokens only, no new values.
        See /coaches/index.html for the full note and the request to T3.
        ====================================================================== -->
-  <style>
-    /* ✅ CUT TO ONE RULE, 2026-09-06. T3 landed Design-Patterns-v1 §1 and §2
-       into site.css §10, so .lede, .actions, .section, .grid, .tile and
-       .cta-block all live there now, in better versions. Every duplicate is
-       deleted. `.section > h2 { border-bottom }` went deliberately: site.css
-       now draws a glow divider between sections and a hairline on top of that
-       is two dividers doing one job.
-       This last rule is genuinely unique — the deliverables list is a plain
-       <ul>, and `ul` has no max-width in site.css. See
-       /marketers-and-agencies/index.html for the full note. */
-
-    .deliverables {
-      max-width: var(--measure);
-      margin-block: var(--space-5);
-      padding-left: var(--space-4);
-    }
-
-    .deliverables li { margin-bottom: var(--space-3); }
-  </style>
+  <!-- ✅ NO PAGE-SCOPED CSS — Design-Patterns-v1.md §4 step 1, in full.
+       The last rule, `.deliverables`, went on 2026-09-06 when that list was
+       converted to .grid/.tile. Everything comes from site.css §10.
+       See /coaches/index.html for the full note. -->
 </head>
 
 <body>
@@ -298,17 +283,24 @@
 <main class="site-main" id="main">
   <div class="container">
 
-    <h1>Video Editing for Business Owners</h1>
+    <!-- .hero and .eyebrow added 2026-09-06 — Design-Patterns-v1.md §4 step 4
+         and §2a/2h. The eyebrow is a <p>, never an <h*>. -->
+    <section class="hero">
+      <p class="eyebrow">For business owners</p>
 
-    <p class="lede">Consistent, professional video — without carrying an in-house
-      editing team on the payroll.</p>
+      <h1>Video Editing for Business Owners</h1>
 
-    <p class="actions">
-      <a class="btn btn--primary" href="/contact/">Get started</a>
-      <a class="btn btn--secondary" href="/portfolio/">See our work</a>
-    </p>
+      <p class="lede">Consistent, professional video — without carrying an in-house
+        editing team on the payroll.</p>
+
+      <p class="actions">
+        <a class="btn btn--primary" href="/contact/">Get started</a>
+        <a class="btn btn--secondary" href="/portfolio/">See our work</a>
+      </p>
+    </section>
 
     <section class="section" aria-labelledby="problem-heading">
+      <p class="eyebrow">The problem</p>
       <h2 id="problem-heading">Why video is the thing that keeps slipping</h2>
 
       <ul class="grid">
@@ -342,6 +334,7 @@
     </section>
 
     <section class="section" aria-labelledby="solution-heading">
+      <p class="eyebrow">How we work</p>
       <h2 id="solution-heading">Your business runs on content. We keep it running.</h2>
 
       <p>Video is one of the few things that does work across every part of a
@@ -357,26 +350,44 @@
     </section>
 
     <section class="section" aria-labelledby="deliver-heading">
+      <p class="eyebrow">What we deliver</p>
       <h2 id="deliver-heading">What we edit for businesses</h2>
 
-      <ul class="deliverables">
-        <li><strong>Corporate explainer and brand films</strong> — the video that says
-          who you are, cut properly.</li>
+      <!-- Converted from <ul class="deliverables"> to .grid/.tile, 2026-09-06.
+           That was this page's last page-scoped rule. -->
+      <ul class="grid">
 
-        <li><strong>Marketing and promotional campaigns</strong> — structured around
-          one message and one action.</li>
+        <li class="tile">
+          <h3>Corporate explainer and brand films</h3>
+          <p>The video that says who you are, cut properly.</p>
+        </li>
 
-        <li><strong>Social content</strong> — reels, shorts and LinkedIn video,
-          formatted per platform rather than reposted across them.</li>
+        <li class="tile">
+          <h3>Marketing and promotional campaigns</h3>
+          <p>Structured around one message and one action.</p>
+        </li>
 
-        <li><strong>Internal training and onboarding</strong> — the videos that stop
-          you explaining the same thing every quarter.</li>
+        <li class="tile">
+          <h3>Social content</h3>
+          <p>Reels, shorts and LinkedIn video, formatted per platform rather than
+            reposted across them.</p>
+        </li>
 
-        <li><strong>Product launch videos</strong> — built to carry a date, not to be
-          re-cut the week before it.</li>
+        <li class="tile">
+          <h3>Internal training and onboarding</h3>
+          <p>The videos that stop you explaining the same thing every quarter.</p>
+        </li>
 
-        <li><strong>Event highlights and recaps</strong> — the day, made useful for
-          the eleven months afterwards.</li>
+        <li class="tile">
+          <h3>Product launch videos</h3>
+          <p>Built to carry a date, not to be re-cut the week before it.</p>
+        </li>
+
+        <li class="tile">
+          <h3>Event highlights and recaps</h3>
+          <p>The day, made useful for the eleven months afterwards.</p>
+        </li>
+
       </ul>
     </section>
 

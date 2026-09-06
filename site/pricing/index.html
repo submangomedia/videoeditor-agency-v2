@@ -63,35 +63,30 @@
   <link rel="stylesheet" href="/assets/css/site.css">
 
   <!-- ==========================================================================
-       PAGE-SCOPED CSS — only what T3's system has no class for.
+       PAGE-SCOPED CSS — THE RATE TABLE ONLY. Everything else is site.css now.
 
-       ⚠️ REWRITTEN 2026-09-05 AFTER T3 SHIPPED THE DARK PALETTE. The previous
-       version defined .section and .cta-block. BOTH NOW EXIST IN site.css, and
-       a page <style> beats the external sheet at equal specificity — T3's
-       .section sets padding-block, T6's set margin-block, so the two would have
-       stacked and doubled the spacing on every section of this page. The old
-       .lede also painted body text --ink-muted, which on #090909 is 5.3:1: fine
-       for a caption, wrong for a lead paragraph. Deleted, not merged.
+       DESIGN-PATTERNS-v1 §4 applied 2026-09-06. DELETED from this block:
+         .eyebrow · .lede   → site.css §9. ⚠️ Note the deliberate change this
+                              causes: T6's local .lede painted --ink (white);
+                              site.css's paints --ink-muted. The shared value
+                              governs, so lead paragraphs on this page are now
+                              muted like every other page's.
+         .faq details ·     → site.css §9's .faq is a full component with
+         .faq summary ·       [ 01 ] counters, a CSS chevron and the Safari
+         .faq p               marker fix. It expects <ul class="faq"><li>
+                              <details>, NOT a bare <div>. The markup below is
+                              rewritten to match — that is why this is not a
+                              pure deletion.
 
-       WHAT SURVIVES IS ONLY WHAT site.css HAS NO CLASS FOR, AND NOTHING HERE
-       SHARES A NAME WITH ANYTHING IN IT. Every value is a T3 token: no hex, no
-       radius, no font, no size of its own. T3 absorbs these and deletes them.
+       ⚠️ NOTHING WAS COPIED FROM site\index.html. Class names read from site.css.
+
+       WHY THE TABLE STAYS: site.css styles no <table> at all — there is no
+       .rate-table, no table reset, nothing. This is the only tabular data on the
+       site, so a shared class would have exactly one user.
+       → REQUEST TO T3, also in WORKLOG.md: if any later page needs a table,
+         promote these five rules rather than letting a second copy appear.
        ====================================================================== -->
   <style>
-    .eyebrow {
-      font-size: var(--step--1);
-      color: var(--ink-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      margin-bottom: var(--space-2);
-    }
-
-    .lede {
-      font-size: var(--step-1);
-      color: var(--ink);
-      max-width: var(--measure);
-    }
-
     /* Wide tables scroll inside their own container. The page body never
        scrolls sideways. */
     .table-scroll { overflow-x: auto; }
@@ -126,21 +121,6 @@
     }
 
     .rate-table__amount { white-space: nowrap; }
-
-    .faq details {
-      border-bottom: 1px solid var(--rule);
-      padding-block: var(--space-3);
-    }
-
-    .faq summary {
-      font-family: var(--font-heading);
-      font-weight: var(--weight-heading);
-      color: var(--ink);
-      font-size: var(--step-1);
-      cursor: pointer;
-    }
-
-    .faq p { margin-top: var(--space-3); }
   </style>
 </head>
 
@@ -448,7 +428,12 @@
 <main class="site-main" id="main">
   <div class="container">
 
-    <h1>Pricing</h1>
+    <!-- site.css §9's .hero — top padding plus the radial glow every other
+         masthead on the site carries. H1 alone: this page's only lede is the
+         bracketed subtext below, which is not settled copy. -->
+    <div class="hero">
+      <h1>Pricing</h1>
+    </div>
 
     <!-- ⚠️ THE SOURCE'S PRE-LABEL WAS "Pricing Plans" AND IT IS NOT USED.
          There are no plans. R04 replaced them with published per-unit rates, so
@@ -461,6 +446,11 @@
          Growth" originally pointed at those tiers. It reads acceptably without
          them. Flagged rather than rewritten, for the same reason. -->
     <section class="section" aria-labelledby="model-heading">
+      <!-- ⚠️ T6's eyebrow, not the source's. The source's pre-label here was
+           "Pricing Plans", which R04 killed. "How it works" names the section
+           and claims nothing. Masud replaces it freely. -->
+      <p class="eyebrow">How it works</p>
+
       <h2 id="model-heading">Transparent Pricing for Every Stage of Growth</h2>
 
       <p class="lede"><span class="todo">[[SUBTEXT — the source line is "Choose the
@@ -529,6 +519,8 @@
               there are.
          ================================================================== -->
     <section class="section" aria-labelledby="rates-heading">
+      <p class="eyebrow">Rates</p>
+
       <h2 id="rates-heading">Our rates</h2>
 
       <!-- THE ONE GUARD ON THIS PAGE. Kept to a single element so it does not
@@ -537,9 +529,28 @@
            to the live domain by accident. DELETE THIS AND THE FIGURES BECOME
            CLAIMS. instructions.md §5 permits a shown price only if it is real or
            "unmistakably labelled a placeholder" — this is the label. -->
-      <p><span class="todo">[[PLACEHOLDER RATES — FOR LAYOUT REVIEW ONLY. The
-        figures in this table are not real prices and must not reach the live
-        domain. Masud sets the real ones later.]]</span></p>
+      <!-- ⛔ THE "PLACEHOLDER RATES" BANNER THAT WAS HERE IS DELETED. T10,
+           2026-09-06, under the same authorisation Masud gave for the rate cells.
+
+           IT HAD BECOME FALSE, AND FALSE IN THE WORST DIRECTION. It read:
+           "The figures in this table are not real prices and must not reach the
+           live domain." That was TRUE while every cell said $25. It stopped
+           being true the moment the flat placeholder was replaced with Masud's
+           own figures — "Short video is $30. Long video is $20 per minute.
+           Thumbnail is $30 per thumbnail." (2026-09-05).
+
+           A banner telling a visitor that $20, $30 and $30 are fake, sitting
+           directly above $20, $30 and $30, is worse than either state on its
+           own: it makes a real rate card unbelievable. The comment above it
+           correctly said "DELETE THIS AND THE FIGURES BECOME CLAIMS" — the
+           figures ARE claims now, and they are Masud's, which is exactly what
+           R04 required before any rate rendered.
+
+           instructions.md §5 is satisfied without it: "any price shown is real,
+           or is unmistakably labelled a placeholder." Three are real. The
+           fourth — Motion Graphics — is not a price at all but a visible
+           [[bracket]] in its own cell, which is the loudest possible label. -->
+
 
       <div class="table-scroll">
         <table class="rate-table">
@@ -668,6 +679,8 @@
             that the trade stays visible.
          ================================================================== -->
     <section class="section" aria-labelledby="included-heading">
+      <p class="eyebrow">Included as standard</p>
+
       <h2 id="included-heading">What every rate includes</h2>
 
       <p class="lede">No revision caps. No extra fees. Ever.</p>
@@ -717,23 +730,38 @@
          the failure this restraint exists to avoid.
          ================================================================== -->
     <section class="section" aria-labelledby="faq-heading">
+      <!-- "FAQ" is the source document's own pre-label for this section
+           (PAGE 1 SECTION 10). Not T6's wording. -->
+      <p class="eyebrow">FAQ</p>
+
       <h2 id="faq-heading">Pricing questions</h2>
 
-      <div class="faq">
+      <!-- ⚠️ RESTRUCTURED 2026-09-06 FROM <div> TO <ul>/<li>. site.css §9's .faq
+           is a real component: it sets counter-reset on .faq and
+           counter-increment on `.faq > li`, and draws the [ 01 ] number from
+           that counter. A bare <div class="faq"> with <details> children has no
+           <li>, so NOTHING INCREMENTS and every question renders "[ 00 ]".
+           The list is also the correct semantics — this is a list of questions,
+           and a screen reader now announces how many there are. -->
+      <ul class="faq">
 
-        <details>
-          <summary>What does "unlimited revisions" really mean?</summary>
-          <p>It means exactly what it says. There is no cap on the number of
-            revision rounds. We keep revising until you're completely satisfied
-            with the final output — with zero extra charges.</p>
-        </details>
+        <li>
+          <details>
+            <summary>What does "unlimited revisions" really mean?</summary>
+            <p>It means exactly what it says. There is no cap on the number of
+              revision rounds. We keep revising until you're completely satisfied
+              with the final output — with zero extra charges.</p>
+          </details>
+        </li>
 
         <!-- A second <details> was here and is DELETED, not filled. It would have
              asked how the unpriced services are quoted, which cannot be answered
              until the real rates exist. An empty accordion is a placeholder; one
-             real answer is not. Restore a second question when the rates land. -->
+             real answer is not. Restore a second question when the rates land.
+             ⚠️ A one-item list is correct here and is not a bug to "fix" by
+             padding it. -->
 
-      </div>
+      </ul>
     </section>
 
     <!-- ======================================================================
@@ -750,7 +778,11 @@
             .btn--primary is T3's blue fill with a white label at 8.46:1 — the
             ONLY correct use of the accent. Never blue text on the dark page.
          ================================================================== -->
-    <section class="section" aria-labelledby="cta-heading">
+    <!-- ⚠️ .cta-block, NOT .section — same reasoning as /services/: site.css
+         draws its divider with `.section + .section::before`, and keeping
+         .section here would stack a hairline on top of a block that already has
+         its own border and glow. -->
+    <section class="cta-block" aria-labelledby="cta-heading">
       <h2 id="cta-heading">Running a team or agency and need a custom volume deal?</h2>
 
       <p class="lede">Let's talk.</p>

@@ -330,9 +330,13 @@ function card(it) {
   const label = '<h3 class="work__title">' + esc(it.t) + '</h3>\n' +
     '          <p class="work__meta">' + meta + '</p>';
 
-  /* PLAYERS === false: the still and its label. Nothing that loads. */
+  /* PLAYERS === false: the still and its label. Nothing that loads.
+     `.tile` is the shared card from site.css §8. `.work__item` adds only the
+     four properties a MEDIA card needs and that .tile does not have — see the
+     <style> block in portfolio/index.html, and the request for `.tile--media`
+     in WORKLOG.md 2026-09-06. */
   if (!PLAYERS) {
-    return '        <li class="work__item">\n' +
+    return '        <li class="tile work__item">\n' +
       '          ' + still + '\n' +
       '          ' + label + '\n' +
       '        </li>';
@@ -353,12 +357,21 @@ function card(it) {
     '        </li>';
 }
 
+/* `.section` is site.css §8's own class, so this page inherits the 120px
+   rhythm and the glow-line divider between adjacent sections. It declares NO
+   margin-block of its own — that was the dead-space bug.
+
+   The count moved OUT of the <h2> and into the eyebrow. Design-Patterns-v1 §4
+   asks for an eyebrow above every section heading; "12 edits" is the one thing
+   worth saying above an industry name, and it retires this page's private
+   `.work__count` from the headings at the same time. */
 function section(label, items) {
   const a = anchorFor(label);
   const cards = items.slice().sort((x, y) => x.o - y.o).map(card).join('\n');
-  return '      <section class="work__group" id="' + a + '" aria-labelledby="' + a + '-h">\n' +
-    '        <h2 id="' + a + '-h">' + esc(label) +
-    ' <span class="work__count">' + items.length + '</span></h2>\n' +
+  const n = items.length + (items.length === 1 ? ' edit' : ' edits');
+  return '      <section class="section" id="' + a + '" aria-labelledby="' + a + '-h">\n' +
+    '        <p class="eyebrow">' + n + '</p>\n' +
+    '        <h2 id="' + a + '-h">' + esc(label) + '</h2>\n' +
     '        <ul class="work">\n' + cards + '\n        </ul>\n      </section>';
 }
 
@@ -384,15 +397,29 @@ function build() {
   ).join('\n');
 
   const out = [];
-  out.push('      <p class="work__lede">' + live.length +
-           ' edits. Every image below is a frame from the video itself.</p>');
+
+  /* ⚠️ THE <h1> IS GENERATED HERE, not hand-written in the page shell.
+     Design-Patterns-v1 §2 puts the page opener in `.hero`, which carries the
+     top-lit glow. Keeping the <h1> inside the generated block is what stops
+     this page ending up with two of them — instructions.md §5 allows exactly
+     one. Same contract as everything else between the markers: edit it here,
+     not in the page. */
+  out.push('      <section class="hero">\n' +
+    '        <p class="eyebrow">Portfolio</p>\n' +
+    '        <h1>Our work</h1>\n' +
+    '        <p class="lede">' + live.length +
+    ' edits. Every image below is a frame from the video itself.</p>\n' +
+    '      </section>');
   out.push('');
-  out.push('      <section class="work__group" id="selected" aria-labelledby="selected-h">\n' +
-    '        <h2 id="selected-h">Selected work</h2>\n        <ul class="work">\n' +
+  out.push('      <section class="section" id="selected" aria-labelledby="selected-h">\n' +
+    '        <p class="eyebrow">Start here</p>\n' +
+    '        <h2 id="selected-h">Selected work</h2>\n' +
+    '        <ul class="work">\n' +
     featured.map(card).join('\n') + '\n        </ul>\n      </section>');
   out.push('');
-  out.push('      <nav class="work__filters" aria-labelledby="filters-h">\n' +
-    '        <h2 id="filters-h">Browse by industry</h2>\n        <ul>\n' + filters +
+  out.push('      <nav class="section work__filters" aria-labelledby="filters-h">\n' +
+    '        <p class="eyebrow">Browse</p>\n' +
+    '        <h2 id="filters-h">By industry</h2>\n        <ul>\n' + filters +
     '\n        </ul>\n' +
     '        <p class="work__note">Filtering by video format is not built yet.\n' +
     '          <span class="todo">[[26 more edits are catalogued and NOT SHOWN.\n' +

@@ -51,69 +51,28 @@
        Every value is an existing token. No new hex, no new radius, no new font.
        ⚠️ `.section` is NOT redefined here. See the note in 404.html.
        ====================================================================== -->
-  <style>
-    .lede {
-      font-size: var(--step-1);
-      color: var(--ink-muted);
-    }
 
-    .stack { margin-block: var(--space-7); }
+  <!-- ✅ PAGE-SCOPED <style> BLOCK DELETED IN FULL, 2026-09-06.
+       DESIGN-PATTERNS-v1.md §4.1. This page now has NO private CSS.
 
-    .contact-list {
-      list-style: none;
-      margin: var(--space-5) 0 0;
-      padding: 0;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
-      gap: var(--space-4);
-    }
+         .lede         → site.css §8, identical
+         .stack        → gone. <section class="section">; site.css owns rhythm
+         .contact-list → .grid + .tile
+         .note         → gone. The supporting line is now a plain <p> inside
+                         .tile, which site.css already colours --ink-body. A
+                         separate small-muted-note utility was NOT invented
+                         here — see the WORKLOG request.
+         .faq          → site.css §8's real .faq, which is a BETTER component:
+                         [ 01 ] counters from a CSS counter, a CSS-drawn
+                         chevron that rotates on [open], and the Safari
+                         ::-webkit-details-marker fix T8's version lacked.
 
-    /* R32, 2026-09-05 — soft radius on anything you READ. The card is not
-       clickable; the link inside it is, and .btn keeps var(--radius). */
-    .contact-list li {
-      border: 1px solid var(--rule);
-      border-radius: var(--radius-card);
-      padding: var(--space-4);
-    }
-
-    .contact-list h3 {
-      font-size: var(--step-1);
-      margin-bottom: var(--space-2);
-    }
-
-    .contact-list p {
-      margin: 0 0 var(--space-2);
-    }
-
-    .contact-list p:last-child { margin-bottom: 0; }
-
-    .contact-list .note {
-      font-size: var(--step--1);
-      color: var(--ink-muted);
-    }
-
-    /* Native <details>. A JS accordion is banned outright by instructions.md §5.
-       The marker is left as the browser's own so keyboard and screen-reader
-       behaviour is whatever the platform already does correctly. */
-    .faq details {
-      border-top: 1px solid var(--rule);
-      padding-block: var(--space-3);
-    }
-
-    .faq details:last-of-type { border-bottom: 1px solid var(--rule); }
-
-    .faq summary {
-      font-family: var(--font-heading);
-      font-weight: var(--weight-heading);
-      color: var(--ink);
-      cursor: pointer;
-      padding-block: var(--space-2);
-    }
-
-    .faq details p {
-      margin: var(--space-2) 0 var(--space-2);
-    }
-  </style>
+       ⚠️ THE FAQ MARKUP HAD TO CHANGE, NOT JUST THE CLASS. site.css's .faq is
+       a LIST — `.faq > li` carries the counter and the border, and
+       `.faq details > p` styles the answer as a DIRECT child of <details>.
+       T8's version had bare <details> children of a <div>. Dropping the class
+       onto the old markup would have produced no counters and no borders.
+       Restructured below to <ul class="faq"><li><details>. -->
 </head>
 
 <body>
@@ -306,11 +265,13 @@
 <main class="site-main" id="main">
   <div class="container">
 
-    <h1>Contact us</h1>
+    <section class="hero">
+      <h1>Contact us</h1>
 
-    <p class="lede">
-      Have a project in mind? We&rsquo;re ready to talk.
-    </p>
+      <p class="lede">
+        Have a project in mind? We&rsquo;re ready to talk.
+      </p>
+    </section>
 
     <!-- ============================================================
          ⚠️ ONE VERIFICATION LEFT BEFORE THIS PAGE CAN SHIP.
@@ -343,7 +304,8 @@
          is T3's or T9's file, not T8's.
          ============================================================ -->
 
-    <div class="stack">
+    <section class="section">
+      <p class="eyebrow">Get in touch</p>
       <h2>Let&rsquo;s start with a conversation</h2>
 
       <!-- ⚠️ THE SOURCE COPY CONTRADICTS ITSELF ON THIS PROMISE, IN ONE
@@ -366,24 +328,24 @@
         within two business hours.
       </p>
 
-      <ul class="contact-list">
-        <li>
+      <ul class="grid">
+        <li class="tile">
           <h3>WhatsApp</h3>
           <!-- WHEN R14 IS DIALLED, this whole <p> becomes:
                <p><a href="https://wa.me/8801336433711">+880 1336433711</a></p> -->
           <p><span class="todo">[[R14 — WhatsApp: +880 1336433711, RULED but NOT YET DIALLED]]</span></p>
-          <p class="note">Fastest for a quick question or a file link.</p>
+          <p>Fastest for a quick question or a file link.</p>
         </li>
 
-        <li>
+        <li class="tile">
           <h3>Phone</h3>
           <!-- WHEN R14 IS DIALLED, this whole <p> becomes:
                <p><a href="tel:+8801336433711">+880 1336433711</a></p> -->
           <p><span class="todo">[[R14 — phone: +880 1336433711, RULED but NOT YET DIALLED]]</span></p>
-          <p class="note">Within working hours below.</p>
+          <p>Within working hours below.</p>
         </li>
 
-        <li>
+        <li class="tile">
           <h3>Email</h3>
           <!-- R15 — RULED 2026-09-05. Masud selected
                videoeditoragency.hello@gmail.com.
@@ -403,13 +365,14 @@
                   available and costs nothing to add later. Switching is a
                   find-and-replace across ten pages, not a rebuild. -->
           <p><a href="mailto:videoeditoragency.hello@gmail.com">videoeditoragency.hello@gmail.com</a></p>
-          <p class="note">Best for briefs, scripts and anything with detail in it.</p>
+          <p>Best for briefs, scripts and anything with detail in it.</p>
         </li>
       </ul>
-    </div>
+    </section>
 
-    <div class="stack">
-      <h2>Where and when</h2>
+    <section class="section">
+      <p class="eyebrow">Where and when</p>
+      <h2>Dhaka, and working with you wherever you are</h2>
 
       <p>
         We work from <strong>Dhaka, Bangladesh</strong> (GMT+6), with clients
@@ -439,15 +402,37 @@
            ⚠️ RENUMBERED FROM R28 — three decisions share that id. RULINGS.md
            registers R28 as "Eleven services, four rates"; the template uses it
            for the Sherika licence; T8's WORKLOG used it for the trading name.
-           The register wins. Full note in /privacy/ §1. -->
+           The register wins. Full note in /privacy/ §1.
 
            A "Dhaka, Bangladesh" line with no street is honest and adequate for
            a remote service business. It is NOT adequate for the two legal
-           pages. That is why the bracket lives there too. -->
-      <p class="note">
+           pages. That is why the bracket lives there too.
+
+           ⚠️⚠️ THIS COMMENT WAS BROKEN AND IS FIXED HERE, 2026-09-06.
+           An earlier T8 edit closed the comment after the renumbering note and
+           left the three lines above stranded OUTSIDE it, followed by a second
+           closer. They would have RENDERED AS VISIBLE COPY on the page —
+           internal notes about brackets and legal pages, printed to a client.
+
+           ⚠️ AND THE FIRST ATTEMPT AT THIS VERY NOTE REPEATED THE BUG. It
+              quoted the closing sequence literally to explain what went wrong,
+              which ended the comment at that line and stranded everything after
+              it. AN HTML COMMENT CANNOT CONTAIN THE CLOSING SEQUENCE, not even
+              inside backticks, not even as an example. Describe it in words.
+
+           ⚠️ NOTHING IN THIS PROJECT CHECKS FOR THIS. sync-shared.mjs compares
+              only the two SHARED blocks; an unbalanced comment inside <main> is
+              invisible to it, the page stays valid HTML, and no parser
+              complains. The only detection is reading the rendered page.
+              → Worth one look at every page in a browser before cutover. -->
+      <!-- ⚠️ REMINDER FOR EVERY THREAD: the same trap exists on every page
+           that documents its own markup in a comment. -->
+      <!-- (Kept as two short comments rather than one long one — a shorter
+           comment is a smaller blast radius when one of them breaks.) -->
+      <p>
         <span class="todo">[[R30 — full registered address, for the legal pages and a Maps link]]</span>
       </p>
-    </div>
+    </section>
 
     <!-- ⚠️ NO CONTACT FORM. R13 — RULED 2026-09-05.
 
@@ -477,15 +462,26 @@
          as a native <form method="post"> with no JS validation gate and no
          JS-rendered success state. instructions.md §5. -->
 
-    <div class="stack faq">
-      <h2>Before you write</h2>
+    <section class="section">
+      <p class="eyebrow">Before you write</p>
+      <h2>Three things people usually ask first</h2>
 
-      <details>
-        <summary>How quickly will you respond?</summary>
-        <p>
-          Within two business hours on weekdays. We also respond on Saturdays.
-        </p>
-      </details>
+      <!-- ⚠️ STRUCTURE MATTERS HERE. site.css §8's .faq is a LIST:
+           `.faq > li` carries the counter and the top border, and
+           `.faq details > p` styles the answer as a DIRECT child of <details>.
+           A <div class="faq"> with bare <details> children — which is what this
+           page had before 2026-09-06 — gets neither the [ 01 ] numbering nor
+           the borders, and fails silently. -->
+      <ul class="faq">
+        <li>
+          <details>
+            <summary>How quickly will you respond?</summary>
+            <p>
+              Within two business hours on weekdays. We also respond on
+              Saturdays.
+            </p>
+          </details>
+        </li>
 
       <!-- ⚠️ REWORDED FROM THE SOURCE, AND THIS ONE MATTERS.
            Source: "…suggest a pricing model during a free 15-minute discovery
@@ -498,27 +494,32 @@
            is true today and needs no third-party JS widget.
            → IF MASUD SETS UP A BOOKING LINK, restore the original sentence and
              link it. -->
-      <details>
-        <summary>Do I need to have everything ready before reaching out?</summary>
-        <p>
-          Not at all. Message us and we&rsquo;ll set up a short call to plan the
-          scope, recommend the right service and suggest a pricing model.
-        </p>
-      </details>
+        <li>
+          <details>
+            <summary>Do I need to have everything ready before reaching out?</summary>
+            <p>
+              Not at all. Message us and we&rsquo;ll set up a short call to plan
+              the scope, recommend the right service and suggest a pricing model.
+            </p>
+          </details>
+        </li>
 
       <!-- ⚠️ "for qualifying clients" was dropped from the source sentence.
            It reads as a hedge a prospect cannot evaluate — nobody knows whether
            they qualify, so it functions as a quiet no. Either state the bar or
            don't imply one. → Masud's call; it is his copy and he can put it
            back with a definition. -->
-      <details>
-        <summary>Do you offer a sample edit before committing?</summary>
-        <p>
-          Yes. We offer a short sample edit so you can judge our quality and
-          your editor fit before committing to anything.
-        </p>
-      </details>
-    </div>
+        <li>
+          <details>
+            <summary>Do you offer a sample edit before committing?</summary>
+            <p>
+              Yes. We offer a short sample edit so you can judge our quality and
+              your editor fit before committing to anything.
+            </p>
+          </details>
+        </li>
+      </ul>
+    </section>
 
     <!-- ⚠️ DELIBERATELY NOT ON THIS PAGE:
          · Embedded Google Map — third-party iframe, cookies before consent.
