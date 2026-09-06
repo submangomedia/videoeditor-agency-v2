@@ -52,6 +52,15 @@ carries an HTML comment marking it a stand-in. **T10 gate: none of the five
 reaches the custom domain until swapped.** The `/legal/` and `/podcasters/`
 notes moved from visible brackets to HTML comments.
 
+**Then, same day:** Masud named the placeholder pair — *"use this video for
+shorts"* `LhHqpgKHfvE`, *"use this for long (horizontal)"* `zb6qyP7zU78`. All
+five stand-in strips now show 3× short + 1× long, **each card linked out to
+YouTube** (THREAD-PLAN §6 pattern A — zero JS, nothing loads until clicked).
+The real legal/podcast strips on `/`, `/legal/`, `/podcasters/` were linked the
+same way for consistency. ⚠️ **Linking out shows YouTube's title, which names
+the client (T2 finding 6 / R07).** Done on Masud's explicit instruction; the
+site is `noindex` and on staging. R07 still has to be settled before cutover.
+
 ### Requests to other threads — none executed by T11
 
 - **T3 / T9 (template):** footer nav needs `/podcasters/`, `/healthcare/`,
@@ -360,6 +369,207 @@ remaining section `<h2>`s. **None of it can start before then.**
 every section `<h2>`. `/pricing/`'s original pre-label was *"Pricing Plans"*, which
 R04 killed — there are no plans. **New eyebrow labels are copy, and T6 does not
 invent copy.** They come from Masud or the source document.
+
+---
+
+## 2026-09-06 — T7 · **SIX NEW PAGES BUILT · zero page-scoped CSS · ⚠️ one page collides with T11**
+
+### ⚠️⚠️ READ THIS FIRST — /healthcare/ AND /medical/ + /aesthetics/ ARE THE SAME BUYER
+
+**T11 built `site\healthcare\index.html` on 2026-09-06.** Its H1 is *"Video Editing for
+Doctors, Dentists & Clinics"* and its lede says *"for general practitioners, dentists,
+**dermatologists and aesthetic clinics**."* Its own build note reads: *"ONE PAGE FOR FOUR
+SPECIALTIES, deliberately… Four pages would be four copies of one page."*
+
+**T7 was told the opposite on the same day.** Masud, 2026-09-06, verbatim: *"Medical +
+doctor, Dermatologist + Aesthetics (because we have more clients in this sector)"* —
+**two** pages. T7 built `/medical/` and `/aesthetics/` accordingly.
+
+**There are now THREE pages competing for one buyer**, all built 2026-09-06:
+
+| URL | Thread | Covers |
+|---|---|---|
+| `/healthcare/` | **T11** | GPs, dentists, dermatologists, aesthetic clinics |
+| `/medical/` | **T7** | doctors and medical practices |
+| `/aesthetics/` | **T7** | dermatology and aesthetic clinics |
+
+**T7 has NOT touched T11's file.** THREAD-PLAN.md §1 Rule 1 — a thread never edits or
+deletes a file another thread owns. **This is the exact duplicate-content failure
+THREAD-PLAN.md §5 T7 warns about, and it is now real rather than theoretical.**
+
+⚠️ **Two threads ran on the same day against contradictory instructions, which Rule 3 —
+"one thread runs at a time" — exists to prevent.** T11's own note records it crossed
+Rule 1 on Masud's word (*"Can you do it by yourself … I need the work"*).
+
+**→ MASUD DECIDES: keep T11's single `/healthcare/`, or T7's split `/medical/` +
+`/aesthetics/`. Not both.** Whichever loses gets deleted and 301'd to the winner. T7 has
+no view worth pressing — the split is what he asked T7 for, the merge is what he asked
+T11 for, and neither thread invented anything.
+
+### Done
+
+- **Six pages built:** `site\podcasters\`, `course-creators\`, `real-estate\`, `medical\`,
+  `aesthetics\`, `legal\` — `index.html` each, from the six approved `03-Build-Ready\`
+  copy files.
+- ✅ **ZERO PAGE-SCOPED CSS IN ANY OF THE SIX.** T3 landed Design-Patterns-v1 §1 and §2
+  into `site.css` §10 on 2026-09-06, so `.hero`, `.eyebrow`, `.lede`, `.actions`,
+  `.section`, `.grid`, `.tile` and `.cta-block` all exist centrally. **These are the first
+  pages on the site with nothing in `<head>` below the stylesheet link.**
+- **Verified before building, not inferred:** the rewritten `page-template.html` (T3's
+  "For" dropdown and T9's promoted nav), `site.css` §10, and `sync-shared.mjs`.
+
+### ✅ Ten brackets closed — /portfolio/ exists
+
+**T5 has shipped `site\portfolio\index.html`.** Every `[[SECONDARY CTA]]` bracket on the
+four original For pages and the six new ones is now a real
+`<a class="btn btn--secondary" href="/portfolio/">See our work</a>`. Under
+`instructions.md` §5 the link resolves, so the bracket is closed rather than deferred.
+
+### ✅ Design-Patterns-v1 §4 step 1 finally satisfied on the four original pages
+
+Their `<style>` blocks are **cut from ~50 lines to 6**. Everything duplicated in
+`site.css` §10 is deleted; the pages now inherit the real `.tile` with its top-lit
+gradient and hover lift, and the glow dividers.
+
+⚠️ **`.section > h2 { border-bottom }` was deleted deliberately**, not overlooked —
+`site.css` §10 draws a glow divider between sections and a hairline on top of it is two
+dividers doing one job.
+
+**One rule survives on those four**, which is what T3's note permits: `.deliverables`.
+Their deliverables list is a plain `<ul>` and `ul` has no max-width in `site.css`. **The
+six new pages use `.grid`/`.tile` instead and need nothing.** If T3 adds a list utility,
+that last rule goes and all ten match.
+
+### ⚠️ Still T3's, and now larger
+
+- **All six new pages are ORPHANS IN THE NAV.** The "For" menu carries four children;
+  `/podcasters/` and `/course-creators/` are the fifth and sixth. **There is no Industries
+  menu at all.** The footer nav lists none of them. Same orphan problem T9 found on
+  2026-09-05, six times over.
+- **C-E2 is unresolved** — a seventh top-level item against `SITE-MAP-v1.md` §2's
+  six-item rule. Spec is in `EXPANSION-v1.md` §3.
+
+### Open — for Masud
+
+1. **The `/healthcare/` collision above.** Highest priority; it is a live duplicate.
+2. **`[[WHITE-LABEL]]`** — still the only content bracket T7 holds, on
+   `/marketers-and-agencies/`.
+3. **`/aesthetics/` platform-policy detail is UNVERIFIED** against current Meta/Google
+   documentation. Flagged in the page itself as a launch gate for T10.
+4. **`/legal/` slug** — it is an audience page, not the legal-notices URL. A visitor
+   typing `/legal/` may expect `/terms/`.
+5. **The keyword-URL window** — `EXPANSION-v1.md` §4. Still free to take today.
+
+### Blocked
+
+- **`node tools\sync-shared.mjs` and `--check` not run** — no sandbox route into Drive.
+  ⚠️ **The six new pages carry SHORTENED comments inside their SHARED blocks; the markup
+  matches the template exactly.** `--check` will report comment-only drift until the
+  script is run, and running it normalises them. **Masud runs both before pushing.**
+- ⚠️ **`/pricing/` still carries a placeholder `$25`.** Gates cutover.
+
+---
+
+## 2026-09-06 — T7 · **SCOPE CHANGE: ten pages → seventeen. Six new pages, second nav axis.**
+
+### Decisions — Masud, 2026-09-06
+
+| # | Answer |
+|---|---|
+| 1 | **"Two axes — 'For' and 'Industries'"** |
+| 2 | **"Build them now, before launch"** |
+| 3 | **"Medical + doctor, Dermatologist + Aesthetics (because we have more clients in this sector)"** — his own wording, not an offered option. Resolves to **two** pages |
+
+**T7 recommended against all three and was overruled on all three.** He was shown each
+cost in the option text. **Recorded once. No thread re-argues it.**
+
+### Done
+
+- **`02-Decisions\EXPANSION-v1.md`** — the scope decision, the two-axis IA, the three
+  ruling collisions, the shared build gates, and the URL window. **T3 needs §3; T1 needs §2.**
+- **Six copy files → `03-Build-Ready\`**, all marked DRAFT: `For-Podcasters-`,
+  `For-CourseCreators-`, `Industry-RealEstate-`, `Industry-Medical-`,
+  `Industry-Aesthetics-`, `Industry-Legal-Copy-Final.md`.
+- **Fetched and read `tastyedits.com/real-estate-video-services/` in full on 2026-09-06.**
+  One page, not five — its nav gave the whole IA. **Structure and intent only; no copy
+  taken.** Finding: they run **3 Services + 6 "Use Cases" + zero Industries.** Every URL
+  Masud sent is a Use Case, which is their word for "For".
+
+### ⚠️ Three collisions — named in EXPANSION-v1.md §2, not silently applied
+
+1. **C-E1 — Answer 2 overrides Ruling 2.** `instructions.md` §3 ruling 2 says *"a lean
+   core, ~8–10 pages"*; §6 says pages return *"one at a time, each justified by keyword
+   data"*; `SITE-MAP-v1.md` §3 calls building many at once *"the exact disease the current
+   site already has."* **Launch is now seventeen pages.** The later ruling governs — but
+   ⚠️ **`instructions.md` §3 still reads as current and is not.** → **T1, and whoever owns
+   `instructions.md`.**
+2. **C-E2 — seven top-level nav items against a six-item rule.** `SITE-MAP-v1.md` §2,
+   `site.css` §5 and `page-template.html` all specify six. A second audience axis makes
+   seven. **T7 did not touch the nav — Rule 2.** → **T3 decides and builds.**
+3. **C-E3 — R21 just got bigger.** Dermatology and aesthetics is **Mango's** vertical, and
+   Masud's stated reason is that the client relationships are there. R21 asks who owns
+   Content Creators; it now needs restating to cover verticals. Unanswered in **both**
+   projects. → **T1.**
+
+### ⚠️ The finding that changes the estimate
+
+**The research supplies ONE SENTENCE per industry.** Verified by reading
+`01-Research-Import\videoeditor_agency_website_copy.md` PAGE 11 (lines 1040–1140).
+
+The four original For pages were **transcribed** from finished prose. **These six are
+written** — roughly 85% new copy. Different work, different risk. Three rules were applied
+to every one, and they are in `EXPANSION-v1.md` §5:
+
+1. Pain points describe **the reader**, never VEA.
+2. Deliverables map only to **R23's eleven services**. Nothing new is offered anywhere.
+3. **No sector claim, no client, no count, no result.** ⚠️ Masud's *"we have more clients
+   in this sector"* is why `/aesthetics/` exists — **it is not on the page and does not go
+   on it until R07/R08 consent exists.**
+
+### ⚠️ Four page-specific risks worth his attention
+
+- **`/course-creators/` vs `/coaches/`** — the closest pair on the site. Course editing is
+  already deliverable #1 on `/coaches/`. **Tasty Edits has one, not both.** The copy holds
+  a hard split — a coach sells their time, a course creator sells the video itself — and
+  if a later edit softens it, the two pages merge.
+- **`/aesthetics/`** — before/after is the default format and **Meta and Google restrict
+  it for health and beauty.** Built in as "compliant ad variants" (ads video, R23 #7), with
+  the rule *sell the edit, never the placement.* ⚠️ **Policy detail is unverified against
+  current platform docs — confirm before launch.** The page also ships **no patient
+  imagery**: using a real before/after to advertise an *editing* service needs that
+  patient's consent for that use, which no client release covers.
+- **`/legal/`** — many jurisdictions restrict lawyer testimonials and outcome claims. **A
+  testimonial VEA solicits could create a problem for the client, not for VEA.** No case
+  results, win rates or settlement figures appear, and none may be added.
+- **`/real-estate/`** — ⚠️ **the reference page carries three bold percentages. None was
+  copied.** They are the competitor's data. This is also the vertical where R18 costs most:
+  a tour that arrives after the offer is worthless, so speed genuinely is the product — a
+  reason to want a turnaround figure, not a licence to invent one.
+
+### ⚠️ A window that closes at cutover — EXPANSION-v1.md §4
+
+Tasty Edits puts the **audience in the label and the keyword in the URL**: the nav says
+"For Content Creators", the URL is `/youtube-video-editing-service/`. VEA's
+`/content-creators/` targets no search term.
+
+**Renaming the four built pages to keyword slugs costs ZERO redirects today** — they carry
+`noindex`, `robots.txt` is `Disallow: /`, no custom domain points at staging, nothing has
+ever been indexed. **After cutover it costs four redirects.** R22 ruled flat slugs to avoid
+redirects on URLs that might carry authority; that reasoning does not reach six URLs that
+have never existed. **T7 recommends keeping flat for consistency — but this is the last
+cheap moment to choose otherwise.** *(Inference, T7.)*
+
+### Blocked / next
+
+- **No HTML built yet for the six.** Copy first, same sequence Masud approved on
+  2026-09-05. Six `index.html` files are the next T7 pass.
+- **T3 is still the blocker on everything visual** — and now also owns the seven-item nav
+  problem and a second dropdown. `DESIGN-PATTERNS-v1.md` §1 and §2 are still not in
+  `site.css`.
+- **`THREAD-PLAN.md` §4 assigns none of the six new folders to anyone.** T7 claims them;
+  recorded in `EXPANSION-v1.md` §6 because the file is not T7's to edit.
+- ⚠️ **`/pricing/` still carries a placeholder `$25`** and must not reach
+  `videoeditor.agency`. Unchanged, repeated because it gates cutover.
 
 ---
 
@@ -2873,6 +3083,286 @@ inherit it.**
   **`hello@videoeditor.agency` has still not been tested** (R15). Under R26b the site is
   dark, so when it returns these are the only inbound routes that exist. Two minutes of
   work, and both are wrong on all ten pages at once if they are wrong at all.
+
+---
+
+## 2026-09-06 — T3 · Nav to 21 pages · ⚠️ THREE PAGES NOW COVER ONE AUDIENCE
+
+**Second sync: 21 pages, "No drift."** Three folders appeared since the 18-page
+run an hour earlier — `course-creators\`, `medical\`, `aesthetics\`.
+
+### Done
+
+- **`/course-creators/` linked.** T3's previous entry recorded it as not
+  existing and deliberately unlinked. **It exists now** — verified by reading
+  its `<h1>`, "Video Editing for Course Creators". It is in the "By role"
+  column and in the footer.
+- **`/medical/` and `/aesthetics/` linked** in the "By industry" column.
+- Footer now carries all 20 linkable pages.
+
+### ⚠️⚠️ DUPLICATE AUDIENCE — THREE URLS, ONE BUYER. NEEDS MASUD BEFORE CUTOVER.
+
+Verified by reading each page's `<h1>` on 2026-09-06, not inferred:
+
+| URL | `<h1>` |
+|---|---|
+| `/healthcare/` | Video Editing for Doctors, Dentists **& Clinics** |
+| `/medical/` | Video Editing for Doctors **& Medical Practices** |
+| `/aesthetics/` | Video Editing for **Dermatology & Aesthetic Clinics** |
+
+**`/healthcare/` is a superset of the other two.** T11 built it as one merged
+page on 2026-09-06 and recorded that choice; `EXPANSION-v1.md` §3 specifies the
+split pair. Both got built. Sources: **`EXPANSION-v1.md` §3 versus T11's WORKLOG
+entry of 2026-09-06.** Neither is wrong on its own; together they are three URLs
+competing for one search intent, which is the duplicate-content problem
+`SITE-MAP-v1.md` §4 warns about for the four audience pages.
+
+**T3's INTERIM treatment — a holding position, explicitly not a ruling:**
+- `/medical/` and `/aesthetics/` are in the **nav** — the specific,
+  non-overlapping pair, matching the spec.
+- `/healthcare/` is reachable **from the footer only**, so it is not orphaned.
+- The menu therefore never shows three near-identical entries.
+
+**It must be settled before cutover. Two clean answers:**
+1. **Keep `/healthcare/`** as the one page → delete or 301 `/medical/` and
+   `/aesthetics/` into it.
+2. **Keep the split** → delete or 301 `/healthcare/` into whichever fits.
+
+→ **Masud decides; T9 writes the redirects.** T3 owns neither page.
+
+### ⚠️ THREE PAGES HAVE UNFILLED `<title>` TAGS — SHIP-BLOCKER, NOT COSMETIC
+
+`/course-creators/`, `/medical/` and `/aesthetics/` all carry the literal
+placeholder:
+
+```
+<title>[[PAGE TITLE — T9. Under ~60 chars, hand-written.]]</title>
+```
+
+That string renders **in the browser tab and in any search result**. It is
+exactly the class of failure `instructions.md` §5 rule 1 forbids — "no
+placeholder that a client could quote back at you." The pages are `noindex` and
+on staging, so nothing has leaked. **`<head>` is T9's, per THREAD-PLAN §4 — T3
+did not edit it.** → **T9, before cutover.**
+
+### Push summary
+
+Commit `site\_template\page-template.html` and `WORKLOG.md`.
+**Re-run `node tools\sync-shared.mjs` then `--check`** — the template changed
+again, so all 21 pages need the new nav and footer.
+
+---
+
+## 2026-09-06 — T3 · Nav rebuilt for 18 pages · C-E2 resolved · T11's request done
+
+**Masud ran `sync-shared.mjs` — 18 pages FIXED, then `--check` printed
+"No drift."** First verified clean sync of the project.
+
+### ⚠️ The sync revealed the real page count: 18, not 10
+
+`instructions.md` §3 ruling 2 says *"a lean core, ~8–10 pages."* The site now has
+**18**. T11 built five (`/healthcare/`, `/legal/`, `/podcasters/`,
+`/real-estate/`, `/ads/`) on Masud's ruling, and `/portfolio/` has since shipped.
+**Not a defect — ruling 2 is superseded**, and EXPANSION-v1 §6 already assigns
+T1 to *"flag `instructions.md` §3 ruling 2 as superseded."* Recorded because a
+thread reading §3 today would think the site had doubled by accident.
+
+### Done — both of T11's requests to T3
+
+1. **The "For" dropdown is now two-column and covers eight audience pages.**
+2. **Six links added to the footer nav** — `/podcasters/`, `/healthcare/`,
+   `/legal/`, `/real-estate/`, `/ads/`, `/portfolio/`. Before this the five new
+   pages were reachable only from the homepage.
+3. **`/portfolio/` promoted from `<span>` to a link.** The template comment said
+   it *"genuinely does not exist"*; the sync proved otherwise.
+   ⚠️ **This unblocks `_redirects` for T9** — 60 of its 61 rows point there.
+
+### C-E2 RESOLVED — "seven top-level items vs six"
+
+| Source | Says |
+|---|---|
+| `EXPANSION-v1.md` §3 | A second dropdown, **Industries** → seven top-level items |
+| `SITE-MAP-v1.md` §2 | **Six**, "matching the rule inherited from the Mango project" |
+
+**T3's resolution: ONE dropdown, TWO COLUMNS — "By role" and "By industry."**
+Six top-level items survive and T11's two-column request is met by the same
+change. The reasoning: the split was never real. "For" means *who we edit for*,
+and a lawyer, a doctor and an estate agent are as much a "who" as a coach is.
+⚠️ **Reversible in one edit** if Masud wants a separate Industries item.
+
+### ⚠️ EXPANSION-v1 §3's slugs do not match what was built — named, not reconciled
+
+- §3 lists **`/medical/` AND `/aesthetics/`** as two pages. T11 built **one**,
+  `/healthcare/`, covering doctors, dentists, dermatologists and clinics.
+- §3 lists **`/course-creators/`. IT DOES NOT EXIST.** **Not linked** — a nav
+  link to a 404 is a defect under `instructions.md` §5.
+- **`/ads/` is not in §3 at all.** T11 built it as a *service* page, so it sits
+  in the footer and on `/services/`, **not** under "For".
+
+### Verified, not assumed
+
+**All 16 nav and footer links checked against the 18 files `sync-shared.mjs`
+listed.** Every one resolves. `/404.html` is deliberately unlinked; `index.html`
+is the logo. Nothing points at a folder that does not exist.
+
+### The dropdown, for whoever maintains it
+
+- Zero JS. Opens on `:hover` **and** `:focus-within` — the focus half is what
+  makes it keyboard-reachable, and removing it orphans eight pages.
+- **Below 48rem it does not open at all** — always visible as an indented list.
+  No toggle, no state. This replaces the banned off-canvas JS drawer.
+- **"For" is a `<button>`.** No `/for/` page exists (R22 ruled slugs flat), so
+  there is nothing to link to. A `<span>` is keyboard-invisible; `href="#"` is a
+  dead link. **`aria-expanded` is deliberately absent** — with no JS its value
+  could never update, and a permanently-false one lies to a screen reader.
+- Column headings are `<p class="nav__menu-head">`, never `<h*>` — same rule as
+  `.eyebrow`. They must not enter the heading tree.
+
+### Still open
+
+- **[[R33 — icon set]]** · **[[R28 — Sherika]]** · **[[R29 — white logo]]**
+- **R23 reversal** — 4 services, not 11. T1 to register, T6/T4 to rebuild.
+  **Still the largest outstanding job.**
+- **R26b takedown** — the old site was still live at last check.
+- E1–E10 unregistered → T1.
+
+### Push summary
+
+Commit `site\assets\css\site.css`, `site\_template\page-template.html`,
+`WORKLOG.md`. **Re-run `node tools\sync-shared.mjs` then `--check` first** — the
+template changed again, so all 18 pages need the new nav and footer.
+
+---
+
+## 2026-09-06 — T3 · Footer brackets closed · "For" dropdown built · Contact CTA
+
+### Rulings — Masud, 2026-09-06
+
+| ID | Verbatim | Effect |
+|---|---|---|
+| **R14** | *"number is active"* | **CLOSED.** This is the dialling test RULINGS §2 C5 required — the number itself was already ruled 2026-09-05. `+880 1336433711` now prints in the footer as a `tel:` link on every page |
+| **R15** | *"videoeditoragency.hello@gmail.com"* | **RULED.** Ships as a `mailto:` in the footer |
+| **R12** | *"started 2020"* | **RULED.** Footer reads "Editing since 2020". ⚠️ Settles the research contradiction: "6+ years" is defensible, "5+ years" is not. **`/about/` is unblocked — T8's `Since [Year]` blank can be filled** |
+
+⚠️ **R12 note for anyone checking:** the domain was registered 2024-05-22. A
+company can predate its domain and Masud has stated 2020, so 2020 governs. The
+date gap is recorded, not treated as a contradiction.
+
+### ⚠️ One concern raised once, then dropped — the email
+
+`videoeditoragency.hello@gmail.com` is a Gmail address on a site whose whole job
+is persuading strangers in the US and UK to send money to an agency they have
+never met. VEA owns `videoeditor.agency` and its DNS zone already carries live
+MX records at a cPanel host, so a branded address is available.
+**Masud named the Gmail and it ships.** Recorded here, not re-argued — there is
+a good reason to prefer the address that demonstrably receives mail over the one
+that merely could. If he later wants `hello@videoeditor.agency`, it is one line
+in this file and one sync.
+
+### Done — both of T9's outstanding requests to T3
+
+1. **The "For" dropdown is built.** The four audience pages existed and
+   **nothing in the header reached them** — orphans in the nav, covered only by
+   T9's footer list. Now a real menu:
+   - **Zero JS.** Opens on `:hover` **and** `:focus-within`. The focus half is
+     not optional — `:hover` alone builds a menu a mouse can reach and a
+     keyboard cannot.
+   - **Below 48rem it does not open at all** — the submenu is simply always
+     visible as an indented list. Nothing to tap, no state to get stuck in.
+     This is what replaces the banned off-canvas JS drawer.
+   - **One level.** A multi-level flyout stays banned.
+   - **"For" is a `<button>`, not an `<a>` or a `<span>`.** There is no `/for/`
+     page (SITE-MAP §2, and R22 ruled the slugs flat), so there is nothing to
+     link to. A `<span>` is keyboard-invisible; `href="#"` is a dead link.
+     ⚠️ **`aria-expanded` is deliberately absent** — with no JS its value could
+     never update, and a permanently-false `aria-expanded` is a lie told to a
+     screen reader.
+2. **Contact now takes the button treatment** SITE-MAP §2 specifies —
+   `.btn .btn--primary`, blue fill, white label, 8.46:1.
+
+Also styled T9's footer link list, which was rendering as a bare bulleted `<ul>`
+because T9 correctly would not write `site.css`.
+
+### Verified
+
+- Every `var(--…)` in `site.css` resolves to a definition in `:root`.
+- **No `.todo` bracket remains in the footer.** The only `[[…]]` left in the
+  template are T9's per-page `<title>`, description and canonical, which are
+  meant to be filled per page, plus two comment-only notes (R28, R29).
+
+### Blocked / open — unchanged
+
+- **T3 still cannot run `sync-shared.mjs`** — Drive is not reachable from the
+  code sandbox. **Masud runs it.** T3 claims no drift status it has not seen.
+- **[[R33 — icon set]]** · **[[R28 — Sherika licence]]** · **[[R29 — white logo]]**
+- **R23 reversal** (see the entry below) still needs T1 to register it and
+  T6/T4 to rebuild. **That is the largest outstanding job.**
+
+---
+
+## 2026-09-06 — T3 · ⚠️ R23 REVERSED BY MASUD. Services ≠ categories.
+
+### ⚠️ THIS SUPERSEDES R23 AND IT CHANGES THREE PAGES. T1, T4, T6 — READ THIS.
+
+> **Masud, 2026-09-06, verbatim:** *"our core services are post-production and
+> video editing, all kinds of video editing. Those are the categories: we edit
+> YouTube videos and ad videos. Those are not services; those are the service
+> categories. When you go to any barber, the barber trims your hair, but he can
+> trim your hair in 100 styles. His service is trimming hair."*
+>
+> Asked whether Video Recording makes it 3 services or 4 — **Masud, 2026-09-06,
+> verbatim: "4"**.
+
+**What this reverses.** R23 was ruled 2026-09-05 as *"11 — the full list"* and
+`site\services\index.html` was built with eleven `<h3>` service blocks. Masud has
+now drawn a distinction that ruling did not contain: **eleven of those are
+CATEGORIES of one service, not eleven services.** Sources named:
+**R23, Masud 2026-09-05 VERSUS Masud 2026-09-06.** The later ruling governs.
+**This is Masud's own correction, not a thread's reinterpretation.**
+
+### The structure he ruled — FOUR services
+
+| # | Service | Note |
+|---|---|---|
+| 1 | **Video editing (post-production)** | The core. Every format sits under this |
+| 2 | **Motion graphics & animation** | Different craft, priced separately |
+| 3 | **Thumbnail design** | Graphic design, not editing. Priced separately |
+| 4 | **Video recording (production)** | ⚠️ Filming, not post. **Dhaka-only** — it cannot be delivered to a client in London. Masud kept it knowing that |
+
+**Categories, which sit INSIDE service 1 and are not services:** YouTube ·
+Ads · Podcast · Short-form reels & TikToks · Marketing · Event · Promotional ·
+Long-form · and the rest of the eleven.
+
+### ⚠️ The evidence that this was right all along — R04's own price list
+
+T3 raises this because it is corroboration, not opinion. R04 ruled per-unit
+rates: **$15/min long-form · $25/reel · $15/min motion graphics · thumbnails
+separately.** The price list does **not** distinguish "YouTube editing" from
+"ads editing" — because it is the same work. It **does** separate editing,
+motion graphics and thumbnails — because those are different work.
+**The pricing already encoded the real service boundaries; the Services page
+did not.** R04 and the new R23 agree. The old R23 was the outlier.
+
+### Who does what — T3 owns none of these files
+
+| File | Owner | What changes |
+|---|---|---|
+| `02-Decisions\RULINGS.md` | **T1** | **Register this as R23 REVERSED**, with both dates and both verbatim quotes. It is currently recorded as "11 — the full list" and that is now wrong |
+| `site\services\index.html` | **T6** | Rebuild: four service blocks, with the eleven format names as a category list *inside* service 1 — not as eleven headings |
+| `site\pricing\index.html` | **T6** | Check the rate card presents four services, matching R04 |
+| `site\index.html` | **T4** | The homepage services section shows four, not six or eleven |
+| `02-Decisions\SITE-MAP-v1.md` | — | §4.2 still describes "11 service blocks". Now stale |
+
+⚠️ **The 6-vs-11-vs-7 contradiction the old R23 was created to settle is NOT
+re-opened by this.** It is settled *differently*: there are four services, and
+the eleven names survive as categories. Any thread that reads the old R23 and
+builds eleven headings is building against a superseded ruling.
+
+### Nothing in T3's own files changed
+
+`site.css` and `page-template.html` carry no service list — the footer is
+location, contact brackets and copyright. **T3 checked rather than assumed.**
+Logged here because THREAD-PLAN §1 Rule 1 forbids T3 editing the files above.
 
 ---
 

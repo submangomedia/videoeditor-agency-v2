@@ -4,18 +4,14 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- ==========================================================================
-       SEO HEAD — OWNED BY T9. THREAD-PLAN.md §4.
-       Synced by hand from _template/page-template.html on 2026-09-06.
-       T7 filled the canonical only. ⚠️ NOT SYNCHRONISED — `--check` will not
-       report drift here.
-       ========================================================================== -->
+  <!-- SEO HEAD — OWNED BY T9. Synced by hand 2026-09-06. T7 filled the canonical
+       only. ⚠️ NOT SYNCHRONISED — `--check` will not report drift here. -->
 
   <title>[[PAGE TITLE — T9. Under ~60 chars, hand-written.]]</title>
 
-  <meta name="description" content="[[META DESCRIPTION — T9. ~150–160 chars, a sales line not a summary. NO TURNAROUND CLAIM — R18.]]">
+  <meta name="description" content="[[META DESCRIPTION — T9. ~150–160 chars. NO TURNAROUND CLAIM — R18. ⚠️ NO CLINICAL OR OUTCOME CLAIM — see the build note below.]]">
 
-  <link rel="canonical" href="https://videoeditor.agency/podcasters/">
+  <link rel="canonical" href="https://videoeditor.agency/medical/">
 
   <!-- ⚠️ STAYS until cutover, then comes off PAGE BY PAGE, NEVER SITEWIDE. -->
   <meta name="robots" content="noindex, nofollow">
@@ -29,13 +25,7 @@
 
   <link rel="stylesheet" href="/assets/css/site.css">
 
-  <!-- ✅ NO PAGE-SCOPED CSS. NOT AN OMISSION — THE POINT.
-       T3 landed Design-Patterns-v1 §1 and §2 into site.css on 2026-09-06, so
-       .hero, .eyebrow, .lede, .actions, .section, .grid, .tile and .cta-block
-       all exist. This page uses nothing else and declares nothing of its own.
-       The six new pages are the first on the site with an empty <head> below
-       the stylesheet link. Any thread tempted to add a <style> block here
-       should check site.css §10 first — it is probably already there. -->
+  <!-- ✅ NO PAGE-SCOPED CSS. See /podcasters/index.html for why. -->
 </head>
 
 <body>
@@ -160,7 +150,7 @@
                 <li><a href="/course-creators/">Course Creators</a></li>
                 <li><a href="/business-owners/">Business Owners</a></li>
                 <li><a href="/marketers-and-agencies/">Marketers &amp; Agencies</a></li>
-                <li><a href="/podcasters/" aria-current="page">Podcasters</a></li>
+                <li><a href="/podcasters/">Podcasters</a></li>
               </ul>
             </div>
             <div>
@@ -188,7 +178,7 @@
                       keep the split. → Masud, then T9's redirect map. -->
               <ul>
                 <li><a href="/real-estate/">Real Estate</a></li>
-                <li><a href="/medical/">Doctors &amp; Medical</a></li>
+                <li><a href="/medical/" aria-current="page">Doctors &amp; Medical</a></li>
                 <li><a href="/aesthetics/">Dermatology &amp; Aesthetics</a></li>
                 <li><a href="/legal/">Legal &amp; Law Firms</a></li>
               </ul>
@@ -226,47 +216,56 @@
 <!-- SHARED:HEADER — END ===================================================== -->
 
 <!-- ============================================================================
-     /podcasters/ — written by T7, 2026-09-06.
+     /medical/ — written by T7, 2026-09-06. Industries axis.
 
-     ⚠️ THIS PAGE IS AN ORPHAN IN THE NAV, AND SO ARE THE OTHER FIVE NEW PAGES.
-        The "For" dropdown above carries FOUR children. This page is the fifth
-        and /course-creators/ is the sixth. The footer's nav list does not carry
-        them either, and there is no Industries menu at all.
-        T7 CANNOT FIX THIS — _template/page-template.html is T3's and T9's file,
-        THREAD-PLAN.md §1 Rule 2. → T3, per 02-Decisions/EXPANSION-v1.md §3.
-        This is the same orphan problem T9 found on 2026-09-05 with the original
-        four: pages that exist and that nothing on the site links to.
+     ⚠️ ORPHAN IN THE NAV — there is no Industries menu. C-E2 in EXPANSION-v1.md
+        §2: a seventh top-level item breaks SITE-MAP-v1.md §2's six-item rule.
+        T3's to resolve.
 
-     COPY SOURCE: 03-Build-Ready/For-Podcasters-Copy-Final.md.
-     ⚠️ THAT COPY IS ~85% WRITTEN, NOT TRANSCRIBED. The research supplies ONE
-        SENTENCE for podcasts (videoeditor_agency_website_copy.md line 1125).
-        The original four For pages were lifted from finished prose; this was
-        not. See EXPANSION-v1.md §5.
+     COPY SOURCE: 03-Build-Ready/Industry-Medical-Copy-Final.md.
+     ⚠️ Research supplies ONE SENTENCE (line 1065) plus PAGE 5 "For
+        Professionals", which names doctors. Everything else is written.
 
-     FIVE SECTIONS, NOT SEVEN. Proof (R08 conditional — no podcast testimonial
-     exists in any source) and Recommended plan (R04 killed the tiers) are
-     DELETED, not unbuilt. THREAD-PLAN.md §5 T4.
+     ⚠️⚠️ THE HARD RULE ON THIS PAGE: NOTHING HERE CLAIMS A VIDEO IMPROVES A
+           HEALTH OUTCOME, A DIAGNOSIS RATE OR PATIENT COMPLIANCE.
+           VEA edits video. It does not produce medical results, and a page
+           implying otherwise would be a claim neither Masud nor any editor
+           could defend. Do not add a statistic, a study, or an outcome.
 
-     ⚠️ NO TURNAROUND CLAIM. R18 closed to pressing. This page's copy leans on
-        SCHEDULE — "a show that publishes on a schedule cannot afford an edit
-        that stalls." THAT IS A CLAIM ABOUT THE READER'S NEED, NOT A PROMISE OF
-        A DELIVERY WINDOW. Do not let a later edit turn it into one.
+     ⚠️ WHERE THIS PAGE STOPS AND /aesthetics/ STARTS — Masud, 2026-09-06,
+        verbatim: "Medical + doctor, Dermatologist + Aesthetics (because we have
+        more clients in this sector)." He asked for TWO pages, not one.
+          /medical/     — the video's job is to EXPLAIN. A patient is deciding
+                          whether they understand and trust you. Talking head,
+                          patient education. Constraint: clinical accuracy.
+          /aesthetics/  — the video's job is to SHOW. A patient is deciding
+                          whether they want the result. Before/after,
+                          treatment. Constraint: ADVERTISING POLICY.
+        IF A LATER EDIT LETS THIS PAGE DRIFT INTO BEFORE-AND-AFTER WORK, THE TWO
+        PAGES MERGE and Masud's reason for having both is gone.
 
-     Every deliverable maps to R23's eleven services: podcast (#4), short-form
-     reels (#2), motion graphics (#5), thumbnail design (#11). Nothing new is
-     offered. No number, no client, no result, no sector claim.
+     ⚠️ R08 IS SHARPER HERE. A testimonial from a doctor about a patient-
+        education video edges toward the patient's side of a confidentiality
+        line. Any medical testimonial needs consent that is specifically about
+        PUBLICATION, not just a client saying yes.
+
+     ⚠️ Masud's "we have more clients in this sector" is WHY these pages exist.
+        It is NOT on the page and does not go on it until R07/R08 consent
+        exists. NO TURNAROUND CLAIM (R18). Deliverables map to R23's eleven:
+        long-form (#1), motion graphics (#5), short-form reels (#2), marketing
+        video (#6), promotional video (#9).
      ========================================================================= -->
 
 <main class="site-main" id="main">
   <div class="container">
 
     <section class="hero">
-      <p class="eyebrow">For podcasters</p>
+      <p class="eyebrow">Industries — medical</p>
 
-      <h1>Video Editing for Podcasters</h1>
+      <h1>Video Editing for Doctors &amp; Medical Practices</h1>
 
-      <p class="lede">One recording becomes a week of content. We cut the episode,
-        pull the clips, and hand it all back ready to publish.</p>
+      <p class="lede">Patient education, clinic content and pieces to camera — edited
+        to carry the authority the subject deserves.</p>
 
       <p class="actions">
         <a class="btn btn--primary" href="/contact/">Get started</a>
@@ -276,98 +275,95 @@
 
     <section class="section" aria-labelledby="problem-heading">
       <p class="eyebrow">The problem</p>
-      <h2 id="problem-heading">Recording the episode was the easy part</h2>
+      <h2 id="problem-heading">Your expertise is the hardest thing to put on camera</h2>
 
       <ul class="grid">
         <li class="tile">
-          <h3>The edit is longer than the episode</h3>
-          <p>Two hours of multi-cam takes far longer than two hours to cut, and it
-            lands on whoever in the team has the least time.</p>
+          <h3>The explanation takes twenty minutes and nobody watches twenty minutes</h3>
+          <p>The information is right. The format is losing.</p>
         </li>
 
         <li class="tile">
-          <h3>The clips never get made</h3>
-          <p>Everyone knows the short-form is where the growth is. It is also the job
-            that gets dropped when the episode itself is late.</p>
+          <h3>Production quality reads as competence</h3>
+          <p>A patient deciding between two practices is not qualified to judge your
+            medicine. They will judge what they can see.</p>
         </li>
 
         <li class="tile">
-          <h3>The video version is an afterthought</h3>
-          <p>Audio goes out clean; the video goes out as a static waveform or a
-            single locked-off shot, and it performs like one.</p>
+          <h3>The footage is recorded between clinics and it shows</h3>
+          <p>Interruptions, restarts, an answered phone — the good material is in
+            there, buried in an hour of it.</p>
         </li>
 
         <li class="tile">
-          <h3>Every episode looks slightly different</h3>
-          <p>Different intro, different captions, different lower thirds — because
-            whoever cut it that week did it their way.</p>
+          <h3>The person who should be editing is you, and you have a list</h3>
+          <p>Which is why the channel has four videos and the last one is from
+            March.</p>
         </li>
       </ul>
     </section>
 
     <section class="section" aria-labelledby="solution-heading">
       <p class="eyebrow">How we work</p>
-      <h2 id="solution-heading">One recording in. A week of content out.</h2>
+      <h2 id="solution-heading">The explanation you already give, made watchable</h2>
 
-      <p>A podcast is not one piece of content. It is a long-form episode, a set of
-        short-form clips, a thumbnail, and a set of assets that have to look like they
-        came from the same show. Most podcasts publish the first one and never get to
-        the rest.</p>
+      <p>Patient education is the rare kind of video where the goal is comprehension
+        rather than reach. Someone came looking for an answer. Whether they get it —
+        and whether they trust the person giving it — is decided in the edit as much
+        as in the recording.</p>
 
-      <!-- "Revisions are genuinely unlimited" is RULED COPY — R17, Masud
-           2026-09-03, verbatim: "Genuinely unlimited". Ships as-is. -->
-      <p>Video Editor Agency takes the whole recording and returns the set. The same
-        editor cuts every episode, so the intro, the captions and the lower thirds
-        stay identical week to week. Revisions are genuinely unlimited — a show that
-        publishes on a schedule cannot afford an edit that stalls.</p>
+      <p>Video Editor Agency cuts the recording down to the answer, adds the on-screen
+        support the explanation needs, and holds the same treatment across every video
+        so the practice looks like one practice. Revisions are genuinely unlimited,
+        which matters when a clinical detail has to be worded exactly.</p>
     </section>
 
     <section class="section" aria-labelledby="deliver-heading">
       <p class="eyebrow">What we deliver</p>
-      <h2 id="deliver-heading">What we edit for podcasts</h2>
+      <h2 id="deliver-heading">What we edit for medical practices</h2>
 
       <ul class="grid">
         <li class="tile">
-          <h3>Multi-cam episode editing</h3>
-          <p>Speaker switching cut to the conversation, not to a timer.</p>
+          <h3>Patient education videos</h3>
+          <p>The long explanation, cut to the length someone will actually watch.</p>
         </li>
 
         <li class="tile">
-          <h3>Short-form clips from the episode</h3>
-          <p>Vertical, captioned, cut for TikTok, Reels and Shorts rather than
-            cropped from the wide.</p>
+          <h3>Pieces to camera</h3>
+          <p>The recording tightened, the restarts removed, the pauses closed.</p>
         </li>
 
         <li class="tile">
-          <h3>Branded lower thirds, intro and outro</h3>
-          <p>The same set every week.</p>
+          <h3>Motion graphics for the parts that need showing</h3>
+          <p>The diagram that does what narration cannot.</p>
         </li>
 
         <li class="tile">
-          <h3>Chapter markers</h3>
-          <p>So a two-hour episode is navigable instead of a wall.</p>
+          <h3>Clinic and practice content</h3>
+          <p>The introduction, the facility, the team.</p>
         </li>
 
         <li class="tile">
-          <h3>Audio cleaned and levelled</h3>
-          <p>Room noise, mismatched mic levels, the cough in take three.</p>
+          <h3>Short-form answers</h3>
+          <p>The single common question, cut vertical for Reels, TikTok and
+            Shorts.</p>
         </li>
 
         <li class="tile">
-          <h3>Thumbnail design</h3>
-          <p>Per episode, A/B-ready.</p>
+          <h3>Captions and on-screen terminology</h3>
+          <p>Spelled correctly, and on screen long enough to read.</p>
         </li>
       </ul>
     </section>
 
     <section class="cta-block" aria-labelledby="cta-heading">
-      <h2 id="cta-heading">Send us one episode</h2>
+      <h2 id="cta-heading">Send us one recording</h2>
 
-      <p>Give us a recording and tell us where you publish. We will cut the episode
-        and the clips, and you can judge the set rather than a sample.</p>
+      <p>Give us a piece to camera and the question it answers. We will cut the long
+        version and a short one, and you can see both.</p>
 
       <p class="actions">
-        <a class="btn btn--primary" href="/contact/">Get your episodes back</a>
+        <a class="btn btn--primary" href="/contact/">Get your expertise on screen</a>
       </p>
     </section>
 
@@ -474,10 +470,10 @@
         <li><a href="/coaches/">For Coaches &amp; Trainers</a></li>
         <li><a href="/business-owners/">For Business Owners</a></li>
         <li><a href="/marketers-and-agencies/">For Marketers &amp; Agencies</a></li>
-        <li><a href="/podcasters/" aria-current="page">For Podcasters</a></li>
+        <li><a href="/podcasters/">For Podcasters</a></li>
         <li><a href="/course-creators/">For Course Creators</a></li>
         <li><a href="/real-estate/">Real Estate</a></li>
-        <li><a href="/medical/">Doctors &amp; Medical</a></li>
+        <li><a href="/medical/" aria-current="page">Doctors &amp; Medical</a></li>
         <li><a href="/aesthetics/">Dermatology &amp; Aesthetics</a></li>
         <li><a href="/healthcare/">Healthcare &amp; Clinics</a></li>
         <li><a href="/legal/">Legal &amp; Law Firms</a></li>

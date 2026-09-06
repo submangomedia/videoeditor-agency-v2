@@ -4,15 +4,13 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- ==========================================================================
-       SEO HEAD — OWNED BY T9. THREAD-PLAN.md §4.
-       T11 filled title, description and canonical for THIS page only,
-       2026-09-06. No turnaround (R18), no rate (R04), no count (R05), no
-       outcome claim. T9 rewrites freely.
-       ⚠️ NOT SYNCHRONISED — sync-shared.mjs copies HEADER and FOOTER only.
-       ========================================================================== -->
-  <title>Video Editing for Lawyers &amp; Law Firms</title>
-  <meta name="description" content="Podcast episodes, explainer shorts and intake video for lawyers and law firms — captioned from the transcript, cut to keep a firm's tone. Unlimited revisions. Edited in Dhaka.">
+  <!-- SEO HEAD — OWNED BY T9. Synced by hand 2026-09-06. T7 filled the canonical
+       only. ⚠️ NOT SYNCHRONISED — `--check` will not report drift here. -->
+
+  <title>[[PAGE TITLE — T9. Under ~60 chars, hand-written.]]</title>
+
+  <meta name="description" content="[[META DESCRIPTION — T9. ~150–160 chars. NO TURNAROUND CLAIM — R18. ⚠️ NO CASE RESULT, WIN RATE OR SETTLEMENT FIGURE — see the build note below.]]">
+
   <link rel="canonical" href="https://videoeditor.agency/legal/">
 
   <!-- ⚠️ STAYS until cutover, then comes off PAGE BY PAGE, NEVER SITEWIDE. -->
@@ -27,29 +25,7 @@
 
   <link rel="stylesheet" href="/assets/css/site.css">
 
-  <!-- PAGE-SCOPED CSS — identical to /healthcare/. T3 collapses into site.css. -->
-  <style>
-    .lede { font-size: var(--step-1); color: var(--ink-muted); }
-    .section > h2 { padding-bottom: var(--space-2); border-bottom: 1px solid var(--rule); }
-    .actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3); margin-block: var(--space-5); }
-    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr)); gap: var(--space-5); margin-block: var(--space-6); padding: 0; list-style: none; }
-    .tile { border: 1px solid var(--rule); border-radius: var(--radius-card); padding: var(--space-4); }
-    .tile h3 { margin-bottom: var(--space-2); }
-    .tile p  { margin-bottom: 0; }
-    .deliverables { max-width: var(--measure); margin-block: var(--space-5); padding-left: var(--space-4); }
-    .deliverables li { margin-bottom: var(--space-3); }
-    .strip { display: grid; grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr)); gap: var(--space-3); margin-block: var(--space-5); padding: 0; list-style: none; }
-    .strip li { border: 1px solid var(--rule); border-radius: var(--radius-card); overflow: hidden; background: var(--bg-raised); }
-    .strip img { display: block; width: 100%; border-radius: 0; opacity: 0.88; }
-    .strip .work__meta { margin: var(--space-3); font-size: var(--step--1); color: var(--ink-muted); }
-    .faq { list-style: none; padding: 0; margin-block: var(--space-6); border-bottom: 1px solid var(--rule); }
-    .faq > li { border-top: 1px solid var(--rule); }
-    .faq summary { cursor: pointer; padding-block: var(--space-4); font-family: var(--font-heading); font-weight: var(--weight-heading); font-size: var(--step-1); color: var(--ink); list-style: none; }
-    .faq summary::-webkit-details-marker { display: none; }
-    .faq details > p { padding-bottom: var(--space-5); margin: 0; max-width: 68ch; }
-    .cta-block { border: 1px solid var(--rule); border-radius: var(--radius-card); padding: var(--space-5); margin-block: var(--space-7); }
-    .note { font-size: var(--step--1); color: var(--ink-muted); max-width: 68ch; }
-  </style>
+  <!-- ✅ NO PAGE-SCOPED CSS. See /podcasters/index.html for why. -->
 </head>
 
 <body>
@@ -104,23 +80,120 @@
       <ul>
         <li><a href="/services/">Services</a></li>
 
-        <!-- ⚠️ STILL TEXT, AND THIS IS THE ONE THAT NEEDS FIXING NEXT.
-             All four audience pages EXIST — /coaches/, /content-creators/,
-             /business-owners/, /marketers-and-agencies/ — and nothing in the
-             header reaches any of them. THEY ARE ORPHANS IN THE NAV.
+        <!-- ⚠️ BUILT BY T3, 2026-09-06, ON T9's REQUEST. The four audience
+             pages were ORPHANS IN THE NAV — they existed and nothing in the
+             header reached them. T9 correctly did not build this: it needs CSS
+             and site.css is T3's file.
 
-             T9 has NOT built the dropdown: it is a CSS :hover/:focus-within
-             component and site.css is T3's file, which T9 does not write.
-             The gap is covered for now by the footer link list below, so no
-             page is unreachable — but a footer link is not a nav item.
-             → T3, or Masud reassigning site.css. -->
-        <li><span class="nav__pending">For</span></li>
+             HOW IT WORKS, AND WHY IT IS ZERO JS:
+             · Desktop — the panel opens on :hover AND on :focus-within. The
+               focus half is what makes it keyboard-operable: tabbing to the
+               "For" button reveals the panel because focus is inside it. Hover
+               alone would be a mouse-only menu.
+             · Mobile / touch — there is no hover, so below 48rem the panel is
+               simply always visible as an indented sub-list. No toggle, no
+               script, nothing to tap twice. instructions.md §5 bans an
+               off-canvas JS mobile nav; this is the replacement.
+             · ONE LEVEL ONLY. A multi-level flyout is banned outright, and it
+               is why the live WordPress Portfolio menu buries the portfolio.
 
-        <!-- Still text because /portfolio/ genuinely does not exist. T5 has not
-             run and is blocked on R07. This is the correct treatment, not a
-             bodge — and it is also why _redirects cannot ship yet, since 60 of
-             its 61 rows point here. -->
-        <li><span class="nav__pending">Portfolio</span></li>
+             ⚠️ "For" IS A <button>, NOT AN <a> AND NOT A <span>.
+                SITE-MAP-v1.md §2: "no page of its own". There is no /for/ page
+                and R22 ruled the slugs flat, so there is nothing to link to.
+                A <span> is invisible to the keyboard; a link to "#" is a dead
+                link. A real <button> is focusable for free and announces
+                itself. aria-expanded is deliberately ABSENT: with no JS its
+                value could never update, and a permanently-false aria-expanded
+                is a lie told to a screen reader. The submenu is a plain <ul>
+                that is genuinely present in the DOM, so it is announced
+                normally. -->
+        <!-- ⚠️ C-E2 RESOLVED BY T3, 2026-09-06 — "seven items vs six".
+             EXPANSION-v1.md §3 proposes a SECOND top-level dropdown,
+             "Industries", which would make SEVEN top-level items.
+             SITE-MAP-v1.md §2 rules SIX, "matching the rule inherited from the
+             Mango project."
+             Sources named: EXPANSION-v1.md §3 versus SITE-MAP-v1.md §2.
+
+             T3's resolution: ONE dropdown, TWO COLUMNS. Six top-level items
+             survive, and T11's request for a two-column panel is satisfied by
+             the same change. The reasoning is that the split was never real —
+             "For" means WHO WE EDIT FOR, and a lawyer, a doctor and an estate
+             agent are as much a "who" as a coach is. Role and industry are two
+             ways of reading the same list, so they are two columns of one menu
+             rather than two menus.
+             ⚠️ Reversible in one edit if Masud wants a separate Industries
+                item. Labelled, not buried.
+
+             ⚠️ EXPANSION-v1 §3's SLUGS DO NOT MATCH WHAT WAS BUILT. Named, not
+                silently reconciled:
+                  · §3 lists /medical/ AND /aesthetics/ as two pages. T11 built
+                    ONE page, /healthcare/, covering doctors, dentists,
+                    dermatologists and aesthetic clinics.
+                  · §3 lists /course-creators/. IT DOES NOT EXIST. It is not
+                    linked here — a nav link to a 404 is a defect under
+                    instructions.md §5, and the whole point of this file's
+                    <span> treatment is to avoid exactly that.
+                  · /ads/ exists and is NOT in §3 at all. T11 describes it as a
+                    SERVICE page (Meta ad creative), not an audience, so it
+                    does not belong under "For". It is reachable from
+                    /services/ and from the footer.
+                EVERY LINK BELOW WAS CHECKED AGAINST THE FOLDERS THAT ACTUALLY
+                EXIST — the 18 files sync-shared.mjs reported on 2026-09-06. -->
+        <li class="nav__has-menu">
+          <button type="button" class="nav__parent" aria-controls="nav-for">For</button>
+          <div class="nav__menu nav__menu--split" id="nav-for">
+            <div>
+              <p class="nav__menu-head">By role</p>
+              <ul>
+                <li><a href="/content-creators/">Content Creators</a></li>
+                <li><a href="/coaches/">Coaches &amp; Trainers</a></li>
+                <li><a href="/course-creators/">Course Creators</a></li>
+                <li><a href="/business-owners/">Business Owners</a></li>
+                <li><a href="/marketers-and-agencies/">Marketers &amp; Agencies</a></li>
+                <li><a href="/podcasters/">Podcasters</a></li>
+              </ul>
+            </div>
+            <div>
+              <p class="nav__menu-head">By industry</p>
+              <!-- ⚠️⚠️ THREE PAGES NOW COVER THE SAME AUDIENCE. NOT T3's TO FIX,
+                   AND NOT SILENTLY RESOLVED. Verified by reading the <h1> of
+                   each on 2026-09-06:
+                     /healthcare/  "Video Editing for Doctors, Dentists & Clinics"
+                     /medical/     "Video Editing for Doctors & Medical Practices"
+                     /aesthetics/  "Video Editing for Dermatology & Aesthetic Clinics"
+                   /healthcare/ is a SUPERSET of the other two. T11 built it as
+                   one merged page; EXPANSION-v1 §3 specifies the split pair;
+                   both now exist. Sources: EXPANSION-v1.md §3 versus T11's
+                   WORKLOG entry, 2026-09-06.
+
+                   T3's INTERIM treatment, chosen so nothing is orphaned and the
+                   menu does not show three near-identical entries:
+                     · /medical/ and /aesthetics/ are linked HERE — they are the
+                       specific, non-overlapping pair, and they match the spec.
+                     · /healthcare/ stays reachable FROM THE FOOTER only.
+                   ⚠️ THIS IS A HOLDING POSITION, NOT A RULING. Three URLs
+                      competing for one query is a duplicate-content problem and
+                      it must be settled before cutover — merge into
+                      /healthcare/ and 301 the pair, or delete /healthcare/ and
+                      keep the split. → Masud, then T9's redirect map. -->
+              <ul>
+                <li><a href="/real-estate/">Real Estate</a></li>
+                <li><a href="/medical/">Doctors &amp; Medical</a></li>
+                <li><a href="/aesthetics/">Dermatology &amp; Aesthetics</a></li>
+                <li><a href="/legal/" aria-current="page">Legal &amp; Law Firms</a></li>
+              </ul>
+            </div>
+          </div>
+        </li>
+
+        <!-- ⚠️ PROMOTED BY T3, 2026-09-06. The comment here said "/portfolio/
+             genuinely does not exist." THAT STOPPED BEING TRUE.
+             sync-shared.mjs reported `FIXED portfolio/index.html` on
+             2026-09-06 — the file exists and carries the shared blocks. Under
+             instructions.md §5 a nav item whose page is live must be a link.
+             ⚠️ This also unblocks `_redirects`, which T9 could not ship because
+                60 of its 61 rows point at /portfolio/. → T9. -->
+        <li><a href="/portfolio/">Portfolio</a></li>
 
         <!-- /pricing/ STAYS in the nav. R04 ruled it ships as a published
              per-unit rate page, so THREAD-PLAN.md §5 T6's fallback — drop it
@@ -129,10 +202,12 @@
 
         <li><a href="/about/">About</a></li>
 
-        <!-- Contact takes the button treatment SITE-MAP-v1.md §2 specifies.
-             T9 promotes it to a link, not to a button: the button class is a
-             design-system decision and site.css is T3's. → T3. -->
-        <li><a href="/contact/">Contact</a></li>
+        <!-- ⚠️ BUTTON TREATMENT APPLIED BY T3, 2026-09-06, ON T9's REQUEST.
+             SITE-MAP-v1.md §2 specifies it and T9 correctly left the class to
+             T3. It is .btn .btn--primary: a blue FILL with a white label at
+             8.46:1. site.css §1 forbids the reverse — blue text on the dark
+             background is 2.48:1. -->
+        <li><a class="btn btn--primary nav__cta" href="/contact/">Contact</a></li>
       </ul>
     </nav>
 
@@ -141,163 +216,157 @@
 <!-- SHARED:HEADER — END ===================================================== -->
 
 <!-- ============================================================================
-     /legal/ — written by T11, 2026-09-06, on Masud's instruction. Rule 1
-     crossed on his word; recorded in WORKLOG. Structure: EXPANSION-v1.md §6.2.
+     /legal/ — written by T7, 2026-09-06. Industries axis.
 
-     PROOF IS REAL BUT NARROW: 12 rendered items, ONE client, unnamed
-     (NamePublic NO, R07). The page says so — "one firm's podcast series" —
-     rather than implying a roster. Nothing embeds; stills link to /portfolio/.
+     ⚠️ SLUG WARNING FOR T9. /legal/ IS AN AUDIENCE PAGE. It is NOT the legal-
+        notices URL — /terms/ and /privacy/ exist separately and are linked in
+        the footer below. A visitor typing /legal/ may expect terms and get a
+        sales page. Worth a second look before cutover.
+        → carried to EXPANSION-v1.md §4's URL decision.
 
-     ⚠️ NO OUTCOME CLAIM. No "more clients", no "more consultations".
-     ⚠️ NO TURNAROUND (R18). NO NUMBER (R05). NO COMPETITOR SENTENCE.
+     ⚠️ ORPHAN IN THE NAV — no Industries menu exists. C-E2, T3's.
+
+     COPY SOURCE: 03-Build-Ready/Industry-Legal-Copy-Final.md.
+     Research supplies ONE SENTENCE (line 1109) plus PAGE 5 "For Professionals",
+     which names lawyers. Everything else is written.
+
+     ⚠️⚠️ TWO HARD RULES ON THIS PAGE:
+
+       1. NO CASE RESULTS, WIN RATES OR SETTLEMENT FIGURES, AND NONE MAY BE
+          ADDED. These are the numbers a legal page most naturally reaches for
+          and they are REGULATED IN MOST JURISDICTIONS.
+
+       2. NOTHING HERE SAYS VIDEO WINS CASES, GENERATES A SPECIFIC NUMBER OF
+          ENQUIRIES, OR CONSTITUTES ADVICE. Legal advertising rules vary by
+          jurisdiction and this page is read internationally, so the copy stays
+          on what the EDIT does and never on what the PRACTICE achieves.
+          The page is safe by construction rather than by checking.
+          (Labelled: INFERENCE, T7, 2026-09-06. Jurisdictional restrictions are
+          not verified here. Not legal advice.)
+
+     ⚠️ R08 HAS A LEGAL-SPECIFIC EDGE: many jurisdictions restrict or prohibit
+        client testimonials for lawyers. A testimonial VEA solicits could create
+        a compliance problem FOR THE CLIENT, not for VEA. Do not chase one for
+        this page without the client confirming it is permitted where they
+        practise.
+
+     NO TURNAROUND CLAIM (R18). Deliverables map to R23's eleven: long-form (#1),
+     short-form reels (#2), motion graphics (#5), marketing video (#6),
+     promotional video (#9). No client, no result, no sector claim.
      ========================================================================= -->
 
 <main class="site-main" id="main">
   <div class="container">
 
-    <h1>Video Editing for Lawyers &amp; Law Firms</h1>
+    <section class="hero">
+      <p class="eyebrow">Industries — legal</p>
 
-    <p class="lede">Podcast episodes, explainer shorts and intake video that keep a
-      firm's tone — captioned from the transcript, not from an auto-generator, and
-      consistent from the first episode to the fiftieth.</p>
+      <h1>Video Editing for Lawyers &amp; Legal Practices</h1>
 
-    <p class="actions">
-      <a class="btn btn--primary" href="/contact/">Get started</a>
-      <a class="btn btn--secondary" href="/portfolio/#legal-and-law-firm">See legal work</a>
-    </p>
+      <p class="lede">Educational content, client-facing explainers and pieces to
+        camera — edited so a stranger decides you are the one to call.</p>
+
+      <p class="actions">
+        <a class="btn btn--primary" href="/contact/">Get started</a>
+        <a class="btn btn--secondary" href="/portfolio/">See our work</a>
+      </p>
+    </section>
 
     <section class="section" aria-labelledby="problem-heading">
-      <h2 id="problem-heading">Why legal video is harder than it looks</h2>
+      <p class="eyebrow">The problem</p>
+      <h2 id="problem-heading">People choose a lawyer before they ever speak to one</h2>
 
       <ul class="grid">
         <li class="tile">
-          <h3>Careful sentences, impatient platforms</h3>
-          <p>Lawyers qualify what they say. Short-form punishes that. The edit has
-            to keep the caveat and lose the dead air.</p>
+          <h3>The research happens without you</h3>
+          <p>By the time someone calls, they have watched three firms explain the same
+            thing and decided which one sounded like they knew.</p>
         </li>
+
         <li class="tile">
-          <h3>A caption is a published statement</h3>
-          <p>A mis-transcribed word in a caption is a claim you did not make.
-            Legal captions need a human reading against the transcript.</p>
+          <h3>Your answer is forty minutes long</h3>
+          <p>It is accurate and complete and nobody watched past two.</p>
         </li>
+
         <li class="tile">
-          <h3>Conservative, but not invisible</h3>
-          <p>The look has to stop a scroll without looking like an ad for a
-            personal-injury hotline.</p>
+          <h3>Every firm's website video looks identical</h3>
+          <p>Same desk, same shelf of books, same music. Nothing in it says which firm
+            this is.</p>
         </li>
+
         <li class="tile">
-          <h3>Consistency across dozens of episodes</h3>
-          <p>Intros, lower-thirds, disclaimers and end cards drift when every
-            episode is edited from scratch.</p>
+          <h3>Billable hours are the reason there is no content</h3>
+          <p>The video that would bring in three matters loses every week to the
+            matters you already have.</p>
         </li>
       </ul>
     </section>
 
     <section class="section" aria-labelledby="solution-heading">
-      <h2 id="solution-heading">Record the conversation. We make it publishable.</h2>
+      <p class="eyebrow">How we work</p>
+      <h2 id="solution-heading">Authority is a thing you demonstrate, not a thing you assert</h2>
 
-      <p>You send the episode, the talking-head or the recorded webinar. Your
-        dedicated editor cuts the full piece, pulls the clips that stand alone,
-        captions them against your transcript, and applies the firm's template every
-        time — so episode forty looks like episode one.</p>
+      <p>Legal marketing has one unusual property: the audience cannot evaluate the
+        expertise. Nobody hiring a lawyer can assess the law. What they can assess is
+        whether you explained something they were confused about — clearly, and without
+        making them feel stupid.</p>
 
-      <!-- R17, Masud 2026-09-03: "Genuinely unlimited". -->
-      <p>Revisions are genuinely unlimited. If a clip needs a disclaimer, a
-        caption needs correcting, or a segment should not go out, it is changed.</p>
-
-      <p class="note">We edit legal content; we do not advise on attorney advertising
-        rules, which vary by bar and jurisdiction. Where a clip or caption might
-        need review, we flag it and follow your instruction.</p>
+      <p>Video Editor Agency takes the recording and cuts it to the answer. The long
+        explanation becomes a watchable piece, the piece becomes a set of short-form
+        answers, and every one of them looks like it came from the same firm. Revisions
+        are genuinely unlimited, which matters when the wording of a point has to be
+        exact.</p>
     </section>
 
     <section class="section" aria-labelledby="deliver-heading">
-      <h2 id="deliver-heading">What we edit for law firms</h2>
+      <p class="eyebrow">What we deliver</p>
+      <h2 id="deliver-heading">What we edit for legal practices</h2>
 
-      <ul class="deliverables">
-        <li><strong>Podcast episodes</strong> — multi-cam, speaker switching, branded
-          intro and outro, chapters, and the episode's clips pulled out.</li>
-        <li><strong>Vertical clips</strong> — captioned shorts for LinkedIn, Reels,
-          TikTok and YouTube Shorts, in the firm's template.</li>
-        <li><strong>"What to do if…" explainers</strong> — talking-head content with
-          on-screen labels and simple motion graphics where a process needs one.</li>
-        <li><strong>Intake and awareness ads</strong> — hook-first variants sized for
-          Meta placements, from the same master. See <a href="/ads/">Meta ad
-          creative</a>.</li>
-        <li><strong>Webinar and CLE edits</strong> — tightened, chaptered, captioned,
-          ready to run as evergreen.</li>
-        <li><strong>Firm and attorney profiles</strong> — for the website and the
-          channel, cut from your existing footage.</li>
-      </ul>
-    </section>
-
-    <section class="section" aria-labelledby="proof-heading">
-      <h2 id="proof-heading">Recent work: one firm's podcast series</h2>
-      <p>Twelve episodes of a US law-firm podcast — full episodes and the vertical
-        clips cut from them. Client unnamed at their request.</p>
-
-      <ul class="strip">
-        <li>
-          <img src="/assets/img/portfolio/ggyM4XlELXo.jpg" width="1080" height="1920" loading="lazy" decoding="async" alt="Video still — law podcast clip, Best software">
-          <p class="work__meta">Podcast clip · 9:16</p>
+      <ul class="grid">
+        <li class="tile">
+          <h3>Educational explainers</h3>
+          <p>The common question answered once, properly, so it stops eating
+            consultations.</p>
         </li>
-        <li>
-          <img src="/assets/img/portfolio/Bo5R1CDI7ok.jpg" width="1080" height="1920" loading="lazy" decoding="async" alt="Video still — law podcast clip, Fear of AI">
-          <p class="work__meta">Podcast clip · 9:16</p>
-        </li>
-        <li>
-          <img src="/assets/img/portfolio/mdKx0eGpFbU.jpg" width="1080" height="1920" loading="lazy" decoding="async" alt="Video still — law podcast clip, Working with lawyers">
-          <p class="work__meta">Podcast clip · 9:16</p>
-        </li>
-        <li>
-          <img src="/assets/img/portfolio/9lTVyaiEWMo.jpg" width="1280" height="720" loading="lazy" decoding="async" alt="Video still — law podcast episode, Favorite tech">
-          <p class="work__meta">Full episode · 16:9</p>
-        </li>
-      </ul>
 
-      <!-- One client today. More legal clients → more shows here. Masud supplies. -->
-      <p><a href="/portfolio/#legal-and-law-firm">All twelve legal edits →</a></p>
-    </section>
+        <li class="tile">
+          <h3>Pieces to camera</h3>
+          <p>The recording tightened, restarts removed, the hesitations closed.</p>
+        </li>
 
-    <section class="section" aria-labelledby="faq-heading">
-      <h2 id="faq-heading">Questions law firms ask</h2>
+        <li class="tile">
+          <h3>Short-form legal answers</h3>
+          <p>One question, one answer, cut vertical for Reels, TikTok and Shorts.</p>
+        </li>
 
-      <ul class="faq">
-        <li><details>
-          <summary>How do you handle captions?</summary>
-          <p>From your transcript where you have one; otherwise we transcribe,
-            then a person reads every caption against the audio before delivery.
-            Legal terms are checked, not guessed.</p>
-        </details></li>
-        <li><details>
-          <summary>Can you add a standard disclaimer to every clip?</summary>
-          <p>Yes. Give us the wording once and it is part of the template — on
-            screen, in the end card, or both.</p>
-        </details></li>
-        <li><details>
-          <summary>Is client or case material kept confidential?</summary>
-          <p>Footage is shared through a private folder, seen only by your
-            assigned editor, and deleted from our systems on request after
-            delivery. Put any specific requirement in the brief.</p>
-        </details></li>
-        <li><details>
-          <summary>Can you match a template we already use?</summary>
-          <p>Yes. Send an existing episode or your brand files and we rebuild the
-            template so new episodes match the old ones.</p>
-        </details></li>
-        <li><details>
-          <summary>Do you work with firms outside Bangladesh?</summary>
-          <p>Yes — editing is fully remote. Only on-site recording is limited to
-            Dhaka.</p>
-        </details></li>
+        <li class="tile">
+          <h3>Firm and practitioner introductions</h3>
+          <p>Who you are, for someone deciding whether to call.</p>
+        </li>
+
+        <li class="tile">
+          <h3>On-screen text and motion graphics</h3>
+          <p>Timelines, process steps, the sequence a client needs to see rather than
+            hear.</p>
+        </li>
+
+        <li class="tile">
+          <h3>Captions</h3>
+          <p>Accurate, because a mis-transcribed legal term is worse than no
+            caption.</p>
+        </li>
       </ul>
     </section>
 
     <section class="cta-block" aria-labelledby="cta-heading">
-      <h2 id="cta-heading">Send one episode. See how it comes back.</h2>
-      <p>Share a recording and where it will be published. We will tell you what we
-        would cut, and what we would leave in.</p>
+      <h2 id="cta-heading">Send us the question you answer most</h2>
+
+      <p>Record the answer you have given a hundred times and send us the file. We will
+        cut the explainer and a short version, and you can judge it against your own
+        standard.</p>
+
       <p class="actions">
-        <a class="btn btn--primary" href="/contact/">Talk to us about your firm's video</a>
+        <a class="btn btn--primary" href="/contact/">Get your expertise on screen</a>
       </p>
     </section>
 
@@ -388,12 +457,29 @@
          which is deliberately unlinked and permanently noindexed. -->
     <nav aria-label="Footer">
       <ul>
+        <!-- ⚠️ SIX LINKS ADDED BY T3, 2026-09-06, ON T11's REQUEST.
+             /podcasters/ · /healthcare/ · /legal/ · /real-estate/ · /ads/ ·
+             /portfolio/. Before this, T11's five new pages were reachable only
+             from the homepage's "Who we edit for" section.
+             /ads/ appears HERE and not in the "For" dropdown because T11 built
+             it as a SERVICE page (Meta ad creative), not an audience.
+             All seventeen links below were checked against the 18 files
+             sync-shared.mjs reported. /404.html is deliberately unlinked. -->
         <li><a href="/services/">Services</a></li>
+        <li><a href="/ads/">Ad Creative</a></li>
         <li><a href="/pricing/">Pricing</a></li>
-        <li><a href="/coaches/">For Coaches &amp; Trainers</a></li>
+        <li><a href="/portfolio/">Portfolio</a></li>
         <li><a href="/content-creators/">For Content Creators</a></li>
+        <li><a href="/coaches/">For Coaches &amp; Trainers</a></li>
         <li><a href="/business-owners/">For Business Owners</a></li>
         <li><a href="/marketers-and-agencies/">For Marketers &amp; Agencies</a></li>
+        <li><a href="/podcasters/">For Podcasters</a></li>
+        <li><a href="/course-creators/">For Course Creators</a></li>
+        <li><a href="/real-estate/">Real Estate</a></li>
+        <li><a href="/medical/">Doctors &amp; Medical</a></li>
+        <li><a href="/aesthetics/">Dermatology &amp; Aesthetics</a></li>
+        <li><a href="/healthcare/">Healthcare &amp; Clinics</a></li>
+        <li><a href="/legal/" aria-current="page">Legal &amp; Law Firms</a></li>
         <li><a href="/about/">About</a></li>
         <li><a href="/contact/">Contact</a></li>
         <li><a href="/privacy/">Privacy policy</a></li>
@@ -401,12 +487,26 @@
       </ul>
     </nav>
 
+    <!-- ⚠️ BRACKETS CLOSED BY T3, 2026-09-06. BOTH ON MASUD'S CONFIRMATION.
+
+         R14 — PHONE. Masud, 2026-09-06, verbatim: "number is active".
+               That is the dialling test RULINGS §2 C5 required, and it is the
+               only thing that was outstanding — the number itself was already
+               ruled on 2026-09-05. It now prints.
+               The tel: href carries no spaces, per RFC 3966; the visible text
+               keeps them because a human reads that.
+
+         R15 — EMAIL. Masud, 2026-09-06, verbatim:
+               "videoeditoragency.hello@gmail.com".
+               ⚠️ T3 FLAGGED A CONCERN ONCE AND IS NOT RE-ARGUING IT. See the
+               note below the footer for what it is. The address Masud gave is
+               what ships. -->
     <p>
-      <span class="todo">[[R14 — phone +880 1336433711: RULED, NOT YET DIALLED]]</span>
-      <span class="todo">[[R15 — which email address does VEA publish?]]</span>
+      <a href="tel:+8801336433711">+880 1336433711</a> ·
+      <a href="mailto:videoeditoragency.hello@gmail.com">videoeditoragency.hello@gmail.com</a>
     </p>
 
-    <p class="legal">© 2026 Video Editor Agency</p>
+    <p class="legal">© 2026 Video Editor Agency · Editing since 2020</p>
   </div>
 </footer>
 <!-- SHARED:FOOTER — END ===================================================== -->

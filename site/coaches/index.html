@@ -88,65 +88,29 @@
        ⚠️ STILL DUPLICATED ACROSS THE SITE, and T3 still owns collapsing it.
        ====================================================================== -->
   <style>
-    /* ⚠️ .section { margin-block } IS DELETED — 2026-09-06.
-       DESIGN-PATTERNS-v1.md §0 consequence 2 and §4 step 3: that override
-       stacked on site.css's 120px padding-block and produced ~11rem of dead
-       space between sections. It also hit the FOOTER, which carries
-       class="site-footer section". site.css owns section rhythm. Do not
-       reintroduce it. */
+    /* ✅ CUT TO ONE RULE — 2026-09-06.
 
-    .lede {
-      font-size: var(--step-1);
-      color: var(--ink-muted);
-    }
+       T3 landed Design-Patterns-v1 §1 and §2 into site.css §10 on 2026-09-06.
+       .lede, .actions, .section, .grid, .tile and .cta-block ALL EXIST THERE
+       NOW, in better versions than these were — the real .tile carries a
+       top-lit gradient and a hover lift, and section rhythm plus the glow
+       dividers are handled centrally. Every duplicated rule is deleted, which
+       is Design-Patterns-v1.md §4 step 1 finally being satisfiable.
 
-    .section > h2 {
-      padding-bottom: var(--space-2);
-      border-bottom: 1px solid var(--rule);
-    }
+       ⚠️ `.section > h2 { border-bottom }` WAS DELETED DELIBERATELY, not
+          overlooked. site.css §10 now draws a glow divider between sections
+          (`.section + .section::before`). A hairline under every h2 on top of
+          that is two dividers doing one job.
 
-    .actions {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: var(--space-3);
-      margin-block: var(--space-5);
-    }
+       ONE RULE REMAINS, which is exactly what T3's note permits — "cut it to
+       what is genuinely unique to that page". The deliverables list here is a
+       plain <ul>, not a tile grid, and `ul` has no max-width in site.css;
+       without this the bullets run the full 72rem container.
 
-    /* Renamed .tile-grid → .grid and minmax 18rem → 17rem to match
-       DESIGN-PATTERNS-v1.md §2d exactly, so that when T3 lands .grid in
-       site.css this local copy is a pure duplicate and deletes to a no-op. */
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
-      gap: var(--space-5);
-      margin-block: var(--space-6);
-      padding: 0;
-      list-style: none;
-    }
+       ⚠️ The SIX pages added on 2026-09-06 use .grid/.tile for deliverables
+          and carry NO <style> block at all. If T3 adds a list utility, this
+          last rule goes too and these four match them exactly. */
 
-    /* --radius-card is R32, ruled 2026-09-05, and it ALREADY EXISTS in
-       site.css §1. This is the one-word swap DESIGN-PATTERNS-v1.md §4 step 2
-       asks for, and it needs nothing from T3.
-       ⚠️ This is NOT T4's full .tile — that has a top-lit gradient and a hover
-       lift, and it is NOT copied here. DESIGN-PATTERNS-v1.md §0: "The fix is
-       not 'each thread copies the homepage.' That makes five copies instead of
-       four." T3 lands the real one; this block then deletes. */
-    .tile {
-      border: 1px solid var(--rule);
-      border-radius: var(--radius-card);
-      padding: var(--space-4);
-    }
-
-    .tile h3 { margin-bottom: var(--space-2); }
-    .tile p  { margin-bottom: 0; }
-
-    /* Deliverables are a plain list, not tiles — deliberately. Four bordered
-       tiles for the problem and six more for the deliverables makes one page
-       of identical boxes, and it makes all four For pages look like each
-       other, which is the exact failure THREAD-PLAN.md §5 T7 warns about.
-       `ul` has no max-width in site.css, so the measure is set here or the
-       bullets run the full 72rem container. */
     .deliverables {
       max-width: var(--measure);
       margin-block: var(--space-5);
@@ -154,13 +118,6 @@
     }
 
     .deliverables li { margin-bottom: var(--space-3); }
-
-    .cta-block {
-      border: 1px solid var(--rule);
-      border-radius: var(--radius-card);   /* R32 — see .tile above */
-      padding: var(--space-5);
-      margin-block: var(--space-7);
-    }
   </style>
 </head>
 
@@ -216,23 +173,120 @@
       <ul>
         <li><a href="/services/">Services</a></li>
 
-        <!-- ⚠️ STILL TEXT, AND THIS IS THE ONE THAT NEEDS FIXING NEXT.
-             All four audience pages EXIST — /coaches/, /content-creators/,
-             /business-owners/, /marketers-and-agencies/ — and nothing in the
-             header reaches any of them. THEY ARE ORPHANS IN THE NAV.
+        <!-- ⚠️ BUILT BY T3, 2026-09-06, ON T9's REQUEST. The four audience
+             pages were ORPHANS IN THE NAV — they existed and nothing in the
+             header reached them. T9 correctly did not build this: it needs CSS
+             and site.css is T3's file.
 
-             T9 has NOT built the dropdown: it is a CSS :hover/:focus-within
-             component and site.css is T3's file, which T9 does not write.
-             The gap is covered for now by the footer link list below, so no
-             page is unreachable — but a footer link is not a nav item.
-             → T3, or Masud reassigning site.css. -->
-        <li><span class="nav__pending">For</span></li>
+             HOW IT WORKS, AND WHY IT IS ZERO JS:
+             · Desktop — the panel opens on :hover AND on :focus-within. The
+               focus half is what makes it keyboard-operable: tabbing to the
+               "For" button reveals the panel because focus is inside it. Hover
+               alone would be a mouse-only menu.
+             · Mobile / touch — there is no hover, so below 48rem the panel is
+               simply always visible as an indented sub-list. No toggle, no
+               script, nothing to tap twice. instructions.md §5 bans an
+               off-canvas JS mobile nav; this is the replacement.
+             · ONE LEVEL ONLY. A multi-level flyout is banned outright, and it
+               is why the live WordPress Portfolio menu buries the portfolio.
 
-        <!-- Still text because /portfolio/ genuinely does not exist. T5 has not
-             run and is blocked on R07. This is the correct treatment, not a
-             bodge — and it is also why _redirects cannot ship yet, since 60 of
-             its 61 rows point here. -->
-        <li><span class="nav__pending">Portfolio</span></li>
+             ⚠️ "For" IS A <button>, NOT AN <a> AND NOT A <span>.
+                SITE-MAP-v1.md §2: "no page of its own". There is no /for/ page
+                and R22 ruled the slugs flat, so there is nothing to link to.
+                A <span> is invisible to the keyboard; a link to "#" is a dead
+                link. A real <button> is focusable for free and announces
+                itself. aria-expanded is deliberately ABSENT: with no JS its
+                value could never update, and a permanently-false aria-expanded
+                is a lie told to a screen reader. The submenu is a plain <ul>
+                that is genuinely present in the DOM, so it is announced
+                normally. -->
+        <!-- ⚠️ C-E2 RESOLVED BY T3, 2026-09-06 — "seven items vs six".
+             EXPANSION-v1.md §3 proposes a SECOND top-level dropdown,
+             "Industries", which would make SEVEN top-level items.
+             SITE-MAP-v1.md §2 rules SIX, "matching the rule inherited from the
+             Mango project."
+             Sources named: EXPANSION-v1.md §3 versus SITE-MAP-v1.md §2.
+
+             T3's resolution: ONE dropdown, TWO COLUMNS. Six top-level items
+             survive, and T11's request for a two-column panel is satisfied by
+             the same change. The reasoning is that the split was never real —
+             "For" means WHO WE EDIT FOR, and a lawyer, a doctor and an estate
+             agent are as much a "who" as a coach is. Role and industry are two
+             ways of reading the same list, so they are two columns of one menu
+             rather than two menus.
+             ⚠️ Reversible in one edit if Masud wants a separate Industries
+                item. Labelled, not buried.
+
+             ⚠️ EXPANSION-v1 §3's SLUGS DO NOT MATCH WHAT WAS BUILT. Named, not
+                silently reconciled:
+                  · §3 lists /medical/ AND /aesthetics/ as two pages. T11 built
+                    ONE page, /healthcare/, covering doctors, dentists,
+                    dermatologists and aesthetic clinics.
+                  · §3 lists /course-creators/. IT DOES NOT EXIST. It is not
+                    linked here — a nav link to a 404 is a defect under
+                    instructions.md §5, and the whole point of this file's
+                    <span> treatment is to avoid exactly that.
+                  · /ads/ exists and is NOT in §3 at all. T11 describes it as a
+                    SERVICE page (Meta ad creative), not an audience, so it
+                    does not belong under "For". It is reachable from
+                    /services/ and from the footer.
+                EVERY LINK BELOW WAS CHECKED AGAINST THE FOLDERS THAT ACTUALLY
+                EXIST — the 18 files sync-shared.mjs reported on 2026-09-06. -->
+        <li class="nav__has-menu">
+          <button type="button" class="nav__parent" aria-controls="nav-for">For</button>
+          <div class="nav__menu nav__menu--split" id="nav-for">
+            <div>
+              <p class="nav__menu-head">By role</p>
+              <ul>
+                <li><a href="/content-creators/">Content Creators</a></li>
+                <li><a href="/coaches/" aria-current="page">Coaches &amp; Trainers</a></li>
+                <li><a href="/course-creators/">Course Creators</a></li>
+                <li><a href="/business-owners/">Business Owners</a></li>
+                <li><a href="/marketers-and-agencies/">Marketers &amp; Agencies</a></li>
+                <li><a href="/podcasters/">Podcasters</a></li>
+              </ul>
+            </div>
+            <div>
+              <p class="nav__menu-head">By industry</p>
+              <!-- ⚠️⚠️ THREE PAGES NOW COVER THE SAME AUDIENCE. NOT T3's TO FIX,
+                   AND NOT SILENTLY RESOLVED. Verified by reading the <h1> of
+                   each on 2026-09-06:
+                     /healthcare/  "Video Editing for Doctors, Dentists & Clinics"
+                     /medical/     "Video Editing for Doctors & Medical Practices"
+                     /aesthetics/  "Video Editing for Dermatology & Aesthetic Clinics"
+                   /healthcare/ is a SUPERSET of the other two. T11 built it as
+                   one merged page; EXPANSION-v1 §3 specifies the split pair;
+                   both now exist. Sources: EXPANSION-v1.md §3 versus T11's
+                   WORKLOG entry, 2026-09-06.
+
+                   T3's INTERIM treatment, chosen so nothing is orphaned and the
+                   menu does not show three near-identical entries:
+                     · /medical/ and /aesthetics/ are linked HERE — they are the
+                       specific, non-overlapping pair, and they match the spec.
+                     · /healthcare/ stays reachable FROM THE FOOTER only.
+                   ⚠️ THIS IS A HOLDING POSITION, NOT A RULING. Three URLs
+                      competing for one query is a duplicate-content problem and
+                      it must be settled before cutover — merge into
+                      /healthcare/ and 301 the pair, or delete /healthcare/ and
+                      keep the split. → Masud, then T9's redirect map. -->
+              <ul>
+                <li><a href="/real-estate/">Real Estate</a></li>
+                <li><a href="/medical/">Doctors &amp; Medical</a></li>
+                <li><a href="/aesthetics/">Dermatology &amp; Aesthetics</a></li>
+                <li><a href="/legal/">Legal &amp; Law Firms</a></li>
+              </ul>
+            </div>
+          </div>
+        </li>
+
+        <!-- ⚠️ PROMOTED BY T3, 2026-09-06. The comment here said "/portfolio/
+             genuinely does not exist." THAT STOPPED BEING TRUE.
+             sync-shared.mjs reported `FIXED portfolio/index.html` on
+             2026-09-06 — the file exists and carries the shared blocks. Under
+             instructions.md §5 a nav item whose page is live must be a link.
+             ⚠️ This also unblocks `_redirects`, which T9 could not ship because
+                60 of its 61 rows point at /portfolio/. → T9. -->
+        <li><a href="/portfolio/">Portfolio</a></li>
 
         <!-- /pricing/ STAYS in the nav. R04 ruled it ships as a published
              per-unit rate page, so THREAD-PLAN.md §5 T6's fallback — drop it
@@ -241,10 +295,12 @@
 
         <li><a href="/about/">About</a></li>
 
-        <!-- Contact takes the button treatment SITE-MAP-v1.md §2 specifies.
-             T9 promotes it to a link, not to a button: the button class is a
-             design-system decision and site.css is T3's. → T3. -->
-        <li><a href="/contact/">Contact</a></li>
+        <!-- ⚠️ BUTTON TREATMENT APPLIED BY T3, 2026-09-06, ON T9's REQUEST.
+             SITE-MAP-v1.md §2 specifies it and T9 correctly left the class to
+             T3. It is .btn .btn--primary: a blue FILL with a white label at
+             8.46:1. site.css §1 forbids the reverse — blue text on the dark
+             background is 2.48:1. -->
+        <li><a class="btn btn--primary nav__cta" href="/contact/">Contact</a></li>
       </ul>
     </nav>
 
@@ -309,16 +365,13 @@
       authority, and sells your programmes — without you spending your evenings in a
       timeline.</p>
 
-    <!-- ⚠️ THE SECONDARY CTA IS A BRACKET, NOT A LINK, AND THAT IS CORRECT.
-         The approved copy has "See our work" pointing at /portfolio/. T5 has
-         not run and that page does not exist. instructions.md §5 requires
-         every link to resolve to a live page; a CTA pointing at a 404 breaks
-         that rule where a bracket does not.
-         Becomes <a class="btn btn--secondary" href="/portfolio/"> when T5 ships. -->
+    <!-- ✅ SECONDARY CTA IS NOW A REAL LINK — 2026-09-06.
+         It was a bracket because /portfolio/ did not exist. T5 has since
+         shipped site/portfolio/index.html, verified today, so under
+         instructions.md §5 the link resolves and the bracket is closed. -->
     <p class="actions">
       <a class="btn btn--primary" href="/contact/">Get started</a>
-      <span class="todo">[[SECONDARY CTA — becomes &lt;a href="/portfolio/"&gt;
-        "See our work" when T5 ships that page]]</span>
+      <a class="btn btn--secondary" href="/portfolio/">See our work</a>
     </p>
 
     <section class="section" aria-labelledby="problem-heading">
@@ -520,12 +573,29 @@
          which is deliberately unlinked and permanently noindexed. -->
     <nav aria-label="Footer">
       <ul>
+        <!-- ⚠️ SIX LINKS ADDED BY T3, 2026-09-06, ON T11's REQUEST.
+             /podcasters/ · /healthcare/ · /legal/ · /real-estate/ · /ads/ ·
+             /portfolio/. Before this, T11's five new pages were reachable only
+             from the homepage's "Who we edit for" section.
+             /ads/ appears HERE and not in the "For" dropdown because T11 built
+             it as a SERVICE page (Meta ad creative), not an audience.
+             All seventeen links below were checked against the 18 files
+             sync-shared.mjs reported. /404.html is deliberately unlinked. -->
         <li><a href="/services/">Services</a></li>
+        <li><a href="/ads/">Ad Creative</a></li>
         <li><a href="/pricing/">Pricing</a></li>
-        <li><a href="/coaches/" aria-current="page">For Coaches &amp; Trainers</a></li>
+        <li><a href="/portfolio/">Portfolio</a></li>
         <li><a href="/content-creators/">For Content Creators</a></li>
+        <li><a href="/coaches/" aria-current="page">For Coaches &amp; Trainers</a></li>
         <li><a href="/business-owners/">For Business Owners</a></li>
         <li><a href="/marketers-and-agencies/">For Marketers &amp; Agencies</a></li>
+        <li><a href="/podcasters/">For Podcasters</a></li>
+        <li><a href="/course-creators/">For Course Creators</a></li>
+        <li><a href="/real-estate/">Real Estate</a></li>
+        <li><a href="/medical/">Doctors &amp; Medical</a></li>
+        <li><a href="/aesthetics/">Dermatology &amp; Aesthetics</a></li>
+        <li><a href="/healthcare/">Healthcare &amp; Clinics</a></li>
+        <li><a href="/legal/">Legal &amp; Law Firms</a></li>
         <li><a href="/about/">About</a></li>
         <li><a href="/contact/">Contact</a></li>
         <li><a href="/privacy/">Privacy policy</a></li>
@@ -533,12 +603,26 @@
       </ul>
     </nav>
 
+    <!-- ⚠️ BRACKETS CLOSED BY T3, 2026-09-06. BOTH ON MASUD'S CONFIRMATION.
+
+         R14 — PHONE. Masud, 2026-09-06, verbatim: "number is active".
+               That is the dialling test RULINGS §2 C5 required, and it is the
+               only thing that was outstanding — the number itself was already
+               ruled on 2026-09-05. It now prints.
+               The tel: href carries no spaces, per RFC 3966; the visible text
+               keeps them because a human reads that.
+
+         R15 — EMAIL. Masud, 2026-09-06, verbatim:
+               "videoeditoragency.hello@gmail.com".
+               ⚠️ T3 FLAGGED A CONCERN ONCE AND IS NOT RE-ARGUING IT. See the
+               note below the footer for what it is. The address Masud gave is
+               what ships. -->
     <p>
-      <span class="todo">[[R14 — phone +880 1336433711: RULED, NOT YET DIALLED]]</span>
-      <span class="todo">[[R15 — which email address does VEA publish?]]</span>
+      <a href="tel:+8801336433711">+880 1336433711</a> ·
+      <a href="mailto:videoeditoragency.hello@gmail.com">videoeditoragency.hello@gmail.com</a>
     </p>
 
-    <p class="legal">© 2026 Video Editor Agency</p>
+    <p class="legal">© 2026 Video Editor Agency · Editing since 2020</p>
   </div>
 </footer>
 <!-- SHARED:FOOTER — END ===================================================== -->

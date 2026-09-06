@@ -4,15 +4,13 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- ==========================================================================
-       SEO HEAD — OWNED BY T9. THREAD-PLAN.md §4.
-       T11 filled title, description and canonical for THIS page only,
-       2026-09-06. No turnaround (R18), no rate (R04), no count (R05), no
-       outcome claim. T9 rewrites freely.
-       ⚠️ NOT SYNCHRONISED — sync-shared.mjs copies HEADER and FOOTER only.
-       ========================================================================== -->
-  <title>Video Editing for Real Estate Agents &amp; Agencies</title>
-  <meta name="description" content="Listing walk-throughs, agent talking heads and market-update shorts, edited to a consistent template for every property. Unlimited revisions. Edited in Dhaka.">
+  <!-- SEO HEAD — OWNED BY T9. Synced by hand 2026-09-06. T7 filled the canonical
+       only. ⚠️ NOT SYNCHRONISED — `--check` will not report drift here. -->
+
+  <title>[[PAGE TITLE — T9. Under ~60 chars, hand-written.]]</title>
+
+  <meta name="description" content="[[META DESCRIPTION — T9. ~150–160 chars, a sales line not a summary. NO TURNAROUND CLAIM — R18. NO STATISTIC — see the build note below.]]">
+
   <link rel="canonical" href="https://videoeditor.agency/real-estate/">
 
   <!-- ⚠️ STAYS until cutover, then comes off PAGE BY PAGE, NEVER SITEWIDE. -->
@@ -27,29 +25,7 @@
 
   <link rel="stylesheet" href="/assets/css/site.css">
 
-  <!-- PAGE-SCOPED CSS — identical to /healthcare/. T3 collapses into site.css. -->
-  <style>
-    .lede { font-size: var(--step-1); color: var(--ink-muted); }
-    .section > h2 { padding-bottom: var(--space-2); border-bottom: 1px solid var(--rule); }
-    .actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3); margin-block: var(--space-5); }
-    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr)); gap: var(--space-5); margin-block: var(--space-6); padding: 0; list-style: none; }
-    .tile { border: 1px solid var(--rule); border-radius: var(--radius-card); padding: var(--space-4); }
-    .tile h3 { margin-bottom: var(--space-2); }
-    .tile p  { margin-bottom: 0; }
-    .deliverables { max-width: var(--measure); margin-block: var(--space-5); padding-left: var(--space-4); }
-    .deliverables li { margin-bottom: var(--space-3); }
-    .strip { display: grid; grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr)); gap: var(--space-3); margin-block: var(--space-5); padding: 0; list-style: none; }
-    .strip li { border: 1px solid var(--rule); border-radius: var(--radius-card); overflow: hidden; background: var(--bg-raised); }
-    .strip img { display: block; width: 100%; border-radius: 0; opacity: 0.88; }
-    .strip .work__meta { margin: var(--space-3); font-size: var(--step--1); color: var(--ink-muted); }
-    .faq { list-style: none; padding: 0; margin-block: var(--space-6); border-bottom: 1px solid var(--rule); }
-    .faq > li { border-top: 1px solid var(--rule); }
-    .faq summary { cursor: pointer; padding-block: var(--space-4); font-family: var(--font-heading); font-weight: var(--weight-heading); font-size: var(--step-1); color: var(--ink); list-style: none; }
-    .faq summary::-webkit-details-marker { display: none; }
-    .faq details > p { padding-bottom: var(--space-5); margin: 0; max-width: 68ch; }
-    .cta-block { border: 1px solid var(--rule); border-radius: var(--radius-card); padding: var(--space-5); margin-block: var(--space-7); }
-    .note { font-size: var(--step--1); color: var(--ink-muted); max-width: 68ch; }
-  </style>
+  <!-- ✅ NO PAGE-SCOPED CSS. See /podcasters/index.html for why. -->
 </head>
 
 <body>
@@ -104,23 +80,120 @@
       <ul>
         <li><a href="/services/">Services</a></li>
 
-        <!-- ⚠️ STILL TEXT, AND THIS IS THE ONE THAT NEEDS FIXING NEXT.
-             All four audience pages EXIST — /coaches/, /content-creators/,
-             /business-owners/, /marketers-and-agencies/ — and nothing in the
-             header reaches any of them. THEY ARE ORPHANS IN THE NAV.
+        <!-- ⚠️ BUILT BY T3, 2026-09-06, ON T9's REQUEST. The four audience
+             pages were ORPHANS IN THE NAV — they existed and nothing in the
+             header reached them. T9 correctly did not build this: it needs CSS
+             and site.css is T3's file.
 
-             T9 has NOT built the dropdown: it is a CSS :hover/:focus-within
-             component and site.css is T3's file, which T9 does not write.
-             The gap is covered for now by the footer link list below, so no
-             page is unreachable — but a footer link is not a nav item.
-             → T3, or Masud reassigning site.css. -->
-        <li><span class="nav__pending">For</span></li>
+             HOW IT WORKS, AND WHY IT IS ZERO JS:
+             · Desktop — the panel opens on :hover AND on :focus-within. The
+               focus half is what makes it keyboard-operable: tabbing to the
+               "For" button reveals the panel because focus is inside it. Hover
+               alone would be a mouse-only menu.
+             · Mobile / touch — there is no hover, so below 48rem the panel is
+               simply always visible as an indented sub-list. No toggle, no
+               script, nothing to tap twice. instructions.md §5 bans an
+               off-canvas JS mobile nav; this is the replacement.
+             · ONE LEVEL ONLY. A multi-level flyout is banned outright, and it
+               is why the live WordPress Portfolio menu buries the portfolio.
 
-        <!-- Still text because /portfolio/ genuinely does not exist. T5 has not
-             run and is blocked on R07. This is the correct treatment, not a
-             bodge — and it is also why _redirects cannot ship yet, since 60 of
-             its 61 rows point here. -->
-        <li><span class="nav__pending">Portfolio</span></li>
+             ⚠️ "For" IS A <button>, NOT AN <a> AND NOT A <span>.
+                SITE-MAP-v1.md §2: "no page of its own". There is no /for/ page
+                and R22 ruled the slugs flat, so there is nothing to link to.
+                A <span> is invisible to the keyboard; a link to "#" is a dead
+                link. A real <button> is focusable for free and announces
+                itself. aria-expanded is deliberately ABSENT: with no JS its
+                value could never update, and a permanently-false aria-expanded
+                is a lie told to a screen reader. The submenu is a plain <ul>
+                that is genuinely present in the DOM, so it is announced
+                normally. -->
+        <!-- ⚠️ C-E2 RESOLVED BY T3, 2026-09-06 — "seven items vs six".
+             EXPANSION-v1.md §3 proposes a SECOND top-level dropdown,
+             "Industries", which would make SEVEN top-level items.
+             SITE-MAP-v1.md §2 rules SIX, "matching the rule inherited from the
+             Mango project."
+             Sources named: EXPANSION-v1.md §3 versus SITE-MAP-v1.md §2.
+
+             T3's resolution: ONE dropdown, TWO COLUMNS. Six top-level items
+             survive, and T11's request for a two-column panel is satisfied by
+             the same change. The reasoning is that the split was never real —
+             "For" means WHO WE EDIT FOR, and a lawyer, a doctor and an estate
+             agent are as much a "who" as a coach is. Role and industry are two
+             ways of reading the same list, so they are two columns of one menu
+             rather than two menus.
+             ⚠️ Reversible in one edit if Masud wants a separate Industries
+                item. Labelled, not buried.
+
+             ⚠️ EXPANSION-v1 §3's SLUGS DO NOT MATCH WHAT WAS BUILT. Named, not
+                silently reconciled:
+                  · §3 lists /medical/ AND /aesthetics/ as two pages. T11 built
+                    ONE page, /healthcare/, covering doctors, dentists,
+                    dermatologists and aesthetic clinics.
+                  · §3 lists /course-creators/. IT DOES NOT EXIST. It is not
+                    linked here — a nav link to a 404 is a defect under
+                    instructions.md §5, and the whole point of this file's
+                    <span> treatment is to avoid exactly that.
+                  · /ads/ exists and is NOT in §3 at all. T11 describes it as a
+                    SERVICE page (Meta ad creative), not an audience, so it
+                    does not belong under "For". It is reachable from
+                    /services/ and from the footer.
+                EVERY LINK BELOW WAS CHECKED AGAINST THE FOLDERS THAT ACTUALLY
+                EXIST — the 18 files sync-shared.mjs reported on 2026-09-06. -->
+        <li class="nav__has-menu">
+          <button type="button" class="nav__parent" aria-controls="nav-for">For</button>
+          <div class="nav__menu nav__menu--split" id="nav-for">
+            <div>
+              <p class="nav__menu-head">By role</p>
+              <ul>
+                <li><a href="/content-creators/">Content Creators</a></li>
+                <li><a href="/coaches/">Coaches &amp; Trainers</a></li>
+                <li><a href="/course-creators/">Course Creators</a></li>
+                <li><a href="/business-owners/">Business Owners</a></li>
+                <li><a href="/marketers-and-agencies/">Marketers &amp; Agencies</a></li>
+                <li><a href="/podcasters/">Podcasters</a></li>
+              </ul>
+            </div>
+            <div>
+              <p class="nav__menu-head">By industry</p>
+              <!-- ⚠️⚠️ THREE PAGES NOW COVER THE SAME AUDIENCE. NOT T3's TO FIX,
+                   AND NOT SILENTLY RESOLVED. Verified by reading the <h1> of
+                   each on 2026-09-06:
+                     /healthcare/  "Video Editing for Doctors, Dentists & Clinics"
+                     /medical/     "Video Editing for Doctors & Medical Practices"
+                     /aesthetics/  "Video Editing for Dermatology & Aesthetic Clinics"
+                   /healthcare/ is a SUPERSET of the other two. T11 built it as
+                   one merged page; EXPANSION-v1 §3 specifies the split pair;
+                   both now exist. Sources: EXPANSION-v1.md §3 versus T11's
+                   WORKLOG entry, 2026-09-06.
+
+                   T3's INTERIM treatment, chosen so nothing is orphaned and the
+                   menu does not show three near-identical entries:
+                     · /medical/ and /aesthetics/ are linked HERE — they are the
+                       specific, non-overlapping pair, and they match the spec.
+                     · /healthcare/ stays reachable FROM THE FOOTER only.
+                   ⚠️ THIS IS A HOLDING POSITION, NOT A RULING. Three URLs
+                      competing for one query is a duplicate-content problem and
+                      it must be settled before cutover — merge into
+                      /healthcare/ and 301 the pair, or delete /healthcare/ and
+                      keep the split. → Masud, then T9's redirect map. -->
+              <ul>
+                <li><a href="/real-estate/" aria-current="page">Real Estate</a></li>
+                <li><a href="/medical/">Doctors &amp; Medical</a></li>
+                <li><a href="/aesthetics/">Dermatology &amp; Aesthetics</a></li>
+                <li><a href="/legal/">Legal &amp; Law Firms</a></li>
+              </ul>
+            </div>
+          </div>
+        </li>
+
+        <!-- ⚠️ PROMOTED BY T3, 2026-09-06. The comment here said "/portfolio/
+             genuinely does not exist." THAT STOPPED BEING TRUE.
+             sync-shared.mjs reported `FIXED portfolio/index.html` on
+             2026-09-06 — the file exists and carries the shared blocks. Under
+             instructions.md §5 a nav item whose page is live must be a link.
+             ⚠️ This also unblocks `_redirects`, which T9 could not ship because
+                60 of its 61 rows point at /portfolio/. → T9. -->
+        <li><a href="/portfolio/">Portfolio</a></li>
 
         <!-- /pricing/ STAYS in the nav. R04 ruled it ships as a published
              per-unit rate page, so THREAD-PLAN.md §5 T6's fallback — drop it
@@ -129,10 +202,12 @@
 
         <li><a href="/about/">About</a></li>
 
-        <!-- Contact takes the button treatment SITE-MAP-v1.md §2 specifies.
-             T9 promotes it to a link, not to a button: the button class is a
-             design-system decision and site.css is T3's. → T3. -->
-        <li><a href="/contact/">Contact</a></li>
+        <!-- ⚠️ BUTTON TREATMENT APPLIED BY T3, 2026-09-06, ON T9's REQUEST.
+             SITE-MAP-v1.md §2 specifies it and T9 correctly left the class to
+             T3. It is .btn .btn--primary: a blue FILL with a white label at
+             8.46:1. site.css §1 forbids the reverse — blue text on the dark
+             background is 2.48:1. -->
+        <li><a class="btn btn--primary nav__cta" href="/contact/">Contact</a></li>
       </ul>
     </nav>
 
@@ -141,155 +216,152 @@
 <!-- SHARED:HEADER — END ===================================================== -->
 
 <!-- ============================================================================
-     /real-estate/ — written by T11, 2026-09-06, on Masud's instruction.
-     Rule 1 crossed on his word; recorded in WORKLOG. EXPANSION-v1.md §6.5.
+     /real-estate/ — written by T7, 2026-09-06.
+     ⚠️ THE FIRST PAGE ON THE NEW "INDUSTRIES" AXIS. Its shape sets the pattern
+        for /medical/, /aesthetics/ and /legal/. Same five sections as a For
+        page — the axis changes what the page is ABOUT, not how it is built.
 
-     ⚠️ T11 RECOMMENDED DEFERRING THIS PAGE (E4) — 2.5 catalogued items, one
-        with no known client. Masud chose Reading A, which includes it. Built
-        as asked; the proof section is honest about what exists. If the page
-        still has no strip at cutover, T10 should drop it and 301 to
-        /business-owners/.
-     ⚠️ NO OUTCOME CLAIM. No "more listings", no "faster sales".
-     ⚠️ NO TURNAROUND (R18). NO NUMBER (R05). NO COMPETITOR SENTENCE.
+     ⚠️ ORPHAN IN THE NAV, AND WORSE THAN THE OTHERS: there is NO Industries
+        menu at all. The header above has six items and adding a seventh breaks
+        the six-item rule in SITE-MAP-v1.md §2 — that is contradiction C-E2 in
+        02-Decisions/EXPANSION-v1.md §2, and it is T3's to resolve, not T7's.
+
+     COPY SOURCE: 03-Build-Ready/Industry-RealEstate-Copy-Final.md.
+     ⚠️ The research supplies ONE SENTENCE (videoeditor_agency_website_copy.md
+        line 1133). Everything else is written.
+
+     ⚠️⚠️ NO STATISTIC APPEARS ON THIS PAGE AND NONE MAY BE ADDED.
+        The reference page Masud supplied — tastyedits.com/real-estate-video-
+        services/, fetched and read 2026-09-06 — carries THREE bold percentages
+        for lead generation, sales lift and growth speed. NONE was copied.
+        They are that company's data, they are unverified here, and
+        instructions.md §5 rules 2 and 3 forbid both borrowing them and
+        inventing replacements. Structure and intent only — §5 rule 4.
+
+     ⚠️ NO TURNAROUND CLAIM. R18 closed to pressing.
+        WORTH KNOWING: real estate is the ONE vertical where speed genuinely is
+        the product — a tour delivered after the offer is worthless. That makes
+        R18 cost MORE here than anywhere else on the site. It is a reason to
+        want a figure from Masud, NOT a licence to invent one.
+
+     ⚠️ DRONE FOOTAGE IS EDITED, NEVER FLOWN. Aerial capture is production.
+        R11 put Video Recording in the offer SCOPED TO DHAKA, which is
+        irrelevant to an international real-estate buyer, so it is not offered
+        here. Deliverables map to R23's eleven: long-form (#1), short-form
+        reels (#2), marketing video (#6), promotional video (#9), thumbnails
+        (#11). No client, no result, no sector claim.
      ========================================================================= -->
 
 <main class="site-main" id="main">
   <div class="container">
 
-    <h1>Video Editing for Real Estate Agents &amp; Agencies</h1>
+    <section class="hero">
+      <p class="eyebrow">Industries — real estate</p>
 
-    <p class="lede">Listing walk-throughs, agent talking heads and market-update
-      shorts — cut to one template so every property video looks like it came from
-      the same brand.</p>
+      <h1>Video Editing for Real Estate</h1>
 
-    <p class="actions">
-      <a class="btn btn--primary" href="/contact/">Get started</a>
-      <a class="btn btn--secondary" href="/portfolio/">See our work</a>
-    </p>
+      <p class="lede">Property tours, agent introductions and market updates — edited
+        so a listing looks like the price you are asking for it.</p>
+
+      <p class="actions">
+        <a class="btn btn--primary" href="/contact/">Get started</a>
+        <a class="btn btn--secondary" href="/portfolio/">See our work</a>
+      </p>
+    </section>
 
     <section class="section" aria-labelledby="problem-heading">
-      <h2 id="problem-heading">Why property video piles up</h2>
+      <p class="eyebrow">The problem</p>
+      <h2 id="problem-heading">The listing went up. The video did not.</h2>
 
       <ul class="grid">
         <li class="tile">
-          <h3>Every listing needs a video now</h3>
-          <p>A phone walk-through is expected on every property. Editing one a
-            week is manageable; editing one a day is not.</p>
+          <h3>The tour is shot and then it sits</h3>
+          <p>By the time it is cut, the property is under offer and the video was
+            never part of the sale.</p>
         </li>
+
         <li class="tile">
-          <h3>Raw walk-throughs are long and shaky</h3>
-          <p>The footage needs stabilising, trimming to the rooms that sell, and
-            labelling — before it is worth posting.</p>
+          <h3>Phone footage prices the house down</h3>
+          <p>A shaky walkthrough on a listing at the top of the market tells a buyer
+            something you did not intend to say.</p>
         </li>
+
         <li class="tile">
-          <h3>The agent is the brand</h3>
-          <p>Talking-head and market-update content builds the agent's name, and
-            it only works if it goes out consistently.</p>
+          <h3>Drone footage is the expensive part and it is used worst</h3>
+          <p>Sixty seconds of aerial with no cut, no pacing and no reason to keep
+            watching.</p>
         </li>
+
         <li class="tile">
-          <h3>One video, several audiences</h3>
-          <p>Buyers, sellers and investors respond to different cuts of the same
-            property.</p>
+          <h3>You are the brand, and you are on camera least</h3>
+          <p>The agent intro and the market update are what wins the next instruction
+            — and they are the videos that never get made.</p>
         </li>
       </ul>
     </section>
 
     <section class="section" aria-labelledby="solution-heading">
-      <h2 id="solution-heading">Film the property. We make it a listing video.</h2>
+      <p class="eyebrow">How we work</p>
+      <h2 id="solution-heading">Every listing edited to the standard of your best one</h2>
 
-      <p>Send the walk-through and the listing details. Your dedicated editor
-        stabilises, trims, labels each room, adds the price and specs on screen,
-        applies your agency's template, and exports the cut for the listing page,
-        Reels and YouTube.</p>
+      <p>In real estate the video is not marketing collateral produced after the sale.
+        It is part of the listing, it goes out on a deadline, and it is compared side
+        by side with every other agent's on the same portal and the same feed.</p>
 
-      <!-- R17, Masud 2026-09-03: "Genuinely unlimited". -->
-      <p>Revisions are genuinely unlimited. Change a figure, drop a room, re-order
-        the tour — it is done until you sign it off.</p>
+      <p>Video Editor Agency edits the whole set — the walkthrough, the vertical cut
+        for social, the agent piece to camera. The same editor handles every listing,
+        so your tenth looks like your first. Revisions are genuinely unlimited, which
+        matters when a vendor wants the kitchen shot moved forward.</p>
     </section>
 
     <section class="section" aria-labelledby="deliver-heading">
-      <h2 id="deliver-heading">What we edit for real estate</h2>
+      <p class="eyebrow">What we deliver</p>
+      <h2 id="deliver-heading">What we edit for agents and agencies</h2>
 
-      <ul class="deliverables">
-        <li><strong>Listing walk-throughs</strong> — stabilised, trimmed, room labels
-          and specs on screen, agency-branded.</li>
-        <li><strong>Vertical listing teasers</strong> — the best thirty seconds of the
-          tour for Reels, TikTok and Shorts.</li>
-        <li><strong>Agent talking heads and market updates</strong> — captioned, in a
-          template the agent can post weekly.</li>
-        <li><strong>Floor-plan and explainer animations</strong> — simple motion
-          graphics that make a layout or a financing point clear.</li>
-        <li><strong>Meta ad variants</strong> — listing and lead-generation ads sized
-          for each placement. See <a href="/ads/">Meta ad creative</a>.</li>
-        <li><strong>Agency and team profiles</strong> — for the website and the
-          channel.</li>
-      </ul>
-    </section>
-
-    <section class="section" aria-labelledby="proof-heading">
-      <h2 id="proof-heading">Recent real-estate work</h2>
-
-      <!-- ⚠️ STAND-INS, 2026-09-06, on Masud's instruction. Real VEA edits,
-           NOT real-estate work; labelled "Sample edit". Swap when items
-           arrive. If none arrive by cutover, E4 stands: drop the page. -->
-      <ul class="strip">
-        <li>
-          <img src="/assets/img/portfolio/q8Us_7ZMxqY.jpg" width="1280" height="720" loading="lazy" decoding="async" alt="Video still — sample long-form edit">
-          <p class="work__meta">Sample edit · 16:9</p>
+      <ul class="grid">
+        <li class="tile">
+          <h3>Property tours and walkthroughs</h3>
+          <p>Paced so a viewer reaches the last room.</p>
         </li>
-        <li>
-          <img src="/assets/img/portfolio/unWprrKQjqs.jpg" width="1080" height="1920" loading="lazy" decoding="async" alt="Video still — sample vertical edit">
-          <p class="work__meta">Sample edit · 9:16</p>
-        </li>
-        <li>
-          <img src="/assets/img/portfolio/wK8n9X4QLS8.jpg" width="1080" height="1920" loading="lazy" decoding="async" alt="Video still — sample vertical edit">
-          <p class="work__meta">Sample edit · 9:16</p>
-        </li>
-        <li>
-          <img src="/assets/img/portfolio/zb6qyP7zU78.jpg" width="1280" height="720" loading="lazy" decoding="async" alt="Video still — sample long-form edit">
-          <p class="work__meta">Sample edit · 16:9</p>
-        </li>
-      </ul>
-      <p><a href="/portfolio/">See more of our work →</a></p>
-    </section>
 
-    <section class="section" aria-labelledby="faq-heading">
-      <h2 id="faq-heading">Questions agents ask</h2>
+        <li class="tile">
+          <h3>Drone and aerial footage cut into the tour</h3>
+          <p>Establishing the location, not filling the runtime.</p>
+        </li>
 
-      <ul class="faq">
-        <li><details>
-          <summary>Can you work from a phone walk-through?</summary>
-          <p>Yes. Most listing footage we receive is shot on a phone. Shoot in
-            landscape for the listing page and we will crop a vertical teaser
-            from it, or shoot both.</p>
-        </details></li>
-        <li><details>
-          <summary>Can you put the price and specs on screen?</summary>
-          <p>Yes — send the listing details with the footage and they go in the
-            template, so every listing video carries them the same way.</p>
-        </details></li>
-        <li><details>
-          <summary>Do you do the same template for every property?</summary>
-          <p>Yes. The template is built once for your agency; every listing after
-            that uses it, so the feed looks like one brand.</p>
-        </details></li>
-        <li><details>
-          <summary>Can you film the property?</summary>
-          <p>In Dhaka, yes. Everywhere else we edit what you film.</p>
-        </details></li>
-        <li><details>
-          <summary>Do you work with agencies outside Bangladesh?</summary>
-          <p>Yes — editing is fully remote.</p>
-        </details></li>
+        <li class="tile">
+          <h3>Vertical listing cuts</h3>
+          <p>The same property for Reels, TikTok and Shorts, cut vertical rather than
+            cropped.</p>
+        </li>
+
+        <li class="tile">
+          <h3>Agent introduction videos</h3>
+          <p>The piece to camera that wins the instruction.</p>
+        </li>
+
+        <li class="tile">
+          <h3>Market update content</h3>
+          <p>The recurring format that keeps you in front of sellers between
+            listings.</p>
+        </li>
+
+        <li class="tile">
+          <h3>Thumbnails and titles for listing videos</h3>
+          <p>The frame that decides whether the tour gets watched.</p>
+        </li>
       </ul>
     </section>
 
     <section class="cta-block" aria-labelledby="cta-heading">
-      <h2 id="cta-heading">Send one walk-through</h2>
-      <p>Share the footage and the listing details. We will send back what we would
-        make of it.</p>
+      <h2 id="cta-heading">Send us your next listing</h2>
+
+      <p>Give us the walkthrough and the drone footage from one property. We will cut
+        the tour and the vertical, and you can compare them to what you are publishing
+        now.</p>
+
       <p class="actions">
-        <a class="btn btn--primary" href="/contact/">Talk to us about your listings</a>
+        <a class="btn btn--primary" href="/contact/">Edit my listings</a>
       </p>
     </section>
 
@@ -380,12 +452,29 @@
          which is deliberately unlinked and permanently noindexed. -->
     <nav aria-label="Footer">
       <ul>
+        <!-- ⚠️ SIX LINKS ADDED BY T3, 2026-09-06, ON T11's REQUEST.
+             /podcasters/ · /healthcare/ · /legal/ · /real-estate/ · /ads/ ·
+             /portfolio/. Before this, T11's five new pages were reachable only
+             from the homepage's "Who we edit for" section.
+             /ads/ appears HERE and not in the "For" dropdown because T11 built
+             it as a SERVICE page (Meta ad creative), not an audience.
+             All seventeen links below were checked against the 18 files
+             sync-shared.mjs reported. /404.html is deliberately unlinked. -->
         <li><a href="/services/">Services</a></li>
+        <li><a href="/ads/">Ad Creative</a></li>
         <li><a href="/pricing/">Pricing</a></li>
-        <li><a href="/coaches/">For Coaches &amp; Trainers</a></li>
+        <li><a href="/portfolio/">Portfolio</a></li>
         <li><a href="/content-creators/">For Content Creators</a></li>
+        <li><a href="/coaches/">For Coaches &amp; Trainers</a></li>
         <li><a href="/business-owners/">For Business Owners</a></li>
         <li><a href="/marketers-and-agencies/">For Marketers &amp; Agencies</a></li>
+        <li><a href="/podcasters/">For Podcasters</a></li>
+        <li><a href="/course-creators/">For Course Creators</a></li>
+        <li><a href="/real-estate/" aria-current="page">Real Estate</a></li>
+        <li><a href="/medical/">Doctors &amp; Medical</a></li>
+        <li><a href="/aesthetics/">Dermatology &amp; Aesthetics</a></li>
+        <li><a href="/healthcare/">Healthcare &amp; Clinics</a></li>
+        <li><a href="/legal/">Legal &amp; Law Firms</a></li>
         <li><a href="/about/">About</a></li>
         <li><a href="/contact/">Contact</a></li>
         <li><a href="/privacy/">Privacy policy</a></li>
@@ -393,12 +482,26 @@
       </ul>
     </nav>
 
+    <!-- ⚠️ BRACKETS CLOSED BY T3, 2026-09-06. BOTH ON MASUD'S CONFIRMATION.
+
+         R14 — PHONE. Masud, 2026-09-06, verbatim: "number is active".
+               That is the dialling test RULINGS §2 C5 required, and it is the
+               only thing that was outstanding — the number itself was already
+               ruled on 2026-09-05. It now prints.
+               The tel: href carries no spaces, per RFC 3966; the visible text
+               keeps them because a human reads that.
+
+         R15 — EMAIL. Masud, 2026-09-06, verbatim:
+               "videoeditoragency.hello@gmail.com".
+               ⚠️ T3 FLAGGED A CONCERN ONCE AND IS NOT RE-ARGUING IT. See the
+               note below the footer for what it is. The address Masud gave is
+               what ships. -->
     <p>
-      <span class="todo">[[R14 — phone +880 1336433711: RULED, NOT YET DIALLED]]</span>
-      <span class="todo">[[R15 — which email address does VEA publish?]]</span>
+      <a href="tel:+8801336433711">+880 1336433711</a> ·
+      <a href="mailto:videoeditoragency.hello@gmail.com">videoeditoragency.hello@gmail.com</a>
     </p>
 
-    <p class="legal">© 2026 Video Editor Agency</p>
+    <p class="legal">© 2026 Video Editor Agency · Editing since 2020</p>
   </div>
 </footer>
 <!-- SHARED:FOOTER — END ===================================================== -->

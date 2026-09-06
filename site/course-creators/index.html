@@ -4,18 +4,14 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- ==========================================================================
-       SEO HEAD — OWNED BY T9. THREAD-PLAN.md §4.
-       Synced by hand from _template/page-template.html on 2026-09-06.
-       T7 filled the canonical only. ⚠️ NOT SYNCHRONISED — `--check` will not
-       report drift here.
-       ========================================================================== -->
+  <!-- SEO HEAD — OWNED BY T9. Synced by hand 2026-09-06. T7 filled the canonical
+       only. ⚠️ NOT SYNCHRONISED — `--check` will not report drift here. -->
 
   <title>[[PAGE TITLE — T9. Under ~60 chars, hand-written.]]</title>
 
   <meta name="description" content="[[META DESCRIPTION — T9. ~150–160 chars, a sales line not a summary. NO TURNAROUND CLAIM — R18.]]">
 
-  <link rel="canonical" href="https://videoeditor.agency/podcasters/">
+  <link rel="canonical" href="https://videoeditor.agency/course-creators/">
 
   <!-- ⚠️ STAYS until cutover, then comes off PAGE BY PAGE, NEVER SITEWIDE. -->
   <meta name="robots" content="noindex, nofollow">
@@ -29,13 +25,7 @@
 
   <link rel="stylesheet" href="/assets/css/site.css">
 
-  <!-- ✅ NO PAGE-SCOPED CSS. NOT AN OMISSION — THE POINT.
-       T3 landed Design-Patterns-v1 §1 and §2 into site.css on 2026-09-06, so
-       .hero, .eyebrow, .lede, .actions, .section, .grid, .tile and .cta-block
-       all exist. This page uses nothing else and declares nothing of its own.
-       The six new pages are the first on the site with an empty <head> below
-       the stylesheet link. Any thread tempted to add a <style> block here
-       should check site.css §10 first — it is probably already there. -->
+  <!-- ✅ NO PAGE-SCOPED CSS. See /podcasters/index.html for why. -->
 </head>
 
 <body>
@@ -157,10 +147,10 @@
               <ul>
                 <li><a href="/content-creators/">Content Creators</a></li>
                 <li><a href="/coaches/">Coaches &amp; Trainers</a></li>
-                <li><a href="/course-creators/">Course Creators</a></li>
+                <li><a href="/course-creators/" aria-current="page">Course Creators</a></li>
                 <li><a href="/business-owners/">Business Owners</a></li>
                 <li><a href="/marketers-and-agencies/">Marketers &amp; Agencies</a></li>
-                <li><a href="/podcasters/" aria-current="page">Podcasters</a></li>
+                <li><a href="/podcasters/">Podcasters</a></li>
               </ul>
             </div>
             <div>
@@ -226,47 +216,56 @@
 <!-- SHARED:HEADER — END ===================================================== -->
 
 <!-- ============================================================================
-     /podcasters/ — written by T7, 2026-09-06.
+     /course-creators/ — written by T7, 2026-09-06.
 
-     ⚠️ THIS PAGE IS AN ORPHAN IN THE NAV, AND SO ARE THE OTHER FIVE NEW PAGES.
-        The "For" dropdown above carries FOUR children. This page is the fifth
-        and /course-creators/ is the sixth. The footer's nav list does not carry
-        them either, and there is no Industries menu at all.
-        T7 CANNOT FIX THIS — _template/page-template.html is T3's and T9's file,
-        THREAD-PLAN.md §1 Rule 2. → T3, per 02-Decisions/EXPANSION-v1.md §3.
-        This is the same orphan problem T9 found on 2026-09-05 with the original
-        four: pages that exist and that nothing on the site links to.
+     ⚠️ ORPHAN IN THE NAV. The "For" menu above carries four children; this is
+        the sixth. T3 owns the template — EXPANSION-v1.md §3.
 
-     COPY SOURCE: 03-Build-Ready/For-Podcasters-Copy-Final.md.
-     ⚠️ THAT COPY IS ~85% WRITTEN, NOT TRANSCRIBED. The research supplies ONE
-        SENTENCE for podcasts (videoeditor_agency_website_copy.md line 1125).
-        The original four For pages were lifted from finished prose; this was
-        not. See EXPANSION-v1.md §5.
+     COPY SOURCE: 03-Build-Ready/For-CourseCreators-Copy-Final.md.
+     ⚠️ ~85% WRITTEN, NOT TRANSCRIBED. The research supplies ONE SENTENCE
+        (videoeditor_agency_website_copy.md line 1117).
 
-     FIVE SECTIONS, NOT SEVEN. Proof (R08 conditional — no podcast testimonial
-     exists in any source) and Recommended plan (R04 killed the tiers) are
-     DELETED, not unbuilt. THREAD-PLAN.md §5 T4.
+     ⚠️⚠️ THIS PAGE HAS TO EARN ITS SEPARATION FROM /coaches/ AND THE SPLIT IS
+           FRAGILE. Course editing is already DELIVERABLE #1 on /coaches/, and
+           the coaches copy sells "online courses not getting launched."
+           Tasty Edits — the reference Masud supplied — has a Course Creators
+           page and NO coaches page. They chose one.
 
-     ⚠️ NO TURNAROUND CLAIM. R18 closed to pressing. This page's copy leans on
-        SCHEDULE — "a show that publishes on a schedule cannot afford an edit
-        that stalls." THAT IS A CLAIM ABOUT THE READER'S NEED, NOT A PROMISE OF
-        A DELIVERY WINDOW. Do not let a later edit turn it into one.
+           THE SPLIT THIS PAGE COMMITS TO:
+             /coaches/         sells THEIR TIME. Video fills the calendar.
+                               A rough edit is a MARKETING problem.
+             /course-creators/ sells THE VIDEO ITSELF. The course IS the
+                               product. A rough edit is a PRODUCT DEFECT in
+                               something someone already paid for.
 
-     Every deliverable maps to R23's eleven services: podcast (#4), short-form
-     reels (#2), motion graphics (#5), thumbnail design (#11). Nothing new is
-     offered. No number, no client, no result, no sector claim.
+           Every line below leans on that. IF A LATER EDIT SOFTENS IT TOWARD
+           "we edit your videos", THE TWO PAGES COLLAPSE and become the
+           duplicate-content problem THREAD-PLAN.md §5 T7 warns about.
+
+     FIVE SECTIONS. Proof (R08) and Recommended plan (R04) deleted, not unbuilt.
+     ⚠️ R04 BITES HARDER HERE than anywhere else: a 40-lesson course priced per
+        finished minute is a large number and there is no bundle to soften it.
+        This page creates a pricing conversation /pricing/ does not answer.
+
+     ⚠️ NO TURNAROUND CLAIM (R18). NO COMPLETION-RATE STATISTIC — "completion is
+        the number that decides your reviews" is a statement about why it
+        matters TO THE READER, not a claim that VEA improves it. Do not let a
+        later edit attach a percentage to it.
+
+     Deliverables map to R23's eleven: long-form (#1), motion graphics (#5),
+     short-form reels (#2), promotional video (#9).
      ========================================================================= -->
 
 <main class="site-main" id="main">
   <div class="container">
 
     <section class="hero">
-      <p class="eyebrow">For podcasters</p>
+      <p class="eyebrow">For course creators</p>
 
-      <h1>Video Editing for Podcasters</h1>
+      <h1>Video Editing for Course Creators</h1>
 
-      <p class="lede">One recording becomes a week of content. We cut the episode,
-        pull the clips, and hand it all back ready to publish.</p>
+      <p class="lede">Your course <em>is</em> the video. We edit it like the product
+        it is — chapter by chapter, consistent from the first lesson to the last.</p>
 
       <p class="actions">
         <a class="btn btn--primary" href="/contact/">Get started</a>
@@ -276,98 +275,95 @@
 
     <section class="section" aria-labelledby="problem-heading">
       <p class="eyebrow">The problem</p>
-      <h2 id="problem-heading">Recording the episode was the easy part</h2>
+      <h2 id="problem-heading">The course is recorded. It has been recorded for months.</h2>
 
       <ul class="grid">
         <li class="tile">
-          <h3>The edit is longer than the episode</h3>
-          <p>Two hours of multi-cam takes far longer than two hours to cut, and it
-            lands on whoever in the team has the least time.</p>
+          <h3>Forty lessons is forty edits</h3>
+          <p>The first three are fine. Lesson eleven is where most courses quietly
+            stop.</p>
         </li>
 
         <li class="tile">
-          <h3>The clips never get made</h3>
-          <p>Everyone knows the short-form is where the growth is. It is also the job
-            that gets dropped when the episode itself is late.</p>
+          <h3>Lesson 30 does not match lesson 1</h3>
+          <p>Different day, different light, different energy — and a student notices
+            the seam even when they cannot name it.</p>
         </li>
 
         <li class="tile">
-          <h3>The video version is an afterthought</h3>
-          <p>Audio goes out clean; the video goes out as a static waveform or a
-            single locked-off shot, and it performs like one.</p>
+          <h3>Production quality is what the refund email is about</h3>
+          <p>Nobody asks for their money back because the teaching was bad. They ask
+            because it felt cheap.</p>
         </li>
 
         <li class="tile">
-          <h3>Every episode looks slightly different</h3>
-          <p>Different intro, different captions, different lower thirds — because
-            whoever cut it that week did it their way.</p>
+          <h3>Students stop watching in the middle</h3>
+          <p>Completion is the number that decides your reviews, your referrals, and
+            whether the next launch works.</p>
         </li>
       </ul>
     </section>
 
     <section class="section" aria-labelledby="solution-heading">
       <p class="eyebrow">How we work</p>
-      <h2 id="solution-heading">One recording in. A week of content out.</h2>
+      <h2 id="solution-heading">Edited like a product, not like a post</h2>
 
-      <p>A podcast is not one piece of content. It is a long-form episode, a set of
-        short-form clips, a thumbnail, and a set of assets that have to look like they
-        came from the same show. Most podcasts publish the first one and never get to
-        the rest.</p>
+      <p>A course is the one kind of video where the edit is not marketing. The
+        customer has already paid. What they receive is the video, and its quality is
+        the quality of the thing they bought.</p>
 
-      <!-- "Revisions are genuinely unlimited" is RULED COPY — R17, Masud
-           2026-09-03, verbatim: "Genuinely unlimited". Ships as-is. -->
-      <p>Video Editor Agency takes the whole recording and returns the set. The same
-        editor cuts every episode, so the intro, the captions and the lower thirds
-        stay identical week to week. Revisions are genuinely unlimited — a show that
-        publishes on a schedule cannot afford an edit that stalls.</p>
+      <p>Video Editor Agency edits the whole curriculum as one piece of work. The same
+        editor across every module, so lesson 40 matches lesson 1 — the same intro,
+        the same captions, the same treatment for every on-screen point. Revisions are
+        genuinely unlimited, which matters most on the module you re-record twice.</p>
     </section>
 
     <section class="section" aria-labelledby="deliver-heading">
       <p class="eyebrow">What we deliver</p>
-      <h2 id="deliver-heading">What we edit for podcasts</h2>
+      <h2 id="deliver-heading">What we edit for course creators</h2>
 
       <ul class="grid">
         <li class="tile">
-          <h3>Multi-cam episode editing</h3>
-          <p>Speaker switching cut to the conversation, not to a timer.</p>
+          <h3>Full curriculum editing, module by module</h3>
+          <p>Structured for completion, not just cut down.</p>
         </li>
 
         <li class="tile">
-          <h3>Short-form clips from the episode</h3>
-          <p>Vertical, captioned, cut for TikTok, Reels and Shorts rather than
-            cropped from the wide.</p>
+          <h3>A consistent look across every lesson</h3>
+          <p>The same intro, lower thirds and treatment from lesson one to the last.</p>
         </li>
 
         <li class="tile">
-          <h3>Branded lower thirds, intro and outro</h3>
-          <p>The same set every week.</p>
+          <h3>Screen recordings and slides cut into the teaching</h3>
+          <p>Readable at the size a student actually watches.</p>
         </li>
 
         <li class="tile">
-          <h3>Chapter markers</h3>
-          <p>So a two-hour episode is navigable instead of a wall.</p>
+          <h3>Motion graphics for the concepts that need showing</h3>
+          <p>The diagram that does the work a paragraph of narration cannot.</p>
         </li>
 
         <li class="tile">
-          <h3>Audio cleaned and levelled</h3>
-          <p>Room noise, mismatched mic levels, the cough in take three.</p>
+          <h3>Launch and promo cuts</h3>
+          <p>The sales video and the trailer, from the course footage you already
+            have.</p>
         </li>
 
         <li class="tile">
-          <h3>Thumbnail design</h3>
-          <p>Per episode, A/B-ready.</p>
+          <h3>Short-form clips from your teaching</h3>
+          <p>The free content that sells the paid content.</p>
         </li>
       </ul>
     </section>
 
     <section class="cta-block" aria-labelledby="cta-heading">
-      <h2 id="cta-heading">Send us one episode</h2>
+      <h2 id="cta-heading">Get the course out of the drive</h2>
 
-      <p>Give us a recording and tell us where you publish. We will cut the episode
-        and the clips, and you can judge the set rather than a sample.</p>
+      <p>Send us two lessons — your best and your worst. We will edit both, so you can
+        see what the floor looks like as well as the ceiling.</p>
 
       <p class="actions">
-        <a class="btn btn--primary" href="/contact/">Get your episodes back</a>
+        <a class="btn btn--primary" href="/contact/">Finish your course</a>
       </p>
     </section>
 
@@ -474,8 +470,8 @@
         <li><a href="/coaches/">For Coaches &amp; Trainers</a></li>
         <li><a href="/business-owners/">For Business Owners</a></li>
         <li><a href="/marketers-and-agencies/">For Marketers &amp; Agencies</a></li>
-        <li><a href="/podcasters/" aria-current="page">For Podcasters</a></li>
-        <li><a href="/course-creators/">For Course Creators</a></li>
+        <li><a href="/podcasters/">For Podcasters</a></li>
+        <li><a href="/course-creators/" aria-current="page">For Course Creators</a></li>
         <li><a href="/real-estate/">Real Estate</a></li>
         <li><a href="/medical/">Doctors &amp; Medical</a></li>
         <li><a href="/aesthetics/">Dermatology &amp; Aesthetics</a></li>
