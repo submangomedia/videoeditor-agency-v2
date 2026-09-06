@@ -366,10 +366,13 @@ img {
       T3. Crossed on Masud's explicit instruction, same as R32. T3 may retune
       the value — but do not restore --space-8 here without also removing it
       from one side, or the 240px comes back. */
-.section { padding-block: var(--space-5); }
+/* Tightened again 2026-09-06, second pass, on Masud's instruction.
+   --space-6 (3rem) each side = 6rem / 96px between sections. Below MZ Media's
+   measured 120px, deliberately. */
+.section { padding-block: var(--space-4); }
 
 @media (min-width: 48rem) {
-  .section { padding-block: var(--space-7); }
+  .section { padding-block: var(--space-6); }
 }
 
 
@@ -860,7 +863,7 @@ img {
      --space-5 (2rem) sits it directly under the header the way MZ Media does.
      The larger bottom value stays: the hero still needs to separate itself
      from the first section. */
-  padding-block: var(--space-5) var(--space-7);
+  padding-block: var(--space-4) var(--space-6);
   isolation: isolate;
 }
 
@@ -917,7 +920,7 @@ img {
   box-shadow: 0 0 18px 1px rgba(39, 63, 183, 0.35);
 }
 
-.section > h2 { margin-bottom: var(--space-5); }
+.section > h2 { margin-bottom: var(--space-4); }
 
 
 /* --- Grid ---------------------------------------------------------------- */
@@ -928,7 +931,7 @@ img {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
   gap: var(--space-4);
-  margin-block: var(--space-6);
+  margin-block: var(--space-4);
   padding: 0;
   list-style: none;
 }
@@ -1010,7 +1013,7 @@ img {
 .steps {
   list-style: none;
   counter-reset: step;
-  margin-block: var(--space-6);
+  margin-block: var(--space-4);
   padding: 0;
 }
 
@@ -1062,7 +1065,7 @@ img {
 .faq {
   list-style: none;
   padding: 0;
-  margin-block: var(--space-6);
+  margin-block: var(--space-4);
   border-bottom: 1px solid var(--rule);
   counter-reset: faq;
 }
