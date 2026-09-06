@@ -2711,6 +2711,70 @@ above the rate table in `/pricing/index.html`. **Masud picks one. T6 did not.**
 
 ---
 
+## 2026-09-06 — T4 · Logo wall fixed · full-bleed strips · container widened
+
+### ⚠️ The grey blocks were T4's bug, and the cause is worth recording
+
+The logo wall used `filter: grayscale(1) brightness(0) invert(1) opacity(.55)`.
+
+- On a **transparent PNG** that yields a white silhouette — acceptable.
+- On a **JPEG**, which has an **opaque white background**, `brightness(0)` turns
+  the entire rectangle black and `invert(1)` turns it solid white.
+
+**Six of the 27 files are `.jpg` / `.jpeg` / `.jfif`** — BCS, Law Sheba, Araz,
+PH, MOWA, EF — so six logos rendered as **featureless grey blocks**. Masud saw
+exactly that and reported it precisely.
+
+**The fix is the shape he asked for.** Every logo now sits on a uniform white
+chip, 11.5 × 6.5rem:
+
+- **One tile size**, so a wide wordmark and a square mark occupy the same
+  footprint and the row reads as a row.
+- **`mix-blend-mode: multiply`** — on a white chip a JPEG's white background
+  multiplies to white and vanishes, while the artwork stays. **This is what lets
+  opaque and transparent logos sit together without editing a single file.**
+- **No filter at rest.** Masud: *"if we hover over a mouse to it, it shows"* —
+  a logo wall that hides its logos until hover is not a logo wall.
+- Logos are larger: 2.5rem → 3.5rem max height.
+
+### Full bleed, and why it matters to the loop
+
+> Masud: *"I think you are not using the whole screen size… on the left and
+> right sides, there is empty space."*
+
+Two changes:
+
+1. **`--container` 72rem → 88rem** in `site.css`. 72rem is 1152px; on a 1920px
+   display that left ~380px dead each side. ⚠️ **Paragraphs did not widen** —
+   `p` is still capped at `--measure` (68ch), because a 1400px line of body text
+   is unreadable at any screen size. The LAYOUT widened, not the prose.
+2. **The three strips now run the full viewport width**, escaping `.container`.
+   `body { overflow-x: clip }` was added so this cannot create a horizontal
+   scrollbar — `clip` rather than `hidden`, which would make body a scroll
+   container and break any future `position: sticky`.
+
+### ⚠️ A loop bug that only appears on a large display — found and fixed
+
+The track holds two copies and travels exactly one copy's width, so **one copy
+must be at least as wide as the viewport** or a bald patch appears at the wrap.
+Once the strips went full-bleed, "viewport" became the whole screen — 120rem on
+a 1920px display.
+
+| Strip | Was | Now |
+|---|---|---|
+| Testimonials | 5 × 22rem ≈ **116rem** ❌ | 5 × 24rem ≈ **126rem** ✅ |
+| People | 10 × 9rem ≈ **103rem** ❌ | 10 × 11rem ≈ **123rem** ✅ |
+| Logos | 27 × 11.5rem ≈ 349rem ✅ | unchanged |
+
+**Both would have shown a gap on exactly the display Masud is using.** The
+constraint is now commented in the file — **if a card is ever narrowed or an
+item removed, this must be re-checked.**
+
+⚠️ **T4 edited `site.css` again** (container, `overflow-x`). Masud's
+instruction, same basis as R32.
+
+---
+
 ## 2026-09-06 — T4 · Marquees added · **the testimonial brackets are gone**
 
 ### The brackets — removed WITHOUT swapping the name

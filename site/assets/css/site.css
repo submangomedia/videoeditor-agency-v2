@@ -230,7 +230,19 @@
   --space-8: 7.5rem;   /* MZ --section-padding 120px */
 
   --measure:   68ch;
-  --container: 72rem;
+
+  /* ⚠️ WIDENED 2026-09-06, 72rem → 88rem. Masud, on a large display: "I think
+     you are not using the whole screen size… on the left and right sides,
+     there is empty space."
+     He is right. 72rem is 1152px, which on a 1920px display leaves ~380px of
+     dead margin each side.
+     PARAGRAPHS DO NOT STRETCH WITH IT — `p` is still capped at --measure
+     (68ch) in §2, because a 1400px line of body text is unreadable no matter
+     how wide the screen is. What widens is the LAYOUT: grids, card rows and
+     the section rules.
+     ⚠️ T4 edited this file, which it does not own. Masud's instruction, same
+        basis as R32. */
+  --container: 88rem;
 }
 
 
@@ -259,6 +271,10 @@ html {
 
 body {
   margin: 0;
+  /* Lets a full-bleed strip break out of .container without creating a
+     horizontal scrollbar. `clip` rather than `hidden` — hidden would make the
+     body a scroll container and break any future position: sticky. */
+  overflow-x: clip;
   background: var(--bg);
   color: var(--ink-body);
   font-family: var(--font-body);

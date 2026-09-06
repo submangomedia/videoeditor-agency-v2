@@ -627,8 +627,15 @@
     .marquee {
       overflow: hidden;
       margin-block: var(--space-4);
-      -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
-      mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+      /* FULL BLEED. The strip escapes .container and runs the whole viewport
+         width, which is what makes an infinite scroll read as infinite — a
+         strip that stops 380px short of each edge looks like a stuck carousel.
+         Negative margins of exactly half the difference; body has
+         overflow-x: clip so this cannot produce a horizontal scrollbar. */
+      margin-inline: calc(50% - 50vw);
+      padding-inline: calc(50vw - 50%);
+      -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+      mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
     }
 
     .marquee__track {
@@ -659,12 +666,24 @@
     .marquee .quotes,
     .marquee .people { display: flex; margin: 0; }
 
+    /* ⚠️ THESE WIDTHS ARE LOAD-BEARING FOR THE INFINITE LOOP, NOT TASTE.
+       The track holds two copies and travels exactly one copy's width. For no
+       gap to appear at the wrap, ONE COPY MUST BE AT LEAST AS WIDE AS THE
+       VIEWPORT. Now that the strips are full-bleed, "viewport" means the whole
+       screen — on a 1920px display that is 120rem.
+         quotes: 5 × 24rem + 4 gaps ≈ 126rem  ✓
+         people: 10 × 11rem + 9 gaps ≈ 123rem ✓
+         logos:  27 × 11.5rem       ≈ 349rem  ✓ (never at risk)
+       At the previous 22rem and 9rem both came to ~116rem and ~103rem, which
+       is SHORT of 120rem — the loop would have shown a bald patch on exactly
+       the large display Masud is using. If a card is ever narrowed, or an item
+       removed, re-check this. */
     .marquee--quotes .marquee__track { animation-duration: 140s; align-items: stretch; }
-    .marquee--quotes .quotes > li { width: 22rem; flex: none; display: flex; }
+    .marquee--quotes .quotes > li { width: 24rem; flex: none; display: flex; }
     .marquee--quotes .quote { width: 100%; }
 
     .marquee--people .marquee__track { animation-duration: 110s; }
-    .marquee--people .person { width: 9rem; flex: none; }
+    .marquee--people .person { width: 11rem; flex: none; }
 
     .logo-wall {
       list-style: none; padding: 0;
@@ -676,24 +695,53 @@
     }
 
     .marquee .logo-wall { display: flex; margin: 0; }
-    .marquee .logo-wall li { width: 8rem; flex: none; }
 
-    .logo-wall li { display: grid; place-items: center; }
+    /* ⚠️⚠️ THE PREVIOUS VERSION OF THIS BLOCK WAS BROKEN AND THIS IS THE FIX.
+       It used filter: grayscale(1) brightness(0) invert(1). On a transparent
+       PNG that yields a white silhouette — acceptable. On a JPEG, which has an
+       OPAQUE WHITE BACKGROUND, brightness(0) turns the whole rectangle black
+       and invert(1) turns it solid white. Six of the 27 files are .jpg/.jpeg/
+       .jfif — BCS, Law Sheba, Araz, PH, MOWA, EF — so six logos rendered as
+       featureless grey blocks. Masud saw exactly that.
 
-    /* Client logos arrive in every colour and on white or transparent
-       grounds. On #090909 the white-background ones would read as holes cut
-       in the page. Desaturating and lifting brightness makes a mixed set sit
-       as one row; full colour returns on hover. */
-    .logo-wall img {
-      max-height: 2.5rem;
-      width: auto;
-      filter: grayscale(1) brightness(0) invert(1) opacity(0.55);
-      transition: filter 180ms ease, transform 180ms ease;
+       THE FIX IS THE SHAPE HE ASKED FOR. Every logo now sits on a uniform
+       white chip:
+         · One tile size, so a wide wordmark and a square mark occupy the same
+           footprint and the row reads as a row.
+         · mix-blend-mode: multiply — on a white chip, a JPEG's white
+           background multiplies to white and DISAPPEARS, while the artwork
+           stays. This is what makes opaque and transparent logos sit together
+           without editing a single file.
+         · No filter at rest. Masud: "if we hover over a mouse to it, it shows"
+           — logos hidden until hover is a logo wall that does not work. They
+           are legible from the first frame now. */
+    .logo-wall li {
+      display: grid;
+      place-items: center;
     }
 
-    .logo-wall img:hover {
-      filter: grayscale(0) brightness(1) invert(0) opacity(1);
-      transform: scale(1.04);
+    .marquee .logo-wall li {
+      width: 11.5rem;
+      height: 6.5rem;
+      flex: none;
+      padding: var(--space-3);
+      border-radius: var(--radius-card);
+      background: #FFFFFF;
+      border: 1px solid var(--rule);
+      transition: transform 180ms ease, box-shadow 180ms ease;
+    }
+
+    .marquee .logo-wall li:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 30px -10px rgba(39,63,183,0.85);
+    }
+
+    .logo-wall img {
+      max-height: 3.5rem;
+      max-width: 100%;
+      width: auto;
+      object-fit: contain;
+      mix-blend-mode: multiply;
     }
 
     .quotes {
