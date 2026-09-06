@@ -2783,13 +2783,40 @@ Ten creator headshots from the Mango folder's `portfolio/profiles/`. Already
 published under their own names on mangomedia.digital, so this is the same
 disclosure on a second domain of the same company.
 
-### ⛔ BLOCKED — the images are not in this repo yet
+### ✅ UNBLOCKED — images copied, paths corrected
 
-All three sections reference `/assets/img/logos/`, `/assets/img/testimonials/`
-and `/assets/img/profiles/`. **Those folders do not exist in `site\assets\img\`.**
-Until Masud copies them the page renders three sections of broken images —
-**worse than the deleted sections were.** The copy list is in the chat. T4
-cannot copy binary files: the bash sandbox has no route to the Drive folder.
+Masud copied the Mango asset tree to **`site\img\`**, not `site\assets\img\`.
+All 42 `src` attributes in the three new sections were repointed to `/img/…`.
+
+⚠️ **THE SITE NOW HAS TWO IMAGE ROOTS, AND NOBODY DECIDED THAT.**
+
+| Path | Holds | Owner |
+|---|---|---|
+| `site\assets\img\portfolio\` | 58 VEA YouTube thumbnails | T5 |
+| `site\img\logos\|testimonials\|profiles\` | the Mango-sourced assets | T4 |
+
+Both work. Neither is wrong. But a page thread now has to remember which tree a
+given image lives in, and that is precisely the kind of thing that is
+discovered by a broken image on production. **One root should win.** `assets/`
+is the existing convention and the CSS already lives under it. → **T3 or T9.**
+T4 has not moved the files: they were copied minutes ago and moving them again
+during an active session is how files go missing.
+
+### ⚠️ Unnecessary files were copied into a PUBLIC repo
+
+The copy brought the whole Mango `img` tree, not just the three folders needed:
+
+- **`site\img\portfolio\graphic\`** — ~20 of **Mango's graphic-design samples**
+  (PHC, Law Sheba, BCS, Sharmeen, Real Estate posts). Nothing on
+  videoeditor.agency references them and they are Mango's portfolio, not VEA's.
+- **`site\img\portfolio\profiles\`** — a duplicate of `site\img\profiles\`.
+  Ten files stored twice.
+- **`site\img\hero.png`** and **`site\img\Mango Media Logo.png`** — Mango's
+  homepage hero and wordmark.
+
+Under R01 the repo is public, so these ship whether or not a page links them.
+**Safe to delete all four.** Not deleted by T4 — deleting a user's files
+minutes after they copied them is not T4's call to make unprompted.
 
 ---
 
