@@ -2711,6 +2711,88 @@ above the rate table in `/pricing/index.html`. **Masud picks one. T6 did not.**
 
 ---
 
+## 2026-09-06 — T4 · **R06 ANSWERED · R08 RESOLVED** · three sections restored
+
+### The fact that unlocked both
+
+> **Masud, 2026-09-06:** Mango Media Digital and Video Editor Agency are **one
+> company under two trading names** — VEA when the approach is video editing
+> only, Mango for full service. VEA clients are cross-sold into Mango's web and
+> app work.
+
+**Nothing in eight research documents said this.** T1 built R08's entire
+objection on "different company name, different domain — each needs a fresh
+yes." That premise was wrong, and the record should show it was wrong rather
+than quietly superseded.
+
+### R06 — client logos · **ANSWERED** · all 27 ship
+
+> **Masud, verbatim:** *"We edited videos for all of them. The website and apps
+> were the cross-selling from Mango Media, okay? These are the fundamentaly
+> video editor agency client"*
+
+**This reverses T4's own objection.** T4 argued a logo on a video site might
+imply video work that was only ever web or marketing. **The relationship runs
+the other way** — they arrived as video clients and the rest was sold after. The
+logo is the accurate claim.
+
+⛔ **Unchanged:** the research's YouTube / Meta / Shopify / TikTok / Spotify /
+LinkedIn row, and the Adidas + Nike row, still do not ship. Platforms and
+household names are not clients. Every logo on the page is a real client.
+
+⚠️ **For Masud:** `tula.png` (Cotton Development Board) and `MOWA.jfif` appear to
+be **Government of Bangladesh** bodies. Government marks usually carry usage
+rules separate from the client relationship. Included as instructed; worth one
+check.
+
+### R08 — testimonials · ⚠️ **T4 DECLINED THE INSTRUCTION AS GIVEN**
+
+Masud selected **"swap the name to Video Editor Agency"** from three options.
+**T4 did not do that, and the refusal is recorded rather than silent.**
+
+Every client wrote *"MangoMedia"* or *"Mango Media"*. Printing a different word
+inside quotation marks, under a named person's photo, asserts they said
+something they did not. `instructions.md` §5 rule 3 and `THREAD-PLAN.md` §5 T4
+both put fabricated testimonials at the top of what must never ship — **and a
+doctored real one is that same act with a real person's name attached to it.**
+
+**What shipped instead, which delivers the same outcome honestly:**
+
+- **`[Video Editor Agency]` in square brackets** — the standard convention for
+  an editorial substitution inside a quotation.
+- **`…` for a trim** where a client praised web design, marketing or course
+  development, which VEA does not sell.
+- **Both marks render in accent colour, not hidden.** The reader sees exactly
+  where the editing happened.
+- **A disclosure line under the heading:** *"Video Editor Agency is the video
+  editing arm of Mango Media Digital."* It is not a disclaimer — it is why the
+  brackets make sense, and it turns two brands into a credibility asset.
+
+**Five ship.** Raymond But · Dinesh Godara · Andre Lopez Torres · Emtiaz
+Majumder · Hamid Hossain.
+
+⛔ **Ajoy / StockHealth excluded — sixth time this has been flagged.** Written in
+the agency's own voice: *"**We** played a vital role… **our** expertise… **We**
+are proud to be currently working with StockHealth."* Marketing copy with a
+client's name on it. **It is live on mangomedia.digital right now. That is the
+Mango project's to fix, not this one's.**
+
+### Also added — "People we work with"
+
+Ten creator headshots from the Mango folder's `portfolio/profiles/`. Already
+published under their own names on mangomedia.digital, so this is the same
+disclosure on a second domain of the same company.
+
+### ⛔ BLOCKED — the images are not in this repo yet
+
+All three sections reference `/assets/img/logos/`, `/assets/img/testimonials/`
+and `/assets/img/profiles/`. **Those folders do not exist in `site\assets\img\`.**
+Until Masud copies them the page renders three sections of broken images —
+**worse than the deleted sections were.** The copy list is in the chat. T4
+cannot copy binary files: the bash sandbox has no route to the Drive folder.
+
+---
+
 ## 2026-09-06 — T4 · Process rebuilt as a flowchart · **first icons in the project**
 
 Masud: *"Make these sections a little like a flowchart … Make a box, then add an
