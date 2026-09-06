@@ -425,6 +425,166 @@
        this is the replacement it names. It opens with JavaScript disabled, it
        is keyboard operable for free, and Ctrl+F finds the closed answers in
        every current browser. */
+    /* ======================================================================
+       .flow — THE PROCESS AS A FLOWCHART
+       Masud, 2026-09-06: "Make these sections a little like a flowchart …
+       Make a box, then add an arrow, and the arrow should glow. It should be
+       like some electricity flowing from step 1 to step 5. Make it small, and
+       also add an icon. You can make it in two rows."
+
+       THREE COLUMNS AT DESKTOP, so five steps fall as 3 + 2 — the two rows he
+       asked for. Two columns on tablet, one stacked on phones.
+
+       ⚠️ THE ARROWS KNOW WHERE THE ROW ENDS. An arrow after the last box in a
+          row would point into the line wrap. The nth-child rules at the foot
+          of this block hide it at each breakpoint's row boundary, and
+          :last-child hides the one after step 5. Change the column count and
+          you must change the nth-child to match.
+
+       ⚠️ ON THE "ELECTRICITY". This is a looping CSS @keyframes animation, not
+          a scroll-driven one — different mechanism from R33. It needs no
+          script. Unlike R33 it IS covered by site.css §2's global
+          prefers-reduced-motion rule, because that rule works by forcing
+          animation-duration to 0.01ms and this animation is time-based. So it
+          stops for users who ask for no motion, automatically.
+
+       ⚠️ THE ICONS ARE HAND-DRAWN INLINE SVG, five simple stroke paths.
+          They are NOT from an icon library — no font is loaded, no file is
+          fetched, nothing is copied. This is the zero-JS answer the icon gap
+          needed, and it is the first icon set in the project. If T3 adopts a
+          proper set later these are the shapes to match.
+       ====================================================================== */
+    .flow {
+      list-style: none;
+      padding: 0;
+      margin-block: var(--space-4);
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-5);
+      counter-reset: flow;
+    }
+
+    @media (min-width: 40rem) { .flow { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 60rem) { .flow { grid-template-columns: repeat(3, 1fr); } }
+
+    .flow > li {
+      position: relative;
+      counter-increment: flow;
+      border: 1px solid var(--rule);
+      border-radius: var(--radius-card);
+      background:
+        linear-gradient(180deg, rgba(39,63,183,0.10), transparent 55%),
+        var(--bg-raised);
+      padding: var(--space-4);
+      transition: border-color 160ms ease, transform 160ms ease,
+                  box-shadow 160ms ease;
+    }
+
+    .flow > li:hover {
+      border-color: rgba(120,145,255,0.45);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px -12px rgba(39,63,183,0.55);
+    }
+
+    .flow__head {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      margin-bottom: var(--space-3);
+    }
+
+    .flow__icon {
+      flex: none;
+      width: 2rem;
+      height: 2rem;
+      display: grid;
+      place-items: center;
+      border-radius: var(--radius);
+      background: rgba(39,63,183,0.20);
+      border: 1px solid rgba(120,145,255,0.35);
+    }
+
+    .flow__icon svg {
+      width: 1rem;
+      height: 1rem;
+      fill: none;
+      stroke: var(--ink-accent, rgba(120,145,255,0.9));
+      stroke-width: 1.75;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .flow__num {
+      font-family: var(--font-heading);
+      font-weight: var(--weight-heading);
+      font-size: var(--step--1);
+      letter-spacing: 0.08em;
+      color: var(--ink-accent, rgba(120,145,255,0.9));
+    }
+
+    .flow h3 { font-size: var(--step-1); margin: 0 0 var(--space-2); }
+    .flow p  { font-size: var(--step--1); margin: 0; max-width: none;
+               color: var(--ink-body); }
+
+    /* THE CONNECTOR. ::after is the wire, ::before is the arrowhead. The wire
+       carries a moving highlight — the "electricity". */
+    .flow > li::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 100%;
+      width: var(--space-5);
+      height: 2px;
+      transform: translateY(-50%);
+      pointer-events: none;
+      background-image: linear-gradient(90deg,
+        rgba(120,145,255,0.15) 0%,
+        rgba(120,145,255,0.15) 35%,
+        rgba(190,205,255,1) 50%,
+        rgba(120,145,255,0.15) 65%,
+        rgba(120,145,255,0.15) 100%);
+      background-size: 250% 100%;
+      box-shadow: 0 0 10px rgba(39,63,183,0.9);
+      animation: flow-spark 2.4s linear infinite;
+    }
+
+    .flow > li::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 100%;
+      margin-left: calc(var(--space-5) - 0.4rem);
+      width: 0.4rem;
+      height: 0.4rem;
+      border-top: 2px solid rgba(120,145,255,0.9);
+      border-right: 2px solid rgba(120,145,255,0.9);
+      transform: translateY(-50%) rotate(45deg);
+      pointer-events: none;
+    }
+
+    @keyframes flow-spark {
+      from { background-position: 125% 0; }
+      to   { background-position: -125% 0; }
+    }
+
+    /* Row-end and end-of-flow suppression. */
+    .flow > li:last-child::before,
+    .flow > li:last-child::after { display: none; }
+
+    @media (max-width: 39.99rem) {
+      .flow > li::before, .flow > li::after { display: none; }
+    }
+
+    @media (min-width: 40rem) and (max-width: 59.99rem) {
+      .flow > li:nth-child(2n)::before,
+      .flow > li:nth-child(2n)::after { display: none; }
+    }
+
+    @media (min-width: 60rem) {
+      .flow > li:nth-child(3n)::before,
+      .flow > li:nth-child(3n)::after { display: none; }
+    }
+
     .faq {
       list-style: none;
       padding: 0;
@@ -1193,32 +1353,91 @@
       <p class="eyebrow">How it works</p>
       <h2 id="process-heading">From Raw Footage to Final Cut — In 5 Simple Steps</h2>
 
-      <ol class="steps">
+      <!-- Still a real <ol>: the steps are ordered and a screen reader should
+           say so. The flowchart is presentation only.
+           Every <svg> is aria-hidden — the icon repeats the heading beside it,
+           so announcing it would just make a screen reader say everything
+           twice. The number is real text, not a CSS counter, because "01" is
+           part of what the step IS here rather than decoration. -->
+      <ol class="flow">
+
         <li>
+          <div class="flow__head">
+            <span class="flow__icon">
+              <!-- upload -->
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <path d="M12 15V4"/><path d="M8 8l4-4 4 4"/>
+                <path d="M4 15v4a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-4"/>
+              </svg>
+            </span>
+            <span class="flow__num">01</span>
+          </div>
           <h3>Submit Brief</h3>
           <p>Share your raw footage, reference videos, style guide, and deadline.
             The more detail you give, the better the first draft.</p>
         </li>
+
         <li>
+          <div class="flow__head">
+            <span class="flow__icon">
+              <!-- editor -->
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <circle cx="12" cy="8" r="3.5"/><path d="M5 20a7 7 0 0 1 14 0"/>
+              </svg>
+            </span>
+            <span class="flow__num">02</span>
+          </div>
           <h3>Assign Editor</h3>
           <p>We match you with a dedicated editor who specializes in your content
             type — YouTube, reels, ads, or long-form.</p>
         </li>
+
         <li>
+          <div class="flow__head">
+            <span class="flow__icon">
+              <!-- preview -->
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <rect x="3" y="5" width="18" height="14" rx="2"/>
+                <path d="M10.5 9.5l4.5 2.5-4.5 2.5z"/>
+              </svg>
+            </span>
+            <span class="flow__num">03</span>
+          </div>
           <h3>First Draft</h3>
           <p>Your editor delivers the first cut within the agreed timeline.
             You'll receive a preview link for review.</p>
         </li>
+
         <li>
+          <div class="flow__head">
+            <span class="flow__icon">
+              <!-- revise -->
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <path d="M20 12a8 8 0 1 1-2.4-5.7"/><path d="M20 4v4h-4"/>
+              </svg>
+            </span>
+            <span class="flow__num">04</span>
+          </div>
           <h3>Revisions</h3>
           <p>Request changes and we'll refine until it's exactly right. Unlimited
             revisions — no extra charge, no arguments.</p>
         </li>
+
         <li>
+          <div class="flow__head">
+            <span class="flow__icon">
+              <!-- deliver -->
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <path d="M12 4v10"/><path d="M8 10l4 4 4-4"/><path d="M5 19h14"/>
+              </svg>
+            </span>
+            <span class="flow__num">05</span>
+          </div>
           <h3>Final Delivery</h3>
           <p>Download your finished video in broadcast-ready format. Ready to
             upload, publish, or broadcast.</p>
         </li>
+
       </ol>
 
     </section>

@@ -387,6 +387,83 @@ lawyers, coaches launching LMS courses — and Meta ad creative as a stated line
 
 ---
 
+## 2026-09-06 — T10 · ✅ **LIVE. videoeditor.agency IS SERVING THE NEW SITE.**
+
+**Masud, 2026-09-06: *"switch now."*** T10 performed the cutover in his browser.
+
+### Done — verified by fetching the live domain, not assumed
+
+| Check | Result |
+|---|---|
+| `https://videoeditor.agency/` | ✅ **200, new dark site, nav works, portfolio stills render** |
+| `www.videoeditor.agency` | ✅ attached, CNAME created |
+| **`/02-Decisions/RULINGS.md`** | ✅ **404 — the research is NOT served.** The build output directory is correct |
+| `/terms/` | ✅ **zero brackets.** Renumbered §1–§10, "Last updated: 6 September 2026" |
+| **MX records** | ✅ **all three intact.** Email untouched |
+| Old project `mangomedia-videoeditor` | ✅ **still exists, zero custom domains — the rollback is intact** |
+
+**R26b had already been executed before T10 arrived** — the old project had no
+custom domains attached, which is why the domain had been resolving to nothing.
+There was nothing to remove; T10 only added.
+
+**Cloudflare added exactly two CNAMEs** (`@` and `www` → `videoeditor-agency-v2.pages.dev`).
+Nothing else in the zone was touched.
+
+### ⛔ THREE THINGS FOUND ON THE LIVE SITE. One breaks the project's founding ruling.
+
+**1. ⛔ CLOUDFLARE HAS INJECTED JAVASCRIPT, AND IT IS ON THE EMAIL LINK.**
+The footer's `mailto:` is now
+`/cdn-cgi/l/email-protection#7b0d121f…`, decoded by a Cloudflare script.
+**This is Email Address Obfuscation, on by default at the zone level.**
+- `instructions.md` §3 ruling 1 — **"Zero JS by default"** — is the ruling this
+  entire project was built on, and **a Cloudflare setting has broken it after
+  launch, without anyone changing a file.**
+- **Worse than the principle: R13 ruled no contact form**, so email is one of only
+  three inbound routes. **It now requires JavaScript to resolve.** A visitor with
+  JS blocked sees a dead link.
+- **Fix: Cloudflare → videoeditor.agency → Scrape Shield → Email Address
+  Obfuscation → OFF.** One toggle. Not done — T10 has authorisation for the
+  cutover, not a standing mandate over zone settings. → **Masud.**
+
+**2. ⛔ `site/robots.txt` IS NOT BEING SERVED.** `videoeditor.agency/robots.txt`
+returns **Cloudflare's managed robots.txt** — AI-crawler rules blocking GPTBot,
+ClaudeBot, Amazonbot and others, with `Content-Signal: search=yes,ai-train=no`.
+- ✅ **`Allow: /` IS present**, so search crawling works and the cutover is not
+  harmed.
+- ⛔ **The `Sitemap:` line T10 wrote is GONE.** Google will not discover
+  `sitemap.xml` from robots.txt. **Submit it manually in Search Console** —
+  `https://videoeditor.agency/sitemap.xml`.
+- Blocking AI crawlers may be exactly what Masud wants. **It was not his
+  decision — it is a Cloudflare default**, and it is recorded here so it is a
+  choice from now on.
+
+**3. ⚠️ "© 2026 Video Editor Agency · Editing since 2020" IS NOW PUBLIC** on all
+21 pages. **R12 — founding year — is OPEN and unanswered.** The research claims
+both "5+ years" and "6+ years"; the domain was registered 2024-05-22; nothing in
+this project supports 2020. **T10 flagged this before the switch and Masud chose
+to switch first.** It is an unverified claim in the footer of every page and it
+is the one item on this list a client could catch him on. → **A real year, or
+delete the clause.**
+
+### Open — unchanged by launch
+
+- **`/terms/` has no limitation-of-liability clause and no governing law.**
+  Masud's exposure is uncapped. Deliberate, recorded, his decision.
+- **`/privacy/` has no postal address.** The only gap with a regulator behind it.
+- **Motion Graphics has no published rate.** Its row is deleted from the table.
+- **R14 — the phone number is live and has still never been dialled.**
+- **R07** — 31 of 61 portfolio items shown, none playable.
+- **R28–R32 still absent from `RULINGS.md`.** Sixth entry to ask. → **T1.**
+
+### Rollback, still valid
+
+Cloudflare → `videoeditor-agency-v2` → Custom domains → remove both →
+`mangomedia-videoeditor` → add both. Two minutes, no DNS edit.
+⛔ **It works only while `mangomedia-videoeditor` and
+`submangomedia/videoeditor-agency` still exist. Do not delete either yet.**
+
+---
+
 ## 2026-09-06 — T10 · **CUTOVER PREPARED — 0 brackets, noindex lifted, robots open**
 
 **Masud, 2026-09-06: *"Whatever the current information you have, just make it
@@ -2631,6 +2708,57 @@ above the rate table in `/pricing/index.html`. **Masud picks one. T6 did not.**
 - **Nothing pushed.**
 - ⚠️ **Is the old site down yet?** T6 and T9 both reported it live on 2026-09-05,
   two days after R26b ruled *"take it down today"*. Not re-checked this session.
+
+---
+
+## 2026-09-06 — T4 · Process rebuilt as a flowchart · **first icons in the project**
+
+Masud: *"Make these sections a little like a flowchart … Make a box, then add an
+arrow, and the arrow should glow. It should be like some electricity flowing from
+step 1 to step 5. Make it small, and also add an icon. You can make it in two
+rows."*
+
+### Done — `site\index.html`
+
+- **`.steps` replaced by `.flow`.** Five boxes, **three columns at desktop so the
+  steps fall 3 + 2** — the two rows he asked for. Two columns on tablet, stacked
+  on phones. Still a real `<ol>`; the flowchart is presentation only.
+- **Glowing connectors.** `::after` is the wire, `::before` the arrowhead. The
+  wire carries a travelling highlight on a looping `@keyframes` — the
+  "electricity".
+- ⚠️ **The arrows know where each row ends.** An arrow after the last box in a
+  row would point into the line wrap. `nth-child(2n)` / `nth-child(3n)` rules
+  suppress it per breakpoint, and `:last-child` kills the one after step 5.
+  **Change the column count and the nth-child rules must change with it.**
+
+### ⛔ The project has icons now, and they are hand-drawn
+
+Five inline SVGs — upload, editor, preview, revise, deliver. **Not from a
+library. No font loaded, no file fetched, nothing copied.** Simple stroke paths
+authored for this page, coloured with `--ink-accent`, each `aria-hidden` because
+the icon repeats the heading beside it.
+
+This closes — for one section — the gap `DESIGN-PATTERNS-v1.md` §3 flagged as
+*"the largest remaining"*. **It does not close it for the site.** If T3 adopts a
+proper set, these are the shapes to match.
+
+### ⚠️ Two different animation mechanisms now exist. Do not confuse them.
+
+| | R33 scroll reveal | `.flow` electricity |
+|---|---|---|
+| Driven by | scroll position, `animation-timeline: view()` | time, plain `@keyframes` |
+| Covered by site.css §2's reduced-motion rule? | ❌ **No** — that rule forces `animation-duration`, which scroll-driven animation ignores. Needs its own explicit guard | ✅ **Yes**, automatically |
+
+**Anyone adding motion to this site must know which kind they are adding.**
+
+### Open
+
+- **`site\index.html`'s `.steps` CSS is now dead** — the markup no longer uses it.
+  `.steps` still lives in `site.css` for other pages, so it was left rather than
+  deleted piecemeal. It goes when this page's `<style>` block is collapsed into
+  the stylesheet — `DESIGN-PATTERNS-v1.md` §4 step 1.
+- **`.flow` is not in `site.css`.** If `/services/` or any "For" page wants a
+  process strip, promote it rather than copying it. → T3.
 
 ---
 
